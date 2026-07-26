@@ -51,7 +51,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
           width={800}
           height={600}
           className={cn(
-            "h-full w-full object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+            "h-full w-full object-cover object-center transition-transform duration-[250ms] ease-[cubic-bezier(0.2,0.8,0.2,1)]",
             isDisabled ? "grayscale" : "group-hover:scale-[1.04]",
           )}
         />
