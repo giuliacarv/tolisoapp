@@ -51,7 +51,7 @@ export function Footer() {
                 <Sparkles className="h-4 w-4 text-gold" strokeWidth={1.75} aria-hidden />
               </span>
               <span className="truncate text-fluid-base font-extrabold tracking-[-0.02em] text-foreground">
-                DESCONT<span className="text-gold">AI</span>
+                DESCONTAI<span className="text-gold">.</span>
               </span>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
