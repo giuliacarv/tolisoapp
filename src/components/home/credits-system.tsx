@@ -1,10 +1,9 @@
 import { ArrowRight, Coins, Minus, Ticket, Wallet } from "lucide-react";
 import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button";
 import { COUPON_REDEMPTION_COST } from "@/data/coupons";
 
-import { Container } from "./primitives";
+import { Container, buttonBase } from "./primitives";
 
 /** Regras de custo — espelham as funções em src/data/products.ts e src/data/coupons.ts. */
 const RULES = [
@@ -61,17 +60,17 @@ export function CreditsSystem() {
               </ul>
 
               <div className="flex flex-col items-start gap-4 pt-2">
-                <Button
-                  size="lg"
+                <button
+                  type="button"
                   onClick={handlePlansClick}
-                  className="group bg-gold text-ink hover:bg-gold/90"
+                  className={`${buttonBase} group bg-gold px-6 text-ink hover:bg-gold-soft focus-visible:ring-offset-ink`}
                 >
                   Conhecer planos de créditos
                   <ArrowRight
-                    className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                    className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
                     aria-hidden
                   />
-                </Button>
+                </button>
                 <p className="max-w-xl text-xs leading-relaxed text-offwhite/50">
                   Os créditos são utilizados para acessar oportunidades e benefícios. A compra do
                   produto é realizada diretamente na loja parceira.
@@ -128,3 +127,5 @@ export function CreditsSystem() {
     </section>
   );
 }
+
+export { CreditsSystem as CreditsSection };

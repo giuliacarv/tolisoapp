@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { CreditsSystem } from "@/components/home/credits-system";
-import { FeaturedOffers } from "@/components/home/featured-offers";
-import { Hero } from "@/components/home/hero";
+import { CreditsSection } from "@/components/home/credits-system";
+import { ProductSection } from "@/components/home/featured-offers";
+import { HeroSection } from "@/components/home/hero";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { SearchAndCategories } from "@/components/home/search-categories";
-import { SiteFooter } from "@/components/home/site-footer";
-import { SiteHeader } from "@/components/home/site-header";
+import { Footer } from "@/components/home/site-footer";
+import { Header } from "@/components/home/site-header";
 import { TrustSection } from "@/components/home/trust-section";
-import { ValidatedCoupons } from "@/components/home/validated-coupons";
+import { CouponSection } from "@/components/home/validated-coupons";
 
 const TITLE = "DESCONTAI — Ofertas e cupons verificados das maiores lojas";
 const DESCRIPTION =
@@ -28,18 +28,18 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <div className="min-h-screen bg-background">
-      <SiteHeader />
+    <div className="min-h-dvh bg-background">
+      <Header />
       <main>
-        <Hero />
+        <HeroSection />
         <SearchAndCategories />
-        <FeaturedOffers />
-        <ValidatedCoupons />
+        <ProductSection />
+        <CouponSection />
         <HowItWorks />
-        <CreditsSystem />
+        <CreditsSection />
         <TrustSection />
       </main>
-      <SiteFooter />
+      <Footer />
     </div>
   );
 }

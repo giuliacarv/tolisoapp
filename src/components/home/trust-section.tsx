@@ -49,7 +49,7 @@ export function TrustSection() {
             return (
               <li
                 key={pillar.title}
-                className="rounded-[18px] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift"
+                className="rounded-[18px] border border-border bg-card p-6 shadow-soft motion-safe-transform transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift"
               >
                 <span className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-background">
                   <Icon className="h-4.5 w-4.5 text-gold" strokeWidth={1.75} aria-hidden />
