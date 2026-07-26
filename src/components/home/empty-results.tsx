@@ -16,16 +16,9 @@ export interface EmptyResultsProps {
  * Estado vazio da vitrine: explica o que aconteceu e oferece caminhos de saída
  * (limpar filtros ou tentar uma sugestão de busca).
  */
-export function EmptyResults({
-  query,
-  filterLabel,
-  onReset,
-  suggestions = [],
-  onSuggestionSelect,
-}: EmptyResultsProps) {
-  const term = query?.trim();
-
+export function EmptyResults({ onReset, suggestions = [], onSuggestionSelect }: EmptyResultsProps) {
   return (
+
     <div
       role="status"
       className="mx-auto flex max-w-xl flex-col items-center rounded-[22px] border border-border bg-card px-6 py-12 text-center shadow-soft"
@@ -42,9 +35,7 @@ export function EmptyResults({
       </h4>
 
       <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-        {term
-          ? `Não localizamos ofertas para “${term}”${filterLabel ? ` em ${filterLabel}` : ""}. Ajuste os termos ou explore outra categoria — nossa curadoria é atualizada com frequência.`
-          : "Ainda não há ofertas nesta seleção. Explore outra categoria enquanto novas oportunidades são curadas."}
+        Tente buscar outro produto, loja ou categoria.
       </p>
 
       {suggestions.length > 0 && (
@@ -72,7 +63,7 @@ export function EmptyResults({
         onClick={onReset}
         className="mt-7 inline-flex min-h-11 items-center justify-center rounded-xl bg-ink px-6 text-sm font-medium text-offwhite transition-opacity duration-200 hover:opacity-90"
       >
-        Limpar busca e filtros
+        Limpar filtros
       </button>
     </div>
   );
