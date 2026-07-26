@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PRODUCTS, type Product } from "@/data/products";
 
 import { CATEGORIES, CategoryGrid } from "./category-grid";
+import { EmptyResults } from "./empty-results";
 import { Container } from "./primitives";
 import { ProductGrid } from "./product-grid";
 import { ProductDetailsModal } from "./product-details-dialog";
@@ -16,15 +17,18 @@ import {
 } from "./results-controls";
 import { SearchBar } from "./search-bar";
 
-
 /** Filtros rápidos — os ids espelham as categorias demonstrativas. */
 const QUICK_FILTERS = [
   { id: "all", label: "Todas as ofertas" },
   ...CATEGORIES.map((category) => ({ id: category.id, label: category.label })),
 ];
 
+/** Sugestões demonstrativas exibidas no estado vazio. */
+const SEARCH_SUGGESTIONS = ["Fone", "Smartwatch", "Skincare", "Teclado"];
+
 /** Mapeia o id da categoria para o rótulo usado nos dados demonstrativos. */
 const CATEGORY_LABEL_BY_ID = new Map(CATEGORIES.map((c) => [c.id, c.label]));
+
 
 /**
  * Seção de descoberta: busca, filtros rápidos, categorias e resultados.
@@ -38,6 +42,8 @@ export function SearchAndCategories() {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [sort, setSort] = useState<SortId>("recommended");
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -63,15 +69,29 @@ export function SearchAndCategories() {
     safePage * PAGE_SIZE,
   );
 
-  /** Qualquer mudança de filtro/busca/ordenação reinicia a paginação. */
+  /**
+   * Qualquer mudança de filtro/busca/ordenação reinicia a paginação e simula
+   * a latência do futuro backend, exibindo os skeletons.
+   * TODO: substituir pelo estado de carregamento real da consulta.
+   */
   useEffect(() => {
     setPage(1);
+    setIsLoading(true);
+    const timeout = window.setTimeout(() => setIsLoading(false), 420);
+    return () => window.clearTimeout(timeout);
   }, [query, activeFilter, sort]);
 
   function handlePageChange(next: number) {
     setPage(Math.min(Math.max(1, next), totalPages));
     document.getElementById("ofertas-filtradas")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  function handleReset() {
+    setQuery("");
+    setActiveFilter("all");
+  }
+
+
 
 
   function handleCategorySelect(id: string) {
@@ -132,18 +152,17 @@ export function SearchAndCategories() {
             </h3>
             <div className="flex flex-wrap items-center gap-3">
               <p aria-live="polite" className="text-sm text-muted-foreground">
-                {filteredProducts.length}{" "}
-                {filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"}
-                {totalPages > 1 ? ` — página ${safePage} de ${totalPages}` : ""}
+                {isLoading
+                  ? "Carregando ofertas…"
+                  : `${filteredProducts.length} ${
+                      filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"
+                    }${totalPages > 1 ? ` — página ${safePage} de ${totalPages}` : ""}`}
               </p>
               <SortSelect value={sort} onValueChange={setSort} />
               {(activeFilter !== "all" || query.trim() !== "") && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setQuery("");
-                    setActiveFilter("all");
-                  }}
+                  onClick={handleReset}
                   className="inline-flex min-h-11 items-center rounded-full border border-border px-3 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground"
                 >
                   Limpar filtros
@@ -153,10 +172,33 @@ export function SearchAndCategories() {
           </div>
 
           <div className="mt-6">
-            <ProductGrid products={pageProducts} onRedeem={handleRedeem} onSelect={handleSelect} />
+            <ProductGrid
+              products={pageProducts}
+              onRedeem={handleRedeem}
+              onSelect={handleSelect}
+              isLoading={isLoading}
+              skeletonCount={PAGE_SIZE}
+              emptyState={
+                <EmptyResults
+                  query={query}
+                  filterLabel={
+                    activeFilter === "all" ? undefined : CATEGORY_LABEL_BY_ID.get(activeFilter)
+                  }
+                  onReset={handleReset}
+                  suggestions={SEARCH_SUGGESTIONS}
+                  onSuggestionSelect={(suggestion) => {
+                    setActiveFilter("all");
+                    setQuery(suggestion);
+                  }}
+                />
+              }
+            />
           </div>
 
-          <Pagination page={safePage} totalPages={totalPages} onPageChange={handlePageChange} />
+          {!isLoading && (
+            <Pagination page={safePage} totalPages={totalPages} onPageChange={handlePageChange} />
+          )}
+
 
 
 
