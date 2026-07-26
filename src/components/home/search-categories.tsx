@@ -5,6 +5,7 @@ import { PRODUCTS, type Product } from "@/data/products";
 import { CATEGORIES, CategoryGrid } from "./category-grid";
 import { Container } from "./primitives";
 import { ProductGrid } from "./product-grid";
+import { ProductDetailsModal } from "./product-details-dialog";
 import { RedeemProductModal } from "./redeem-dialog";
 import { SearchBar } from "./search-bar";
 
@@ -26,6 +27,7 @@ export function SearchAndCategories() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [selected, setSelected] = useState<Product | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
@@ -49,6 +51,12 @@ export function SearchAndCategories() {
   function handleRedeem(product: Product) {
     setSelected(product);
     setModalOpen(true);
+  }
+
+  /** Clique no card: abre os detalhes da oferta (sem custo de créditos). */
+  function handleSelect(product: Product) {
+    setSelected(product);
+    setDetailsOpen(true);
   }
 
   return (
@@ -97,7 +105,8 @@ export function SearchAndCategories() {
           </div>
 
           <div className="mt-6">
-            <ProductGrid products={filteredProducts} onRedeem={handleRedeem} />
+            <ProductGrid products={filteredProducts} onRedeem={handleRedeem}
+            onSelect={handleSelect} />
           </div>
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
@@ -106,6 +115,12 @@ export function SearchAndCategories() {
         </div>
       </Container>
 
+      <ProductDetailsModal
+        product={selected}
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+        onRedeem={handleRedeem}
+      />
       <RedeemProductModal product={selected} open={modalOpen} onOpenChange={setModalOpen} />
     </section>
   );

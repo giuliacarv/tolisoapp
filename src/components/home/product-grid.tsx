@@ -4,6 +4,8 @@ import type { Product } from "@/data/products";
 export interface ProductGridProps {
   products: Product[];
   onRedeem: (product: Product) => void;
+  /** Clique no card abre o modal de detalhes. */
+  onSelect?: (product: Product) => void;
   isLoading?: boolean;
   /** Quantos skeletons exibir durante o carregamento. */
   skeletonCount?: number;
@@ -13,6 +15,7 @@ export interface ProductGridProps {
 export function ProductGrid({
   products,
   onRedeem,
+  onSelect,
   isLoading = false,
   skeletonCount = 8,
 }: ProductGridProps) {
@@ -41,7 +44,7 @@ export function ProductGrid({
     <ul className="grid-fluid [--col-min:15rem]">
       {products.map((product) => (
         <li key={product.id} className="min-w-0">
-          <ProductCard product={product} onRedeem={onRedeem} />
+          <ProductCard product={product} onRedeem={onRedeem} onSelect={onSelect} />
         </li>
       ))}
     </ul>

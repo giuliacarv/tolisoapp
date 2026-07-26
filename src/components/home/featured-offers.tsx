@@ -5,6 +5,7 @@ import { FEATURED_PRODUCTS, type Product } from "@/data/products";
 
 import { Container, SectionHeading } from "./primitives";
 import { ProductGrid } from "./product-grid";
+import { ProductDetailsModal } from "./product-details-dialog";
 import { RedeemProductModal } from "./redeem-dialog";
 
 /**
@@ -16,6 +17,7 @@ export function FeaturedOffers() {
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState<Product | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [detailsOpen, setDetailsOpen] = useState(false);
 
   useEffect(() => {
     const timer = window.setTimeout(() => setIsLoading(false), 500);
@@ -25,6 +27,12 @@ export function FeaturedOffers() {
   function handleRedeem(product: Product) {
     setSelected(product);
     setModalOpen(true);
+  }
+
+  /** Clique no card: abre os detalhes da oferta (sem custo de créditos). */
+  function handleSelect(product: Product) {
+    setSelected(product);
+    setDetailsOpen(true);
   }
 
   return (
@@ -49,6 +57,7 @@ export function FeaturedOffers() {
           <ProductGrid
             products={FEATURED_PRODUCTS}
             onRedeem={handleRedeem}
+            onSelect={handleSelect}
             isLoading={isLoading}
             skeletonCount={8}
           />
@@ -60,6 +69,12 @@ export function FeaturedOffers() {
         </p>
       </Container>
 
+      <ProductDetailsModal
+        product={selected}
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+        onRedeem={handleRedeem}
+      />
       <RedeemProductModal product={selected} open={modalOpen} onOpenChange={setModalOpen} />
     </section>
   );
