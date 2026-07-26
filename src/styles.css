@@ -50,6 +50,7 @@
   --color-ring-offset-background: var(--background);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-amber: var(--amber);
   --color-ink: var(--ink);
   --color-graphite: var(--graphite);
   --color-offwhite: var(--offwhite);
@@ -66,6 +67,8 @@
   --offwhite: oklch(0.968 0.008 85);
   --gold: oklch(0.75 0.075 82);
   --gold-soft: oklch(0.88 0.045 85);
+  /* Âmbar legível sobre fundos claros — usado no estado "Validação pendente". */
+  --amber: oklch(0.58 0.105 74);
   --saving: oklch(0.51 0.11 160);
   --discount: oklch(0.6 0.15 22);
 

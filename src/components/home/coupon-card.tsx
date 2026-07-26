@@ -27,7 +27,7 @@ const STATUS_STYLES: Record<CouponStatus, { label: string; className: string }> 
   },
   pending: {
     label: "Validação pendente",
-    className: "border-gold/45 bg-gold/12 text-gold-strong",
+    className: "border-amber/40 bg-amber/10 text-amber",
   },
   expired: {
     label: "Expirado",
