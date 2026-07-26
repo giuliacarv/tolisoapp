@@ -1,7 +1,8 @@
-import { ArrowRight, BadgeCheck, Link2, ShieldCheck, Sparkles, Store, TicketCheck } from "lucide-react";
+import { ArrowRight, BadgeCheck, ShieldCheck, Sparkles, Store, TicketCheck } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Container } from "./primitives";
+
+import { Container, buttonOutline, buttonSolid, cardBase } from "./primitives";
 import espressoImage from "@/assets/hero-product-espresso.jpg";
 import headphonesImage from "@/assets/hero-product-headphones.jpg";
 import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
@@ -35,7 +36,7 @@ const HERO_OFFERS: HeroOffer[] = [
     oldPrice: "R$ 469,00",
     price: "R$ 289,90",
     discount: "-38%",
-    credits: 1,
+    credits: 2,
   },
   {
     id: "relogio",
@@ -59,7 +60,7 @@ const HERO_OFFERS: HeroOffer[] = [
   },
 ];
 
-function OfferCard({
+function HeroOfferCard({
   offer,
   className,
   priority = false,
@@ -69,30 +70,27 @@ function OfferCard({
   priority?: boolean;
 }) {
   return (
-    <article
-      className={cn(
-        "w-full rounded-[18px] border border-border bg-card p-4 shadow-soft",
-        className,
-      )}
-    >
+    <article className={cn(cardBase, "motion-safe-transform w-full p-4", className)}>
       <div className="flex items-center gap-4">
         <div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-2xl bg-secondary">
           <img
             src={offer.image}
-            alt={offer.name}
+            alt={`Foto ilustrativa: ${offer.name}`}
             width={800}
             height={800}
+            decoding="async"
             loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
             className="h-full w-full object-cover"
           />
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-2">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
             <span className="truncate text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               {offer.store}
             </span>
-            <span className="shrink-0 rounded-md bg-discount/10 px-1.5 py-0.5 text-[11px] font-semibold text-discount">
+            <span className="shrink-0 rounded-md bg-discount/12 px-1.5 py-0.5 text-[11px] font-semibold text-discount">
               {offer.discount}
             </span>
           </div>
@@ -106,63 +104,56 @@ function OfferCard({
         </div>
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-3 border-t border-border pt-3">
+      <div className="mt-3 border-t border-border pt-3">
         <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground">
-          <Sparkles className="h-3 w-3 text-gold" strokeWidth={2} aria-hidden />
+          <Sparkles className="h-3 w-3 shrink-0 text-gold" strokeWidth={2} aria-hidden />
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"} para desbloquear
         </span>
-        <Link2 className="h-3.5 w-3.5 shrink-0 text-muted-foreground" strokeWidth={1.75} aria-hidden />
       </div>
     </article>
   );
 }
 
-export function Hero() {
+export function HeroSection() {
   return (
     <section id="topo" className="relative overflow-hidden pt-[72px]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklab,var(--gold)_16%,transparent),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklab,var(--gold)_12%,transparent),transparent_70%)]"
       />
 
-      <Container className="relative py-16 sm:py-24 lg:py-28">
-        <div className="grid gap-16 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
-          <div className="flex flex-col items-start gap-8">
-            <span className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-card px-3.5 py-1.5 text-xs font-medium text-foreground">
-              <Sparkles className="h-3.5 w-3.5 text-gold" strokeWidth={2} aria-hidden />
-              Você começa com 5 créditos grátis.
+      <Container className="relative py-14 sm:py-20 lg:py-24">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
+          <div className="flex min-w-0 flex-col items-start gap-7">
+            <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card px-3.5 py-1.5 text-xs font-medium text-foreground">
+              <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
+              <span className="min-w-0">Você começa com 5 créditos grátis.</span>
             </span>
 
-            <h1 className="max-w-[16ch] font-serif text-4xl leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-[58px]">
+            <h1 className="max-w-[18ch] font-serif text-[32px] leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-[56px]">
               Ofertas selecionadas para você economizar de verdade.
             </h1>
 
-            <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-[17px]">
+            <p className="max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-[17px]">
               Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
               maiores lojas do Brasil.
             </p>
 
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <a
-                href="#ofertas"
-                className="group inline-flex items-center justify-center gap-2 rounded-xl bg-ink px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-graphite"
-              >
+              <a href="#ofertas" className={cn(buttonSolid, "group py-3.5")}>
                 Explorar ofertas
                 <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                   strokeWidth={2}
                   aria-hidden
                 />
               </a>
-              <a
-                href="#cupons"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-6 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
-              >
+              <a href="#cupons" className={cn(buttonOutline, "py-3.5")}>
                 Ver cupons
               </a>
             </div>
 
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-7 text-[13px] text-muted-foreground">
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-[13px] text-muted-foreground">
               {TRUST_SIGNALS.map(({ label, icon: Icon }) => (
                 <li key={label} className="inline-flex items-center gap-2">
                   <Icon className="h-3.5 w-3.5 shrink-0 text-saving" strokeWidth={2} aria-hidden />
@@ -173,17 +164,17 @@ export function Hero() {
           </div>
 
           <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -inset-6 rounded-[32px] bg-[radial-gradient(70%_60%_at_60%_30%,color-mix(in_oklab,var(--gold)_14%,transparent),transparent_75%)]"
-            />
             <div className="relative flex flex-col gap-4 sm:gap-0">
-              <OfferCard offer={HERO_OFFERS[0]} priority className="sm:w-[92%] sm:rotate-[-1.2deg]" />
-              <OfferCard
-                offer={HERO_OFFERS[1]}
-                className="sm:-mt-3 sm:ml-auto sm:w-[94%] sm:translate-x-2 sm:rotate-[0.8deg]"
+              <HeroOfferCard
+                offer={HERO_OFFERS[0]}
+                priority
+                className="sm:w-[92%] sm:rotate-[-1.2deg]"
               />
-              <OfferCard
+              <HeroOfferCard
+                offer={HERO_OFFERS[1]}
+                className="sm:-mt-3 sm:ml-auto sm:w-[94%] sm:rotate-[0.8deg]"
+              />
+              <HeroOfferCard
                 offer={HERO_OFFERS[2]}
                 className="sm:-mt-3 sm:w-[90%] sm:rotate-[-0.6deg]"
               />
@@ -194,3 +185,5 @@ export function Hero() {
     </section>
   );
 }
+
+export { HeroSection as Hero };
