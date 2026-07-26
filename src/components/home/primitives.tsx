@@ -25,24 +25,28 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3",
+        // Ritmo 8pt: 8px entre sobrancelha e título, 16px entre título e apoio.
+        "flex flex-col gap-2",
         align === "center" && "items-center text-center",
         className,
       )}
     >
       {eyebrow ? (
-        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          <span className="h-px w-6 bg-gold" aria-hidden />
+        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+          <span className="h-px w-6 bg-[image:var(--gradient-gold)]" aria-hidden />
           {eyebrow}
         </span>
       ) : null}
-      <h2 className="font-serif text-fluid-h2 leading-[1.12] tracking-[-0.02em] text-balance text-foreground">
+      <h2 className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance text-foreground">
         {title}
       </h2>
       {description ? (
-        <p className="max-w-[65ch] text-fluid-sm leading-relaxed text-pretty text-muted-foreground">{description}</p>
+        <p className="mt-2 max-w-[58ch] text-fluid-sm leading-[1.7] text-pretty text-muted-foreground">
+          {description}
+        </p>
       ) : null}
     </div>
+
   );
 }
 
