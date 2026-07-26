@@ -1,39 +1,21 @@
-import { useEffect, useState } from "react";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
 
-import { FEATURED_PRODUCTS, type Product } from "@/data/products";
+import { FEATURED_PRODUCTS } from "@/data/products";
+import { DEFAULT_PAGE_SIZE } from "@/domain/products/pagination";
+import { useProductModals } from "@/hooks/use-product-modals";
+import { useSimulatedLoading } from "@/hooks/use-simulated-loading";
 
 import { Container, SectionHeading } from "./primitives";
 import { ProductGrid } from "./product-grid";
-import { ProductDetailsModal } from "./product-details-dialog";
-import { RedeemProductModal } from "./redeem-dialog";
+import { ProductModals } from "./product-modals";
 
 /**
  * Ofertas em destaque.
- * TODO: trocar o timeout por fetch real (API/banco). O skeleton já cobre o
- * estado de carregamento para essa futura integração.
+ * TODO: trocar o carregamento simulado por fetch real (API/banco).
  */
 export function FeaturedOffers() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [selected, setSelected] = useState<Product | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [detailsOpen, setDetailsOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), 500);
-    return () => window.clearTimeout(timer);
-  }, []);
-
-  function handleRedeem(product: Product) {
-    setSelected(product);
-    setModalOpen(true);
-  }
-
-  /** Clique no card: abre os detalhes da oferta (sem custo de créditos). */
-  function handleSelect(product: Product) {
-    setSelected(product);
-    setDetailsOpen(true);
-  }
+  const isLoading = useSimulatedLoading([], 500);
+  const modals = useProductModals();
 
   return (
     <section id="ofertas" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
@@ -56,10 +38,10 @@ export function FeaturedOffers() {
         <div className="mt-10">
           <ProductGrid
             products={FEATURED_PRODUCTS}
-            onRedeem={handleRedeem}
-            onSelect={handleSelect}
+            onRedeem={modals.openRedeem}
+            onSelect={modals.openDetails}
             isLoading={isLoading}
-            skeletonCount={8}
+            skeletonCount={DEFAULT_PAGE_SIZE}
           />
         </div>
 
@@ -69,13 +51,7 @@ export function FeaturedOffers() {
         </p>
       </Container>
 
-      <ProductDetailsModal
-        product={selected}
-        open={detailsOpen}
-        onOpenChange={setDetailsOpen}
-        onRedeem={handleRedeem}
-      />
-      <RedeemProductModal product={selected} open={modalOpen} onOpenChange={setModalOpen} />
+      <ProductModals modals={modals} />
     </section>
   );
 }
