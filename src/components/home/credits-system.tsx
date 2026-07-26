@@ -29,7 +29,7 @@ export function CreditsSystem() {
         <div className="overflow-hidden rounded-3xl bg-ink px-6 py-14 text-offwhite sm:px-12 sm:py-16">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
             <div className="min-w-0 space-y-6">
-              <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-gold">
+              <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.22em] text-gold">
                 <span className="h-px w-6 bg-gold" aria-hidden />
                 Sistema de créditos
               </span>
@@ -38,7 +38,7 @@ export function CreditsSystem() {
                 Seus créditos desbloqueiam novas economias
               </h2>
 
-              <p className="max-w-xl text-[15px] leading-relaxed text-offwhite/70">
+              <p className="max-w-xl text-fluid-sm leading-relaxed text-offwhite/70">
                 Toda nova conta começa com 5 créditos gratuitos. Use os créditos para resgatar
                 produtos e cupons exclusivos.
               </p>
@@ -87,7 +87,7 @@ export function CreditsSystem() {
                   </span>
                   <p className="truncate text-sm font-medium text-offwhite">Exemplo de uso</p>
                 </div>
-                <span className="shrink-0 rounded-full border border-offwhite/15 px-3 py-1 text-[11px] text-offwhite/60">
+                <span className="shrink-0 rounded-full border border-offwhite/15 px-3 py-1 text-fluid-micro text-offwhite/60">
                   Ilustrativo
                 </span>
               </div>

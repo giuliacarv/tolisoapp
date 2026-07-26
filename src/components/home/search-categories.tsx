@@ -69,8 +69,8 @@ export function SearchAndCategories() {
                     onClick={() => setActiveFilter(id)}
                     className={
                       isActive
-                        ? "inline-flex min-h-9 items-center rounded-full bg-ink px-4 py-2 text-[13px] font-medium text-offwhite transition-colors duration-200"
-                        : "inline-flex min-h-9 items-center rounded-full border border-border bg-background px-4 py-2 text-[13px] font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground"
+                        ? "inline-flex min-h-9 items-center rounded-full bg-ink px-4 py-2 text-fluid-xs font-medium text-offwhite transition-colors duration-200"
+                        : "inline-flex min-h-9 items-center rounded-full border border-border bg-background px-4 py-2 text-fluid-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground"
                     }
                   >
                     {label}

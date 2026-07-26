@@ -105,7 +105,7 @@ function CategoryCard({ category, isActive, onSelect }: CategoryCardProps) {
         <span className="font-serif text-lg font-medium tracking-tight">{category.label}</span>
         <span
           className={cn(
-            "text-[13px] leading-relaxed",
+            "text-fluid-xs leading-relaxed",
             isActive ? "text-offwhite/75" : "text-muted-foreground",
           )}
         >
@@ -142,7 +142,7 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
         className="mx-auto items-center text-center"
       />
 
-      <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      <ul className="mt-10 grid-fluid [--col-min:9rem]">
         {CATEGORIES.map((category) => (
           <li key={category.id} className="min-w-0">
             <CategoryCard

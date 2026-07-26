@@ -31,12 +31,12 @@ export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponMo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-h-[85dvh] overflow-y-auto rounded-[20px] border-border bg-card sm:max-w-md">
+      <DialogContent className="fixed inset-x-0 bottom-0 top-auto max-h-[90dvh] w-full max-w-none translate-x-0 translate-y-0 gap-4 overflow-y-auto overscroll-contain rounded-t-[20px] border-border bg-card p-[var(--gutter)] sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[20px] sm:p-6">
         <DialogHeader>
-          <DialogTitle className="font-serif text-2xl tracking-tight text-foreground">
+          <DialogTitle className="font-serif text-fluid-h3 tracking-tight text-foreground">
             Resgatar cupom
           </DialogTitle>
-          <DialogDescription className="pt-1 text-[15px] leading-relaxed text-muted-foreground">
+          <DialogDescription className="pt-1 text-fluid-sm leading-relaxed text-muted-foreground">
             Este cupom utilizará {COUPON_REDEMPTION_COST} créditos. Após a confirmação, o código
             será liberado e você poderá acessar a loja participante.
           </DialogDescription>

@@ -18,7 +18,7 @@ export function ProductGrid({
 }: ProductGridProps) {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid-fluid [--col-min:15rem]">
         {Array.from({ length: skeletonCount }).map((_, index) => (
           <ProductCardSkeleton key={`skeleton-${index}`} />
         ))}
@@ -38,7 +38,7 @@ export function ProductGrid({
   }
 
   return (
-    <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <ul className="grid-fluid [--col-min:15rem]">
       {products.map((product) => (
         <li key={product.id} className="min-w-0">
           <ProductCard product={product} onRedeem={onRedeem} />

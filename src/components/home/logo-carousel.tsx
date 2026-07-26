@@ -31,7 +31,7 @@ function LogoSlide({ logo, ariaHidden }: { logo: PartnerLogo; ariaHidden?: boole
   return (
     <li
       aria-hidden={ariaHidden || undefined}
-      className="flex w-[92px] shrink-0 items-center justify-center px-2 sm:w-[148px] sm:px-5 lg:w-[158px]"
+      className="flex w-[clamp(5.5rem,18vw,9.875rem)] shrink-0 items-center justify-center px-[clamp(0.5rem,1.4vw,1.25rem)]"
     >
       {logo.link && !ariaHidden ? (
         <a
@@ -88,7 +88,7 @@ export function LogoCarousel({ logos = PARTNER_LOGOS, speed = 50, className }: L
         <div className="flex flex-col items-center gap-6">
           <h2
             id="parceiros-title"
-            className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground"
+            className="text-fluid-micro font-semibold uppercase tracking-[0.22em] text-muted-foreground"
           >
             Lojas e marketplaces reconhecidos
           </h2>
