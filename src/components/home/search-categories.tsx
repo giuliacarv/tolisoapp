@@ -63,15 +63,29 @@ export function SearchAndCategories() {
     safePage * PAGE_SIZE,
   );
 
-  /** Qualquer mudança de filtro/busca/ordenação reinicia a paginação. */
+  /**
+   * Qualquer mudança de filtro/busca/ordenação reinicia a paginação e simula
+   * a latência do futuro backend, exibindo os skeletons.
+   * TODO: substituir pelo estado de carregamento real da consulta.
+   */
   useEffect(() => {
     setPage(1);
+    setIsLoading(true);
+    const timeout = window.setTimeout(() => setIsLoading(false), 420);
+    return () => window.clearTimeout(timeout);
   }, [query, activeFilter, sort]);
 
   function handlePageChange(next: number) {
     setPage(Math.min(Math.max(1, next), totalPages));
     document.getElementById("ofertas-filtradas")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
+
+  function handleReset() {
+    setQuery("");
+    setActiveFilter("all");
+  }
+
+
 
 
   function handleCategorySelect(id: string) {
