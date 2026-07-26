@@ -36,7 +36,7 @@ export function SectionHeading({
           {eyebrow}
         </span>
       ) : null}
-      <h2 className="font-serif text-fluid-h2 leading-tight tracking-tight text-balance text-foreground">
+      <h2 className="font-serif text-fluid-h2 leading-[1.12] tracking-[-0.02em] text-balance text-foreground">
         {title}
       </h2>
       {description ? (
@@ -50,7 +50,7 @@ export function Tag({ className, ...props }: ComponentProps<"span">) {
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground",
+        "inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground shadow-hairline",
         className,
       )}
       {...props}
@@ -63,18 +63,25 @@ export function Tag({ className, ...props }: ComponentProps<"span">) {
  * (área de toque >= 44px), foco visível e duração de transição (~200ms).
  */
 export const buttonBase =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold transition-[transform,background-color,border-color,color,box-shadow] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0";
 
-export const buttonSolid = cn(buttonBase, "bg-ink text-offwhite hover:bg-graphite");
+/** Ação primária: gradiente grafite→carvão e sombra que ganha difusão no hover. */
+export const buttonSolid = cn(
+  buttonBase,
+  "bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-soft hover:shadow-lift",
+);
 
 export const buttonOutline = cn(
   buttonBase,
-  "border border-border bg-card text-foreground hover:bg-secondary",
+  "border border-border bg-card text-foreground hover:border-gold/40 hover:bg-secondary hover:shadow-soft",
 );
 
-/** Card base: borda fina, sombra discreta e hover contido. */
+/** Card base: borda fina, sombra difusa e elevação contida no hover. */
 export const cardBase =
-  "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow] duration-200";
+  "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]";
+
+/** Superfície de vidro para painéis sobrepostos (modais, barras flutuantes). */
+export const glassPanel = "glass-surface rounded-[18px] shadow-lift";
 
 /** Chips de filtro — altura mínima de 44px para área de toque confortável. */
 export const chipBase =
