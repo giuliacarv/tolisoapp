@@ -158,3 +158,27 @@
   }
 }
 
+/* Faixa do carrossel de logotipos: loop infinito baseado só em transform. */
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@utility marquee-track {
+  animation-name: marquee-scroll;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Sem movimento automático: o usuário rola horizontalmente se quiser. */
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}

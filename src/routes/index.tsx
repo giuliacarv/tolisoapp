@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CreditsSection } from "@/components/home/credits-system";
 import { ProductSection } from "@/components/home/featured-offers";
 import { HeroSection } from "@/components/home/hero";
+import { LogoCarousel } from "@/components/home/logo-carousel";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { SearchAndCategories } from "@/components/home/search-categories";
 import { Footer } from "@/components/home/site-footer";
@@ -32,6 +33,7 @@ function Index() {
       <Header />
       <main>
         <HeroSection />
+        <LogoCarousel />
         <SearchAndCategories />
         <ProductSection />
         <CouponSection />
