@@ -19,7 +19,12 @@ export interface CouponCardProps {
 
 export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
   return (
-    <article className="flex h-full flex-col gap-4 rounded-[18px] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift">
+    <article
+      className={cn(
+        cardBase,
+        "motion-safe-transform flex h-full flex-col gap-4 p-6 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+      )}
+    >
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
         <div className="min-w-0 space-y-1">
           <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
