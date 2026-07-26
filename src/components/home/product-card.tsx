@@ -9,7 +9,7 @@ import {
 } from "@/data/products";
 import { cn } from "@/lib/utils";
 
-import { buttonOutline, cardBase } from "./primitives";
+import { cardBase } from "./primitives";
 
 export interface ProductCardProps {
   product: Product;
