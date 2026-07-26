@@ -127,14 +127,20 @@ function HeroOfferCard({
 export function HeroSection() {
   return (
     <section id="topo" className="relative overflow-x-clip scroll-mt-[var(--header-h)]">
+      {/* Ambiência: luz quente assimétrica + grão fino. Puramente decorativo. */}
       <div
         aria-hidden
-        className="halo-gradient pointer-events-none absolute inset-x-0 top-0 h-[clamp(18rem,45vw,32rem)] opacity-60"
+        className="ambient-light pointer-events-none absolute inset-x-0 -top-[var(--header-h)] h-[clamp(24rem,60vw,44rem)]"
+      />
+      <div
+        aria-hidden
+        className="texture-grain pointer-events-none absolute inset-0"
       />
 
       <Container className="relative section-y">
-        <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
-          <div className="flex min-w-0 flex-col items-start gap-7">
+        <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-16">
+          <Reveal className="flex min-w-0 flex-col items-start gap-6 sm:gap-8">
+
             <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card px-3.5 py-1.5 text-xs font-medium text-foreground">
               <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
               <span className="min-w-0">Você começa com 5 créditos grátis.</span>
