@@ -81,13 +81,12 @@ function CategoryCard({ category, isActive, onSelect }: CategoryCardProps) {
       onClick={() => onSelect(category.id)}
       aria-pressed={isActive}
       className={cn(
-        cardBase,
-        "motion-safe-transform flex h-full w-full flex-col items-start gap-4 p-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        isActive
-          ? "border-ink bg-ink text-offwhite"
-          : "text-foreground hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+        isActive ? cardBase : cardInteractive,
+        "motion-safe-transform flex h-full w-full flex-col items-start gap-4 p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        isActive && "border-ink bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift",
       )}
     >
+
       <span
         className={cn(
           "grid h-11 w-11 shrink-0 place-items-center rounded-xl border transition-colors duration-200",
