@@ -39,7 +39,35 @@ export interface Product {
   expiresAt: string;
   /** ISO 8601 — data de publicação da oferta (mock). */
   publishedAt: string;
+  /** Disponibilidade da oferta na loja parceira. Ausente = disponível. */
+  available?: boolean;
 }
+
+/** Motivo pelo qual uma oferta não pode ser resgatada (ou `null` se ativa). */
+export type ProductUnavailableReason = "expired" | "unavailable";
+
+/**
+ * Avalia se a oferta ainda pode ser resgatada.
+ * Datas inválidas são tratadas como "não expiradas" para não bloquear
+ * indevidamente uma oferta por erro de dado.
+ */
+export function getProductUnavailableReason(
+  product: Pick<Product, "expiresAt" | "available">,
+  now: Date = new Date(),
+): ProductUnavailableReason | null {
+  if (product.available === false) return "unavailable";
+
+  const expiresAt = new Date(product.expiresAt).getTime();
+  if (Number.isFinite(expiresAt) && expiresAt < now.getTime()) return "expired";
+
+  return null;
+}
+
+/** Rótulo curto exibido no card para ofertas não resgatáveis. */
+export function formatUnavailableLabel(reason: ProductUnavailableReason): string {
+  return reason === "expired" ? "Oferta expirada" : "Indisponível";
+}
+
 
 /**
  * Regra de créditos do DESCONTAI.
