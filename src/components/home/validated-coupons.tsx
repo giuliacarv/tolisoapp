@@ -57,13 +57,14 @@ export function CouponSection() {
             ))}
           </div>
         ) : (
-          <ul className="mt-10 grid-fluid [--col-min:18rem]">
-            {COUPONS.map((coupon) => (
-              <li key={coupon.id} className="min-w-0">
+          <ul className="mt-12 grid-fluid [--col-min:18rem]">
+            {COUPONS.map((coupon, index) => (
+              <Reveal as="li" key={coupon.id} delay={Math.min(index, 5) * 70} className="min-w-0">
                 <CouponCard coupon={coupon} onRedeem={handleRedeem} />
-              </li>
+              </Reveal>
             ))}
           </ul>
+
         )}
 
         <div className="mt-8">
