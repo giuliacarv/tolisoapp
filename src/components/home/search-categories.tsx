@@ -130,11 +130,13 @@ export function SearchAndCategories() {
                 ? "Todas as ofertas"
                 : "Resultados da busca"}
             </h3>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <p aria-live="polite" className="text-sm text-muted-foreground">
                 {filteredProducts.length}{" "}
                 {filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"}
+                {totalPages > 1 ? ` — página ${safePage} de ${totalPages}` : ""}
               </p>
+              <SortSelect value={sort} onValueChange={setSort} />
               {(activeFilter !== "all" || query.trim() !== "") && (
                 <button
                   type="button"
@@ -151,9 +153,12 @@ export function SearchAndCategories() {
           </div>
 
           <div className="mt-6">
-            <ProductGrid products={filteredProducts} onRedeem={handleRedeem}
-            onSelect={handleSelect} />
+            <ProductGrid products={pageProducts} onRedeem={handleRedeem} onSelect={handleSelect} />
           </div>
+
+          <Pagination page={safePage} totalPages={totalPages} onPageChange={handlePageChange} />
+
+
 
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
