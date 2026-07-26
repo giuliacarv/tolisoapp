@@ -178,8 +178,9 @@ export function CouponDisclaimer() {
   return (
     <p className="inline-flex items-start gap-2 text-xs text-muted-foreground">
       <ShieldAlert className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
-      Cupons demonstrativos, criados apenas para ilustrar a interface: os códigos são fictícios e não
-      geram desconto real. Condições e validade dependem das regras de cada loja.
+      Cupons demonstrativos. A validação automática será conectada ao banco de dados em uma próxima
+      etapa.
     </p>
   );
 }
+
