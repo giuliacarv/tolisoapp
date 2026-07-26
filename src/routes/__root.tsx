@@ -78,12 +78,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DESCONTAI" },
-      { name: "description", content: "DESCONTAI — ofertas selecionadas e cupons validados das maiores lojas do Brasil." },
       { name: "author", content: "DESCONTAI" },
+      { name: "robots", content: "index, follow" },
       { property: "og:site_name", content: "DESCONTAI" },
-      { property: "og:title", content: "DESCONTAI" },
-      { property: "og:description", content: "DESCONTAI — ofertas selecionadas e cupons validados das maiores lojas do Brasil." },
+      { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -98,8 +96,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
     ],
+
 
   }),
   shellComponent: RootShell,
