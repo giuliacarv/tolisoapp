@@ -1,31 +1,34 @@
-import { Eye, HandCoins, LockKeyhole, ScrollText } from "lucide-react";
+import { BadgeCheck, Coins, Info, ShieldCheck, Store } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import { Container, SectionHeading } from "./primitives";
 
-const PILLARS = [
+interface Pillar {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const PILLARS: Pillar[] = [
   {
-    icon: Eye,
-    title: "Preço conferido na fonte",
-    description:
-      "Cada oferta é comparada com o histórico da própria loja. Se o desconto for artificial, ela não é publicada.",
+    icon: Store,
+    title: "Lojas reconhecidas",
+    description: "Ofertas provenientes de marketplaces e varejistas conhecidos.",
   },
   {
-    icon: HandCoins,
-    title: "Somos remunerados por afiliação",
-    description:
-      "Ao comprar pelos nossos links, recebemos uma comissão da loja. O preço para você é exatamente o mesmo.",
+    icon: BadgeCheck,
+    title: "Cupons revisados",
+    description: "Cupons com status de validação, data de verificação e regras disponíveis.",
   },
   {
-    icon: ScrollText,
-    title: "Critérios públicos de curadoria",
-    description:
-      "Explicamos abertamente como escolhemos e ordenamos as ofertas. Nenhum destaque é vendido.",
+    icon: ShieldCheck,
+    title: "Redirecionamento seguro",
+    description: "Você confere e finaliza a compra diretamente na plataforma responsável.",
   },
   {
-    icon: LockKeyhole,
-    title: "Compra na loja oficial",
-    description:
-      "O pagamento nunca acontece no DESCONTAI. Você finaliza no ambiente seguro da loja parceira.",
+    icon: Coins,
+    title: "Economia transparente",
+    description: "Antes de resgatar, você sempre verá a quantidade de créditos necessária.",
   },
 ];
 
@@ -33,30 +36,40 @@ export function TrustSection() {
   return (
     <section id="transparencia" className="scroll-mt-24 py-20 sm:py-24">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <SectionHeading
-            eyebrow="Confiança e transparência"
-            title="Sem preço fantasma, sem promessa exagerada"
-            description="Um marketplace de ofertas só é útil se for honesto. Estes são os compromissos que sustentam o DESCONTAI."
-          />
+        <SectionHeading
+          eyebrow="Confiança"
+          title="Transparência em cada oferta"
+          align="center"
+          className="mx-auto items-center text-center"
+        />
 
-          <ul className="grid gap-6 sm:grid-cols-2">
-            {PILLARS.map((pillar) => (
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {PILLARS.map((pillar) => {
+            const Icon = pillar.icon;
+            return (
               <li
                 key={pillar.title}
                 className="rounded-[18px] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift"
               >
                 <span className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-background">
-                  <pillar.icon className="h-4.5 w-4.5 text-gold" strokeWidth={1.75} />
+                  <Icon className="h-4.5 w-4.5 text-gold" strokeWidth={1.75} aria-hidden />
                 </span>
                 <h3 className="mt-5 text-base font-semibold text-foreground">{pillar.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {pillar.description}
                 </p>
               </li>
-            ))}
-          </ul>
-        </div>
+            );
+          })}
+        </ul>
+
+        <p className="mx-auto mt-10 grid max-w-3xl grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-2xl border border-border bg-secondary/50 px-5 py-4 text-xs leading-relaxed text-muted-foreground">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.7} aria-hidden />
+          <span className="min-w-0">
+            Alguns links desta plataforma são links de afiliado. Podemos receber uma comissão quando
+            uma compra é realizada, sem custo adicional para você.
+          </span>
+        </p>
       </Container>
     </section>
   );
