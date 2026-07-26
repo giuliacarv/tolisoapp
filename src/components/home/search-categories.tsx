@@ -24,7 +24,9 @@ const CATEGORIES = [
 
 export function SearchAndCategories() {
   return (
-    <section className="scroll-mt-24 py-4">
+    <section id="categorias" className="scroll-mt-24 py-4">
+      <span id="buscar" className="sr-only" aria-hidden />
+
       <Container>
         <div className="rounded-[18px] border border-border bg-card p-5 shadow-soft sm:p-7">
           <form
