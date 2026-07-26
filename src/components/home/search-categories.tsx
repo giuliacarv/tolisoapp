@@ -148,18 +148,17 @@ export function SearchAndCategories() {
             </h3>
             <div className="flex flex-wrap items-center gap-3">
               <p aria-live="polite" className="text-sm text-muted-foreground">
-                {filteredProducts.length}{" "}
-                {filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"}
-                {totalPages > 1 ? ` — página ${safePage} de ${totalPages}` : ""}
+                {isLoading
+                  ? "Carregando ofertas…"
+                  : `${filteredProducts.length} ${
+                      filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"
+                    }${totalPages > 1 ? ` — página ${safePage} de ${totalPages}` : ""}`}
               </p>
               <SortSelect value={sort} onValueChange={setSort} />
               {(activeFilter !== "all" || query.trim() !== "") && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setQuery("");
-                    setActiveFilter("all");
-                  }}
+                  onClick={handleReset}
                   className="inline-flex min-h-11 items-center rounded-full border border-border px-3 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground"
                 >
                   Limpar filtros
@@ -169,10 +168,33 @@ export function SearchAndCategories() {
           </div>
 
           <div className="mt-6">
-            <ProductGrid products={pageProducts} onRedeem={handleRedeem} onSelect={handleSelect} />
+            <ProductGrid
+              products={pageProducts}
+              onRedeem={handleRedeem}
+              onSelect={handleSelect}
+              isLoading={isLoading}
+              skeletonCount={PAGE_SIZE}
+              emptyState={
+                <EmptyResults
+                  query={query}
+                  filterLabel={
+                    activeFilter === "all" ? undefined : CATEGORY_LABEL_BY_ID.get(activeFilter)
+                  }
+                  onReset={handleReset}
+                  suggestions={SEARCH_SUGGESTIONS}
+                  onSuggestionSelect={(suggestion) => {
+                    setActiveFilter("all");
+                    setQuery(suggestion);
+                  }}
+                />
+              }
+            />
           </div>
 
-          <Pagination page={safePage} totalPages={totalPages} onPageChange={handlePageChange} />
+          {!isLoading && (
+            <Pagination page={safePage} totalPages={totalPages} onPageChange={handlePageChange} />
+          )}
+
 
 
 
