@@ -15,7 +15,7 @@ const NAV_LINKS = [
   { label: "Como funciona", href: "#como-funciona" },
 ];
 
-const LOGIN_MESSAGE = "Login e cadastro serão adicionados na próxima etapa.";
+const LOGIN_MESSAGE = "Login e cadastro serão implementados na próxima etapa.";
 
 const iconButton =
   "touch-target grid shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground transition-colors duration-200 hover:bg-secondary";
