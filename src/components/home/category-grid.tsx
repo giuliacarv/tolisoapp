@@ -92,11 +92,11 @@ function CategoryCard({ category, isActive, onSelect }: CategoryCardProps) {
       <span
         className={cn(
           "grid h-11 w-11 shrink-0 place-items-center rounded-xl border transition-colors duration-200",
-          isActive ? "border-offwhite/20 bg-offwhite/10" : "border-border bg-background",
+          isActive ? "border-offwhite/20 bg-offwhite/10" : "border-gold/25 bg-gold/8",
         )}
       >
         <Icon
-          className={cn("h-5 w-5", isActive ? "text-gold" : "text-muted-foreground")}
+          className={cn("h-5 w-5", "text-gold")}
           strokeWidth={1.75}
           aria-hidden
         />
