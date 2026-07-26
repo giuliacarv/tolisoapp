@@ -42,9 +42,7 @@ export function EmptyResults({
       </h4>
 
       <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-        {term
-          ? `Não localizamos ofertas para “${term}”${filterLabel ? ` em ${filterLabel}` : ""}. Ajuste os termos ou explore outra categoria — nossa curadoria é atualizada com frequência.`
-          : "Ainda não há ofertas nesta seleção. Explore outra categoria enquanto novas oportunidades são curadas."}
+        Tente buscar outro produto, loja ou categoria.
       </p>
 
       {suggestions.length > 0 && (
@@ -72,7 +70,7 @@ export function EmptyResults({
         onClick={onReset}
         className="mt-7 inline-flex min-h-11 items-center justify-center rounded-xl bg-ink px-6 text-sm font-medium text-offwhite transition-opacity duration-200 hover:opacity-90"
       >
-        Limpar busca e filtros
+        Limpar filtros
       </button>
     </div>
   );
