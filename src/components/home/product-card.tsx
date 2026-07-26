@@ -1,6 +1,12 @@
 import { BadgeCheck, Coins, Store as StoreIcon } from "lucide-react";
 
-import { formatBRL, formatCreditsLabel, type Product } from "@/data/products";
+import {
+  formatBRL,
+  formatCreditsLabel,
+  formatUnavailableLabel,
+  getProductUnavailableReason,
+  type Product,
+} from "@/data/products";
 import { cn } from "@/lib/utils";
 
 import { buttonOutline, cardBase } from "./primitives";
@@ -13,17 +19,30 @@ export interface ProductCardProps {
   className?: string;
 }
 
-/** Card de produto com altura visual consistente (flex + mt-auto no rodapé). */
+/**
+ * Card de produto com altura visual consistente.
+ * Estrutura: mídia com proporção fixa 4/3 → conteúdo flexível → rodapé
+ * ancorado (`mt-auto`), garantindo botões alinhados entre cards vizinhos.
+ */
 export function ProductCard({ product, onRedeem, onSelect, className }: ProductCardProps) {
+  // Ofertas expiradas ou esgotadas não podem consumir créditos do usuário.
+  const unavailableReason = getProductUnavailableReason(product);
+  const isDisabled = unavailableReason !== null;
+
   return (
     <article
+      aria-disabled={isDisabled || undefined}
       className={cn(
         cardBase,
-        "motion-safe-transform group relative flex h-full flex-col overflow-hidden hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+        "motion-safe-transform group relative flex h-full flex-col overflow-hidden",
+        isDisabled
+          ? "opacity-60 saturate-50"
+          : "hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
         className,
       )}
     >
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
+      {/* Mídia: proporção única para todos os cards, sem distorção (object-cover). */}
+      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-secondary">
         <img
           src={product.image}
           alt={`Foto ilustrativa: ${product.name}`}
@@ -31,27 +50,45 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
           decoding="async"
           width={800}
           height={600}
-          className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
+          className={cn(
+            "h-full w-full object-cover object-center transition-transform duration-200",
+            isDisabled ? "grayscale" : "group-hover:scale-[1.03]",
+          )}
         />
-        <span className="absolute left-3 top-3 rounded-lg bg-discount px-2.5 py-1 text-xs font-bold text-offwhite">
-          -{product.discountPercentage}%
-        </span>
-        {product.verified ? (
-          <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-fluid-micro font-semibold text-foreground backdrop-blur">
-            <BadgeCheck className="h-3.5 w-3.5 text-saving" strokeWidth={2} aria-hidden />
-            Oferta verificada
+
+        {/* Faixa superior: badges em linha para nunca se sobreporem. */}
+        <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
+          <span className="rounded-lg bg-discount px-2.5 py-1 text-xs font-bold text-offwhite">
+            -{product.discountPercentage}%
           </span>
-        ) : null}
-        <span className="absolute bottom-3 left-3 inline-flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-fluid-micro font-semibold text-foreground backdrop-blur">
-          <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
-          <span className="truncate">{product.store}</span>
-        </span>
+
+          {isDisabled ? (
+            <span className="rounded-lg border border-border bg-card/90 px-2.5 py-1 text-fluid-micro font-semibold text-muted-foreground backdrop-blur">
+              {formatUnavailableLabel(unavailableReason)}
+            </span>
+          ) : product.verified ? (
+            <span className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-fluid-micro font-semibold text-foreground backdrop-blur">
+              <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-saving" strokeWidth={2} aria-hidden />
+              <span className="truncate">Oferta verificada</span>
+            </span>
+          ) : null}
+        </div>
+
+        {/* Loja: faixa inferior isolada, sem colidir com a faixa superior. */}
+        <div className="pointer-events-none absolute inset-x-3 bottom-3 flex">
+          <span className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-fluid-micro font-semibold text-foreground backdrop-blur">
+            <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
+            <span className="truncate">{product.store}</span>
+          </span>
+        </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 p-5">
+      <div className="flex flex-1 flex-col gap-2 p-5">
         <span className="text-fluid-micro font-semibold uppercase tracking-[0.18em] text-muted-foreground">
           {product.category}
         </span>
+
+        {/* Alturas mínimas fixas mantêm o alinhamento entre cards com textos curtos. */}
         <h3 className="line-clamp-2 min-h-[2.75rem] text-fluid-sm font-semibold leading-snug text-foreground">
           {/* Stretched link: o botão cobre o card inteiro sem aninhar
               interativos, mantendo um único alvo semântico para leitores de tela. */}
@@ -64,19 +101,23 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
             {product.name}
           </button>
         </h3>
-        <p className="line-clamp-2 text-fluid-xs leading-relaxed text-muted-foreground">
+
+        <p className="line-clamp-2 min-h-[2.5rem] text-fluid-xs leading-relaxed text-muted-foreground">
           {product.description}
         </p>
 
-        <div className="mt-auto space-y-3 pt-2">
-          <div className="flex flex-wrap items-baseline gap-2">
+        <div className="mt-auto space-y-3 pt-3">
+          {/* Preços: anterior riscado + atual em destaque, na mesma linha de base. */}
+          <p className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
             <span className="text-sm text-muted-foreground line-through">
+              <span className="sr-only">Preço anterior: </span>
               {formatBRL(product.originalPrice)}
             </span>
-            <span className="font-serif text-2xl text-foreground">
+            <span className="font-serif text-2xl leading-none text-foreground">
+              <span className="sr-only">Preço atual: </span>
               {formatBRL(product.currentPrice)}
             </span>
-          </div>
+          </p>
 
           <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground">
             <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
@@ -86,10 +127,21 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
           <button
             type="button"
             onClick={() => onRedeem(product)}
-            aria-label={`Resgatar desconto de ${product.name}`}
-            className={cn(buttonOutline, "relative z-10 w-full bg-background hover:border-ink hover:bg-ink hover:text-offwhite")}
+            disabled={isDisabled}
+            aria-label={
+              isDisabled
+                ? `${formatUnavailableLabel(unavailableReason)}: ${product.name}`
+                : `Resgatar desconto de ${product.name}`
+            }
+            className={cn(
+              buttonOutline,
+              "relative z-10 w-full bg-background",
+              isDisabled
+                ? "cursor-not-allowed opacity-60 hover:border-border hover:bg-background hover:text-foreground"
+                : "hover:border-ink hover:bg-ink hover:text-offwhite",
+            )}
           >
-            Resgatar Desconto
+            {isDisabled ? formatUnavailableLabel(unavailableReason) : "Resgatar Desconto"}
           </button>
         </div>
       </div>
@@ -100,13 +152,22 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
 /** Skeleton com as mesmas proporções do card real (evita CLS). */
 export function ProductCardSkeleton() {
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-soft">
-      <div className="aspect-[4/3] w-full animate-pulse bg-secondary" />
-      <div className="flex flex-1 flex-col gap-3 p-5">
+    <div
+      aria-hidden
+      className="flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-soft"
+    >
+      <div className="aspect-[4/3] w-full shrink-0 animate-pulse bg-secondary" />
+      <div className="flex flex-1 flex-col gap-2 p-5">
         <div className="h-3 w-20 animate-pulse rounded bg-secondary" />
-        <div className="h-4 w-full animate-pulse rounded bg-secondary" />
-        <div className="h-4 w-3/4 animate-pulse rounded bg-secondary" />
-        <div className="mt-auto space-y-3 pt-4">
+        <div className="min-h-[2.75rem] space-y-2">
+          <div className="h-4 w-full animate-pulse rounded bg-secondary" />
+          <div className="h-4 w-3/4 animate-pulse rounded bg-secondary" />
+        </div>
+        <div className="min-h-[2.5rem] space-y-2">
+          <div className="h-3 w-full animate-pulse rounded bg-secondary" />
+          <div className="h-3 w-2/3 animate-pulse rounded bg-secondary" />
+        </div>
+        <div className="mt-auto space-y-3 pt-3">
           <div className="h-7 w-32 animate-pulse rounded bg-secondary" />
           <div className="h-6 w-24 animate-pulse rounded-full bg-secondary" />
           <div className="h-11 w-full animate-pulse rounded-xl bg-secondary" />
