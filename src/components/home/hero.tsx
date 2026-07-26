@@ -116,7 +116,7 @@ function HeroOfferCard({
 
 export function HeroSection() {
   return (
-    <section id="topo" className="relative overflow-x-clip pt-[var(--header-h)]">
+    <section id="topo" className="relative overflow-x-clip scroll-mt-[var(--header-h)]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(18rem,45vw,32rem)] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklab,var(--gold)_12%,transparent),transparent_70%)]"
