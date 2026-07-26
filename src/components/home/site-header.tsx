@@ -18,7 +18,7 @@ const NAV_LINKS = [
 const LOGIN_MESSAGE = "Login e cadastro serão adicionados na próxima etapa.";
 
 const iconButton =
-  "grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground transition-colors duration-200 hover:bg-secondary";
+  "touch-target grid shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground transition-colors duration-200 hover:bg-secondary";
 
 /**
  * Header fixo do DESCONTAI.
@@ -50,7 +50,7 @@ export function Header() {
           : "border-b border-transparent",
       )}
     >
-      <Container className="flex h-[72px] items-center justify-between gap-4">
+      <Container className="flex h-[var(--header-h)] items-center justify-between gap-2 sm:gap-4">
         <a
           href="#topo"
           className="flex min-w-0 items-center gap-2.5 rounded-lg"
@@ -59,7 +59,7 @@ export function Header() {
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink">
             <Sparkles className="h-4 w-4 text-gold" strokeWidth={1.75} aria-hidden />
           </span>
-          <span className="truncate text-[17px] font-extrabold tracking-[-0.02em] text-foreground">
+          <span className="truncate text-fluid-lg font-extrabold tracking-[-0.02em] text-foreground">
             DESCONT<span className="text-gold">AI</span>
           </span>
         </a>
@@ -99,7 +99,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="flex w-[88%] max-w-[340px] flex-col gap-0 border-l border-border bg-background p-6"
+              className="flex w-[min(21.25rem,88vw)] flex-col gap-0 overflow-y-auto overscroll-contain border-l border-border bg-background p-[var(--gutter)]"
             >
               <SheetHeader className="p-0 text-left">
                 <SheetTitle className="font-serif text-xl tracking-tight">Menu</SheetTitle>
@@ -115,7 +115,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="border-b border-border/70 py-4 font-serif text-lg text-foreground transition-colors duration-200 hover:text-gold"
+                    className="touch-target flex items-center border-b border-border/70 py-4 font-serif text-lg text-foreground transition-colors duration-200 hover:text-gold"
                   >
                     {link.label}
                   </a>

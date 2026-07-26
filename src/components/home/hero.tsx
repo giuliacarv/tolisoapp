@@ -87,10 +87,10 @@ function HeroOfferCard({
 
         <div className="min-w-0 flex-1">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-            <span className="truncate text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="truncate text-fluid-micro font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               {offer.store}
             </span>
-            <span className="shrink-0 rounded-md bg-discount/12 px-1.5 py-0.5 text-[11px] font-semibold text-discount">
+            <span className="shrink-0 rounded-md bg-discount/12 px-1.5 py-0.5 text-fluid-micro font-semibold text-discount">
               {offer.discount}
             </span>
           </div>
@@ -105,7 +105,7 @@ function HeroOfferCard({
       </div>
 
       <div className="mt-3 border-t border-border pt-3">
-        <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5 text-fluid-micro font-medium text-muted-foreground">
           <Sparkles className="h-3 w-3 shrink-0 text-gold" strokeWidth={2} aria-hidden />
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"} para desbloquear
         </span>
@@ -116,13 +116,13 @@ function HeroOfferCard({
 
 export function HeroSection() {
   return (
-    <section id="topo" className="relative overflow-hidden pt-[72px]">
+    <section id="topo" className="relative overflow-x-clip pt-[var(--header-h)]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklab,var(--gold)_12%,transparent),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(18rem,45vw,32rem)] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklab,var(--gold)_12%,transparent),transparent_70%)]"
       />
 
-      <Container className="relative py-14 sm:py-20 lg:py-24">
+      <Container className="relative section-y">
         <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
           <div className="flex min-w-0 flex-col items-start gap-7">
             <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card px-3.5 py-1.5 text-xs font-medium text-foreground">
@@ -130,11 +130,11 @@ export function HeroSection() {
               <span className="min-w-0">Você começa com 5 créditos grátis.</span>
             </span>
 
-            <h1 className="max-w-[18ch] font-serif text-[32px] leading-[1.1] tracking-tight text-foreground sm:text-5xl lg:text-[56px]">
+            <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.08] tracking-tight text-foreground">
               Ofertas selecionadas para você economizar de verdade.
             </h1>
 
-            <p className="max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-[17px]">
+            <p className="max-w-[58ch] text-pretty text-fluid-base leading-relaxed text-muted-foreground">
               Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
               maiores lojas do Brasil.
             </p>
@@ -153,7 +153,7 @@ export function HeroSection() {
               </a>
             </div>
 
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-[13px] text-muted-foreground">
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-fluid-xs text-muted-foreground">
               {TRUST_SIGNALS.map(({ label, icon: Icon }) => (
                 <li key={label} className="inline-flex items-center gap-2">
                   <Icon className="h-3.5 w-3.5 shrink-0 text-saving" strokeWidth={2} aria-hidden />
@@ -163,7 +163,7 @@ export function HeroSection() {
             </ul>
           </div>
 
-          <div className="relative mx-auto w-full min-w-0 max-w-[460px] lg:max-w-none">
+          <div className="relative mx-auto w-full min-w-0 max-w-[28.75rem] lg:max-w-none">
             <div className="relative flex min-w-0 flex-col gap-4 sm:gap-0">
               <HeroOfferCard
                 offer={HERO_OFFERS[0]}
