@@ -21,7 +21,7 @@ const iconButton =
   "touch-target grid shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground transition-colors duration-200 hover:bg-secondary";
 
 /**
- * Header fixo do DESCONTAI.
+ * Header sticky do DESCONTAI.
  * O menu mobile usa o Sheet (Radix): fecha com Escape, trava a rolagem
  * e mantém o foco preso enquanto está aberto.
  */
