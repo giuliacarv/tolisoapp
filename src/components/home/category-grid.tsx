@@ -3,7 +3,9 @@ import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import { SectionHeading, cardBase } from "./primitives";
+import { SectionHeading, cardBase, cardInteractive } from "./primitives";
+import { Reveal } from "./reveal";
+
 
 /**
  * ============================================================
