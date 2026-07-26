@@ -38,7 +38,7 @@ export function CouponSection() {
           <SectionHeading
             eyebrow="Cupons"
             title="Cupons validados"
-            description="Cupons selecionados e revisados para você aproveitar descontos reais nas lojas participantes."
+            description="Exemplos demonstrativos de cupons das principais lojas, com status de verificação e custo fixo de 3 créditos por resgate."
           />
           <a
             href="#cupons"
