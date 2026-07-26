@@ -8,16 +8,18 @@ import { buttonOutline, cardBase } from "./primitives";
 export interface ProductCardProps {
   product: Product;
   onRedeem: (product: Product) => void;
+  /** Abre o modal de detalhes da oferta (clique no card). */
+  onSelect?: (product: Product) => void;
   className?: string;
 }
 
 /** Card de produto com altura visual consistente (flex + mt-auto no rodapé). */
-export function ProductCard({ product, onRedeem, className }: ProductCardProps) {
+export function ProductCard({ product, onRedeem, onSelect, className }: ProductCardProps) {
   return (
     <article
       className={cn(
         cardBase,
-        "motion-safe-transform group flex h-full flex-col overflow-hidden hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+        "motion-safe-transform group relative flex h-full flex-col overflow-hidden hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
         className,
       )}
     >
@@ -51,7 +53,16 @@ export function ProductCard({ product, onRedeem, className }: ProductCardProps) 
           {product.category}
         </span>
         <h3 className="line-clamp-2 min-h-[2.75rem] text-fluid-sm font-semibold leading-snug text-foreground">
-          {product.name}
+          {/* Stretched link: o botão cobre o card inteiro sem aninhar
+              interativos, mantendo um único alvo semântico para leitores de tela. */}
+          <button
+            type="button"
+            onClick={() => onSelect?.(product)}
+            aria-label={`Ver detalhes de ${product.name}`}
+            className="text-left after:absolute after:inset-0 after:rounded-[18px] after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-gold"
+          >
+            {product.name}
+          </button>
         </h3>
         <p className="line-clamp-2 text-fluid-xs leading-relaxed text-muted-foreground">
           {product.description}
@@ -76,7 +87,7 @@ export function ProductCard({ product, onRedeem, className }: ProductCardProps) 
             type="button"
             onClick={() => onRedeem(product)}
             aria-label={`Resgatar desconto de ${product.name}`}
-            className={cn(buttonOutline, "w-full bg-background hover:border-ink hover:bg-ink hover:text-offwhite")}
+            className={cn(buttonOutline, "relative z-10 w-full bg-background hover:border-ink hover:bg-ink hover:text-offwhite")}
           >
             Resgatar Desconto
           </button>
