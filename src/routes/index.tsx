@@ -34,7 +34,7 @@ function Index() {
         <HeroSection />
         <LogoCarousel />
         <SearchAndCategories />
-        <ProductSection />
+        <SearchAndCategories />
         <CouponSection />
         <HowItWorks />
         <CreditsSection />
