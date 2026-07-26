@@ -4,7 +4,6 @@ import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 import { Container, buttonOutline, buttonSolid, cardBase } from "./primitives";
-import { Reveal } from "./reveal";
 import espressoImage from "@/assets/hero-product-espresso.jpg";
 import headphonesImage from "@/assets/hero-product-headphones.jpg";
 import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
@@ -66,22 +65,19 @@ function HeroOfferCard({
   offer,
   className,
   priority = false,
-  delay = 0,
 }: {
   offer: HeroOffer;
   className?: string;
   priority?: boolean;
-  /** Atraso da entrada escalonada, em milissegundos. */
-  delay?: number;
 }) {
   return (
-    <Reveal
-      as="article"
-      delay={delay}
+    // Sem `interactive-lift` aqui: estes cards carregam rotações decorativas
+    // e um `transform` de hover sobrescreveria a inclinação da composição.
+    <article
       className={cn(
         cardBase,
-        "interactive-lift motion-safe-transform w-full min-w-0 p-4",
-        "glass-surface edge-highlight hover:border-gold/40",
+        "motion-safe-transform w-full min-w-0 p-4 glass-surface edge-highlight",
+        "hover:border-gold/40 hover:shadow-float",
         className,
       )}
     >
@@ -124,7 +120,7 @@ function HeroOfferCard({
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"} para desbloquear
         </span>
       </div>
-    </Reveal>
+    </article>
   );
 }
 
