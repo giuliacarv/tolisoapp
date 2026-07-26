@@ -45,11 +45,12 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-200",
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-200",
         scrolled
-          ? "bg-background/70 shadow-hairline backdrop-blur-xl backdrop-saturate-150"
+          ? "bg-background/75 shadow-hairline backdrop-blur-xl backdrop-saturate-150"
           : "bg-transparent",
       )}
+      data-over-hero={scrolled ? undefined : "true"}
     >
       {/* Filete dourado que só aparece com a rolagem — sombra de 1px, sem "linha de tabela". */}
       <span
@@ -67,10 +68,20 @@ export function Header() {
           className="flex min-h-11 min-w-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label="DESCONTAI — início"
         >
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink bg-[image:var(--gradient-ink)] shadow-soft ring-1 ring-gold/25">
+          <span
+            className={cn(
+              "grid h-9 w-9 shrink-0 place-items-center rounded-xl shadow-soft ring-1 ring-gold/25 transition-colors duration-200",
+              scrolled ? "bg-ink bg-[image:var(--gradient-ink)]" : "bg-offwhite/10",
+            )}
+          >
             <Sparkles className="h-4 w-4 text-gold" strokeWidth={1.75} aria-hidden />
           </span>
-          <span className="truncate text-fluid-lg font-extrabold tracking-[-0.02em] text-foreground">
+          <span
+            className={cn(
+              "truncate text-fluid-lg font-extrabold tracking-[-0.02em] transition-colors duration-200",
+              scrolled ? "text-foreground" : "text-offwhite",
+            )}
+          >
             DESCONTAI<span className="text-gold">.</span>
           </span>
         </a>
@@ -81,7 +92,12 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={(event) => handleAnchorClick(event, link.href)}
-              className="nav-underline inline-flex min-h-11 items-center rounded-md text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className={cn(
+                "nav-underline inline-flex min-h-11 items-center rounded-md text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2",
+                scrolled
+                  ? "text-muted-foreground hover:text-foreground focus-visible:ring-offset-background"
+                  : "text-offwhite/70 hover:text-offwhite focus-visible:ring-offset-ink",
+              )}
             >
               {link.label}
             </a>
@@ -93,20 +109,34 @@ export function Header() {
             href="#buscar"
             onClick={(event) => handleAnchorClick(event, "#buscar")}
             aria-label="Ir para a busca de ofertas"
-            className={iconButton}
+            className={cn(
+              iconButton,
+              !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
+            )}
           >
             <Search className="h-4 w-4" strokeWidth={1.75} aria-hidden />
           </a>
 
-          <CreditsBadge className="hidden sm:inline-flex" />
+          <CreditsBadge
+            className={cn(
+              "hidden sm:inline-flex",
+              !scrolled && "border-gold/35 bg-offwhite/5 text-offwhite",
+            )}
+          />
 
           <button
             type="button"
             onClick={handleLogin}
-            className={cn(buttonSolid, "hidden sm:inline-flex")}
+            className={cn(
+              "touch-target hidden items-center justify-center rounded-xl px-5 text-sm font-semibold transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 sm:inline-flex",
+              scrolled
+                ? "bg-primary text-primary-foreground shadow-soft focus-visible:ring-offset-background"
+                : "bg-[image:var(--gradient-gold)] text-ink shadow-soft focus-visible:ring-offset-ink",
+            )}
           >
             Entrar
           </button>
+
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
