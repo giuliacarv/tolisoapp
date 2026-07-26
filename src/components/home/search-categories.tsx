@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { PRODUCTS, type Product } from "@/data/products";
 
@@ -7,7 +7,15 @@ import { Container } from "./primitives";
 import { ProductGrid } from "./product-grid";
 import { ProductDetailsModal } from "./product-details-dialog";
 import { RedeemProductModal } from "./redeem-dialog";
+import {
+  PAGE_SIZE,
+  Pagination,
+  SortSelect,
+  sortProducts,
+  type SortId,
+} from "./results-controls";
 import { SearchBar } from "./search-bar";
+
 
 /** Filtros rápidos — os ids espelham as categorias demonstrativas. */
 const QUICK_FILTERS = [
