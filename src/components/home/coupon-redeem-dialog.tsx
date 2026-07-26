@@ -9,8 +9,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { COUPON_REDEMPTION_COST, type Coupon } from "@/data/coupons";
+import { cn } from "@/lib/utils";
 
-export interface CouponRedeemDialogProps {
+import { buttonOutline, buttonSolid } from "./primitives";
+
+export interface RedeemCouponModalProps {
   coupon: Coupon | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -20,7 +23,7 @@ export interface CouponRedeemDialogProps {
  * Confirmação de resgate de cupom.
  * Nesta etapa NÃO debita créditos e NÃO revela o código completo.
  */
-export function CouponRedeemDialog({ coupon, open, onOpenChange }: CouponRedeemDialogProps) {
+export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponModalProps) {
   function handleConfirm() {
     onOpenChange(false);
     toast("Autenticação necessária para concluir o resgate.");
