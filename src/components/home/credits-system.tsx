@@ -28,8 +28,14 @@ export function CreditsSystem() {
   return (
     <section id="creditos" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
-        <div className="overflow-hidden rounded-3xl bg-ink px-6 py-14 text-offwhite sm:px-12 sm:py-16">
-          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+        <div className="relative isolate overflow-hidden rounded-3xl bg-ink bg-[image:var(--gradient-ink)] px-6 py-12 text-offwhite shadow-float sm:px-12 sm:py-16">
+          {/* Halo dourado difuso: dá volume ao bloco escuro sem poluir o conteúdo. */}
+          <div
+            aria-hidden
+            className="halo-gradient pointer-events-none absolute inset-x-0 -top-1/2 -z-10 h-[140%] opacity-40"
+          />
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+
             <div className="min-w-0 space-y-6">
               <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.22em] text-gold">
                 <span className="h-px w-6 bg-gold" aria-hidden />
