@@ -123,10 +123,15 @@ export function Footer() {
                           {link.label}
                         </a>
                       ) : (
-                        <button type="button" onClick={() => toast(SOON_MESSAGE)} className={linkClass}>
+                        <button
+                          type="button"
+                          onClick={() => toast(link.message ?? SOON_MESSAGE)}
+                          className={linkClass}
+                        >
                           {link.label}
                         </button>
                       )}
+
                     </li>
                   ))}
                 </ul>
