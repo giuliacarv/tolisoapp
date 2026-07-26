@@ -45,7 +45,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300",
+        "sticky inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-200",
         scrolled
           ? "border-b border-border/60 bg-background/70 shadow-hairline backdrop-blur-xl backdrop-saturate-150"
           : "border-b border-transparent bg-transparent",
