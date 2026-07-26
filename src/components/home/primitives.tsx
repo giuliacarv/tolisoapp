@@ -75,3 +75,18 @@ export const buttonOutline = cn(
 /** Card base: borda fina, sombra discreta e hover contido. */
 export const cardBase =
   "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow] duration-200";
+
+/** Chips de filtro — altura mínima de 44px para área de toque confortável. */
+export const chipBase =
+  "inline-flex min-h-11 items-center rounded-full px-4 py-2 text-fluid-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50";
+
+export const chipActive = cn(chipBase, "bg-ink text-offwhite");
+
+export const chipIdle = cn(
+  chipBase,
+  "border border-border bg-background text-muted-foreground hover:border-gold/40 hover:text-foreground",
+);
+
+/** Diálogo em bottom-sheet no mobile e centrado a partir de `sm`. */
+export const sheetDialogContent =
+  "fixed inset-x-0 bottom-0 top-auto max-h-[90dvh] w-full max-w-none translate-x-0 translate-y-0 gap-4 overflow-y-auto overscroll-contain rounded-t-[20px] border-border bg-card p-[var(--gutter)] sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[20px] sm:p-6";

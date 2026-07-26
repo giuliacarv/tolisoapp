@@ -1,42 +1,10 @@
-import type { Product } from "@/data/products";
+import { SORT_OPTIONS, type SortId } from "@/domain/products/sorting";
 
-/** Opções de ordenação disponíveis para a vitrine de ofertas. */
-export const SORT_OPTIONS = [
-  { id: "recommended", label: "Recomendados" },
-  { id: "discount", label: "Maior desconto" },
-  { id: "recent", label: "Mais recentes" },
-  { id: "price-asc", label: "Menor preço" },
-  { id: "price-desc", label: "Maior preço" },
-] as const;
+import { chipActive, chipBase, chipIdle } from "./primitives";
 
-export type SortId = (typeof SORT_OPTIONS)[number]["id"];
-
-/** Quantidade de itens exibidos por página. */
-export const PAGE_SIZE = 8;
-
-/**
- * Ordena uma lista de produtos sem mutar o array original.
- * `recommended` prioriza itens em destaque, preservando a ordem base.
- */
-export function sortProducts(products: Product[], sort: SortId): Product[] {
-  const list = [...products];
-
-  switch (sort) {
-    case "discount":
-      return list.sort((a, b) => b.discountPercentage - a.discountPercentage);
-    case "recent":
-      return list.sort(
-        (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-      );
-    case "price-asc":
-      return list.sort((a, b) => a.currentPrice - b.currentPrice);
-    case "price-desc":
-      return list.sort((a, b) => b.currentPrice - a.currentPrice);
-    case "recommended":
-    default:
-      return list.sort((a, b) => Number(b.featured) - Number(a.featured));
-  }
-}
+// Reexports de compatibilidade — a lógica vive em `@/domain/products`.
+export { SORT_OPTIONS, sortProducts, type SortId } from "@/domain/products/sorting";
+export { DEFAULT_PAGE_SIZE as PAGE_SIZE } from "@/domain/products/pagination";
 
 export interface SortSelectProps {
   value: SortId;
@@ -72,13 +40,13 @@ export interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
+const pageButton = `${chipBase} min-w-11 justify-center px-3 text-xs disabled:cursor-not-allowed disabled:opacity-40`;
+
 /** Paginação numérica simples e responsiva. */
 export function Pagination({ page, totalPages, onPageChange }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
-  const base =
-    "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full px-3 text-xs font-medium transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40";
 
   return (
     <nav aria-label="Paginação das ofertas" className="mt-8 flex flex-wrap justify-center gap-2">
@@ -86,7 +54,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
         type="button"
         onClick={() => onPageChange(page - 1)}
         disabled={page === 1}
-        className={`${base} border border-border text-muted-foreground hover:border-gold/40 hover:text-foreground`}
+        className={`${chipIdle} ${pageButton}`}
       >
         Anterior
       </button>
@@ -100,11 +68,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
             aria-current={isActive ? "page" : undefined}
             aria-label={`Página ${item}`}
             onClick={() => onPageChange(item)}
-            className={
-              isActive
-                ? `${base} bg-ink text-offwhite`
-                : `${base} border border-border text-muted-foreground hover:border-gold/40 hover:text-foreground`
-            }
+            className={`${isActive ? chipActive : chipIdle} ${pageButton}`}
           >
             {item}
           </button>
@@ -115,7 +79,7 @@ export function Pagination({ page, totalPages, onPageChange }: PaginationProps) 
         type="button"
         onClick={() => onPageChange(page + 1)}
         disabled={page === totalPages}
-        className={`${base} border border-border text-muted-foreground hover:border-gold/40 hover:text-foreground`}
+        className={`${chipIdle} ${pageButton}`}
       >
         Próxima
       </button>

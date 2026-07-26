@@ -5,7 +5,7 @@ import { ProductSection } from "@/components/home/featured-offers";
 import { HeroSection } from "@/components/home/hero";
 import { LogoCarousel } from "@/components/home/logo-carousel";
 import { HowItWorks } from "@/components/home/how-it-works";
-import { SearchAndCategories } from "@/components/home/search-categories";
+import { SearchAndCategories } from "@/components/home/discovery-section";
 import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";
 import { TrustSection } from "@/components/home/trust-section";
