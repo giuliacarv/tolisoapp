@@ -37,6 +37,8 @@ export interface Product {
   verified: boolean;
   /** ISO 8601. */
   expiresAt: string;
+  /** ISO 8601 — data de publicação da oferta (mock). */
+  publishedAt: string;
 }
 
 /**
@@ -96,6 +98,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-15T23:59:59-03:00",
+    publishedAt: "2026-07-24T09:00:00-03:00",
   },
   {
     id: "prd_002",
@@ -111,6 +114,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-05T23:59:59-03:00",
+    publishedAt: "2026-07-23T09:00:00-03:00",
   },
   {
     id: "prd_003",
@@ -126,6 +130,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: false,
     expiresAt: "2026-08-20T23:59:59-03:00",
+    publishedAt: "2026-07-22T09:00:00-03:00",
   },
   {
     id: "prd_004",
@@ -141,6 +146,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-12T23:59:59-03:00",
+    publishedAt: "2026-07-21T09:00:00-03:00",
   },
   {
     id: "prd_005",
@@ -156,6 +162,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-02T23:59:59-03:00",
+    publishedAt: "2026-07-20T09:00:00-03:00",
   },
   {
     id: "prd_006",
@@ -171,6 +178,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: false,
     expiresAt: "2026-08-18T23:59:59-03:00",
+    publishedAt: "2026-07-18T09:00:00-03:00",
   },
   {
     id: "prd_007",
@@ -186,6 +194,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-09T23:59:59-03:00",
+    publishedAt: "2026-07-16T09:00:00-03:00",
   },
   {
     id: "prd_008",
@@ -201,6 +210,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-07T23:59:59-03:00",
+    publishedAt: "2026-07-14T09:00:00-03:00",
   },
   {
     id: "prd_009",
@@ -216,6 +226,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: false,
     expiresAt: "2026-08-11T23:59:59-03:00",
+    publishedAt: "2026-07-11T09:00:00-03:00",
   },
   {
     id: "prd_010",
@@ -231,6 +242,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     featured: true,
     verified: true,
     expiresAt: "2026-08-25T23:59:59-03:00",
+    publishedAt: "2026-07-08T09:00:00-03:00",
   },
 ];
 
