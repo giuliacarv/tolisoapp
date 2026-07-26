@@ -395,6 +395,70 @@
   }
 }
 
+/**
+ * Faixa de seção: quebra a monotonia do fundo único alternando uma superfície
+ * levemente mais densa, delimitada por filetes que nascem e morrem em
+ * transparente (evita a "linha de tabela" que barateia o layout).
+ */
+@utility section-band {
+  position: relative;
+  background-image: var(--gradient-surface);
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, transparent, var(--color-border), transparent);
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    bottom: 0;
+  }
+}
+
+/**
+ * Brilho diagonal que atravessa a superfície no hover.
+ * Fica sob o conteúdo (z-index 0) e nunca intercepta ponteiro.
+ */
+@utility hover-sheen {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease-premium);
+    background-image: linear-gradient(
+      135deg,
+      color-mix(in oklab, var(--gold) 12%, transparent),
+      transparent 55%
+    );
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    opacity: 1;
+  }
+}
+
+/** Numeral/medalha em gradiente dourado, usado em índices de etapas. */
+@utility gold-medallion {
+  background-image: var(--gradient-gold);
+  color: var(--ink);
+  box-shadow: var(--shadow-soft);
+}
+
+
 /* ---------------------------------------------------------------------------
  * Animações de entrada escalonadas.
  * O elemento nasce oculto e revela quando ganha `data-revealed="true"`

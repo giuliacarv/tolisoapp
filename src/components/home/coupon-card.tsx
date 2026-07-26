@@ -12,7 +12,7 @@ import {
 } from "@/data/coupons";
 import { cn } from "@/lib/utils";
 
-import { buttonOutline, cardBase } from "./primitives";
+import { buttonOutline, cardBase, cardInteractive } from "./primitives";
 
 export interface CouponCardProps {
   coupon: Coupon;
@@ -51,13 +51,12 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
     <article
       aria-disabled={isExpired || undefined}
       className={cn(
-        cardBase,
-        "motion-safe-transform flex h-full flex-col gap-4 p-6",
-        isExpired
-          ? "border-dashed opacity-60 saturate-50"
-          : "hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+        isExpired ? cardBase : cardInteractive,
+        "motion-safe-transform flex h-full flex-col gap-4 p-6 sm:p-8",
+        isExpired && "border-dashed opacity-60 saturate-50",
       )}
     >
+
       <div className="flex flex-wrap items-center gap-2">
         <span className="inline-flex items-center rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           Cupom demonstrativo

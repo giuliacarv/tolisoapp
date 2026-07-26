@@ -25,24 +25,28 @@ export function SectionHeading({
   return (
     <div
       className={cn(
-        "flex flex-col gap-3",
+        // Ritmo 8pt: 8px entre sobrancelha e título, 16px entre título e apoio.
+        "flex flex-col gap-2",
         align === "center" && "items-center text-center",
         className,
       )}
     >
       {eyebrow ? (
-        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.22em] text-muted-foreground">
-          <span className="h-px w-6 bg-gold" aria-hidden />
+        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+          <span className="h-px w-6 bg-[image:var(--gradient-gold)]" aria-hidden />
           {eyebrow}
         </span>
       ) : null}
-      <h2 className="font-serif text-fluid-h2 leading-[1.12] tracking-[-0.02em] text-balance text-foreground">
+      <h2 className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance text-foreground">
         {title}
       </h2>
       {description ? (
-        <p className="max-w-[65ch] text-fluid-sm leading-relaxed text-pretty text-muted-foreground">{description}</p>
+        <p className="mt-2 max-w-[58ch] text-fluid-sm leading-[1.7] text-pretty text-muted-foreground">
+          {description}
+        </p>
       ) : null}
     </div>
+
   );
 }
 
@@ -79,6 +83,14 @@ export const buttonOutline = cn(
 /** Card base: borda fina, sombra difusa e elevação contida no hover. */
 export const cardBase =
   "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]";
+
+/** Card clicável/navegável: base + elevação e brilho diagonal no hover. */
+export const cardInteractive = cn(
+  cardBase,
+  "hover-sheen motion-safe-transform hover:border-gold/40 hover:shadow-lift motion-safe:hover:-translate-y-1",
+);
+
+
 
 /** Superfície de vidro para painéis sobrepostos (modais, barras flutuantes). */
 export const glassPanel = "glass-surface rounded-[18px] shadow-lift";

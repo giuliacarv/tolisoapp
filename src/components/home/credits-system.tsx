@@ -28,8 +28,14 @@ export function CreditsSystem() {
   return (
     <section id="creditos" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
-        <div className="overflow-hidden rounded-3xl bg-ink px-6 py-14 text-offwhite sm:px-12 sm:py-16">
-          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+        <div className="relative isolate overflow-hidden rounded-3xl bg-ink bg-[image:var(--gradient-ink)] px-6 py-12 text-offwhite shadow-float sm:px-12 sm:py-16">
+          {/* Halo dourado difuso: dá volume ao bloco escuro sem poluir o conteúdo. */}
+          <div
+            aria-hidden
+            className="halo-gradient pointer-events-none absolute inset-x-0 -top-1/2 -z-10 h-[140%] opacity-40"
+          />
+          <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+
             <div className="min-w-0 space-y-6">
               <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.22em] text-gold">
                 <span className="h-px w-6 bg-gold" aria-hidden />
@@ -84,7 +90,7 @@ export function CreditsSystem() {
             </div>
 
             {/* Exemplo visual de saldo — valores ilustrativos */}
-            <div className="min-w-0 rounded-2xl border border-offwhite/12 bg-graphite/80 p-6 sm:p-8">
+            <div className="glass-surface min-w-0 rounded-2xl border-offwhite/12 bg-graphite/60 p-6 shadow-lift sm:p-8">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
                 <div className="flex min-w-0 items-center gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-offwhite/8">
