@@ -237,7 +237,8 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     affiliateUrl: "#placeholder-afiliado/prd_008",
     featured: true,
     verified: true,
-    expiresAt: "2026-08-07T23:59:59-03:00",
+    // Demonstração do estado desabilitado: oferta com validade vencida.
+    expiresAt: "2026-07-18T23:59:59-03:00",
     publishedAt: "2026-07-14T09:00:00-03:00",
   },
   {
@@ -255,6 +256,8 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     verified: false,
     expiresAt: "2026-08-11T23:59:59-03:00",
     publishedAt: "2026-07-11T09:00:00-03:00",
+    // Demonstração do estado desabilitado: oferta esgotada na loja parceira.
+    available: false,
   },
   {
     id: "prd_010",
