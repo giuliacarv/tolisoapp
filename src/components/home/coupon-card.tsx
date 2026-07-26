@@ -8,6 +8,9 @@ import {
   maskCouponCode,
   type Coupon,
 } from "@/data/coupons";
+import { cn } from "@/lib/utils";
+
+import { buttonOutline, cardBase } from "./primitives";
 
 export interface CouponCardProps {
   coupon: Coupon;
