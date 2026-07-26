@@ -143,7 +143,7 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
         className="mx-auto items-center text-center"
       />
 
-      <ul className="mt-12 grid-fluid [--col-min:11rem]">
+      <ul className="mt-12 grid-fluid [--col-min:15rem]">
         {CATEGORIES.map((category, index) => (
           <Reveal as="li" key={category.id} delay={index * 60} className="min-w-0">
             <CategoryCard
