@@ -93,21 +93,38 @@ export function SearchAndCategories() {
           <CategoryGrid activeCategory={activeFilter} onSelect={handleCategorySelect} />
         </div>
 
-        <div className="mt-16 sm:mt-20">
+        <div id="ofertas-filtradas" className="mt-16 scroll-mt-[calc(var(--header-h)+1.5rem)] sm:mt-20">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <h3 className="font-serif text-2xl tracking-tight text-foreground sm:text-3xl">
-              {activeFilter === "all" ? "Todas as ofertas" : "Resultados do filtro"}
+              {activeFilter === "all" && query.trim() === ""
+                ? "Todas as ofertas"
+                : "Resultados da busca"}
             </h3>
-            <p aria-live="polite" className="text-sm text-muted-foreground">
-              {filteredProducts.length}{" "}
-              {filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"}
-            </p>
+            <div className="flex items-center gap-3">
+              <p aria-live="polite" className="text-sm text-muted-foreground">
+                {filteredProducts.length}{" "}
+                {filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"}
+              </p>
+              {(activeFilter !== "all" || query.trim() !== "") && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setQuery("");
+                    setActiveFilter("all");
+                  }}
+                  className="inline-flex min-h-11 items-center rounded-full border border-border px-3 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground"
+                >
+                  Limpar filtros
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="mt-6">
             <ProductGrid products={filteredProducts} onRedeem={handleRedeem}
             onSelect={handleSelect} />
           </div>
+
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
             Valores e produtos ilustrativos — serão substituídos por dados reais do backend.
