@@ -4,6 +4,8 @@ import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 import { Container, buttonOutline, buttonSolid, cardBase } from "./primitives";
+import { Reveal } from "./reveal";
+
 import espressoImage from "@/assets/hero-product-espresso.jpg";
 import headphonesImage from "@/assets/hero-product-headphones.jpg";
 import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
