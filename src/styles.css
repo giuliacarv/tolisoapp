@@ -56,9 +56,21 @@
   --color-offwhite: var(--offwhite);
   --color-saving: var(--saving);
   --color-discount: var(--discount);
-  --shadow-soft: 0 1px 2px rgb(11 11 12 / 0.04), 0 12px 32px -18px rgb(11 11 12 / 0.18);
-  --shadow-lift: 0 2px 6px rgb(11 11 12 / 0.05), 0 24px 48px -24px rgb(11 11 12 / 0.22);
+  /*
+   * Escada de elevação (Soft Shadows).
+   * Blur entre 8px e 24px+, spread 0–4px e opacidades de 0.04 a 0.14 —
+   * sombras difusas e frias, nunca o "drop-shadow" duro padrão.
+   */
+  --shadow-hairline: 0 1px 2px rgb(11 11 12 / 0.04);
+  --shadow-soft: 0 1px 2px rgb(11 11 12 / 0.04), 0 8px 24px -12px rgb(11 11 12 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(11 11 12 / 0.05), 0 16px 40px -16px rgb(11 11 12 / 0.16);
+  --shadow-float: 0 4px 10px rgb(11 11 12 / 0.06), 0 24px 56px -20px rgb(11 11 12 / 0.2);
+  --shadow-inset-hairline: inset 0 1px 0 rgb(255 255 255 / 0.6);
+
+  /* Curva de easing única do produto: saída rápida, chegada suave. */
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+
 
 :root {
   --radius: 1rem;
