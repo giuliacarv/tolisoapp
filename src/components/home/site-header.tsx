@@ -140,7 +140,15 @@ export function Header() {
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <button type="button" aria-label="Abrir menu de navegação" className={cn(iconButton, "lg:hidden")}>
+              <button
+                type="button"
+                aria-label="Abrir menu de navegação"
+                className={cn(
+                  iconButton,
+                  "lg:hidden",
+                  !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
+                )}
+              >
                 <Menu className="h-4 w-4" strokeWidth={1.75} aria-hidden />
               </button>
             </SheetTrigger>
