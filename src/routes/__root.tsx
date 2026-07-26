@@ -129,7 +129,9 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <Toaster />
+      {/* Topo: evita cobrir botões de ação (footers de modal / bottom-sheet). */}
+      <Toaster position="top-center" offset="calc(var(--header-h) + 0.75rem)" />
+
     </QueryClientProvider>
   );
 }
