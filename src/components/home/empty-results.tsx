@@ -19,8 +19,6 @@ export interface EmptyResultsProps {
 export function EmptyResults({ onReset, suggestions = [], onSuggestionSelect }: EmptyResultsProps) {
   return (
 
-
-  return (
     <div
       role="status"
       className="mx-auto flex max-w-xl flex-col items-center rounded-[22px] border border-border bg-card px-6 py-12 text-center shadow-soft"
