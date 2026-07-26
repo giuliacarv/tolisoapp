@@ -31,7 +31,7 @@ export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponMo
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="rounded-[20px] border-border bg-card sm:max-w-md">
+      <DialogContent className="max-h-[85dvh] overflow-y-auto rounded-[20px] border-border bg-card sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="font-serif text-2xl tracking-tight text-foreground">
             Resgatar cupom
@@ -55,15 +55,11 @@ export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponMo
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className="rounded-xl border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+            className={cn(buttonOutline, "w-full sm:w-auto")}
           >
             Cancelar
           </button>
-          <button
-            type="button"
-            onClick={handleConfirm}
-            className="rounded-xl bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          >
+          <button type="button" onClick={handleConfirm} className={cn(buttonSolid, "w-full sm:w-auto")}>
             Confirmar resgate
           </button>
         </DialogFooter>
@@ -71,3 +67,6 @@ export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponMo
     </Dialog>
   );
 }
+
+export { RedeemCouponModal as CouponRedeemDialog };
+
