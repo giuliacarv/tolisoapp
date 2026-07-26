@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { PRODUCTS, type Product } from "@/data/products";
 
 import { CATEGORIES, CategoryGrid } from "./category-grid";
+import { EmptyResults } from "./empty-results";
 import { Container } from "./primitives";
 import { ProductGrid } from "./product-grid";
 import { ProductDetailsModal } from "./product-details-dialog";
@@ -16,15 +17,18 @@ import {
 } from "./results-controls";
 import { SearchBar } from "./search-bar";
 
-
 /** Filtros rápidos — os ids espelham as categorias demonstrativas. */
 const QUICK_FILTERS = [
   { id: "all", label: "Todas as ofertas" },
   ...CATEGORIES.map((category) => ({ id: category.id, label: category.label })),
 ];
 
+/** Sugestões demonstrativas exibidas no estado vazio. */
+const SEARCH_SUGGESTIONS = ["Fone", "Smartwatch", "Skincare", "Teclado"];
+
 /** Mapeia o id da categoria para o rótulo usado nos dados demonstrativos. */
 const CATEGORY_LABEL_BY_ID = new Map(CATEGORIES.map((c) => [c.id, c.label]));
+
 
 /**
  * Seção de descoberta: busca, filtros rápidos, categorias e resultados.
