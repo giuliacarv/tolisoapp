@@ -143,17 +143,18 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
         className="mx-auto items-center text-center"
       />
 
-      <ul className="mt-10 grid-fluid [--col-min:9rem]">
-        {CATEGORIES.map((category) => (
-          <li key={category.id} className="min-w-0">
+      <ul className="mt-12 grid-fluid [--col-min:11rem]">
+        {CATEGORIES.map((category, index) => (
+          <Reveal as="li" key={category.id} delay={index * 60} className="min-w-0">
             <CategoryCard
               category={category}
               isActive={activeCategory === category.id}
               onSelect={onSelect}
             />
-          </li>
+          </Reveal>
         ))}
       </ul>
+
     </div>
   );
 }
