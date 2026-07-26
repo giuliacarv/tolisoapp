@@ -6,8 +6,20 @@ import { handleAnchorClick } from "@/lib/smooth-scroll";
 
 import { Container } from "./primitives";
 
-/** Links são placeholders até que as páginas institucionais existam. */
-const COLUMNS: { title: string; links: { label: string; href: string | null }[] }[] = [
+/**
+ * Links do rodapé.
+ * - `href` → âncora interna existente, com scroll suave.
+ * - `message` → página institucional ainda inexistente: renderiza um botão
+ *   com aparência de link e avisa o usuário por toast (sem navegar, sem
+ *   saltar para o topo e sem `href="#"`).
+ */
+interface FooterLink {
+  label: string;
+  href?: string;
+  message?: string;
+}
+
+const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Navegar",
     links: [
@@ -20,20 +32,30 @@ const COLUMNS: { title: string; links: { label: string; href: string | null }[] 
   {
     title: "Suporte",
     links: [
-      { label: "Central de ajuda", href: null },
-      { label: "Contato", href: null },
+      { label: "Central de ajuda", message: "Central de ajuda será disponibilizada em breve." },
+      { label: "Contato", message: "Página de contato será disponibilizada em breve." },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Termos de uso", href: null },
-      { label: "Política de privacidade", href: null },
-      { label: "Política de cookies", href: null },
-      { label: "Divulgação de afiliados", href: null },
+      { label: "Termos de uso", message: "Termos de uso serão adicionados antes do lançamento." },
+      {
+        label: "Política de privacidade",
+        message: "Política de privacidade será adicionada antes do lançamento.",
+      },
+      {
+        label: "Política de cookies",
+        message: "Política de cookies será adicionada antes do lançamento.",
+      },
+      {
+        label: "Divulgação de afiliados",
+        message: "Divulgação de afiliados será adicionada antes do lançamento.",
+      },
     ],
   },
 ];
+
 
 const SOCIALS = [
   { icon: Instagram, label: "Instagram" },
@@ -101,10 +123,15 @@ export function Footer() {
                           {link.label}
                         </a>
                       ) : (
-                        <button type="button" onClick={() => toast(SOON_MESSAGE)} className={linkClass}>
+                        <button
+                          type="button"
+                          onClick={() => toast(link.message ?? SOON_MESSAGE)}
+                          className={linkClass}
+                        >
                           {link.label}
                         </button>
                       )}
+
                     </li>
                   ))}
                 </ul>
