@@ -127,35 +127,35 @@ function HeroOfferCard({
 
 export function HeroSection() {
   return (
-    <section id="topo" className="relative overflow-x-clip scroll-mt-[var(--header-h)]">
-      {/* Ambiência: luz quente assimétrica + grão fino. Puramente decorativo. */}
+    <section
+      id="topo"
+      className="noir-band relative overflow-x-clip scroll-mt-[var(--header-h)] pt-[var(--header-h)]"
+    >
+      {/* Grão fino sobre a faixa escura. Puramente decorativo. */}
       <div
         aria-hidden
-        className="ambient-light pointer-events-none absolute inset-x-0 -top-[var(--header-h)] h-[clamp(24rem,60vw,44rem)]"
-      />
-      <div
-        aria-hidden
-        className="texture-grain pointer-events-none absolute inset-0"
+        className="texture-grain pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-screen"
       />
 
       <Container className="relative section-y">
         <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-16">
           <div className="flex min-w-0 flex-col items-start gap-6 sm:gap-8">
             <Reveal>
-              <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card/70 px-3.5 py-1.5 text-xs font-medium text-foreground shadow-hairline backdrop-blur-sm">
+              <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/35 bg-offwhite/5 px-3.5 py-1.5 text-xs font-medium text-offwhite/85 backdrop-blur-sm">
                 <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
                 <span className="min-w-0">Você começa com 5 créditos grátis.</span>
               </span>
             </Reveal>
 
             <Reveal delay={80}>
-              <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.04] tracking-[-0.03em] text-foreground">
-                Ofertas selecionadas para você economizar de verdade.
+              <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.04] tracking-[-0.03em] text-offwhite">
+                Ofertas selecionadas para{" "}
+                <span className="gold-text">economizar de verdade</span>.
               </h1>
             </Reveal>
 
             <Reveal delay={160}>
-              <p className="max-w-[52ch] text-pretty text-fluid-base leading-[1.75] text-muted-foreground">
+              <p className="max-w-[52ch] text-pretty text-fluid-base leading-[1.75] text-offwhite/65">
                 Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
                 maiores lojas do Brasil.
               </p>
@@ -166,7 +166,7 @@ export function HeroSection() {
                 <a
                   href="#ofertas"
                   onClick={(event) => handleAnchorClick(event, "#ofertas")}
-                  className={cn(buttonSolid, "group py-3.5")}
+                  className="group touch-target inline-flex items-center justify-center gap-2 rounded-xl bg-[image:var(--gradient-gold)] px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   Explorar ofertas
                   <ArrowRight
@@ -178,7 +178,7 @@ export function HeroSection() {
                 <a
                   href="#cupons"
                   onClick={(event) => handleAnchorClick(event, "#cupons")}
-                  className={cn(buttonOutline, "py-3.5")}
+                  className="touch-target inline-flex items-center justify-center gap-2 rounded-xl border border-offwhite/25 px-6 py-3.5 text-sm font-semibold text-offwhite transition-colors duration-200 hover:border-gold/50 hover:bg-offwhite/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
                   Ver cupons
                 </a>
@@ -187,12 +187,15 @@ export function HeroSection() {
 
             <Reveal delay={320} className="w-full">
               <div className="w-full">
-                <div className="rule-fade w-full" aria-hidden />
-                <ul className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-fluid-xs text-muted-foreground">
+                <div
+                  className="h-px w-full bg-[linear-gradient(to_right,transparent,color-mix(in_oklab,var(--offwhite)_18%,transparent),transparent)]"
+                  aria-hidden
+                />
+                <ul className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-fluid-xs text-offwhite/60">
                   {TRUST_SIGNALS.map(({ label, icon: Icon }) => (
                     <li key={label} className="inline-flex items-center gap-2">
                       <Icon
-                        className="h-3.5 w-3.5 shrink-0 text-saving"
+                        className="h-3.5 w-3.5 shrink-0 text-gold"
                         strokeWidth={2}
                         aria-hidden
                       />
@@ -203,6 +206,7 @@ export function HeroSection() {
               </div>
             </Reveal>
           </div>
+
 
           <div className="relative mx-auto w-full min-w-0 max-w-[28.75rem] lg:max-w-none">
             <div className="relative flex min-w-0 flex-col gap-4 sm:gap-0">
