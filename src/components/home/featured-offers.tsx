@@ -3,9 +3,9 @@ import { ArrowUpRight, ShieldCheck } from "lucide-react";
 
 import { FEATURED_PRODUCTS, type Product } from "@/data/products";
 
-import { ProductCard, ProductCardSkeleton } from "./product-card";
 import { Container, SectionHeading } from "./primitives";
-import { RedeemDialog } from "./redeem-dialog";
+import { ProductGrid } from "./product-grid";
+import { RedeemProductModal } from "./redeem-dialog";
 
 /**
  * Ofertas em destaque.
@@ -15,16 +15,16 @@ import { RedeemDialog } from "./redeem-dialog";
 export function FeaturedOffers() {
   const [isLoading, setIsLoading] = useState(true);
   const [selected, setSelected] = useState<Product | null>(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), 600);
+    const timer = window.setTimeout(() => setIsLoading(false), 500);
     return () => window.clearTimeout(timer);
   }, []);
 
   function handleRedeem(product: Product) {
     setSelected(product);
-    setDialogOpen(true);
+    setModalOpen(true);
   }
 
   return (
@@ -37,31 +37,32 @@ export function FeaturedOffers() {
             description="Produtos selecionados com preços atrativos nas principais lojas online."
           />
           <a
-            href="#ofertas"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+            href="#categorias"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
           >
             Ver todas as ofertas
-            <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+            <ArrowUpRight className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden />
           </a>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {isLoading
-            ? Array.from({ length: 8 }).map((_, index) => (
-                <ProductCardSkeleton key={`skeleton-${index}`} />
-              ))
-            : FEATURED_PRODUCTS.map((product) => (
-                <ProductCard key={product.id} product={product} onRedeem={handleRedeem} />
-              ))}
+        <div className="mt-10">
+          <ProductGrid
+            products={FEATURED_PRODUCTS}
+            onRedeem={handleRedeem}
+            isLoading={isLoading}
+            skeletonCount={8}
+          />
         </div>
 
-        <p className="mt-8 inline-flex items-center gap-2 text-xs text-muted-foreground">
-          <ShieldCheck className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
+        <p className="mt-8 inline-flex items-start gap-2 text-xs text-muted-foreground">
+          <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
           Produtos e valores meramente ilustrativos nesta versão inicial.
         </p>
       </Container>
 
-      <RedeemDialog product={selected} open={dialogOpen} onOpenChange={setDialogOpen} />
+      <RedeemProductModal product={selected} open={modalOpen} onOpenChange={setModalOpen} />
     </section>
   );
 }
+
+export { FeaturedOffers as ProductSection };

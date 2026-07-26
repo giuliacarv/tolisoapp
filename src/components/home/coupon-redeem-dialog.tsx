@@ -9,8 +9,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { COUPON_REDEMPTION_COST, type Coupon } from "@/data/coupons";
+import { cn } from "@/lib/utils";
 
-export interface CouponRedeemDialogProps {
+import { buttonOutline, buttonSolid } from "./primitives";
+
+export interface RedeemCouponModalProps {
   coupon: Coupon | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -20,7 +23,7 @@ export interface CouponRedeemDialogProps {
  * Confirmação de resgate de cupom.
  * Nesta etapa NÃO debita créditos e NÃO revela o código completo.
  */
-export function CouponRedeemDialog({ coupon, open, onOpenChange }: CouponRedeemDialogProps) {
+export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponModalProps) {
   function handleConfirm() {
     onOpenChange(false);
     toast("Autenticação necessária para concluir o resgate.");
@@ -28,7 +31,7 @@ export function CouponRedeemDialog({ coupon, open, onOpenChange }: CouponRedeemD
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="rounded-[20px] border-border bg-card sm:max-w-md">
+      <DialogContent className="max-h-[85dvh] overflow-y-auto rounded-[20px] border-border bg-card sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="font-serif text-2xl tracking-tight text-foreground">
             Resgatar cupom
@@ -52,15 +55,11 @@ export function CouponRedeemDialog({ coupon, open, onOpenChange }: CouponRedeemD
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className="rounded-xl border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+            className={cn(buttonOutline, "w-full sm:w-auto")}
           >
             Cancelar
           </button>
-          <button
-            type="button"
-            onClick={handleConfirm}
-            className="rounded-xl bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          >
+          <button type="button" onClick={handleConfirm} className={cn(buttonSolid, "w-full sm:w-auto")}>
             Confirmar resgate
           </button>
         </DialogFooter>
@@ -68,3 +67,6 @@ export function CouponRedeemDialog({ coupon, open, onOpenChange }: CouponRedeemD
     </Dialog>
   );
 }
+
+export { RedeemCouponModal as CouponRedeemDialog };
+

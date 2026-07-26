@@ -8,6 +8,9 @@ import {
   maskCouponCode,
   type Coupon,
 } from "@/data/coupons";
+import { cn } from "@/lib/utils";
+
+import { buttonOutline, cardBase } from "./primitives";
 
 export interface CouponCardProps {
   coupon: Coupon;
@@ -16,7 +19,12 @@ export interface CouponCardProps {
 
 export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
   return (
-    <article className="flex h-full flex-col gap-4 rounded-[18px] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift">
+    <article
+      className={cn(
+        cardBase,
+        "motion-safe-transform flex h-full flex-col gap-4 p-6 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+      )}
+    >
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
         <div className="min-w-0 space-y-1">
           <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -73,18 +81,20 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
         </div>
       </dl>
 
-      <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-semibold text-foreground">
-        <Coins className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
+      <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-[11px] font-semibold text-foreground">
+        <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
         Custa {COUPON_REDEMPTION_COST} créditos
       </span>
 
       <button
         type="button"
         onClick={() => onRedeem(coupon)}
-        className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all hover:border-transparent hover:bg-ink hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label={`Resgatar cupom ${coupon.title} da loja ${coupon.store}`}
+        className={cn(buttonOutline, "w-full bg-background hover:border-ink hover:bg-ink hover:text-offwhite")}
       >
         Resgatar Cupom
       </button>
+
     </article>
   );
 }

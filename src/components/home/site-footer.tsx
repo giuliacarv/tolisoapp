@@ -38,7 +38,7 @@ const SOCIALS = [
   { icon: Mail, label: "E-mail" },
 ];
 
-export function SiteFooter() {
+export function Footer() {
   const year = new Date().getFullYear();
 
   return (
@@ -65,7 +65,7 @@ export function SiteFooter() {
                   key={label}
                   href="#"
                   aria-label={`${label} (em breve)`}
-                  className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-all hover:border-gold/50 hover:text-gold"
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors duration-200 hover:border-gold/50 hover:text-gold"
                 >
                   <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
                 </a>
@@ -84,7 +84,7 @@ export function SiteFooter() {
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-sm text-foreground/75 transition-colors hover:text-gold"
+                        className="inline-flex min-h-9 items-center rounded-md text-sm text-muted-foreground transition-colors duration-200 hover:text-gold"
                       >
                         {link.label}
                       </a>
@@ -113,3 +113,5 @@ export function SiteFooter() {
     </footer>
   );
 }
+
+export { Footer as SiteFooter };

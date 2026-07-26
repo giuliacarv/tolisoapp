@@ -3,6 +3,8 @@ import { BadgeCheck, Coins, Store as StoreIcon } from "lucide-react";
 import { formatBRL, formatCreditsLabel, type Product } from "@/data/products";
 import { cn } from "@/lib/utils";
 
+import { buttonOutline, cardBase } from "./primitives";
+
 export interface ProductCardProps {
   product: Product;
   onRedeem: (product: Product) => void;
@@ -14,31 +16,33 @@ export function ProductCard({ product, onRedeem, className }: ProductCardProps) 
   return (
     <article
       className={cn(
-        "group flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift",
+        cardBase,
+        "motion-safe-transform group flex h-full flex-col overflow-hidden hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
         className,
       )}
     >
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
         <img
           src={product.image}
-          alt={product.name}
+          alt={`Foto ilustrativa: ${product.name}`}
           loading="lazy"
+          decoding="async"
           width={800}
-          height={800}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+          height={600}
+          className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.03]"
         />
-        <span className="absolute left-3 top-3 rounded-lg bg-discount px-2.5 py-1 text-xs font-bold text-white">
+        <span className="absolute left-3 top-3 rounded-lg bg-discount px-2.5 py-1 text-xs font-bold text-offwhite">
           -{product.discountPercentage}%
         </span>
         {product.verified ? (
           <span className="absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-[11px] font-semibold text-foreground backdrop-blur">
-            <BadgeCheck className="h-3.5 w-3.5 text-saving" strokeWidth={2} />
+            <BadgeCheck className="h-3.5 w-3.5 text-saving" strokeWidth={2} aria-hidden />
             Oferta verificada
           </span>
         ) : null}
-        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-[11px] font-semibold text-foreground backdrop-blur">
-          <StoreIcon className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
-          {product.store}
+        <span className="absolute bottom-3 left-3 inline-flex max-w-[calc(100%-1.5rem)] items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-[11px] font-semibold text-foreground backdrop-blur">
+          <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
+          <span className="truncate">{product.store}</span>
         </span>
       </div>
 
@@ -49,7 +53,7 @@ export function ProductCard({ product, onRedeem, className }: ProductCardProps) 
         <h3 className="line-clamp-2 min-h-[2.75rem] text-[15px] font-semibold leading-snug text-foreground">
           {product.name}
         </h3>
-        <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+        <p className="line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">
           {product.description}
         </p>
 
@@ -63,15 +67,16 @@ export function ProductCard({ product, onRedeem, className }: ProductCardProps) 
             </span>
           </div>
 
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/10 px-2.5 py-1 text-[11px] font-semibold text-foreground">
-            <Coins className="h-3.5 w-3.5 text-gold" strokeWidth={1.75} />
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-[11px] font-semibold text-foreground">
+            <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
             {formatCreditsLabel(product.creditsRequired)}
           </span>
 
           <button
             type="button"
             onClick={() => onRedeem(product)}
-            className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground transition-all hover:border-transparent hover:bg-ink hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            aria-label={`Resgatar desconto de ${product.name}`}
+            className={cn(buttonOutline, "w-full bg-background hover:border-ink hover:bg-ink hover:text-offwhite")}
           >
             Resgatar Desconto
           </button>
