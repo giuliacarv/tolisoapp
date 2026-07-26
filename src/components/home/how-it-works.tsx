@@ -65,7 +65,7 @@ export function HowItWorks() {
                     "flex h-full flex-col items-start gap-4 p-6 sm:p-8 lg:items-center lg:text-center",
                   )}
                 >
-                  <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-border bg-background">
+                  <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-gold/25 bg-gold/8">
                     <Icon className="h-5 w-5 text-gold" strokeWidth={1.6} aria-hidden />
                     <span className="gold-medallion absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full text-[11px] font-bold tabular-nums">
                       {index + 1}

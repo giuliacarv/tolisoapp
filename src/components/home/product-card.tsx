@@ -37,7 +37,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
         "motion-safe-transform group relative flex h-full flex-col overflow-hidden",
         isDisabled
           ? "opacity-60 saturate-50"
-          : "interactive-lift hover:border-gold/40",
+          : "interactive-lift gilded-frame hover:border-gold/40",
         className,
       )}
     >

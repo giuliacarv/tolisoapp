@@ -87,7 +87,7 @@ export const cardBase =
 /** Card clicável/navegável: base + elevação e brilho diagonal no hover. */
 export const cardInteractive = cn(
   cardBase,
-  "hover-sheen motion-safe-transform hover:border-gold/40 hover:shadow-lift motion-safe:hover:-translate-y-1",
+  "hover-sheen gilded-frame motion-safe-transform hover:border-gold/40 hover:shadow-lift motion-safe:hover:-translate-y-1",
 );
 
 
