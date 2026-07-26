@@ -57,3 +57,21 @@ export function Tag({ className, ...props }: ComponentProps<"span">) {
     />
   );
 }
+
+/**
+ * Estilos de botão reutilizáveis — mantêm consistência de raio, altura mínima
+ * (área de toque >= 44px), foco visível e duração de transição (~200ms).
+ */
+export const buttonBase =
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50";
+
+export const buttonSolid = cn(buttonBase, "bg-ink text-offwhite hover:bg-graphite");
+
+export const buttonOutline = cn(
+  buttonBase,
+  "border border-border bg-card text-foreground hover:bg-secondary",
+);
+
+/** Card base: borda fina, sombra discreta e hover contido. */
+export const cardBase =
+  "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow] duration-200";
