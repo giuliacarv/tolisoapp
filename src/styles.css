@@ -56,9 +56,21 @@
   --color-offwhite: var(--offwhite);
   --color-saving: var(--saving);
   --color-discount: var(--discount);
-  --shadow-soft: 0 1px 2px rgb(11 11 12 / 0.04), 0 12px 32px -18px rgb(11 11 12 / 0.18);
-  --shadow-lift: 0 2px 6px rgb(11 11 12 / 0.05), 0 24px 48px -24px rgb(11 11 12 / 0.22);
+  /*
+   * Escada de elevação (Soft Shadows).
+   * Blur entre 8px e 24px+, spread 0–4px e opacidades de 0.04 a 0.14 —
+   * sombras difusas e frias, nunca o "drop-shadow" duro padrão.
+   */
+  --shadow-hairline: 0 1px 2px rgb(11 11 12 / 0.04);
+  --shadow-soft: 0 1px 2px rgb(11 11 12 / 0.04), 0 8px 24px -12px rgb(11 11 12 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(11 11 12 / 0.05), 0 16px 40px -16px rgb(11 11 12 / 0.16);
+  --shadow-float: 0 4px 10px rgb(11 11 12 / 0.06), 0 24px 56px -20px rgb(11 11 12 / 0.2);
+  --shadow-inset-hairline: inset 0 1px 0 rgb(255 255 255 / 0.6);
+
+  /* Curva de easing única do produto: saída rápida, chegada suave. */
+  --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
+
 
 :root {
   --radius: 1rem;
@@ -270,6 +282,157 @@
   /* Sem movimento automático: o usuário rola horizontalmente se quiser. */
   .marquee-track {
     animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Camada premium: profundidade, vidro, tipografia editorial e movimento.
+ * Tudo definido em tokens para evitar valores mágicos nos componentes.
+ * ------------------------------------------------------------------------ */
+:root {
+  /* Gradientes de profundidade — sutis por definição (nunca "arco-íris"). */
+  --gradient-surface: linear-gradient(
+    to bottom right,
+    oklch(0.995 0.004 85),
+    oklch(0.972 0.008 85)
+  );
+  --gradient-ink: linear-gradient(to bottom right, oklch(0.2 0.004 285), oklch(0.13 0.004 285));
+  --gradient-gold: linear-gradient(to bottom right, oklch(0.82 0.07 85), oklch(0.71 0.08 78));
+  /* Halo dourado difuso usado atrás de seções de destaque. */
+  --gradient-halo: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in oklab, var(--gold) 22%, transparent),
+    transparent 70%
+  );
+
+  /* Vidro (Glassmorphism) — mesmos valores em todo o produto. */
+  --glass-bg: color-mix(in oklab, var(--card) 62%, transparent);
+  --glass-border: color-mix(in oklab, var(--foreground) 10%, transparent);
+  --glass-blur: 16px;
+
+  /* Escala 8pt: todo espaçamento deriva destes degraus. */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+}
+
+.dark {
+  --gradient-surface: linear-gradient(
+    to bottom right,
+    oklch(0.19 0.004 285),
+    oklch(0.15 0.004 285)
+  );
+  --glass-bg: color-mix(in oklab, var(--card) 55%, transparent);
+  --glass-border: color-mix(in oklab, oklch(1 0 0) 14%, transparent);
+}
+
+@layer base {
+  /* Hierarquia tipográfica: títulos densos e editoriais, corpo respirável. */
+  h1,
+  h2,
+  h3 {
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h3 {
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  p,
+  li {
+    line-height: 1.65;
+  }
+}
+
+/** Superfície de vidro: transparência + blur + borda de 1px de baixa opacidade. */
+@utility glass-surface {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(150%);
+  border: 1px solid var(--glass-border);
+}
+
+/** Fundo com gradiente neutro — profundidade sem ruído visual. */
+@utility surface-gradient {
+  background-image: var(--gradient-surface);
+}
+
+/** Halo dourado decorativo (usar em pseudo-container com overflow controlado). */
+@utility halo-gradient {
+  background-image: var(--gradient-halo);
+}
+
+/** Filete superior de luz — dá espessura física às superfícies claras. */
+@utility edge-highlight {
+  box-shadow: var(--shadow-soft), var(--shadow-inset-hairline);
+}
+
+/**
+ * Interação premium: elevação discreta + sombra mais difusa no hover.
+ * `transform` e `opacity` apenas — propriedades compostas na GPU.
+ */
+@utility interactive-lift {
+  transition:
+    transform 0.3s var(--ease-premium),
+    box-shadow 0.3s var(--ease-premium),
+    border-color 0.3s var(--ease-premium),
+    background-color 0.3s var(--ease-premium),
+    color 0.3s var(--ease-premium);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Animações de entrada escalonadas.
+ * O elemento nasce oculto e revela quando ganha `data-revealed="true"`
+ * (definido pelo IntersectionObserver do componente <Reveal />).
+ * `--reveal-delay` permite o efeito cascata entre 50ms e 200ms por item.
+ * ------------------------------------------------------------------------ */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@utility reveal {
+  opacity: 0;
+  will-change: opacity, transform;
+
+  &[data-revealed="true"] {
+    animation: reveal-rise 0.7s var(--ease-premium) both;
+    animation-delay: var(--reveal-delay, 0ms);
+    /* Libera a camada de composição depois da entrada. */
+    will-change: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Sem deslocamento: o conteúdo simplesmente já está visível. */
+  .reveal {
+    opacity: 1 !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .interactive-lift:hover {
     transform: none !important;
   }
 }
