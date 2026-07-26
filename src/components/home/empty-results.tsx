@@ -16,14 +16,9 @@ export interface EmptyResultsProps {
  * Estado vazio da vitrine: explica o que aconteceu e oferece caminhos de saída
  * (limpar filtros ou tentar uma sugestão de busca).
  */
-export function EmptyResults({
-  query,
-  filterLabel,
-  onReset,
-  suggestions = [],
-  onSuggestionSelect,
-}: EmptyResultsProps) {
-  const term = query?.trim();
+export function EmptyResults({ onReset, suggestions = [], onSuggestionSelect }: EmptyResultsProps) {
+  return (
+
 
   return (
     <div
