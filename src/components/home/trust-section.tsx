@@ -34,7 +34,7 @@ const PILLARS: Pillar[] = [
 
 export function TrustSection() {
   return (
-    <section id="transparencia" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="transparencia" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
         <SectionHeading
           eyebrow="Confiança"
@@ -43,7 +43,7 @@ export function TrustSection() {
           className="mx-auto items-center text-center"
         />
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid-fluid [--col-min:14rem]">
           {PILLARS.map((pillar) => {
             const Icon = pillar.icon;
             return (

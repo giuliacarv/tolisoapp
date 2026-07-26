@@ -50,7 +50,7 @@ export function Footer() {
               <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink">
                 <Sparkles className="h-4 w-4 text-gold" strokeWidth={1.75} aria-hidden />
               </span>
-              <span className="truncate text-[17px] font-extrabold tracking-[-0.02em] text-foreground">
+              <span className="truncate text-fluid-base font-extrabold tracking-[-0.02em] text-foreground">
                 DESCONT<span className="text-gold">AI</span>
               </span>
             </div>
@@ -73,10 +73,10 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+          <div className="grid-fluid [--col-min:9rem] gap-8">
             {COLUMNS.map((column) => (
               <div key={column.title} className="min-w-0">
-                <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
+                <h3 className="text-fluid-micro font-semibold uppercase tracking-[0.22em] text-muted-foreground">
                   {column.title}
                 </h3>
                 <ul className="mt-4 space-y-3">

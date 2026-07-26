@@ -27,7 +27,7 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
     >
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
         <div className="min-w-0 space-y-1">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+          <span className="text-fluid-micro font-semibold uppercase tracking-[0.18em] text-muted-foreground">
             {coupon.store}
           </span>
           <p className="font-serif text-xl leading-tight text-foreground">
@@ -35,12 +35,12 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
           </p>
         </div>
         {coupon.validated ? (
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-saving/40 bg-saving/10 px-2.5 py-1 text-[11px] font-semibold text-saving">
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-saving/40 bg-saving/10 px-2.5 py-1 text-fluid-micro font-semibold text-saving">
             <BadgeCheck className="h-3.5 w-3.5" strokeWidth={2} />
             Validado
           </span>
         ) : (
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-secondary px-2.5 py-1 text-[11px] font-semibold text-muted-foreground">
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-muted-foreground">
             <Clock3 className="h-3.5 w-3.5" strokeWidth={2} />
             Validação pendente
           </span>
@@ -48,7 +48,7 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
       </div>
 
       <div className="min-h-[3.5rem] space-y-1">
-        <h3 className="text-[15px] font-semibold leading-snug text-foreground">{coupon.title}</h3>
+        <h3 className="text-fluid-sm font-semibold leading-snug text-foreground">{coupon.title}</h3>
         <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
           {coupon.description}
         </p>
@@ -62,7 +62,7 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
         <span className="font-mono text-sm font-semibold tracking-[0.14em] text-foreground">
           {maskCouponCode(coupon.code)}
         </span>
-        <span className="ml-auto text-[11px] text-muted-foreground">Código oculto</span>
+        <span className="ml-auto text-fluid-micro text-muted-foreground">Código oculto</span>
       </div>
 
       <dl className="mt-auto space-y-1.5 text-xs text-muted-foreground">
@@ -81,7 +81,7 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
         </div>
       </dl>
 
-      <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-[11px] font-semibold text-foreground">
+      <span className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground">
         <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
         Custa {COUPON_REDEMPTION_COST} créditos
       </span>

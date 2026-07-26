@@ -35,7 +35,7 @@ export function SearchBar({ value, onValueChange, className }: SearchBarProps) {
           value={value}
           onChange={(event) => onValueChange(event.target.value)}
           placeholder="Busque por produtos, marcas ou lojas"
-          className="h-13 min-h-12 w-full rounded-xl border border-border bg-background py-3 pl-12 pr-4 text-[15px] text-foreground outline-none transition-colors duration-200 placeholder:text-muted-foreground focus:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40"
+          className="h-13 min-h-12 w-full rounded-xl border border-border bg-background py-3 pl-12 pr-4 text-fluid-sm text-foreground outline-none transition-colors duration-200 placeholder:text-muted-foreground focus:border-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/40"
         />
       </div>
       <button type="submit" className={cn(buttonSolid, "min-h-12 px-7")}>

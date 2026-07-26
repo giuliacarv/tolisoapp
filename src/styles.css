@@ -113,6 +113,31 @@
 }
 
 
+/* ---------------------------------------------------------------------------
+ * Escala fluida (mobile-first)
+ * Todos os degraus usam clamp(min, preferencial-em-vw, max) para escalar
+ * continuamente de ~240px (smartwatch/dobrável fechado) até ultrawide,
+ * eliminando saltos entre breakpoints. Os valores mínimos foram escolhidos
+ * para preservar legibilidade (>= 0.8125rem em textos de corpo).
+ * ------------------------------------------------------------------------ */
+:root {
+  --header-h: clamp(3.5rem, 3.1rem + 1.6vw, 4.5rem);
+
+  /* Tipografia */
+  --fs-micro: clamp(0.625rem, 0.6rem + 0.12vw, 0.6875rem);
+  --fs-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --fs-sm: clamp(0.8125rem, 0.78rem + 0.2vw, 0.9375rem);
+  --fs-base: clamp(0.9375rem, 0.9rem + 0.25vw, 1.0625rem);
+  --fs-lg: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+  --fs-h3: clamp(1.125rem, 1.02rem + 0.5vw, 1.5rem);
+  --fs-h2: clamp(1.5rem, 1.15rem + 1.7vw, 2.5rem);
+  --fs-h1: clamp(1.875rem, 1.25rem + 3.2vw, 3.75rem);
+
+  /* Espaçamento vertical de seção e gutter horizontal */
+  --space-section: clamp(2.75rem, 1.8rem + 4.5vw, 6rem);
+  --gutter: clamp(0.875rem, 0.4rem + 2.2vw, 2rem);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
@@ -123,10 +148,24 @@
     -webkit-font-smoothing: antialiased;
     background-color: var(--color-background);
     color: var(--color-foreground);
+    /* Nenhum elemento pode gerar rolagem horizontal; `clip` não cria
+       contexto de rolagem (ao contrário de `hidden`) e preserva
+       `position: sticky` do header. */
+    overflow-x: clip;
   }
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
+    /* Impede que iOS aumente a fonte na rotação para paisagem. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Mídia nunca estoura o container pai. */
+  img,
+  svg,
+  video {
+    max-width: 100%;
   }
 
   /* Foco visível consistente em toda navegação por teclado. */
@@ -136,6 +175,55 @@
     border-radius: var(--radius-sm);
   }
 }
+
+/* Utilitários fluidos reutilizáveis. */
+@utility text-fluid-micro {
+  font-size: var(--fs-micro);
+}
+@utility text-fluid-xs {
+  font-size: var(--fs-xs);
+}
+@utility text-fluid-sm {
+  font-size: var(--fs-sm);
+}
+@utility text-fluid-base {
+  font-size: var(--fs-base);
+}
+@utility text-fluid-lg {
+  font-size: var(--fs-lg);
+}
+@utility text-fluid-h3 {
+  font-size: var(--fs-h3);
+}
+@utility text-fluid-h2 {
+  font-size: var(--fs-h2);
+}
+@utility text-fluid-h1 {
+  font-size: var(--fs-h1);
+}
+
+/** Ritmo vertical padrão das seções (substitui py-20 sm:py-24). */
+@utility section-y {
+  padding-block: var(--space-section);
+}
+
+/** Área de toque mínima de 44x44px recomendada pela WCAG 2.5.5. */
+@utility touch-target {
+  min-height: 2.75rem;
+  min-inline-size: 2.75rem;
+}
+
+/**
+ * Grade fluida orientada a conteúdo: quebra no ponto em que o card deixa de
+ * ser legível (não em larguras de aparelhos específicos). O `--col-min`
+ * define esse ponto de quebra e é ajustável por instância.
+ */
+@utility grid-fluid {
+  display: grid;
+  gap: clamp(1rem, 0.6rem + 1.4vw, 1.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--col-min, 16rem)), 1fr));
+}
+
 
 /* Respeita usuários que preferem menos movimento. */
 @media (prefers-reduced-motion: reduce) {

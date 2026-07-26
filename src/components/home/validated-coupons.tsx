@@ -29,7 +29,7 @@ export function CouponSection() {
   return (
     <section
       id="cupons"
-      className="scroll-mt-24 border-y border-border bg-secondary/50 py-20 sm:py-24"
+      className="section-y scroll-mt-[calc(var(--header-h)+1rem)] border-y border-border bg-secondary/50"
     >
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -48,13 +48,13 @@ export function CouponSection() {
         </div>
 
         {isLoading ? (
-          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid-fluid [--col-min:18rem]">
             {Array.from({ length: 6 }).map((_, index) => (
               <CouponCardSkeleton key={`coupon-skeleton-${index}`} />
             ))}
           </div>
         ) : (
-          <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-10 grid-fluid [--col-min:18rem]">
             {COUPONS.map((coupon) => (
               <li key={coupon.id} className="min-w-0">
                 <CouponCard coupon={coupon} onRedeem={handleRedeem} />
