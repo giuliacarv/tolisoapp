@@ -1,31 +1,29 @@
-import { MousePointerClick, PackageCheck, Search, Wallet } from "lucide-react";
+import { Coins, Search, Store } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 import { Container, SectionHeading } from "./primitives";
 
-const STEPS = [
+interface Step {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const STEPS: Step[] = [
   {
     icon: Search,
-    title: "Encontre o produto",
-    description:
-      "Busque por nome, marca ou categoria e compare o preço atual com o histórico das principais lojas.",
+    title: "Encontre uma oportunidade",
+    description: "Explore produtos e cupons selecionados nas principais lojas online.",
   },
   {
-    icon: MousePointerClick,
-    title: "Confira a oferta",
-    description:
-      "Mostramos desconto real, cupom aplicável e condições de frete antes de você sair do DESCONTAI.",
+    icon: Coins,
+    title: "Resgate com créditos",
+    description: "Utilize seus créditos para liberar o desconto, o cupom ou o acesso à oferta.",
   },
   {
-    icon: PackageCheck,
-    title: "Compre na loja oficial",
-    description:
-      "Você é redirecionado para Shopee, TikTok Shop, Mercado Livre, Ponto Frio ou Amazon para finalizar com segurança.",
-  },
-  {
-    icon: Wallet,
-    title: "Acompanhe sua economia",
-    description:
-      "Cada compra registrada soma à sua economia acumulada e libera créditos dentro da plataforma.",
+    icon: Store,
+    title: "Compre na loja parceira",
+    description: "Você será direcionado para a plataforma responsável pela venda e entrega.",
   },
 ];
 
@@ -34,32 +32,47 @@ export function HowItWorks() {
     <section id="como-funciona" className="scroll-mt-24 py-20 sm:py-24">
       <Container>
         <SectionHeading
-          eyebrow="Como funciona"
-          title="Quatro passos, nenhuma pegadinha"
-          description="O DESCONTAI não vende produtos. Reunimos, verificamos e organizamos as melhores ofertas — a compra acontece direto na loja parceira."
           align="center"
-          className="mx-auto items-center"
+          eyebrow="Como funciona"
+          title="Economizar ficou mais simples"
+          description="Descubra uma oferta, utilize seus créditos e finalize sua compra diretamente na loja parceira."
+          className="mx-auto items-center text-center"
         />
 
-        <ol className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((step, index) => (
-            <li
-              key={step.title}
-              className="group relative flex flex-col gap-4 rounded-[18px] border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-gold/40 hover:shadow-lift"
-            >
-              <div className="flex items-center justify-between">
-                <span className="grid h-11 w-11 place-items-center rounded-xl border border-border bg-background">
-                  <step.icon className="h-4.5 w-4.5 text-gold" strokeWidth={1.75} />
-                </span>
-                <span className="font-serif text-2xl text-border">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <h3 className="text-base font-semibold text-foreground">{step.title}</h3>
-              <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
-            </li>
-          ))}
-        </ol>
+        <div className="relative mt-14">
+          {/* Linha conectando as etapas — apenas no desktop */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-[16%] top-7 hidden h-px bg-gradient-to-r from-transparent via-border to-transparent lg:block"
+          />
+
+          <ol className="relative grid gap-10 lg:grid-cols-3 lg:gap-8">
+            {STEPS.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <li
+                  key={step.title}
+                  className="flex flex-col items-start gap-4 lg:items-center lg:text-center"
+                >
+                  <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border bg-card shadow-soft">
+                    <Icon className="h-5 w-5 text-gold" strokeWidth={1.6} aria-hidden />
+                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[10px] font-semibold text-offwhite">
+                      {index + 1}
+                    </span>
+                  </div>
+                  <div className="min-w-0 space-y-2">
+                    <h3 className="font-serif text-xl tracking-tight text-foreground">
+                      {step.title}
+                    </h3>
+                    <p className="max-w-sm text-sm leading-relaxed text-muted-foreground lg:mx-auto">
+                      {step.description}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </Container>
     </section>
   );
