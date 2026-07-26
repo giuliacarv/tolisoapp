@@ -3,6 +3,8 @@ import { toast } from "sonner";
 
 import { COUPON_REDEMPTION_COST } from "@/data/coupons";
 
+import { handleAnchorClick } from "@/lib/smooth-scroll";
+
 import { Container, buttonBase } from "./primitives";
 
 /** Regras de custo — espelham as funções em src/data/products.ts e src/data/coupons.ts. */
@@ -60,9 +62,12 @@ export function CreditsSystem() {
               </ul>
 
               <div className="flex flex-col items-start gap-4 pt-2">
-                <button
-                  type="button"
-                  onClick={handlePlansClick}
+                <a
+                  href="#creditos"
+                  onClick={(event) => {
+                    handleAnchorClick(event, "#creditos");
+                    handlePlansClick();
+                  }}
                   className={`${buttonBase} group bg-gold px-6 text-ink hover:bg-gold-soft focus-visible:ring-offset-ink`}
                 >
                   Conhecer planos de créditos
@@ -70,7 +75,7 @@ export function CreditsSystem() {
                     className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5"
                     aria-hidden
                   />
-                </button>
+                </a>
                 <p className="max-w-xl text-xs leading-relaxed text-offwhite/50">
                   Os créditos são utilizados para acessar oportunidades e benefícios. A compra do
                   produto é realizada diretamente na loja parceira.

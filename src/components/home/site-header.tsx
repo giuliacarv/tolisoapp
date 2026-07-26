@@ -3,6 +3,7 @@ import { Menu, Search, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 import { Container, buttonSolid } from "./primitives";
@@ -53,6 +54,7 @@ export function Header() {
       <Container className="flex h-[var(--header-h)] items-center justify-between gap-2 sm:gap-4">
         <a
           href="#topo"
+          onClick={(event) => handleAnchorClick(event, "#topo", () => setOpen(false))}
           className="flex min-w-0 items-center gap-2.5 rounded-lg"
           aria-label="DESCONTAI — início"
         >
@@ -69,6 +71,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
+              onClick={(event) => handleAnchorClick(event, link.href)}
               className="rounded-md text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
             >
               {link.label}
@@ -77,7 +80,12 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <a href="#buscar" aria-label="Ir para a busca de ofertas" className={iconButton}>
+          <a
+            href="#buscar"
+            onClick={(event) => handleAnchorClick(event, "#buscar")}
+            aria-label="Ir para a busca de ofertas"
+            className={iconButton}
+          >
             <Search className="h-4 w-4" strokeWidth={1.75} aria-hidden />
           </a>
 
@@ -114,7 +122,10 @@ export function Header() {
                   <a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setOpen(false)}
+                    onClick={(event) => {
+                      handleAnchorClick(event, link.href, () => setOpen(false));
+                      setOpen(false);
+                    }}
                     className="touch-target flex items-center border-b border-border/70 py-4 font-serif text-lg text-foreground transition-colors duration-200 hover:text-gold"
                   >
                     {link.label}
