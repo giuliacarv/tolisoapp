@@ -24,7 +24,7 @@ export function CreditsSystem() {
   }
 
   return (
-    <section id="creditos" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="creditos" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
         <div className="overflow-hidden rounded-3xl bg-ink px-6 py-14 text-offwhite sm:px-12 sm:py-16">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">

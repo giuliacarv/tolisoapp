@@ -29,7 +29,7 @@ const STEPS: Step[] = [
 
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="como-funciona" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
         <SectionHeading
           align="center"

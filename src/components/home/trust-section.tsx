@@ -34,7 +34,7 @@ const PILLARS: Pillar[] = [
 
 export function TrustSection() {
   return (
-    <section id="transparencia" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="transparencia" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
         <SectionHeading
           eyebrow="Confiança"

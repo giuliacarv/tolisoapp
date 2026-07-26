@@ -29,7 +29,7 @@ export function CouponSection() {
   return (
     <section
       id="cupons"
-      className="scroll-mt-24 border-y border-border bg-secondary/50 py-20 sm:py-24"
+      className="section-y scroll-mt-[calc(var(--header-h)+1rem)] border-y border-border bg-secondary/50"
     >
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">

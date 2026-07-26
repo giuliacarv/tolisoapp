@@ -28,7 +28,7 @@ export function FeaturedOffers() {
   }
 
   return (
-    <section id="ofertas" className="scroll-mt-24 py-20 sm:py-24">
+    <section id="ofertas" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
