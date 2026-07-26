@@ -19,9 +19,16 @@ export function DiscoveryPanel({
 }: DiscoveryPanelProps) {
   return (
     <div id="buscar" className="mx-auto max-w-3xl scroll-mt-[calc(var(--header-h)+1.5rem)]">
-      <div className="rounded-[22px] border border-border bg-card p-5 shadow-soft sm:p-8">
+      <div className="glass-surface edge-highlight relative overflow-hidden rounded-[22px] p-5 sm:p-8">
+        {/* Halo dourado discreto ancorado no canto superior direito do painel. */}
+        <span
+          aria-hidden
+          className="halo-gradient pointer-events-none absolute -right-16 -top-24 h-56 w-72 opacity-45"
+        />
+        <div className="relative">
         <SearchBar value={query} onValueChange={onQueryChange} />
         <QuickFilters options={filters} activeId={activeFilter} onSelect={onFilterChange} />
+        </div>
       </div>
     </div>
   );
