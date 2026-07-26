@@ -38,6 +38,8 @@ export function SearchAndCategories() {
   const [detailsOpen, setDetailsOpen] = useState(false);
   const [sort, setSort] = useState<SortId>("recommended");
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
