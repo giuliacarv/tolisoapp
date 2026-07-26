@@ -8,6 +8,8 @@ import { RedeemCouponModal } from "./coupon-redeem-dialog";
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 
 import { Container, SectionHeading } from "./primitives";
+import { Reveal } from "./reveal";
+
 
 /**
  * Cupons validados.
