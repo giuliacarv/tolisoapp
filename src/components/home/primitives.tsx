@@ -84,6 +84,14 @@ export const buttonOutline = cn(
 export const cardBase =
   "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow,background-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)]";
 
+/** Card clicável/navegável: base + elevação e brilho diagonal no hover. */
+export const cardInteractive = cn(
+  cardBase,
+  "hover-sheen motion-safe-transform hover:border-gold/40 hover:shadow-lift motion-safe:hover:-translate-y-1",
+);
+
+
+
 /** Superfície de vidro para painéis sobrepostos (modais, barras flutuantes). */
 export const glassPanel = "glass-surface rounded-[18px] shadow-lift";
 
