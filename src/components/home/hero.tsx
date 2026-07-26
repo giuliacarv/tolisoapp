@@ -4,6 +4,7 @@ import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 import { Container, buttonOutline, buttonSolid, cardBase } from "./primitives";
+import { Reveal } from "./reveal";
 import espressoImage from "@/assets/hero-product-espresso.jpg";
 import headphonesImage from "@/assets/hero-product-headphones.jpg";
 import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
@@ -65,13 +66,25 @@ function HeroOfferCard({
   offer,
   className,
   priority = false,
+  delay = 0,
 }: {
   offer: HeroOffer;
   className?: string;
   priority?: boolean;
+  /** Atraso da entrada escalonada, em milissegundos. */
+  delay?: number;
 }) {
   return (
-    <article className={cn(cardBase, "motion-safe-transform w-full min-w-0 p-4", className)}>
+    <Reveal
+      as="article"
+      delay={delay}
+      className={cn(
+        cardBase,
+        "interactive-lift motion-safe-transform w-full min-w-0 p-4",
+        "glass-surface edge-highlight hover:border-gold/40",
+        className,
+      )}
+    >
       <div className="flex min-w-0 items-center gap-3 sm:gap-4">
         <div className="grid h-16 w-16 shrink-0 sm:h-20 sm:w-20 place-items-center overflow-hidden rounded-2xl bg-secondary">
           <img
@@ -111,7 +124,7 @@ function HeroOfferCard({
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"} para desbloquear
         </span>
       </div>
-    </article>
+    </Reveal>
   );
 }
 
@@ -120,7 +133,7 @@ export function HeroSection() {
     <section id="topo" className="relative overflow-x-clip scroll-mt-[var(--header-h)]">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[clamp(18rem,45vw,32rem)] bg-[radial-gradient(60%_60%_at_50%_0%,color-mix(in_oklab,var(--gold)_12%,transparent),transparent_70%)]"
+        className="halo-gradient pointer-events-none absolute inset-x-0 top-0 h-[clamp(18rem,45vw,32rem)] opacity-60"
       />
 
       <Container className="relative section-y">
