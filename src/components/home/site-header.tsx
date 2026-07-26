@@ -55,7 +55,7 @@ export function Header() {
         <a
           href="#topo"
           onClick={(event) => handleAnchorClick(event, "#topo", () => setOpen(false))}
-          className="flex min-w-0 items-center gap-2.5 rounded-lg"
+          className="flex min-h-11 min-w-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label="DESCONTAI — início"
         >
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-ink">
@@ -72,7 +72,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={(event) => handleAnchorClick(event, link.href)}
-              className="rounded-md text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground"
+              className="inline-flex min-h-11 items-center rounded-md text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
               {link.label}
             </a>
