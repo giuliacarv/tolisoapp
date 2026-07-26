@@ -90,7 +90,7 @@ export function CreditsSystem() {
             </div>
 
             {/* Exemplo visual de saldo — valores ilustrativos */}
-            <div className="min-w-0 rounded-2xl border border-offwhite/12 bg-graphite/80 p-6 sm:p-8">
+            <div className="glass-surface min-w-0 rounded-2xl border-offwhite/12 bg-graphite/60 p-6 shadow-lift sm:p-8">
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
                 <div className="flex min-w-0 items-center gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-offwhite/8">
