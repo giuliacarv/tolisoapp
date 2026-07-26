@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { PRODUCTS, type Product } from "@/data/products";
 
@@ -7,7 +7,15 @@ import { Container } from "./primitives";
 import { ProductGrid } from "./product-grid";
 import { ProductDetailsModal } from "./product-details-dialog";
 import { RedeemProductModal } from "./redeem-dialog";
+import {
+  PAGE_SIZE,
+  Pagination,
+  SortSelect,
+  sortProducts,
+  type SortId,
+} from "./results-controls";
 import { SearchBar } from "./search-bar";
+
 
 /** Filtros rápidos — os ids espelham as categorias demonstrativas. */
 const QUICK_FILTERS = [
@@ -28,12 +36,14 @@ export function SearchAndCategories() {
   const [selected, setSelected] = useState<Product | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [sort, setSort] = useState<SortId>("recommended");
+  const [page, setPage] = useState(1);
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
     const categoryLabel = CATEGORY_LABEL_BY_ID.get(activeFilter);
 
-    return PRODUCTS.filter((product) => {
+    const filtered = PRODUCTS.filter((product) => {
       const matchesFilter = activeFilter === "all" || product.category === categoryLabel;
       const matchesSearch =
         term === "" ||
@@ -42,7 +52,27 @@ export function SearchAndCategories() {
         product.category.toLowerCase().includes(term);
       return matchesFilter && matchesSearch;
     });
-  }, [query, activeFilter]);
+
+    return sortProducts(filtered, sort);
+  }, [query, activeFilter, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageProducts = filteredProducts.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE,
+  );
+
+  /** Qualquer mudança de filtro/busca/ordenação reinicia a paginação. */
+  useEffect(() => {
+    setPage(1);
+  }, [query, activeFilter, sort]);
+
+  function handlePageChange(next: number) {
+    setPage(Math.min(Math.max(1, next), totalPages));
+    document.getElementById("ofertas-filtradas")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
 
   function handleCategorySelect(id: string) {
     setActiveFilter((prev) => (prev === id ? "all" : id));
@@ -100,11 +130,13 @@ export function SearchAndCategories() {
                 ? "Todas as ofertas"
                 : "Resultados da busca"}
             </h3>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <p aria-live="polite" className="text-sm text-muted-foreground">
                 {filteredProducts.length}{" "}
                 {filteredProducts.length === 1 ? "oferta encontrada" : "ofertas encontradas"}
+                {totalPages > 1 ? ` — página ${safePage} de ${totalPages}` : ""}
               </p>
+              <SortSelect value={sort} onValueChange={setSort} />
               {(activeFilter !== "all" || query.trim() !== "") && (
                 <button
                   type="button"
@@ -121,9 +153,12 @@ export function SearchAndCategories() {
           </div>
 
           <div className="mt-6">
-            <ProductGrid products={filteredProducts} onRedeem={handleRedeem}
-            onSelect={handleSelect} />
+            <ProductGrid products={pageProducts} onRedeem={handleRedeem} onSelect={handleSelect} />
           </div>
+
+          <Pagination page={safePage} totalPages={totalPages} onPageChange={handlePageChange} />
+
+
 
 
           <p className="mt-6 text-center text-xs text-muted-foreground">
