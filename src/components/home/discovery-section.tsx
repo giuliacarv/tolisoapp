@@ -182,7 +182,7 @@ export function SearchAndCategories() {
               strokeWidth={1.75}
               aria-hidden
             />
-            Produtos e valores meramente ilustrativos nesta versão inicial.
+            Produtos, preços e descontos demonstrativos nesta versão inicial.
           </p>
         </Container>
 
