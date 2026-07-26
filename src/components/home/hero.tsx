@@ -1,5 +1,6 @@
 import { ArrowRight, BadgeCheck, ShieldCheck, Sparkles, Store, TicketCheck } from "lucide-react";
 
+import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
 import { Container, buttonOutline, buttonSolid, cardBase } from "./primitives";
@@ -140,7 +141,11 @@ export function HeroSection() {
             </p>
 
             <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <a href="#ofertas" className={cn(buttonSolid, "group py-3.5")}>
+              <a
+                href="#ofertas"
+                onClick={(event) => handleAnchorClick(event, "#ofertas")}
+                className={cn(buttonSolid, "group py-3.5")}
+              >
                 Explorar ofertas
                 <ArrowRight
                   className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -148,7 +153,11 @@ export function HeroSection() {
                   aria-hidden
                 />
               </a>
-              <a href="#cupons" className={cn(buttonOutline, "py-3.5")}>
+              <a
+                href="#cupons"
+                onClick={(event) => handleAnchorClick(event, "#cupons")}
+                className={cn(buttonOutline, "py-3.5")}
+              >
                 Ver cupons
               </a>
             </div>

@@ -1,9 +1,13 @@
 import { Instagram, Linkedin, Mail, Sparkles, Youtube } from "lucide-react";
 
+import { toast } from "sonner";
+
+import { handleAnchorClick } from "@/lib/smooth-scroll";
+
 import { Container } from "./primitives";
 
 /** Links são placeholders até que as páginas institucionais existam. */
-const COLUMNS = [
+const COLUMNS: { title: string; links: { label: string; href: string | null }[] }[] = [
   {
     title: "Navegar",
     links: [
@@ -16,17 +20,17 @@ const COLUMNS = [
   {
     title: "Suporte",
     links: [
-      { label: "Central de ajuda", href: "#" },
-      { label: "Contato", href: "#" },
+      { label: "Central de ajuda", href: null },
+      { label: "Contato", href: null },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Termos de uso", href: "#" },
-      { label: "Política de privacidade", href: "#" },
-      { label: "Política de cookies", href: "#" },
-      { label: "Divulgação de afiliados", href: "#" },
+      { label: "Termos de uso", href: null },
+      { label: "Política de privacidade", href: null },
+      { label: "Política de cookies", href: null },
+      { label: "Divulgação de afiliados", href: null },
     ],
   },
 ];
@@ -37,6 +41,11 @@ const SOCIALS = [
   { icon: Linkedin, label: "LinkedIn" },
   { icon: Mail, label: "E-mail" },
 ];
+
+const SOON_MESSAGE = "Esta página será publicada em uma próxima etapa.";
+
+const linkClass =
+  "inline-flex min-h-9 items-center rounded-md text-left text-sm text-muted-foreground transition-colors duration-200 hover:text-gold";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -61,14 +70,15 @@ export function Footer() {
 
             <div className="flex flex-wrap items-center gap-2">
               {SOCIALS.map(({ icon: Icon, label }) => (
-                <a
+                <button
                   key={label}
-                  href="#"
+                  type="button"
+                  onClick={() => toast(SOON_MESSAGE)}
                   aria-label={`${label} (em breve)`}
                   className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors duration-200 hover:border-gold/50 hover:text-gold"
                 >
                   <Icon className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-                </a>
+                </button>
               ))}
             </div>
           </div>
@@ -82,12 +92,19 @@ export function Footer() {
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      <a
-                        href={link.href}
-                        className="inline-flex min-h-9 items-center rounded-md text-sm text-muted-foreground transition-colors duration-200 hover:text-gold"
-                      >
-                        {link.label}
-                      </a>
+                      {link.href ? (
+                        <a
+                          href={link.href}
+                          onClick={(event) => handleAnchorClick(event, link.href as string)}
+                          className={linkClass}
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <button type="button" onClick={() => toast(SOON_MESSAGE)} className={linkClass}>
+                          {link.label}
+                        </button>
+                      )}
                     </li>
                   ))}
                 </ul>

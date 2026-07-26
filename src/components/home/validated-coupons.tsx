@@ -5,6 +5,8 @@ import { COUPONS, type Coupon } from "@/data/coupons";
 
 import { CouponCard, CouponCardSkeleton, CouponDisclaimer } from "./coupon-card";
 import { RedeemCouponModal } from "./coupon-redeem-dialog";
+import { handleAnchorClick } from "@/lib/smooth-scroll";
+
 import { Container, SectionHeading } from "./primitives";
 
 /**
@@ -40,6 +42,7 @@ export function CouponSection() {
           />
           <a
             href="#cupons"
+            onClick={(event) => handleAnchorClick(event, "#cupons")}
             className="inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
           >
             Ver todos os cupons
