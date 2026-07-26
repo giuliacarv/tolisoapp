@@ -5,6 +5,7 @@ import { PRODUCTS } from "@/data/products";
 import { DEFAULT_PAGE_SIZE } from "@/domain/products/pagination";
 import { ALL_FILTER_ID, useProductDiscovery } from "@/hooks/use-product-discovery";
 import { useProductModals } from "@/hooks/use-product-modals";
+import { scrollToId } from "@/lib/smooth-scroll";
 
 import { CATEGORIES, CategoryGrid } from "./category-grid";
 import { DiscoveryPanel } from "./discovery/discovery-panel";
@@ -41,9 +42,7 @@ export function SearchAndCategories() {
   const modals = useProductModals();
 
   function scrollToOffers() {
-    document
-      .getElementById("ofertas")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    scrollToId("#ofertas");
   }
 
   function handlePageChange(next: number) {
