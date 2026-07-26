@@ -139,71 +139,88 @@ export function HeroSection() {
 
       <Container className="relative section-y">
         <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-16">
-          <Reveal className="flex min-w-0 flex-col items-start gap-6 sm:gap-8">
+          <div className="flex min-w-0 flex-col items-start gap-6 sm:gap-8">
+            <Reveal>
+              <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card/70 px-3.5 py-1.5 text-xs font-medium text-foreground shadow-hairline backdrop-blur-sm">
+                <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
+                <span className="min-w-0">Você começa com 5 créditos grátis.</span>
+              </span>
+            </Reveal>
 
-            <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card px-3.5 py-1.5 text-xs font-medium text-foreground">
-              <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
-              <span className="min-w-0">Você começa com 5 créditos grátis.</span>
-            </span>
+            <Reveal delay={80}>
+              <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.04] tracking-[-0.03em] text-foreground">
+                Ofertas selecionadas para você economizar de verdade.
+              </h1>
+            </Reveal>
 
-            <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.08] tracking-tight text-foreground">
-              Ofertas selecionadas para você economizar de verdade.
-            </h1>
+            <Reveal delay={160}>
+              <p className="max-w-[52ch] text-pretty text-fluid-base leading-[1.75] text-muted-foreground">
+                Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
+                maiores lojas do Brasil.
+              </p>
+            </Reveal>
 
-            <p className="max-w-[58ch] text-pretty text-fluid-base leading-relaxed text-muted-foreground">
-              Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
-              maiores lojas do Brasil.
-            </p>
+            <Reveal delay={240} className="w-full sm:w-auto">
+              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <a
+                  href="#ofertas"
+                  onClick={(event) => handleAnchorClick(event, "#ofertas")}
+                  className={cn(buttonSolid, "group py-3.5")}
+                >
+                  Explorar ofertas
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                </a>
+                <a
+                  href="#cupons"
+                  onClick={(event) => handleAnchorClick(event, "#cupons")}
+                  className={cn(buttonOutline, "py-3.5")}
+                >
+                  Ver cupons
+                </a>
+              </div>
+            </Reveal>
 
-            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-              <a
-                href="#ofertas"
-                onClick={(event) => handleAnchorClick(event, "#ofertas")}
-                className={cn(buttonSolid, "group py-3.5")}
-              >
-                Explorar ofertas
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                  strokeWidth={2}
-                  aria-hidden
-                />
-              </a>
-              <a
-                href="#cupons"
-                onClick={(event) => handleAnchorClick(event, "#cupons")}
-                className={cn(buttonOutline, "py-3.5")}
-              >
-                Ver cupons
-              </a>
-            </div>
-
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6 text-fluid-xs text-muted-foreground">
-              {TRUST_SIGNALS.map(({ label, icon: Icon }) => (
-                <li key={label} className="inline-flex items-center gap-2">
-                  <Icon className="h-3.5 w-3.5 shrink-0 text-saving" strokeWidth={2} aria-hidden />
-                  {label}
-                </li>
-              ))}
-            </ul>
+            <Reveal delay={320} className="w-full">
+              <div className="w-full">
+                <div className="rule-fade w-full" aria-hidden />
+                <ul className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-fluid-xs text-muted-foreground">
+                  {TRUST_SIGNALS.map(({ label, icon: Icon }) => (
+                    <li key={label} className="inline-flex items-center gap-2">
+                      <Icon
+                        className="h-3.5 w-3.5 shrink-0 text-saving"
+                        strokeWidth={2}
+                        aria-hidden
+                      />
+                      {label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </div>
 
           <div className="relative mx-auto w-full min-w-0 max-w-[28.75rem] lg:max-w-none">
             <div className="relative flex min-w-0 flex-col gap-4 sm:gap-0">
-              <HeroOfferCard
-                offer={HERO_OFFERS[0]}
-                priority
-                className="sm:w-[92%] sm:rotate-[-1.2deg]"
-              />
-              <HeroOfferCard
-                offer={HERO_OFFERS[1]}
-                className="sm:-mt-3 sm:ml-auto sm:w-[94%] sm:rotate-[0.8deg]"
-              />
-              <HeroOfferCard
-                offer={HERO_OFFERS[2]}
-                className="sm:-mt-3 sm:w-[90%] sm:rotate-[-0.6deg]"
-              />
+              <Reveal delay={120}>
+                <HeroOfferCard
+                  offer={HERO_OFFERS[0]}
+                  priority
+                  className="sm:w-[92%] sm:rotate-[-1.2deg]"
+                />
+              </Reveal>
+              <Reveal delay={220} className="sm:-mt-3 sm:ml-auto sm:w-[94%]">
+                <HeroOfferCard offer={HERO_OFFERS[1]} className="sm:rotate-[0.8deg]" />
+              </Reveal>
+              <Reveal delay={320} className="sm:-mt-3 sm:w-[90%]">
+                <HeroOfferCard offer={HERO_OFFERS[2]} className="sm:rotate-[-0.6deg]" />
+              </Reveal>
             </div>
           </div>
+
         </div>
       </Container>
     </section>
