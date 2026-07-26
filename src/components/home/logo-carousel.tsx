@@ -24,14 +24,14 @@ function LogoSlide({ logo, ariaHidden }: { logo: PartnerLogo; ariaHidden?: boole
       width={240}
       height={64}
       draggable={false}
-      className="h-8 w-auto max-w-full object-contain opacity-70 grayscale transition-[filter,opacity] duration-200 group-hover/slide:opacity-100 group-hover/slide:grayscale-0 group-focus-visible/slide:opacity-100 group-focus-visible/slide:grayscale-0 sm:h-9"
+      className="h-7 w-auto max-w-full object-contain opacity-70 grayscale transition-[filter,opacity] duration-200 group-hover/slide:opacity-100 group-hover/slide:grayscale-0 group-focus-visible/slide:opacity-100 group-focus-visible/slide:grayscale-0 sm:h-9"
     />
   );
 
   return (
     <li
       aria-hidden={ariaHidden || undefined}
-      className="flex w-[28%] shrink-0 items-center justify-center px-3 sm:w-[18%] sm:px-5 lg:w-[12.5%]"
+      className="flex w-[92px] shrink-0 items-center justify-center px-2 sm:w-[148px] sm:px-5 lg:w-[158px]"
     >
       {logo.link && !ariaHidden ? (
         <a
