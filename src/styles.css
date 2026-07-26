@@ -500,3 +500,90 @@
     transform: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Camada "Awwwards": ambiência, texturas finas e feedback de navegação.
+ * Nada aqui introduz cor nova — apenas profundidade sobre os tokens da marca.
+ * ------------------------------------------------------------------------ */
+:root {
+  /* Brilho dourado usado como realce de foco/hover em superfícies escuras. */
+  --shadow-gold: 0 0 0 1px color-mix(in oklab, var(--gold) 32%, transparent),
+    0 18px 44px -22px color-mix(in oklab, var(--gold) 55%, transparent);
+
+  /* Ambiência do topo: dois focos de luz assimétricos (nunca centralizados). */
+  --ambient-warm: radial-gradient(
+    42rem 26rem at 78% -8%,
+    color-mix(in oklab, var(--gold) 26%, transparent),
+    transparent 68%
+  );
+  --ambient-cool: radial-gradient(
+    36rem 24rem at 6% 18%,
+    color-mix(in oklab, var(--foreground) 7%, transparent),
+    transparent 70%
+  );
+
+  /* Grão fotográfico de 1 tile — quebra o "plástico" dos fundos chapados. */
+  --texture-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/** Luz ambiente do topo da página (aplicar em camada decorativa absoluta). */
+@utility ambient-light {
+  background-image: var(--ambient-warm), var(--ambient-cool);
+}
+
+/** Grão finíssimo: textura sem custo de imagem, invisível ao olho destreinado. */
+@utility texture-grain {
+  background-image: var(--texture-grain);
+  background-repeat: repeat;
+  opacity: 0.035;
+  mix-blend-mode: multiply;
+}
+
+/** Filete horizontal que nasce e morre em transparente. */
+@utility rule-fade {
+  block-size: 1px;
+  border: 0;
+  background-image: linear-gradient(to right, transparent, var(--color-border), transparent);
+}
+
+/** Filete dourado — usado sob o header quando a página é rolada. */
+@utility rule-gold {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in oklab, var(--gold) 60%, transparent),
+    transparent
+  );
+}
+
+/**
+ * Sublinhado de navegação: cresce da esquerda no hover/foco e recolhe
+ * pela direita na saída — movimento direcional, não um "liga/desliga".
+ */
+@utility nav-underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0.5rem;
+    height: 1px;
+    background-image: var(--gradient-gold);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s var(--ease-premium);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-underline::after {
+    transition: none;
+  }
+}

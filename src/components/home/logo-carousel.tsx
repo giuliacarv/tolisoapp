@@ -82,13 +82,13 @@ export function LogoCarousel({ logos = PARTNER_LOGOS, speed = 50, className }: L
   return (
     <section
       aria-labelledby="parceiros-title"
-      className={cn("my-8 sm:my-12 lg:my-16", className)}
+      className={cn("section-band py-10 sm:py-14", className)}
     >
       <Container>
         <div className="flex flex-col items-center gap-6">
           <h2
             id="parceiros-title"
-            className="text-fluid-micro font-semibold uppercase tracking-[0.22em] text-muted-foreground"
+            className="text-fluid-micro font-semibold uppercase tracking-[0.28em] text-muted-foreground"
           >
             Lojas e marketplaces reconhecidos
           </h2>
