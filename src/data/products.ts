@@ -11,8 +11,11 @@ import espressoImg from "@/assets/hero-product-espresso.jpg";
 import headphonesImg from "@/assets/hero-product-headphones.jpg";
 import keyboardImg from "@/assets/product-keyboard.jpg";
 import lampImg from "@/assets/product-lamp.jpg";
+import mouseImg from "@/assets/product-mouse.jpg";
+import serumImg from "@/assets/product-serum.jpg";
 import skincareImg from "@/assets/product-skincare.jpg";
 import smartwatchImg from "@/assets/hero-product-smartwatch.jpg";
+import walletImg from "@/assets/product-wallet.jpg";
 
 export interface Product {
   id: string;
@@ -189,7 +192,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     slug: "sérum-facial-acido-hialuronico",
     name: "Sérum facial com ácido hialurônico 30ml",
     description: "Hidratação profunda com textura leve e absorção rápida.",
-    image: skincareImg,
+    image: serumImg,
     category: "Beleza e cuidados",
     store: "Mercado Livre",
     originalPrice: 79.9,
@@ -204,7 +207,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     slug: "mouse-sem-fio-ergonomico",
     name: "Mouse sem fio ergonômico silencioso",
     description: "Sensor de 4000 DPI e bateria recarregável via USB-C.",
-    image: keyboardImg,
+    image: mouseImg,
     category: "Informática",
     store: "Shopee",
     originalPrice: 89.9,
@@ -219,7 +222,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     slug: "carteira-slim-rfid",
     name: "Carteira slim com bloqueio RFID",
     description: "Couro sintético premium com compartimento para 8 cartões.",
-    image: bagImg,
+    image: walletImg,
     category: "Acessórios",
     store: "Magalu",
     originalPrice: 89.0,
