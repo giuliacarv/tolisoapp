@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import { ProductCard, ProductCardSkeleton } from "./product-card";
+import { Reveal } from "./reveal";
 import type { Product } from "@/data/products";
 
 export interface ProductGridProps {
@@ -55,10 +56,17 @@ export function ProductGrid({
 
   return (
     <ul className="grid-fluid [--col-min:15rem]">
-      {products.map((product) => (
-        <li key={product.id} className="min-w-0">
+      {products.map((product, index) => (
+        // Cascata limitada aos 8 primeiros itens: acima disso a espera
+        // acumulada passaria a parecer lentidão, não elegância.
+        <Reveal
+          as="li"
+          key={product.id}
+          delay={Math.min(index, 7) * 60}
+          className="min-w-0"
+        >
           <ProductCard product={product} onRedeem={onRedeem} onSelect={onSelect} />
-        </li>
+        </Reveal>
       ))}
     </ul>
   );

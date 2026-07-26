@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { Reveal } from "@/components/home/reveal";
 import { CreditsSection } from "@/components/home/credits-system";
 import { HeroSection } from "@/components/home/hero";
 import { LogoCarousel } from "@/components/home/logo-carousel";
@@ -33,12 +34,23 @@ function Index() {
       <main>
         <HeroSection />
         <LogoCarousel />
-        <SearchAndCategories />
 
-        <CouponSection />
-        <HowItWorks />
-        <CreditsSection />
-        <TrustSection />
+        {/* Cada seção entra com um leve deslocamento ao alcançar a viewport. */}
+        <Reveal>
+          <SearchAndCategories />
+        </Reveal>
+        <Reveal>
+          <CouponSection />
+        </Reveal>
+        <Reveal>
+          <HowItWorks />
+        </Reveal>
+        <Reveal>
+          <CreditsSection />
+        </Reveal>
+        <Reveal>
+          <TrustSection />
+        </Reveal>
       </main>
       <Footer />
     </div>
