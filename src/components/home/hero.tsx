@@ -77,14 +77,12 @@ function HeroOfferCard({
     // e um `transform` de hover sobrescreveria a inclinação da composição.
     <article
       className={cn(
-        cardBase,
-        "motion-safe-transform w-full min-w-0 p-4 glass-surface edge-highlight",
-        "hover:border-gold/40 hover:shadow-float",
+        "motion-safe-transform w-full min-w-0 rounded-2xl p-4 noir-card",
         className,
       )}
     >
       <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-        <div className="grid h-16 w-16 shrink-0 sm:h-20 sm:w-20 place-items-center overflow-hidden rounded-2xl bg-secondary">
+        <div className="grid h-16 w-16 shrink-0 sm:h-20 sm:w-20 place-items-center overflow-hidden rounded-2xl bg-offwhite/10">
           <img
             src={offer.image}
             alt={`Foto ilustrativa: ${offer.name}`}
@@ -99,25 +97,25 @@ function HeroOfferCard({
 
         <div className="min-w-0 flex-1">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-            <span className="truncate text-fluid-micro font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+            <span className="truncate text-fluid-micro font-semibold uppercase tracking-[0.18em] text-offwhite/55">
               {offer.store}
             </span>
-            <span className="shrink-0 rounded-md bg-discount/12 px-1.5 py-0.5 text-fluid-micro font-semibold text-discount">
+            <span className="shrink-0 rounded-md bg-gold/15 px-1.5 py-0.5 text-fluid-micro font-semibold text-gold">
               {offer.discount}
             </span>
           </div>
 
-          <p className="mt-1 truncate text-sm font-semibold text-foreground">{offer.name}</p>
+          <p className="mt-1 truncate text-sm font-semibold text-offwhite">{offer.name}</p>
 
           <div className="mt-1.5 flex flex-wrap items-baseline gap-2">
-            <span className="font-serif text-lg text-foreground">{offer.price}</span>
-            <span className="text-xs text-muted-foreground line-through">{offer.oldPrice}</span>
+            <span className="font-serif text-lg text-offwhite">{offer.price}</span>
+            <span className="text-xs text-offwhite/45 line-through">{offer.oldPrice}</span>
           </div>
         </div>
       </div>
 
-      <div className="mt-3 border-t border-border pt-3">
-        <span className="inline-flex items-center gap-1.5 text-fluid-micro font-medium text-muted-foreground">
+      <div className="mt-3 border-t border-offwhite/10 pt-3">
+        <span className="inline-flex items-center gap-1.5 text-fluid-micro font-medium text-offwhite/60">
           <Sparkles className="h-3 w-3 shrink-0 text-gold" strokeWidth={2} aria-hidden />
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"} para desbloquear
         </span>
@@ -125,6 +123,7 @@ function HeroOfferCard({
     </article>
   );
 }
+
 
 export function HeroSection() {
   return (
