@@ -134,12 +134,12 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
                 : `Resgatar desconto de ${product.name}`
             }
             className={cn(
-              buttonOutline,
-              "relative z-10 w-full bg-background",
+              "touch-target relative z-10 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-[transform,box-shadow,background-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               isDisabled
-                ? "cursor-not-allowed opacity-60 hover:border-border hover:bg-background hover:text-foreground"
-                : "hover:border-ink hover:bg-ink hover:text-offwhite",
+                ? "cursor-not-allowed border border-border bg-secondary text-muted-foreground opacity-70"
+                : "bg-[image:var(--gradient-ink)] text-offwhite shadow-soft hover:-translate-y-0.5 hover:shadow-lift",
             )}
+
           >
             {isDisabled ? formatUnavailableLabel(unavailableReason) : "Resgatar Desconto"}
           </button>
