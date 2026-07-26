@@ -36,12 +36,14 @@ export function SearchAndCategories() {
   const [selected, setSelected] = useState<Product | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
   const [detailsOpen, setDetailsOpen] = useState(false);
+  const [sort, setSort] = useState<SortId>("recommended");
+  const [page, setPage] = useState(1);
 
   const filteredProducts = useMemo(() => {
     const term = query.trim().toLowerCase();
     const categoryLabel = CATEGORY_LABEL_BY_ID.get(activeFilter);
 
-    return PRODUCTS.filter((product) => {
+    const filtered = PRODUCTS.filter((product) => {
       const matchesFilter = activeFilter === "all" || product.category === categoryLabel;
       const matchesSearch =
         term === "" ||
@@ -50,7 +52,27 @@ export function SearchAndCategories() {
         product.category.toLowerCase().includes(term);
       return matchesFilter && matchesSearch;
     });
-  }, [query, activeFilter]);
+
+    return sortProducts(filtered, sort);
+  }, [query, activeFilter, sort]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageProducts = filteredProducts.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE,
+  );
+
+  /** Qualquer mudança de filtro/busca/ordenação reinicia a paginação. */
+  useEffect(() => {
+    setPage(1);
+  }, [query, activeFilter, sort]);
+
+  function handlePageChange(next: number) {
+    setPage(Math.min(Math.max(1, next), totalPages));
+    document.getElementById("ofertas-filtradas")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
 
   function handleCategorySelect(id: string) {
     setActiveFilter((prev) => (prev === id ? "all" : id));
