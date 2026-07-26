@@ -37,7 +37,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
         "motion-safe-transform group relative flex h-full flex-col overflow-hidden",
         isDisabled
           ? "opacity-60 saturate-50"
-          : "hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-lift",
+          : "interactive-lift hover:border-gold/40",
         className,
       )}
     >
@@ -51,8 +51,8 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
           width={800}
           height={600}
           className={cn(
-            "h-full w-full object-cover object-center transition-transform duration-200",
-            isDisabled ? "grayscale" : "group-hover:scale-[1.03]",
+            "h-full w-full object-cover object-center transition-transform duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+            isDisabled ? "grayscale" : "group-hover:scale-[1.04]",
           )}
         />
 
