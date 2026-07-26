@@ -12,7 +12,7 @@ import {
 } from "@/data/coupons";
 import { cn } from "@/lib/utils";
 
-import { buttonOutline, cardBase, cardInteractive } from "./primitives";
+import { buttonOutline } from "./primitives";
 
 export interface CouponCardProps {
   coupon: Coupon;
