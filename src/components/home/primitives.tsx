@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 /** Container central com largura máxima de ~1.280px. */
 export function Container({ className, ...props }: ComponentProps<"div">) {
-  return <div className={cn("mx-auto w-full max-w-[1280px] px-5 sm:px-8", className)} {...props} />;
+  return <div className={cn("mx-auto w-full max-w-[1280px] px-4 sm:px-6 lg:px-8", className)} {...props} />;
 }
 
 interface SectionHeadingProps {

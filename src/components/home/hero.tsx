@@ -70,9 +70,9 @@ function HeroOfferCard({
   priority?: boolean;
 }) {
   return (
-    <article className={cn(cardBase, "motion-safe-transform w-full p-4", className)}>
-      <div className="flex items-center gap-4">
-        <div className="grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-2xl bg-secondary">
+    <article className={cn(cardBase, "motion-safe-transform w-full min-w-0 p-4", className)}>
+      <div className="flex min-w-0 items-center gap-3 sm:gap-4">
+        <div className="grid h-16 w-16 shrink-0 sm:h-20 sm:w-20 place-items-center overflow-hidden rounded-2xl bg-secondary">
           <img
             src={offer.image}
             alt={`Foto ilustrativa: ${offer.name}`}
@@ -123,7 +123,7 @@ export function HeroSection() {
       />
 
       <Container className="relative py-14 sm:py-20 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
+        <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
           <div className="flex min-w-0 flex-col items-start gap-7">
             <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/40 bg-card px-3.5 py-1.5 text-xs font-medium text-foreground">
               <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
@@ -163,8 +163,8 @@ export function HeroSection() {
             </ul>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[460px] lg:max-w-none">
-            <div className="relative flex flex-col gap-4 sm:gap-0">
+          <div className="relative mx-auto w-full min-w-0 max-w-[460px] lg:max-w-none">
+            <div className="relative flex min-w-0 flex-col gap-4 sm:gap-0">
               <HeroOfferCard
                 offer={HERO_OFFERS[0]}
                 priority
