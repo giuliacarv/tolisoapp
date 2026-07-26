@@ -44,10 +44,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-200",
+        "sticky inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow] duration-300",
         scrolled
-          ? "border-b border-border/70 bg-background/90 backdrop-blur-xl"
-          : "border-b border-transparent",
+          ? "border-b border-border/60 bg-background/75 shadow-[0_1px_2px_rgba(11,11,12,0.06)] backdrop-blur-md backdrop-saturate-150"
+          : "border-b border-transparent bg-transparent",
       )}
     >
       <Container className="flex h-[var(--header-h)] items-center justify-between gap-2 sm:gap-4">
@@ -60,7 +60,7 @@ export function Header() {
             <Sparkles className="h-4 w-4 text-gold" strokeWidth={1.75} aria-hidden />
           </span>
           <span className="truncate text-fluid-lg font-extrabold tracking-[-0.02em] text-foreground">
-            DESCONT<span className="text-gold">AI</span>
+            DESCONTAI<span className="text-gold">.</span>
           </span>
         </a>
 
