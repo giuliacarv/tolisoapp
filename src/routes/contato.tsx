@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LifeBuoy, Send, ShieldAlert } from "lucide-react";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import { Container, SectionHeading, buttonOutline, buttonSolid } from "@/components/home/primitives";

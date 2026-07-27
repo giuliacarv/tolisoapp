@@ -9,6 +9,7 @@ import {
   formatCreditCount,
 } from "@/config/business-rules";
 import { COUPON_REDEMPTION_COST } from "@/domain/coupons/coupon-rules";
+import { useComingSoon } from "@/hooks/use-coming-soon";
 
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 
