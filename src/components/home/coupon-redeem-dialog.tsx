@@ -17,6 +17,8 @@ export interface RedeemCouponModalProps {
   coupon: Coupon | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /** Mensagem exibida após a confirmação (nenhum crédito é debitado). */
+  confirmationMessage?: string;
 }
 
 /** Rótulos legíveis dos estados exibidos no card e no modal. */
@@ -58,14 +60,19 @@ function DetailRow({
  * Nesta etapa NÃO debita créditos, NÃO revela o código completo e NÃO
  * redireciona para a loja parceira — apenas antecipa o fluxo final.
  */
-export function RedeemCouponModal({ coupon, open, onOpenChange }: RedeemCouponModalProps) {
+export function RedeemCouponModal({
+  coupon,
+  open,
+  onOpenChange,
+  confirmationMessage = "Faça login para concluir o resgate. A autenticação será adicionada na próxima etapa.",
+}: RedeemCouponModalProps) {
   const status = coupon ? getCouponStatus(coupon) : "pending";
   const remaining = getRemainingBalance(DEMO_CREDIT_BALANCE, COUPON_REDEMPTION_COST);
 
   function handleContinue() {
     // Fecha primeiro para que o Radix devolva o foco ao botão de origem.
     onOpenChange(false);
-    toast("Faça login para concluir o resgate. A autenticação será adicionada na próxima etapa.");
+    toast(confirmationMessage);
   }
 
   return (
