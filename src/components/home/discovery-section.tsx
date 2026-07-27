@@ -8,14 +8,17 @@ import { useProductModals } from "@/hooks/use-product-modals";
 import { scrollToId } from "@/lib/smooth-scroll";
 import { categoryService, productService } from "@/services";
 
+import { AutoCarousel } from "./auto-carousel";
 import { CategoryGrid } from "./category-grid";
 import { DiscoveryPanel } from "./discovery/discovery-panel";
 import { ResultsHeader } from "./discovery/results-header";
 import { EmptyResults } from "./empty-results";
 import { Container, SectionHeading, chipIdle } from "./primitives";
+import { ProductCard } from "./product-card";
 import { ProductGrid } from "./product-grid";
 import { ProductModals } from "./product-modals";
 import { Pagination } from "./results-controls";
+
 
 /** Sugestões demonstrativas exibidas no estado vazio. */
 const SEARCH_SUGGESTIONS = ["Fone", "Smartwatch", "Skincare", "Teclado"];
