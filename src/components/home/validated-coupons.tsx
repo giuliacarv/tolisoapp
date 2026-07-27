@@ -78,7 +78,7 @@ export function CouponSection() {
               items={coupons.data ?? []}
               getKey={(coupon) => coupon.id}
               ariaLabel="Carrossel de cupons validados"
-              speed={40}
+              intervalMs={4200}
               renderItem={(coupon) => (
                 <div className="w-full">
                   <CouponCard coupon={coupon} onRedeem={handleRedeem} />
