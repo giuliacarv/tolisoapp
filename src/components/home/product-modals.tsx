@@ -6,13 +6,15 @@ import { RedeemProductModal } from "./redeem-dialog";
 
 export interface ProductModalsProps {
   modals: ProductModalsState;
+  /** Repassada ao modal de resgate (ver `RedeemProductModal`). */
+  confirmationMessage?: string;
 }
 
 /**
  * Par de modais de produto (detalhes + confirmação de resgate).
  * Encapsula a ligação entre eles para que cada seção monte apenas um componente.
  */
-export function ProductModals({ modals }: ProductModalsProps) {
+export function ProductModals({ modals, confirmationMessage }: ProductModalsProps) {
   const { selected, detailsOpen, redeemOpen, setDetailsOpen, setRedeemOpen, openRedeem } = modals;
 
   function handleRedeemFromDetails(product: Product) {
@@ -27,7 +29,12 @@ export function ProductModals({ modals }: ProductModalsProps) {
         onOpenChange={setDetailsOpen}
         onRedeem={handleRedeemFromDetails}
       />
-      <RedeemProductModal product={selected} open={redeemOpen} onOpenChange={setRedeemOpen} />
+      <RedeemProductModal
+        product={selected}
+        open={redeemOpen}
+        onOpenChange={setRedeemOpen}
+        confirmationMessage={confirmationMessage}
+      />
     </>
   );
 }

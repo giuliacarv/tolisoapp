@@ -11,6 +11,11 @@ export interface RedeemProductModalProps {
   product: Product | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  /**
+   * Mensagem exibida após a confirmação. Permite que a página de detalhe
+   * comunique o estágio da integração sem duplicar o modal.
+   */
+  confirmationMessage?: string;
 }
 
 
@@ -20,13 +25,18 @@ export interface RedeemProductModalProps {
  * Confirmação de resgate de produto.
  * Nesta etapa NÃO desconta créditos e NÃO redireciona — apenas antecipa o fluxo.
  */
-export function RedeemProductModal({ product, open, onOpenChange }: RedeemProductModalProps) {
+export function RedeemProductModal({
+  product,
+  open,
+  onOpenChange,
+  confirmationMessage = "Faça login para resgatar esta oferta. A autenticação será adicionada na próxima etapa.",
+}: RedeemProductModalProps) {
   const credits = product?.creditsRequired ?? 1;
   const savings = product ? calculateSavings(product.originalPrice, product.currentPrice) : 0;
 
   function handleContinue() {
     onOpenChange(false);
-    toast("Faça login para resgatar esta oferta. A autenticação será adicionada na próxima etapa.");
+    toast(confirmationMessage);
   }
 
   return (

@@ -29,7 +29,41 @@ import {
 import type { Product } from "@/types";
 
 /** Campos derivados ficam de fora da semente. */
-type ProductSeed = Omit<Product, "creditsRequired" | "discountPercentage">;
+type ProductSeed = Omit<
+  Product,
+  "creditsRequired" | "discountPercentage" | "highlights" | "terms" | "updatedAt"
+>;
+
+/**
+ * Características demonstrativas por produto. Mantidas fora das sementes para
+ * não poluir a lista principal e para deixar explícito que são conteúdo
+ * editorial (não vêm de nenhuma loja real nesta fase).
+ */
+const PRODUCT_HIGHLIGHTS: Record<string, string[]> = {
+  prd_001: ["Cancelamento ativo de ruído", "Até 30h de bateria com o estojo", "Bluetooth 5.3 multiponto", "Modo transparência"],
+  prd_002: ["Tela AMOLED de 46mm", "Resistência à água IP68", "GPS integrado", "Mais de 100 modos esportivos"],
+  prd_003: ["Pressão de 15 bar", "Vaporizador de leite", "Reservatório removível de 1,2L", "Corpo compacto para bancada"],
+  prd_004: ["Layout compacto 75%", "Switches hot-swap", "Estrutura de alumínio", "Conexão sem fio e por cabo"],
+  prd_005: ["Kit com 4 itens", "Fórmula com vitamina C", "Indicado para rotina diária", "Embalagens de 30ml a 60ml"],
+  prd_006: ["Couro legítimo", "Alça ajustável", "Forro interno com bolso", "Acabamento artesanal"],
+  prd_007: ["Base em cerâmica esmaltada", "Cúpula de linho", "Luz quente difusa", "Soquete E27"],
+  prd_008: ["Ácido hialurônico puro", "Textura leve", "Absorção rápida", "Frasco de 30ml com conta-gotas"],
+  prd_009: ["Sensor de 4000 DPI", "Clique silencioso", "Bateria recarregável USB-C", "Design ergonômico"],
+  prd_010: ["Bloqueio RFID", "Compartimento para 8 cartões", "Couro sintético premium", "Formato slim para bolso"],
+};
+
+/** Galerias demonstrativas — apenas onde há mais de uma foto disponível. */
+const PRODUCT_GALLERIES: Record<string, string[]> = {
+  prd_005: [skincareImg, serumImg],
+  prd_008: [serumImg, skincareImg],
+  prd_004: [keyboardImg, mouseImg],
+  prd_009: [mouseImg, keyboardImg],
+};
+
+/** Condições padrão desta demonstração. */
+const DEFAULT_TERMS =
+  "Oferta demonstrativa sujeita a alteração ou encerramento pela loja parceira sem aviso prévio. " +
+  "Preço, frete, disponibilidade e formas de pagamento são definidos exclusivamente pela loja no momento da compra.";
 
 const PRODUCT_SEEDS: ProductSeed[] = [
   {
@@ -220,6 +254,11 @@ const PRODUCT_SEEDS: ProductSeed[] = [
 /** Produtos com créditos e desconto derivados das regras de domínio. */
 export const MOCK_PRODUCTS: Product[] = PRODUCT_SEEDS.map((seed) => ({
   ...seed,
+  gallery: PRODUCT_GALLERIES[seed.id] ?? seed.gallery,
+  highlights: PRODUCT_HIGHLIGHTS[seed.id] ?? [],
+  terms: DEFAULT_TERMS,
+  // Sem sistema de sincronização ainda: a publicação é a última atualização.
+  updatedAt: seed.publishedAt,
   discountPercentage: calculateDiscountPercentage(seed.originalPrice, seed.currentPrice),
   creditsRequired: calculateCreditsRequired(seed.currentPrice),
 }));
