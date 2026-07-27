@@ -63,7 +63,9 @@ export function DiscoveryPanel({
                 key={term}
                 type="button"
                 onClick={() => onQueryChange(term)}
-                className="rounded-full px-2.5 py-1.5 text-fluid-xs text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+                // Alvo de toque de 44px sem inflar o chip visualmente: a altura
+                // mínima cresce, o padding horizontal permanece compacto.
+                className="inline-flex min-h-11 items-center rounded-full px-2.5 py-1.5 text-fluid-xs text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
               >
                 {term}
               </button>
