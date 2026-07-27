@@ -95,11 +95,7 @@ export function CouponFiltersPanel({
       <div className="flex items-center justify-between gap-3">
         <h2 className="font-serif text-lg tracking-tight text-foreground">Filtros</h2>
         {isActive ? (
-          <button
-            type="button"
-            onClick={onReset}
-            className="min-h-11 rounded-lg px-2 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
-          >
+          <button type="button" onClick={onReset} className={linkQuiet}>
             Limpar filtros
           </button>
         ) : null}

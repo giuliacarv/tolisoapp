@@ -68,11 +68,7 @@ export function EmptyResults({
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={onReset}
-        className="mt-7 inline-flex min-h-11 items-center justify-center rounded-xl bg-ink px-6 text-sm font-medium text-offwhite transition-opacity duration-200 hover:opacity-90"
-      >
+      <button type="button" onClick={onReset} className={cn(buttonSolid, "mt-7")}>
         Limpar filtros
       </button>
     </div>

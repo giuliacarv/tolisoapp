@@ -9,9 +9,11 @@ import {
 } from "@/domain/coupons/coupon-rules";
 import { DEMO_CREDIT_BALANCE, getRemainingBalance } from "@/domain/credits/credit-rules";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import type { Coupon, CouponStatus } from "@/types";
 
 import { ConfirmDialog } from "./confirm-dialog";
+import { panelInset, panelInsetMuted } from "./primitives";
 
 export interface RedeemCouponModalProps {
   coupon: Coupon | null;
