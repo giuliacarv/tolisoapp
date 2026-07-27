@@ -3,9 +3,11 @@ import { toast } from "sonner";
 
 import { calculateSavings } from "@/domain/products/product-rules";
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
 import { ConfirmDialog } from "./confirm-dialog";
+import { panelInset, panelInsetMuted } from "./primitives";
 
 export interface RedeemProductModalProps {
   product: Product | null;
