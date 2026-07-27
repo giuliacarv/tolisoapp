@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { CookieBanner } from "@/components/legal/cookie-banner";
 
 function NotFoundComponent() {
   return (
@@ -136,6 +137,8 @@ function RootComponent() {
       <Outlet />
       {/* Topo: evita cobrir botões de ação (footers de modal / bottom-sheet). */}
       <Toaster position="top-center" offset="calc(var(--header-h) + 0.75rem)" />
+      {/* Banner provisório: controla apenas preferências locais, sem carregar rastreadores. */}
+      <CookieBanner />
 
     </QueryClientProvider>
   );

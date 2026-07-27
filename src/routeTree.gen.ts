@@ -9,21 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as AjudaRouteImport } from './routes/ajuda'
+import { Route as AfiliadosRouteImport } from './routes/afiliados'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
 import { Route as CuponsIndexRouteImport } from './routes/cupons.index'
 import { Route as OfertasSlugRouteImport } from './routes/ofertas.$slug'
 import { Route as CuponsSlugRouteImport } from './routes/cupons.$slug'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -32,6 +41,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
   id: '/recuperar-senha',
   path: '/recuperar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FavoritosRoute = FavoritosRouteImport.update({
@@ -54,6 +68,11 @@ const CreditosRoute = CreditosRouteImport.update({
   path: '/creditos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
@@ -67,6 +86,11 @@ const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
 const AjudaRoute = AjudaRouteImport.update({
   id: '/ajuda',
   path: '/ajuda',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AfiliadosRoute = AfiliadosRouteImport.update({
+  id: '/afiliados',
+  path: '/afiliados',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -97,15 +121,19 @@ const CuponsSlugRoute = CuponsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/afiliados': typeof AfiliadosRoute
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/contato': typeof ContatoRoute
+  '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termos': typeof TermosRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons/': typeof CuponsIndexRoute
@@ -113,15 +141,19 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/afiliados': typeof AfiliadosRoute
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/contato': typeof ContatoRoute
+  '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termos': typeof TermosRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons': typeof CuponsIndexRoute
@@ -130,15 +162,19 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/afiliados': typeof AfiliadosRoute
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/contato': typeof ContatoRoute
+  '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
+  '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termos': typeof TermosRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons/': typeof CuponsIndexRoute
@@ -148,15 +184,19 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/afiliados'
     | '/ajuda'
     | '/como-funciona'
     | '/contato'
+    | '/cookies'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
     | '/favoritos'
+    | '/privacidade'
     | '/recuperar-senha'
     | '/sitemap.xml'
+    | '/termos'
     | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons/'
@@ -164,15 +204,19 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/afiliados'
     | '/ajuda'
     | '/como-funciona'
     | '/contato'
+    | '/cookies'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
     | '/favoritos'
+    | '/privacidade'
     | '/recuperar-senha'
     | '/sitemap.xml'
+    | '/termos'
     | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons'
@@ -180,15 +224,19 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/afiliados'
     | '/ajuda'
     | '/como-funciona'
     | '/contato'
+    | '/cookies'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
     | '/favoritos'
+    | '/privacidade'
     | '/recuperar-senha'
     | '/sitemap.xml'
+    | '/termos'
     | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons/'
@@ -197,15 +245,19 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AfiliadosRoute: typeof AfiliadosRoute
   AjudaRoute: typeof AjudaRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
   ContatoRoute: typeof ContatoRoute
+  CookiesRoute: typeof CookiesRoute
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
   FavoritosRoute: typeof FavoritosRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermosRoute: typeof TermosRoute
   CuponsSlugRoute: typeof CuponsSlugRoute
   OfertasSlugRoute: typeof OfertasSlugRoute
   CuponsIndexRoute: typeof CuponsIndexRoute
@@ -214,6 +266,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -226,6 +285,13 @@ declare module '@tanstack/react-router' {
       path: '/recuperar-senha'
       fullPath: '/recuperar-senha'
       preLoaderRoute: typeof RecuperarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/favoritos': {
@@ -256,6 +322,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreditosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
@@ -275,6 +348,13 @@ declare module '@tanstack/react-router' {
       path: '/ajuda'
       fullPath: '/ajuda'
       preLoaderRoute: typeof AjudaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/afiliados': {
+      id: '/afiliados'
+      path: '/afiliados'
+      fullPath: '/afiliados'
+      preLoaderRoute: typeof AfiliadosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -317,15 +397,19 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AfiliadosRoute: AfiliadosRoute,
   AjudaRoute: AjudaRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
   ContatoRoute: ContatoRoute,
+  CookiesRoute: CookiesRoute,
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
   FavoritosRoute: FavoritosRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
   RecuperarSenhaRoute: RecuperarSenhaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermosRoute: TermosRoute,
   CuponsSlugRoute: CuponsSlugRoute,
   OfertasSlugRoute: OfertasSlugRoute,
   CuponsIndexRoute: CuponsIndexRoute,
