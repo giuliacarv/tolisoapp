@@ -1193,12 +1193,12 @@
   background-color: color-mix(in oklab, var(--card) 58%, transparent);
   backdrop-filter: blur(8px) saturate(180%);
   border-color: color-mix(in oklab, var(--offwhite) 10%, transparent);
-  box-shadow: var(--shadow-soft);
+  box-shadow: none;
 }
 
 .theme-obsidian .noir-card:hover {
   border-color: color-mix(in oklab, var(--gold) 55%, transparent);
-  box-shadow: var(--shadow-lift);
+  box-shadow: none;
 }
 
 /* Superfícies de conteúdo ganham o mesmo vidro dos cards do hero apenas no escuro;
