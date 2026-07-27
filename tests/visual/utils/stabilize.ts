@@ -59,6 +59,10 @@ export async function gotoStable(page: Page, path: string): Promise<void> {
   });
 
   await page.goto(path, { waitUntil: "domcontentloaded" });
+  // Espera o `load`: em cold start o Vite pode disparar um reload de
+  // otimização de dependências, destruindo o contexto durante os scripts
+  // de estabilização abaixo.
+  await page.waitForLoadState("load").catch(() => {});
   await page.addStyleTag({ content: DETERMINISTIC_CSS });
 
   // Rola a página inteira para disparar lazy loading e observers de entrada,
