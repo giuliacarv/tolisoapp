@@ -22,6 +22,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  describeCouponCreditRule,
+  describeProductCreditRule,
+  formatCreditCount,
+} from "@/config/business-rules";
 import { COUPON_REDEMPTION_COST } from "@/domain/coupons/coupon-rules";
 import { DEMO_CREDIT_BALANCE } from "@/domain/credits/credit-rules";
 import { formatCreditsLabel } from "@/lib/format";

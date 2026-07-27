@@ -22,6 +22,12 @@ const RULES = [
   { icon: Ticket, label: describeCouponCreditRule().sentence },
 ];
 
+/**
+ * Saldo final do extrato demonstrativo. Derivado das constantes de negócio
+ * para que o número exibido nunca contradiga as regras acima.
+ */
+const REMAINING_BALANCE = INITIAL_CREDIT_BALANCE - PRODUCT_CREDIT_COST_LOW - COUPON_REDEMPTION_COST;
+
 const LEDGER = [
   { label: "Saldo inicial", value: describeInitialBalance(), tone: "neutral" as const },
   { label: "Resgate de produto", value: `−${formatCreditCount(PRODUCT_CREDIT_COST_LOW)}`, tone: "debit" as const },
