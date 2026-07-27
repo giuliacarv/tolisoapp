@@ -115,20 +115,26 @@ export function SearchAndCategories() {
       </section>
 
 
-      {/* Categorias */}
-      <section id="categorias" className="scroll-mt-[calc(var(--header-h)+1rem)] pt-16 sm:pt-20">
-        <Container>
-          <CategoryGrid
-            categories={categories}
-            isLoading={categoriesResource.isLoading}
-            activeCategory={discovery.activeFilter}
-            onSelect={discovery.toggleFilter}
-          />
-        </Container>
-      </section>
+      {/*
+        Categorias + Ofertas dividem a MESMA faixa tonal: juntas formam o bloco
+        de descoberta e se destacam da busca (fundo base) que vem antes e dos
+        cupons (fundo base) que vêm depois.
+      */}
+      <div className="section-band relative">
+        {/* Categorias */}
+        <section id="categorias" className="scroll-mt-[calc(var(--header-h)+1rem)] pt-16 sm:pt-20">
+          <Container>
+            <CategoryGrid
+              categories={categories}
+              isLoading={categoriesResource.isLoading}
+              activeCategory={discovery.activeFilter}
+              onSelect={discovery.toggleFilter}
+            />
+          </Container>
+        </section>
 
-      {/* Ofertas em destaque */}
-      <section id="ofertas" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
+        {/* Ofertas em destaque */}
+        <section id="ofertas" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
         <Container>
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
             <SectionHeading
@@ -251,7 +257,9 @@ export function SearchAndCategories() {
         </Container>
 
         <ProductModals modals={modals} />
-      </section>
+        </section>
+      </div>
     </>
+
   );
 }
