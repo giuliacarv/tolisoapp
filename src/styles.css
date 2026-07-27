@@ -1217,3 +1217,67 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ------------------------------------------------------------------
+ * Acessibilidade — WCAG 2.4.7 (Focus Visible) e 1.4.11 (Non-text Contrast)
+ *
+ * Vários primitivos shadcn aplicam `focus-visible:outline-none` + `ring-1`,
+ * o que produz um indicador de apenas 1px (abaixo do mínimo recomendado de
+ * 2px) e, em superfícies escuras, com contraste insuficiente. As regras
+ * abaixo ficam fora de @layer de propósito: CSS sem camada vence qualquer
+ * utilitário do Tailwind, garantindo um foco consistente em toda a página
+ * sem precisar editar cada componente.
+ * ------------------------------------------------------------------ */
+:where(html) {
+  --focus-ring: var(--gold);
+  --focus-halo: oklch(0.14 0.004 285);
+}
+
+.theme-obsidian {
+  --focus-ring: var(--violet-lume);
+}
+
+.theme-obsidian:not(.dark) {
+  --focus-halo: #ffffff;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible,
+[role="link"]:focus-visible,
+[role="tab"]:focus-visible,
+[role="checkbox"]:focus-visible,
+[role="switch"]:focus-visible,
+[role="menuitem"]:focus-visible,
+[role="option"]:focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 2px !important;
+  /* Halo interno: mantém 3:1 mesmo quando o elemento encosta em um fundo
+     da mesma família de cor do anel. Só transform/opacity/box-shadow —
+     nenhuma propriedade que force reflow. */
+  box-shadow: 0 0 0 2px var(--focus-halo) !important;
+  border-radius: var(--radius-sm);
+}
+
+/* Elementos com cantos próprios preservam seu raio no anel de foco. */
+.rounded-full:focus-visible {
+  border-radius: 9999px;
+}
+.rounded-2xl:focus-visible,
+.rounded-3xl:focus-visible {
+  border-radius: inherit;
+}
+
+/* WCAG 2.5.5/2.5.8 — alvos de toque com no mínimo 44px em qualquer eixo. */
+@media (pointer: coarse) {
+  a[href],
+  button:not([disabled]),
+  [role="button"] {
+    min-height: 44px;
+  }
+}
