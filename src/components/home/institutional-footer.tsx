@@ -222,7 +222,7 @@ export function InstitutionalFooter() {
 
           {/* Coluna 3: Newsletter */}
           <div className="lg:col-span-3">
-            <h3 className="text-fluid-xs font-semibold uppercase tracking-wider text-foreground">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground md:text-fluid-xs">
               Mantenha-se Atualizado
             </h3>
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
