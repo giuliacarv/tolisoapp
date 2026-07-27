@@ -10,7 +10,7 @@
  * `consent.analytics` / `consent.marketing` antes de ser inicializada.
  */
 
-export const COOKIE_CONSENT_STORAGE_KEY = "descontai_cookie_consent";
+export const COOKIE_CONSENT_STORAGE_KEY = "economizai_cookie_consent";
 
 /** Versão do texto/estrutura de consentimento; mudar força nova escolha. */
 export const COOKIE_CONSENT_VERSION = 1;

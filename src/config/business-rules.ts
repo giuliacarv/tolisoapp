@@ -1,5 +1,5 @@
 /**
- * CONFIGURAÇÃO CENTRAL DE REGRAS COMERCIAIS — DESCONTAI
+ * CONFIGURAÇÃO CENTRAL DE REGRAS COMERCIAIS — EconomizAI
  * ---------------------------------------------------------------------------
  * Fonte única de verdade para todos os números de negócio da interface.
  * Nada aqui persiste dados nem representa saldo real: são valores

@@ -11,7 +11,7 @@ const SECTIONS: LegalSection[] = [
     id: "como-funciona-comissao",
     title: "Como funciona a comissão",
     body: [
-      "Participamos de programas de afiliados de lojas e marketplaces. Quando você clica em um link de afiliado e realiza uma compra elegível, a loja pode pagar ao DESCONTAI uma comissão sobre aquela venda.",
+      "Participamos de programas de afiliados de lojas e marketplaces. Quando você clica em um link de afiliado e realiza uma compra elegível, a loja pode pagar ao EconomizAI uma comissão sobre aquela venda.",
       "Essa remuneração é o que sustenta a curadoria, a verificação de cupons e a manutenção da plataforma.",
     ],
   },
@@ -19,7 +19,7 @@ const SECTIONS: LegalSection[] = [
     id: "sem-custo-adicional",
     title: "A comissão não altera o preço",
     body: [
-      "O valor pago por você é exatamente o mesmo que pagaria acessando a loja diretamente. A comissão é paga pela loja ao DESCONTAI, e não somada ao seu pedido.",
+      "O valor pago por você é exatamente o mesmo que pagaria acessando a loja diretamente. A comissão é paga pela loja ao EconomizAI, e não somada ao seu pedido.",
       "Também não recebemos pagamento para inflar avaliações: a presença de uma oferta na plataforma não garante que ela seja a melhor do mercado naquele momento.",
     ],
   },
@@ -28,7 +28,7 @@ const SECTIONS: LegalSection[] = [
     title: "A loja é responsável pela venda",
     body: [
       "A compra é concluída no site do parceiro. Cobrança, faturamento, entrega, garantia, troca, devolução e atendimento pós-venda são de responsabilidade exclusiva da loja vendedora.",
-      "O DESCONTAI não processa pagamentos, não emite nota fiscal e não pode alterar, cancelar ou reembolsar pedidos.",
+      "O EconomizAI não processa pagamentos, não emite nota fiscal e não pode alterar, cancelar ou reembolsar pedidos.",
     ],
   },
   {
@@ -51,7 +51,7 @@ const SECTIONS: LegalSection[] = [
     id: "cookies-afiliados",
     title: "Cookies de afiliados",
     body: [
-      "A atribuição de comissões costuma depender de cookies gravados pela rede do parceiro. No DESCONTAI, essa categoria só é ativada mediante consentimento e permanece desligada por padrão.",
+      "A atribuição de comissões costuma depender de cookies gravados pela rede do parceiro. No EconomizAI, essa categoria só é ativada mediante consentimento e permanece desligada por padrão.",
     ],
     extra: (
       <p className="text-fluid-sm leading-[1.8] text-muted-foreground">
@@ -77,9 +77,9 @@ const SECTIONS: LegalSection[] = [
 
 export const Route = createFileRoute("/afiliados")({
   head: () => {
-    const title = "Divulgação de afiliados | DESCONTAI";
+    const title = "Divulgação de afiliados | EconomizAI";
     const description =
-      "Alguns links do DESCONTAI são links de afiliado. Podemos receber uma comissão por compras elegíveis, sem custo adicional para o usuário.";
+      "Alguns links do EconomizAI são links de afiliado. Podemos receber uma comissão por compras elegíveis, sem custo adicional para o usuário.";
 
     return {
       meta: [
@@ -106,14 +106,14 @@ function AffiliateDisclosurePage() {
     <LegalPage
       eyebrow="Transparência"
       title="Divulgação de afiliados"
-      description="Como o DESCONTAI é remunerado, por que isso não muda o preço para você e o que continua sendo responsabilidade da loja."
+      description="Como o EconomizAI é remunerado, por que isso não muda o preço para você e o que continua sendo responsabilidade da loja."
       updatedAt={UPDATED_AT}
       sections={SECTIONS}
       intro={
         <div className="gilded-frame flex items-start gap-4 rounded-[20px] border border-gold/30 bg-gold/5 p-6 shadow-soft">
           <BadgePercent className="mt-0.5 size-6 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
           <p className="text-fluid-base leading-[1.7] text-pretty text-foreground">
-            Alguns links do DESCONTAI são links de afiliado. Podemos receber uma comissão por
+            Alguns links do EconomizAI são links de afiliado. Podemos receber uma comissão por
             compras elegíveis, sem custo adicional para o usuário.
           </p>
         </div>

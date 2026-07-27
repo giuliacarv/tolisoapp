@@ -13,8 +13,8 @@
  */
 
 /** Chaves explicitamente marcadas como preferência local de convidado. */
-export const GUEST_FAVORITES_KEY = "descontai_guest_favorites";
-export const GUEST_RECENTLY_VIEWED_KEY = "descontai_guest_recently_viewed";
+export const GUEST_FAVORITES_KEY = "economizai_guest_favorites";
+export const GUEST_RECENTLY_VIEWED_KEY = "economizai_guest_recently_viewed";
 
 /** Limite do histórico "Vistos recentemente". */
 export const RECENTLY_VIEWED_LIMIT = 12;

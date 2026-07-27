@@ -10,7 +10,7 @@ const SECTIONS: LegalSection[] = [
     id: "natureza-da-plataforma",
     title: "Natureza da plataforma",
     body: [
-      "O DESCONTAI é uma plataforma de descoberta e curadoria de ofertas e cupons. Reunimos, organizamos e apresentamos informações sobre produtos e promoções divulgados por lojas e marketplaces de terceiros.",
+      "O EconomizAI é uma plataforma de descoberta e curadoria de ofertas e cupons. Reunimos, organizamos e apresentamos informações sobre produtos e promoções divulgados por lojas e marketplaces de terceiros.",
       "Não vendemos produtos, não processamos pagamentos, não emitimos notas fiscais e não realizamos entregas. Toda compra ocorre no site da loja escolhida, sob os termos, preços e condições dessa loja.",
     ],
     bullets: [
@@ -37,7 +37,7 @@ const SECTIONS: LegalSection[] = [
     id: "redirecionamentos-externos",
     title: "Redirecionamentos externos",
     body: [
-      "Ao concluir um resgate, você poderá ser direcionado para um site de terceiros. A partir do momento em que sai do DESCONTAI, aplicam-se exclusivamente os termos, a política de privacidade e as regras de compra do destino.",
+      "Ao concluir um resgate, você poderá ser direcionado para um site de terceiros. A partir do momento em que sai do EconomizAI, aplicam-se exclusivamente os termos, a política de privacidade e as regras de compra do destino.",
       "Sempre que um link levar para fora da plataforma, essa saída será identificada na interface antes da confirmação.",
     ],
     bullets: [
@@ -100,7 +100,7 @@ const SECTIONS: LegalSection[] = [
     id: "contato",
     title: "Contato",
     body: [
-      "Dúvidas, correções de conteúdo, reclamações sobre uma oferta ou pedidos relacionados a estes termos podem ser enviados pela página de contato do DESCONTAI.",
+      "Dúvidas, correções de conteúdo, reclamações sobre uma oferta ou pedidos relacionados a estes termos podem ser enviados pela página de contato do EconomizAI.",
       "Nesta fase de pré-lançamento, o canal de atendimento e o endereço oficial de resposta ainda estão sendo definidos e serão publicados aqui antes da abertura ao público.",
     ],
   },
@@ -108,9 +108,9 @@ const SECTIONS: LegalSection[] = [
 
 export const Route = createFileRoute("/termos")({
   head: () => {
-    const title = "Termos de uso | DESCONTAI";
+    const title = "Termos de uso | EconomizAI";
     const description =
-      "Termos de uso provisórios do DESCONTAI: natureza da plataforma, créditos, redirecionamentos, responsabilidade das lojas e conduta do usuário.";
+      "Termos de uso provisórios do EconomizAI: natureza da plataforma, créditos, redirecionamentos, responsabilidade das lojas e conduta do usuário.";
 
     return {
       meta: [
@@ -137,7 +137,7 @@ function TermsPage() {
     <LegalPage
       eyebrow="Legal"
       title="Termos de uso"
-      description="Como o DESCONTAI funciona, o que os créditos representam e quais são as responsabilidades de cada parte na jornada até a loja."
+      description="Como o EconomizAI funciona, o que os créditos representam e quais são as responsabilidades de cada parte na jornada até a loja."
       updatedAt={UPDATED_AT}
       sections={SECTIONS}
     />

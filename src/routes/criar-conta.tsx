@@ -56,9 +56,9 @@ type SignUpValues = z.infer<typeof signUpSchema>;
 
 export const Route = createFileRoute("/criar-conta")({
   head: () => {
-    const title = "Criar conta | DESCONTAI";
+    const title = "Criar conta | EconomizAI";
     const description =
-      "Crie sua conta DESCONTAI e comece a acompanhar ofertas e cupons selecionados.";
+      "Crie sua conta EconomizAI e comece a acompanhar ofertas e cupons selecionados.";
 
     return {
       meta: [
@@ -232,7 +232,7 @@ function SignUpPage() {
                     />
                   </FormControl>
                   <FormLabel className="cursor-pointer text-fluid-xs font-normal leading-relaxed text-offwhite/70">
-                    Li e aceito os termos de uso e a política de privacidade do DESCONTAI.
+                    Li e aceito os termos de uso e a política de privacidade do EconomizAI.
                   </FormLabel>
                 </div>
                 <FormMessage />

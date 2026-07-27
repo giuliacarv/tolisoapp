@@ -18,9 +18,9 @@ import { useProductModals } from "@/hooks/use-product-modals";
 import { cn } from "@/lib/utils";
 
 const SITE_URL = "https://descontai1.lovable.app";
-const TITLE = "Ofertas selecionadas | DESCONTAI";
+const TITLE = "Ofertas selecionadas | EconomizAI";
 const DESCRIPTION =
-  "Explore produtos selecionados em diferentes lojas, categorias e faixas de preço no catálogo do DESCONTAI.";
+  "Explore produtos selecionados em diferentes lojas, categorias e faixas de preço no catálogo do EconomizAI.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
 
 export const Route = createFileRoute("/ofertas/")({

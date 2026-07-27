@@ -26,9 +26,9 @@ const REDEEM_CONFIRMATION_MESSAGE =
 
 export const Route = createFileRoute("/favoritos")({
   head: () => {
-    const title = "Favoritos | DESCONTAI";
+    const title = "Favoritos | EconomizAI";
     const description =
-      "Veja as ofertas que você salvou neste dispositivo e os produtos vistos recentemente no DESCONTAI.";
+      "Veja as ofertas que você salvou neste dispositivo e os produtos vistos recentemente no EconomizAI.";
 
     return {
       meta: [

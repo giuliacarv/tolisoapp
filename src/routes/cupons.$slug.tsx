@@ -76,9 +76,9 @@ const STATUS_META: Record<
 
 export const Route = createFileRoute("/cupons/$slug")({
   head: ({ params }) => {
-    const title = "Detalhes do cupom | DESCONTAI";
+    const title = "Detalhes do cupom | EconomizAI";
     const description =
-      "Veja benefício, condições, validade e créditos necessários deste cupom demonstrativo no DESCONTAI.";
+      "Veja benefício, condições, validade e créditos necessários deste cupom demonstrativo no EconomizAI.";
 
     return {
       meta: [

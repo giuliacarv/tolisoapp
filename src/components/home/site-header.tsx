@@ -23,7 +23,7 @@ const iconButton =
   "touch-target grid shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground transition-colors duration-200 hover:bg-secondary";
 
 /**
- * Header sticky do DESCONTAI.
+ * Header sticky do EconomizAI.
  * O menu mobile usa o Sheet (Radix): fecha com Escape, trava a rolagem
  * e mantém o foco preso enquanto está aberto.
  */
@@ -104,7 +104,7 @@ export function Header() {
           href={isHome ? "#topo" : "/"}
           onClick={(event) => handleAnchorClick(event, "#topo", () => setOpen(false))}
           className="flex min-h-11 min-w-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          aria-label="DESCONTAI — início"
+          aria-label="EconomizAI — início"
         >
           <span
             className={cn(
@@ -120,7 +120,7 @@ export function Header() {
               scrolled ? "text-foreground" : "text-offwhite",
             )}
           >
-            DESCONTAI<span className="text-gold">.</span>
+            EconomizAI<span className="text-gold">.</span>
           </span>
         </a>
 

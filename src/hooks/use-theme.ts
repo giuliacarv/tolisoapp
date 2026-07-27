@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 export type Theme = "light" | "dark";
 
-const STORAGE_KEY = "descontai-theme";
+const STORAGE_KEY = "economizai-theme";
 
 /** Lê a preferência persistida; cai para a preferência do sistema. */
 function readStoredTheme(): Theme {

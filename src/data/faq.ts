@@ -32,7 +32,7 @@ export const FAQ_ENTRIES: readonly FaqEntry[] = [
   {
     id: "conta-criar",
     category: "Conta",
-    question: "Como criar uma conta no DESCONTAI?",
+    question: "Como criar uma conta no EconomizAI?",
     answer:
       "As telas de cadastro e acesso já existem, mas a autenticação ainda não está conectada. Quando a integração for concluída, a criação de conta será feita com e-mail e senha e sua conta começará com 5 créditos.",
   },
@@ -102,9 +102,9 @@ export const FAQ_ENTRIES: readonly FaqEntry[] = [
   {
     id: "compras-vende",
     category: "Compras nas lojas",
-    question: "O DESCONTAI vende os produtos?",
+    question: "O EconomizAI vende os produtos?",
     answer:
-      "Não. O DESCONTAI seleciona ofertas, organiza informações e facilita o acesso aos links. A venda, o pagamento, a entrega e o suporte são responsabilidade da loja parceira.",
+      "Não. O EconomizAI seleciona ofertas, organiza informações e facilita o acesso aos links. A venda, o pagamento, a entrega e o suporte são responsabilidade da loja parceira.",
   },
   {
     id: "compras-entrega",
@@ -118,13 +118,13 @@ export const FAQ_ENTRIES: readonly FaqEntry[] = [
     category: "Privacidade e segurança",
     question: "Como funciona um link de afiliado?",
     answer:
-      "Alguns links desta plataforma são links de afiliado. Quando uma compra elegível é realizada, o DESCONTAI pode receber uma comissão da loja, sem custo adicional para você e sem alterar o preço do produto.",
+      "Alguns links desta plataforma são links de afiliado. Quando uma compra elegível é realizada, o EconomizAI pode receber uma comissão da loja, sem custo adicional para você e sem alterar o preço do produto.",
   },
   {
     id: "privacidade-dados",
     category: "Privacidade e segurança",
-    question: "O DESCONTAI pede dados de pagamento?",
+    question: "O EconomizAI pede dados de pagamento?",
     answer:
-      "Nunca. Dados de cartão e senhas de lojas são informados apenas no ambiente da loja parceira. O DESCONTAI não solicita esse tipo de informação por formulário, e-mail ou mensagem.",
+      "Nunca. Dados de cartão e senhas de lojas são informados apenas no ambiente da loja parceira. O EconomizAI não solicita esse tipo de informação por formulário, e-mail ou mensagem.",
   },
 ] as const;

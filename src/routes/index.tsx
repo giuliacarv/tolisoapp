@@ -14,9 +14,9 @@ import { ThemeToggle } from "@/components/home/theme-toggle";
 
 
 const SITE_URL = "https://descontai1.lovable.app";
-const TITLE = "DESCONTAI | Ofertas e cupons selecionados";
+const TITLE = "EconomizAI | Ofertas e cupons selecionados";
 const DESCRIPTION =
-  "Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
+  "Inteligência Artificial pra Economizar de Verdade! Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
 
 export const Route = createFileRoute("/")({
@@ -35,14 +35,14 @@ export const Route = createFileRoute("/")({
       { property: "og:image:height", content: "630" },
       {
         property: "og:image:alt",
-        content: "DESCONTAI — Ofertas e cupons selecionados",
+        content: "EconomizAI — Ofertas e cupons selecionados",
       },
       { name: "twitter:title", content: TITLE },
       { name: "twitter:description", content: DESCRIPTION },
       { name: "twitter:image", content: OG_IMAGE },
       {
         name: "twitter:image:alt",
-        content: "DESCONTAI — Ofertas e cupons selecionados",
+        content: "EconomizAI — Ofertas e cupons selecionados",
       },
     ],
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
@@ -52,7 +52,7 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "DESCONTAI",
+          name: "EconomizAI",
           url: `${SITE_URL}/`,
           description: DESCRIPTION,
           inLanguage: "pt-BR",

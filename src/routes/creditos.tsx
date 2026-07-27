@@ -70,7 +70,7 @@ const FAQ = [
   {
     question: "O que são créditos?",
     answer:
-      "Créditos são a unidade usada no DESCONTAI para liberar o acesso a uma oferta ou ao código de um cupom selecionado. Eles não são dinheiro, não substituem o pagamento na loja parceira e não geram desconto adicional além do informado na oferta.",
+      "Créditos são a unidade usada no EconomizAI para liberar o acesso a uma oferta ou ao código de um cupom selecionado. Eles não são dinheiro, não substituem o pagamento na loja parceira e não geram desconto adicional além do informado na oferta.",
   },
   {
     question: "Os créditos expiram?",
@@ -96,9 +96,9 @@ const FAQ = [
 
 export const Route = createFileRoute("/creditos")({
   head: () => {
-    const title = "Créditos | DESCONTAI";
+    const title = "Créditos | EconomizAI";
     const description =
-      "Entenda como funcionam os créditos do DESCONTAI: quanto custa resgatar ofertas e cupons e o que está incluído.";
+      "Entenda como funcionam os créditos do EconomizAI: quanto custa resgatar ofertas e cupons e o que está incluído.";
 
     return {
       meta: [
@@ -171,7 +171,7 @@ function CreditsHero() {
           </h1>
 
           <p className="mt-5 max-w-[58ch] text-fluid-base leading-[1.7] text-pretty text-offwhite/70">
-            Use créditos para acessar descontos e cupons selecionados no DESCONTAI.
+            Use créditos para acessar descontos e cupons selecionados no EconomizAI.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">

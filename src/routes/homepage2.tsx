@@ -13,9 +13,9 @@ import { CouponSection } from "@/components/home/validated-coupons";
 import { ThemeToggle } from "@/components/home/theme-toggle";
 
 const SITE_URL = "https://descontai1.lovable.app";
-const TITLE = "DESCONTAI | Novo design (rascunho)";
+const TITLE = "EconomizAI | Novo design (rascunho)";
 const DESCRIPTION =
-  "Ambiente de rascunho para o novo design da home do DESCONTAI: ofertas, cupons e créditos.";
+  "Ambiente de rascunho para o novo design da home do EconomizAI: ofertas, cupons e créditos.";
 
 export const Route = createFileRoute("/homepage2")({
   head: () => ({

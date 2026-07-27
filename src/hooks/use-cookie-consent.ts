@@ -8,7 +8,7 @@ import {
   type CookieConsent,
 } from "@/lib/cookie-consent";
 
-const CONSENT_EVENT = "descontai:cookie-consent";
+const CONSENT_EVENT = "economizai:cookie-consent";
 
 /**
  * Estado de consentimento de cookies compartilhado entre componentes.
