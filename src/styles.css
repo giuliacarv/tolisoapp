@@ -342,9 +342,21 @@
     oklch(0.19 0.004 285),
     oklch(0.15 0.004 285)
   );
+
+  /*
+   * As faixas noir precisam continuar legíveis sobre um fundo já escuro:
+   * elevamos levemente a luminosidade para preservar a leitura de camadas.
+   */
+  --gradient-ink: linear-gradient(to bottom right, oklch(0.235 0.005 285), oklch(0.165 0.004 285));
+
+  /* Ação primária dourada — único elemento realmente luminoso da tela. */
+  --gradient-cta: var(--gradient-gold);
+  --cta-foreground: var(--ink);
+
   --glass-bg: color-mix(in oklab, var(--card) 55%, transparent);
   --glass-border: color-mix(in oklab, oklch(1 0 0) 14%, transparent);
 }
+
 
 @layer base {
   /* Hierarquia tipográfica: títulos densos e editoriais, corpo respirável. */
