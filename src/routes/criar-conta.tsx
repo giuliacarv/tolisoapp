@@ -112,7 +112,7 @@ function SignUpPage() {
         </>
       }
     >
-      <p className="mb-6 flex items-start gap-2 rounded-xl border border-gold/25 bg-gold/10 p-3 text-fluid-xs leading-relaxed text-offwhite/85">
+      <p className="mb-6 flex items-start gap-2 rounded-xl border border-gold/25 bg-gold/10 p-3 text-fluid-xs leading-relaxed text-foreground">
         <Sparkles className="mt-0.5 size-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
         Sua conta começará com 5 créditos gratuitos.
       </p>
@@ -124,7 +124,7 @@ function SignUpPage() {
             name="fullName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">Nome completo</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">Nome completo</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -144,7 +144,7 @@ function SignUpPage() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">E-mail</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">E-mail</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -166,7 +166,7 @@ function SignUpPage() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">Senha</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">Senha</FormLabel>
                 <div className="relative">
                   <FormControl>
                     <Input
@@ -183,7 +183,7 @@ function SignUpPage() {
                     onClick={() => setShowPassword((value) => !value)}
                     aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                     aria-pressed={showPassword}
-                    className="absolute inset-y-0 right-0 grid w-11 place-items-center rounded-r-md text-offwhite/60 transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="absolute inset-y-0 right-0 grid w-11 place-items-center rounded-r-xl text-muted-foreground transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   >
                     {showPassword ? (
                       <EyeOff className="size-4" strokeWidth={1.75} aria-hidden />
@@ -202,7 +202,7 @@ function SignUpPage() {
             name="confirmPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">Confirmar senha</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">Confirmar senha</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -228,10 +228,10 @@ function SignUpPage() {
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={(checked) => field.onChange(checked === true)}
-                      className="mt-0.5 border-offwhite/30 data-[state=checked]:border-gold data-[state=checked]:bg-gold data-[state=checked]:text-ink"
+                      className="mt-0.5 border-border data-[state=checked]:border-gold data-[state=checked]:bg-gold data-[state=checked]:text-ink"
                     />
                   </FormControl>
-                  <FormLabel className="cursor-pointer text-fluid-xs font-normal leading-relaxed text-offwhite/70">
+                  <FormLabel className="cursor-pointer text-fluid-xs font-normal leading-relaxed text-muted-foreground">
                     Li e aceito os termos de uso e a política de privacidade do EconomizAI.
                   </FormLabel>
                 </div>
