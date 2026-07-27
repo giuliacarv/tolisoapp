@@ -17,6 +17,7 @@ import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as AjudaRouteImport } from './routes/ajuda'
@@ -66,6 +67,11 @@ const CreditosRoute = CreditosRouteImport.update({
   path: '/creditos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContatoRoute = ContatoRouteImport.update({
   id: '/contato',
   path: '/contato',
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/contato': typeof ContatoRoute
+  '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/contato': typeof ContatoRoute
+  '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/contato': typeof ContatoRoute
+  '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/ajuda'
     | '/como-funciona'
     | '/contato'
+    | '/cookies'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/ajuda'
     | '/como-funciona'
     | '/contato'
+    | '/cookies'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/ajuda'
     | '/como-funciona'
     | '/contato'
+    | '/cookies'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   AjudaRoute: typeof AjudaRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
   ContatoRoute: typeof ContatoRoute
+  CookiesRoute: typeof CookiesRoute
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
@@ -296,6 +309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreditosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contato': {
       id: '/contato'
       path: '/contato'
@@ -360,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   AjudaRoute: AjudaRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
   ContatoRoute: ContatoRoute,
+  CookiesRoute: CookiesRoute,
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
