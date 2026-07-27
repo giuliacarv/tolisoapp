@@ -128,11 +128,11 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
         />
       </span>
 
-      <span className={cn("flex min-w-0 flex-col gap-1.5", featured ? "mt-8" : "mt-4")}>
+      <span className={cn("flex min-w-0 flex-col gap-1.5", featured ? "mt-7" : "mt-4")}>
         <span
           className={cn(
             "font-serif tracking-tight",
-            featured ? "text-fluid-h2 leading-[1.1]" : "text-lg font-medium",
+            featured ? "text-2xl leading-[1.15] sm:text-3xl" : "text-lg font-medium",
           )}
         >
           {category.label}
