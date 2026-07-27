@@ -17,7 +17,6 @@ import { Container, SectionHeading, chipIdle } from "./primitives";
 import { ProductCard } from "./product-card";
 import { ProductGrid } from "./product-grid";
 import { ProductModals } from "./product-modals";
-import { Pagination } from "./results-controls";
 
 
 /** Sugestões demonstrativas exibidas no estado vazio. */
@@ -66,11 +65,6 @@ export function SearchAndCategories() {
 
   function scrollToOffers() {
     scrollToId("#ofertas");
-  }
-
-  function handlePageChange(next: number) {
-    discovery.goToPage(next);
-    scrollToOffers();
   }
 
   function handleSuggestion(suggestion: string) {
