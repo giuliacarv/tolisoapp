@@ -13,6 +13,7 @@ import { Route as TermosRouteImport } from './routes/termos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as Homepage2RouteImport } from './routes/homepage2'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
@@ -46,6 +47,11 @@ const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
   id: '/privacidade',
   path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Homepage2Route = Homepage2RouteImport.update({
+  id: '/homepage2',
+  path: '/homepage2',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FavoritosRoute = FavoritosRouteImport.update({
@@ -130,6 +136,7 @@ export interface FileRoutesByFullPath {
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
+  '/homepage2': typeof Homepage2Route
   '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -150,6 +157,7 @@ export interface FileRoutesByTo {
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
+  '/homepage2': typeof Homepage2Route
   '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -171,6 +179,7 @@ export interface FileRoutesById {
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
+  '/homepage2': typeof Homepage2Route
   '/privacidade': typeof PrivacidadeRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -193,6 +202,7 @@ export interface FileRouteTypes {
     | '/criar-conta'
     | '/entrar'
     | '/favoritos'
+    | '/homepage2'
     | '/privacidade'
     | '/recuperar-senha'
     | '/sitemap.xml'
@@ -213,6 +223,7 @@ export interface FileRouteTypes {
     | '/criar-conta'
     | '/entrar'
     | '/favoritos'
+    | '/homepage2'
     | '/privacidade'
     | '/recuperar-senha'
     | '/sitemap.xml'
@@ -233,6 +244,7 @@ export interface FileRouteTypes {
     | '/criar-conta'
     | '/entrar'
     | '/favoritos'
+    | '/homepage2'
     | '/privacidade'
     | '/recuperar-senha'
     | '/sitemap.xml'
@@ -254,6 +266,7 @@ export interface RootRouteChildren {
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
   FavoritosRoute: typeof FavoritosRoute
+  Homepage2Route: typeof Homepage2Route
   PrivacidadeRoute: typeof PrivacidadeRoute
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/privacidade'
       fullPath: '/privacidade'
       preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/homepage2': {
+      id: '/homepage2'
+      path: '/homepage2'
+      fullPath: '/homepage2'
+      preLoaderRoute: typeof Homepage2RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/favoritos': {
@@ -406,6 +426,7 @@ const rootRouteChildren: RootRouteChildren = {
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
   FavoritosRoute: FavoritosRoute,
+  Homepage2Route: Homepage2Route,
   PrivacidadeRoute: PrivacidadeRoute,
   RecuperarSenhaRoute: RecuperarSenhaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
