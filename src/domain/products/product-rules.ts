@@ -6,6 +6,11 @@
  * espelhadas no banco como colunas geradas ou políticas).
  */
 
+import {
+  PRODUCT_CREDIT_COST_HIGH,
+  PRODUCT_CREDIT_COST_LOW,
+  PRODUCT_PRICE_THRESHOLD_BRL,
+} from "@/config/business-rules";
 import type { Product } from "@/types";
 
 /** Motivo pelo qual uma oferta não pode ser resgatada (ou `null` se ativa). */
@@ -22,11 +27,12 @@ export type ProductUnavailableReason = "expired" | "unavailable";
 export function calculateCreditsRequired(currentPrice: number): number {
   if (!Number.isFinite(currentPrice) || currentPrice < 0) {
     // Entrada inválida: fallback conservador para o menor custo possível.
-    return 1;
+    return PRODUCT_CREDIT_COST_LOW;
   }
 
   const cents = Math.round(currentPrice * 100);
-  return cents <= 5000 ? 1 : 2;
+  const thresholdCents = Math.round(PRODUCT_PRICE_THRESHOLD_BRL * 100);
+  return cents <= thresholdCents ? PRODUCT_CREDIT_COST_LOW : PRODUCT_CREDIT_COST_HIGH;
 }
 
 /** Percentual de desconto arredondado a partir dos preços. */

@@ -6,13 +6,14 @@
  * mudar nenhuma regra nem nenhum componente.
  */
 
+import { INITIAL_CREDIT_BALANCE } from "@/config/business-rules";
 import type { RedeemableKind, RedemptionPreview } from "@/types";
 
 /**
  * Saldo demonstrativo exibido na interface.
  * TODO(backend): substituir pelo saldo real do usuário autenticado.
  */
-export const DEMO_CREDIT_BALANCE = 5;
+export const DEMO_CREDIT_BALANCE = INITIAL_CREDIT_BALANCE;
 
 /**
  * Saldo restante após um resgate hipotético.
