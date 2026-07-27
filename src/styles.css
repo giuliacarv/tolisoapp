@@ -51,6 +51,7 @@
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-petrol: var(--petrol);
+  --color-petrol-bright: var(--petrol-bright);
   --color-amber: var(--amber);
   --color-ink: var(--ink);
   --color-graphite: var(--graphite);
@@ -88,6 +89,8 @@
    * Reservado a selos de desconto e realces de dado — nunca a ações primárias.
    */
   --petrol: oklch(0.52 0.062 210);
+  /* Par claro do petróleo, legível sobre superfícies de tinta em qualquer tema. */
+  --petrol-bright: oklch(0.82 0.07 205);
   /* Âmbar legível sobre fundos claros — usado no estado "Validação pendente". */
   --amber: oklch(0.58 0.105 74);
   --saving: oklch(0.51 0.11 160);
@@ -141,6 +144,7 @@
   --amber: oklch(0.82 0.1 80);
   --discount: oklch(0.72 0.15 25);
   --petrol: oklch(0.78 0.075 205);
+  --petrol-bright: oklch(0.84 0.07 205);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.75 0.075 82);
