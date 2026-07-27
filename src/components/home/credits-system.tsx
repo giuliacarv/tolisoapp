@@ -36,7 +36,7 @@ const LEDGER = [
 
 export function CreditsSystem() {
   function handlePlansClick() {
-    toast("Os planos e o checkout serão adicionados em uma próxima etapa.");
+    notifyComingSoon();
   }
 
   return (

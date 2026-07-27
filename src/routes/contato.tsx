@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useComingSoon } from "@/hooks/use-coming-soon";
 import { cn } from "@/lib/utils";
 
 const SITE_URL = "https://descontai1.lovable.app";
@@ -115,7 +116,7 @@ function ContactPage() {
    * apenas confirmamos que o formulário está válido.
    */
   function onSubmit(_values: ContactValues) {
-    toast("O envio de mensagens será ativado após a integração com o serviço de atendimento.");
+    notifyComingSoon();
   }
 
   return (
