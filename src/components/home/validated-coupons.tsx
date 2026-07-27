@@ -5,12 +5,13 @@ import { useAsyncResource } from "@/hooks/use-async-resource";
 import { couponService } from "@/services";
 import type { Coupon } from "@/types";
 
+import { AutoCarousel } from "./auto-carousel";
 import { CouponCard, CouponCardSkeleton, CouponDisclaimer } from "./coupon-card";
 import { RedeemCouponModal } from "./coupon-redeem-dialog";
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 
 import { Container, SectionHeading } from "./primitives";
-import { Reveal } from "./reveal";
+
 
 
 /**
