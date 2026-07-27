@@ -16,7 +16,7 @@ import { Header } from "@/components/home/site-header";
 import { ThemeToggle } from "@/components/home/theme-toggle";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** As cinco etapas da jornada, do descobrimento à compra na loja parceira. */
 const STEPS = [

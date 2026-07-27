@@ -29,7 +29,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useComingSoon } from "@/hooks/use-coming-soon";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Categorias de atendimento oferecidas no formulário. */
 const CONTACT_CATEGORIES = [

@@ -32,7 +32,7 @@ import { cn } from "@/lib/utils";
 import { couponQueries } from "@/services";
 import type { Coupon, CouponStatus } from "@/types";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Mensagem exigida após a confirmação enquanto não há contas nem créditos. */
 const REDEEM_CONFIRMATION_MESSAGE =

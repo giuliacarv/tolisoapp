@@ -18,7 +18,7 @@ import { useCouponCatalog } from "@/hooks/use-coupon-catalog";
 import { cn } from "@/lib/utils";
 import type { Coupon } from "@/types";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 const TITLE = "Cupons selecionados | EconomizAI";
 const DESCRIPTION =
   "Consulte condições, validade e status de verificação dos cupons demonstrativos das principais lojas online do Brasil.";

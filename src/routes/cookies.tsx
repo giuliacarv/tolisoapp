@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 import { CookiePreferencesPanel } from "@/components/legal/cookie-preferences-panel";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 const UPDATED_AT = "rascunho inicial";
 
 const SECTIONS: LegalSection[] = [

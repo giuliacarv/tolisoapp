@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { HomepageView } from "@/components/home/homepage-view";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 const TITLE = "EconomizAI | Novo design (rascunho)";
 const DESCRIPTION =
   "Ambiente de rascunho para o novo design da home do EconomizAI: ofertas, cupons e créditos.";

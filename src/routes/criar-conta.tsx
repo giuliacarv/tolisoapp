@@ -20,7 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Regras de cadastro — reaproveitáveis pela futura integração de contas. */
 const signUpSchema = z

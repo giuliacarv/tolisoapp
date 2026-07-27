@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Aviso obrigatório: os favoritos ainda não pertencem a uma conta. */
 const LOCAL_ONLY_NOTICE = "Seus favoritos estão salvos apenas neste dispositivo.";

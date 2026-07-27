@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Heart, Search, ShoppingBag, Sparkles } from "lucide-react";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 const TITLE = "Design System Vivid | EconomizAI";
 const DESCRIPTION =
   "Referência viva do design system Vivid do EconomizAI: cores, tipografia, superfícies e componentes.";
