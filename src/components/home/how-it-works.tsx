@@ -98,14 +98,14 @@ export function HowItWorks() {
           />
         </Reveal>
 
-        <div className="relative mt-14 sm:mt-20">
+        <div className="relative mt-10 sm:mt-14 lg:mt-20">
           {/* Trilho contínuo que costura as três etapas (desktop). */}
           <div
             aria-hidden
             className="pointer-events-none absolute inset-x-[16%] top-8 hidden h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent lg:block"
           />
 
-          <ol className="relative grid gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
+          <ol className="relative grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
             {HOW_IT_WORKS_STEPS.map((step, index) => {
               const isLast = index === HOW_IT_WORKS_STEPS.length - 1;
 
@@ -123,7 +123,7 @@ export function HowItWorks() {
                     <>
                       <span
                         aria-hidden
-                        className="mt-8 grid h-8 w-8 place-items-center rounded-full border border-border/70 text-gold/70 md:hidden"
+                        className="mt-5 grid h-8 w-8 place-items-center rounded-full border border-border/70 text-gold/70 md:hidden"
                       >
                         <ChevronDown className="h-4 w-4" strokeWidth={1.5} />
                       </span>
