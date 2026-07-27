@@ -30,9 +30,9 @@ const OfertasIndexRoute = OfertasIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const OfertasSlugRoute = OfertasSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => OfertasRoute,
+  id: '/ofertas/$slug',
+  path: '/ofertas/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -65,6 +65,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  OfertasSlugRoute: typeof OfertasSlugRoute
   OfertasIndexRoute: typeof OfertasIndexRoute
 }
 
@@ -93,10 +94,10 @@ declare module '@tanstack/react-router' {
     }
     '/ofertas/$slug': {
       id: '/ofertas/$slug'
-      path: '/$slug'
+      path: '/ofertas/$slug'
       fullPath: '/ofertas/$slug'
       preLoaderRoute: typeof OfertasSlugRouteImport
-      parentRoute: typeof OfertasRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -104,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  OfertasSlugRoute: OfertasSlugRoute,
   OfertasIndexRoute: OfertasIndexRoute,
 }
 export const routeTree = rootRouteImport
