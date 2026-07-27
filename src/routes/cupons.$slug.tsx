@@ -26,13 +26,13 @@ import {
   getCouponStatus,
   maskCouponCode,
 } from "@/domain/coupons/coupon-rules";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { couponService } from "@/services";
+import { couponQueries } from "@/services";
 import type { Coupon, CouponStatus } from "@/types";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Mensagem exigida após a confirmação enquanto não há contas nem créditos. */
 const REDEEM_CONFIRMATION_MESSAGE =
@@ -177,15 +177,10 @@ function CouponDetailPage() {
   const [redeemTarget, setRedeemTarget] = useState<Coupon | null>(null);
   const [redeemOpen, setRedeemOpen] = useState(false);
 
-  const fetchCoupon = useCallback(() => couponService.findBySlug(slug), [slug]);
-  const coupon = useAsyncResource<Coupon | null>(fetchCoupon, [slug]);
+  const coupon = useResource(couponQueries.bySlug(slug));
 
   const currentId = coupon.data?.id ?? null;
-  const fetchSiblings = useCallback(
-    () => (currentId ? couponService.listByStore(currentId, 3) : Promise.resolve([])),
-    [currentId],
-  );
-  const siblings = useAsyncResource<Coupon[]>(fetchSiblings, [currentId]);
+  const siblings = useResource(couponQueries.byStore(currentId, 3));
 
   const openRedeem = useCallback((target: Coupon) => {
     setRedeemTarget(target);

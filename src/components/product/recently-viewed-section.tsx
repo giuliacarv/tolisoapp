@@ -2,10 +2,10 @@ import { useCallback } from "react";
 import { History, Trash2 } from "lucide-react";
 
 import { ProductGrid } from "@/components/home/product-grid";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { useRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { cn } from "@/lib/utils";
-import { productService } from "@/services";
+import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
 export interface RecentlyViewedSectionProps {
@@ -25,16 +25,10 @@ export function RecentlyViewedSection({
   className,
 }: RecentlyViewedSectionProps) {
   const { recentIds, clearRecentlyViewed, limit } = useRecentlyViewed();
-  const key = recentIds.join(",");
 
-  const fetchRecent = useCallback(
-    () => (recentIds.length > 0 ? productService.listByIds(recentIds) : Promise.resolve([])),
-    // `key` mantém a identidade estável entre renders sem mudança real.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key],
-  );
-
-  const recent = useAsyncResource<Product[]>(fetchRecent, [key]);
+  // A chave da query já é o próprio array de ids: o Query faz comparação
+  // estrutural, então não é preciso serializar em string nem usar `useCallback`.
+  const recent = useResource(productQueries.byIds(recentIds));
   const products = recent.data ?? [];
 
   if (recentIds.length === 0) return null;

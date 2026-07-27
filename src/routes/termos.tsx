@@ -3,7 +3,7 @@ import { describeCouponCreditRule, describeProductCreditRule } from "@/config/bu
 
 import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 const UPDATED_AT = "rascunho inicial";
 
 const SECTIONS: LegalSection[] = [

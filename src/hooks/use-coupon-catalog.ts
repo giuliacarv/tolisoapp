@@ -11,8 +11,8 @@ import {
   type CouponFilters,
   type CouponSortId,
 } from "@/domain/coupons/coupon-filters";
-import { useAsyncResource } from "@/hooks/use-async-resource";
-import { couponService } from "@/services";
+import { useResource } from "@/hooks/use-async-resource";
+import { couponQueries } from "@/services";
 import type { Coupon } from "@/types";
 
 /** Opção de faceta já com a contagem de cupons correspondentes. */
@@ -37,7 +37,7 @@ const EMPTY_COUPONS: readonly Coupon[] = [];
  * gerenciamos estado de interface.
  */
 export function useCouponCatalog() {
-  const couponsResource = useAsyncResource(() => couponService.list(), []);
+  const couponsResource = useResource(couponQueries.list());
 
   const coupons = couponsResource.data ?? EMPTY_COUPONS;
 

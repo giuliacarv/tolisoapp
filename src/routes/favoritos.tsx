@@ -9,14 +9,14 @@ import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";
 import { ThemeToggle } from "@/components/home/theme-toggle";
 import { RecentlyViewedSection } from "@/components/product/recently-viewed-section";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { cn } from "@/lib/utils";
-import { productService } from "@/services";
+import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Aviso obrigatório: os favoritos ainda não pertencem a uma conta. */
 const LOCAL_ONLY_NOTICE = "Seus favoritos estão salvos apenas neste dispositivo.";
@@ -50,15 +50,7 @@ function FavoritesPage() {
   const { favoriteIds, count, clearFavorites } = useFavorites();
   const modals = useProductModals();
 
-  // A chave em string mantém a dependência estável entre renders.
-  const key = favoriteIds.join(",");
-  const fetchFavorites = useCallback(
-    () => (favoriteIds.length > 0 ? productService.listByIds(favoriteIds) : Promise.resolve([])),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key],
-  );
-
-  const favorites = useAsyncResource<Product[]>(fetchFavorites, [key]);
+  const favorites = useResource(productQueries.byIds(favoriteIds));
   const products = favorites.data ?? [];
 
   return (

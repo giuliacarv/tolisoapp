@@ -17,7 +17,7 @@ import { CATALOG_PAGE_SIZE, useCatalog } from "@/hooks/use-catalog";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 const TITLE = "Ofertas selecionadas | EconomizAI";
 const DESCRIPTION =
   "Explore produtos selecionados em diferentes lojas, categorias e faixas de preço no catálogo do EconomizAI.";

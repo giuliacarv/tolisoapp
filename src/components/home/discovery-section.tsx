@@ -2,11 +2,11 @@ import { useCallback, useMemo } from "react";
 import { ArrowUpRight, ShieldCheck, X } from "lucide-react";
 
 import { DEFAULT_PAGE_SIZE } from "@/domain/products/pagination";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { ALL_FILTER_ID, useProductDiscovery } from "@/hooks/use-product-discovery";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { scrollToId } from "@/lib/smooth-scroll";
-import { categoryService, productService } from "@/services";
+import { categoryQueries, productQueries } from "@/services";
 
 import { AutoCarousel } from "./auto-carousel";
 import { CategoryGrid } from "./category-grid";
@@ -32,8 +32,8 @@ const EMPTY_CATEGORIES: readonly never[] = [];
  */
 export function SearchAndCategories() {
   // Camada de serviços: hoje resolve mocks, amanhã o Supabase — sem mudar a UI.
-  const productsResource = useAsyncResource(() => productService.list(), []);
-  const categoriesResource = useAsyncResource(() => categoryService.list(), []);
+  const productsResource = useResource(productQueries.list());
+  const categoriesResource = useResource(categoryQueries.list());
 
   const products = productsResource.data ?? EMPTY_PRODUCTS;
   const categories = categoriesResource.data ?? EMPTY_CATEGORIES;

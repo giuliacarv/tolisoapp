@@ -32,7 +32,7 @@ import { DEMO_CREDIT_BALANCE } from "@/domain/credits/credit-rules";
 import { formatCreditsLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Créditos concedidos a uma nova conta (demonstrativo). */
 const NEW_ACCOUNT_CREDITS = DEMO_CREDIT_BALANCE;

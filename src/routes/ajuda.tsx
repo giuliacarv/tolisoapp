@@ -17,7 +17,7 @@ import { FAQ_CATEGORIES, FAQ_ENTRIES, type FaqCategory, type FaqEntry } from "@/
 import { normalizeText } from "@/domain/products/filters";
 import { cn } from "@/lib/utils";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Filtro local: combina termo normalizado (sem acento/caixa) e categoria. */
 function filterFaq(

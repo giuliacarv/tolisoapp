@@ -29,15 +29,15 @@ import {
   formatUnavailableLabel,
   getProductUnavailableReason,
 } from "@/domain/products/product-rules";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { useRegisterRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { productService } from "@/services";
+import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
-const SITE_URL = "https://descontai1.lovable.app";
+const SITE_URL = "https://economizai1.lovable.app";
 
 /** Mensagem exigida após a confirmação enquanto não há contas nem créditos. */
 const REDEEM_CONFIRMATION_MESSAGE =
@@ -100,19 +100,14 @@ function ProductDetailPage() {
   const { slug } = Route.useParams();
   const modals = useProductModals();
 
-  const fetchProduct = useCallback(() => productService.findBySlug(slug), [slug]);
-  const product = useAsyncResource<Product | null>(fetchProduct, [slug]);
+  const product = useResource(productQueries.bySlug(slug));
 
   const currentId = product.data?.id ?? null;
 
   // Histórico local "Vistos recentemente" (apenas o id público do produto).
   useRegisterRecentlyViewed(currentId ?? undefined);
 
-  const fetchRelated = useCallback(
-    () => (currentId ? productService.listRelated(currentId, 4) : Promise.resolve([])),
-    [currentId],
-  );
-  const related = useAsyncResource<Product[]>(fetchRelated, [currentId]);
+  const related = useResource(productQueries.related(currentId, 4));
 
   if (product.isLoading) {
     return (

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-import { useAsyncResource } from "@/hooks/use-async-resource";
-import { couponService } from "@/services";
+import { useResource } from "@/hooks/use-async-resource";
+import { couponQueries } from "@/services";
 import type { Coupon } from "@/types";
 
 import { AutoCarousel } from "./auto-carousel";
@@ -20,7 +20,7 @@ import { Container, SectionHeading } from "./primitives";
  * nenhuma alteração neste componente.
  */
 export function CouponSection() {
-  const coupons = useAsyncResource(() => couponService.list(), []);
+  const coupons = useResource(couponQueries.list());
   const [selected, setSelected] = useState<Coupon | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 

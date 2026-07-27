@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { cn } from "@/lib/utils";
-import { storeService } from "@/services";
+import { storeQueries } from "@/services";
 import type { Store } from "@/types";
 
 import { Container } from "./primitives";
@@ -73,10 +73,7 @@ const EMPTY_STORES: readonly Store[] = [];
 
 export function LogoCarousel({ logos, speed = 50, className }: LogoCarouselProps) {
   // Quando nenhuma lista é injetada, o componente resolve as lojas ativas.
-  const storesResource = useAsyncResource(
-    () => storeService.list({ activeOnly: true }),
-    [],
-  );
+  const storesResource = useResource(storeQueries.list({ activeOnly: true }));
   const items = logos ?? storesResource.data ?? EMPTY_STORES;
 
   const trackRef = useRef<HTMLUListElement>(null);
