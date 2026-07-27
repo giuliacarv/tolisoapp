@@ -1,6 +1,8 @@
 import { MessageSquareText, Rocket, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+import { describeCouponCreditRule, describeProductCreditRange } from "@/config/business-rules";
+
 /**
  * Etapa do fluxo "Como funciona".
  *
@@ -40,6 +42,6 @@ export const HOW_IT_WORKS_STEPS: readonly HowItWorksStep[] = [
     title: "Resgate e economize",
     description:
       "Use seus créditos para liberar o desconto ou o cupom e finalize a compra direto na loja parceira, com o preço já reduzido.",
-    highlight: "1 a 2 créditos por oferta e 3 créditos por cupom.",
+    highlight: `${describeProductCreditRange()} por oferta e ${describeCouponCreditRule().cost} por cupom.`,
   },
 ] as const;

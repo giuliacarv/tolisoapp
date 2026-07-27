@@ -1,6 +1,14 @@
 import { ArrowRight, Coins, Minus, Ticket, Wallet } from "lucide-react";
 import { toast } from "sonner";
 
+import {
+  INITIAL_CREDIT_BALANCE,
+  PRODUCT_CREDIT_COST_LOW,
+  describeCouponCreditRule,
+  describeInitialBalance,
+  describeProductCreditRule,
+  formatCreditCount,
+} from "@/config/business-rules";
 import { COUPON_REDEMPTION_COST } from "@/domain/coupons/coupon-rules";
 
 import { handleAnchorClick } from "@/lib/smooth-scroll";
@@ -9,15 +17,15 @@ import { Container, buttonBase } from "./primitives";
 
 /** Regras de custo — espelham as funções em src/data/products.ts e src/data/coupons.ts. */
 const RULES = [
-  { icon: Coins, label: "Produtos de até R$ 50,00 custam 1 crédito." },
-  { icon: Coins, label: "Produtos acima de R$ 50,00 custam 2 créditos." },
-  { icon: Ticket, label: `Cupons custam ${COUPON_REDEMPTION_COST} créditos.` },
+  { icon: Coins, label: describeProductCreditRule("low").sentence },
+  { icon: Coins, label: describeProductCreditRule("high").sentence },
+  { icon: Ticket, label: describeCouponCreditRule().sentence },
 ];
 
 const LEDGER = [
-  { label: "Saldo inicial", value: "5 créditos", tone: "neutral" as const },
-  { label: "Resgate de produto", value: "−1 crédito", tone: "debit" as const },
-  { label: `Resgate de cupom`, value: `−${COUPON_REDEMPTION_COST} créditos`, tone: "debit" as const },
+  { label: "Saldo inicial", value: describeInitialBalance(), tone: "neutral" as const },
+  { label: "Resgate de produto", value: `−${formatCreditCount(PRODUCT_CREDIT_COST_LOW)}`, tone: "debit" as const },
+  { label: "Resgate de cupom", value: `−${describeCouponCreditRule().cost}`, tone: "debit" as const },
 ];
 
 export function CreditsSystem() {
@@ -128,7 +136,7 @@ export function CreditsSystem() {
                 ))}
                 <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 pt-4">
                   <dt className="truncate text-sm font-medium text-offwhite">Saldo restante</dt>
-                  <dd className="shrink-0 font-serif text-2xl text-gold">1 crédito</dd>
+                  <dd className="shrink-0 font-serif text-2xl text-gold">{formatCreditCount(REMAINING_BALANCE)}</dd>
                 </div>
               </dl>
             </div>

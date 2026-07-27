@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { describeCouponCreditRule, describeProductCreditRule } from "@/config/business-rules";
 
 import { LegalPage, type LegalSection } from "@/components/legal/legal-page";
 
@@ -27,8 +28,8 @@ const SECTIONS: LegalSection[] = [
       "Créditos não são moeda, não têm curso legal, não são conversíveis em dinheiro e não representam desconto adicional na loja.",
     ],
     bullets: [
-      "Ofertas com preço até R$ 50,00 custam 1 crédito; acima de R$ 50,00, 2 créditos.",
-      "Cupons custam 3 créditos.",
+      `Ofertas com preço ${describeProductCreditRule("low").range} custam ${describeProductCreditRule("low").cost}; ${describeProductCreditRule("high").range}, ${describeProductCreditRule("high").cost}.`,
+      describeCouponCreditRule().sentence,
       "O consumo de créditos remunera a curadoria e a verificação do conteúdo, e não garante estoque, preço, aprovação de pedido ou êxito da compra.",
       "Regras, custos e formas de obtenção de créditos podem ser ajustados; mudanças relevantes serão comunicadas na plataforma.",
     ],
