@@ -137,7 +137,7 @@ function HeroOfferCard({
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"}
         </span>
         <span className="text-fluid-micro font-medium uppercase tracking-[0.16em] text-offwhite/40">
-          Desbloquear
+          Liberar oferta
         </span>
       </div>
     </article>
