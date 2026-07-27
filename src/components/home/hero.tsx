@@ -3,8 +3,10 @@ import { ArrowRight, BadgeCheck, ShieldCheck, Sparkles, Store, TicketCheck } fro
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
+import { ParallaxOrbs } from "./parallax-orbs";
 import { Container } from "./primitives";
 import { Reveal } from "./reveal";
+
 
 import espressoImage from "@/assets/hero-product-espresso.jpg";
 import headphonesImage from "@/assets/hero-product-headphones.jpg";
