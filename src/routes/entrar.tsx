@@ -162,18 +162,21 @@ function SignInPage() {
               control={form.control}
               name="remember"
               render={({ field }) => (
-                <FormItem className="flex items-center gap-2 space-y-0">
+                // Ergonomia touch: o par caixa + rótulo forma um único alvo de
+                // 44px de altura, evitando toques imprecisos no quadrado de 16px.
+                <FormItem className="flex min-h-11 items-center gap-2 space-y-0">
                   <FormControl>
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={(checked) => field.onChange(checked === true)}
-                      className="border-border data-[state=checked]:border-gold data-[state=checked]:bg-gold data-[state=checked]:text-ink"
+                      className="size-5 border-border data-[state=checked]:border-gold data-[state=checked]:bg-gold data-[state=checked]:text-ink"
                     />
                   </FormControl>
-                  <FormLabel className="cursor-pointer text-fluid-xs font-normal text-muted-foreground">
+                  <FormLabel className="flex min-h-11 cursor-pointer items-center text-fluid-xs font-normal text-muted-foreground">
                     Lembrar de mim
                   </FormLabel>
                 </FormItem>
+
               )}
             />
 
