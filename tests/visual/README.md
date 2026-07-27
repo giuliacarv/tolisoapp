@@ -23,6 +23,13 @@ O runner reutiliza o servidor de desenvolvimento em `http://localhost:8080`
 | Tema claro (roxo/laranja/branco) | `/homepage2` | 1280×900 e 390×844 |
 | Tema escuro (Obsidian) | `/homepage2` | 1280×900 e 390×844 |
 | Header e hero isolados | `/homepage2` | 1280×900 e 390×844 |
+| Ausência de overflow horizontal (`/`, `/ofertas`, `/cupons`, `/como-funciona`) | várias | 280×720 e 1920×1080 |
+| Home nos extremos (página inteira) | `/` | 280×720 e 1920×1080 |
+
+Os cenários extremos vivem em `responsive-extremes.spec.ts` e rodam apenas nos
+projetos `xs-280` e `wide-1920` (`bunx playwright test --project=xs-280`). Eles
+medem `scrollWidth` × `clientWidth` e, ao falhar, listam os elementos que
+estouram a viewport — diagnóstico mais direto que um diff de pixels.
 
 As capturas de seções isoladas existem para que uma quebra pontual gere um
 diff legível, em vez de um diff de página inteira difícil de interpretar.

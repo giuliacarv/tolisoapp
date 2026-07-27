@@ -39,6 +39,29 @@ export function volatileRegions(page: Page): Locator[] {
 /**
  * Navega até a rota e estabiliza a página para captura visual.
  */
+/**
+ * Navega tolerando um reload precoce do Vite.
+ *
+ * Na primeira visita a uma rota o dev server pode reotimizar dependências e
+ * recarregar a página, destruindo o contexto de execução no meio dos scripts
+ * de estabilização. Uma segunda tentativa parte de um bundle já aquecido.
+ */
+async function gotoResilient(page: Page, path: string): Promise<void> {
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      await page.goto(path, { waitUntil: "domcontentloaded" });
+      await page.waitForLoadState("load").catch(() => {});
+      // Sonda barata: se o contexto sobreviver a isto, os scripts pesados
+      // abaixo também sobrevivem.
+      await page.waitForTimeout(250);
+      await page.evaluate(() => document.readyState);
+      return;
+    } catch (error) {
+      if (attempt === 1) throw error;
+    }
+  }
+}
+
 export async function gotoStable(page: Page, path: string): Promise<void> {
   await page.emulateMedia({ reducedMotion: "reduce" });
 
@@ -58,7 +81,10 @@ export async function gotoStable(page: Page, path: string): Promise<void> {
     );
   });
 
-  await page.goto(path, { waitUntil: "domcontentloaded" });
+  await gotoResilient(page, path);
+  // Espera o `load`: em cold start o Vite pode disparar um reload de
+  // otimização de dependências, destruindo o contexto durante os scripts
+  // de estabilização abaixo.
   await page.addStyleTag({ content: DETERMINISTIC_CSS });
 
   // Rola a página inteira para disparar lazy loading e observers de entrada,
