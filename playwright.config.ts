@@ -53,7 +53,28 @@ export default defineConfig({
     timeout: 120_000,
   },
   projects: [
-    { name: "desktop", use: { viewport: { width: 1280, height: 900 } } },
-    { name: "mobile", use: { viewport: { width: 390, height: 844 } } },
+    // Suíte principal de regressão visual (não inclui os extremos).
+    {
+      name: "desktop",
+      testIgnore: /responsive-extremes\.spec\.ts/,
+      use: { viewport: { width: 1280, height: 900 } },
+    },
+    {
+      name: "mobile",
+      testIgnore: /responsive-extremes\.spec\.ts/,
+      use: { viewport: { width: 390, height: 844 } },
+    },
+    // Extremos de largura: só os cenários de overflow/responsividade.
+    {
+      name: "xs-280",
+      testMatch: /responsive-extremes\.spec\.ts/,
+      use: { viewport: { width: 280, height: 720 } },
+    },
+    {
+      name: "wide-1920",
+      testMatch: /responsive-extremes\.spec\.ts/,
+      use: { viewport: { width: 1920, height: 1080 } },
+    },
   ],
+
 });
