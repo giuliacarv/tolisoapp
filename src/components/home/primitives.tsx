@@ -14,6 +14,11 @@ interface SectionHeadingProps {
   align?: "left" | "center";
   /** Nível semântico do título. Use "h1" quando for o título principal da página. */
   as?: "h1" | "h2" | "h3";
+  /**
+   * `serif` (padrão) mantém a voz editorial Fraunces.
+   * `display` usa a condensada Bebas Neue para títulos de impacto institucional.
+   */
+  variant?: "serif" | "display";
   className?: string;
 }
 
@@ -23,8 +28,11 @@ export function SectionHeading({
   description,
   align = "left",
   as: Heading = "h2",
+  variant = "serif",
   className,
 }: SectionHeadingProps) {
+  const isDisplay = variant === "display";
+
   return (
     <div
       className={cn(
@@ -35,23 +43,30 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.28em] text-muted-foreground">
           <span className="h-px w-6 bg-[image:var(--gradient-gold)]" aria-hidden />
           {eyebrow}
         </span>
       ) : null}
-      <Heading className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance text-foreground">
+      <Heading
+        className={cn(
+          "text-balance text-foreground",
+          isDisplay
+            ? "font-display text-fluid-h1 uppercase leading-[0.92] tracking-[0.01em]"
+            : "font-serif text-fluid-h2 leading-[1.06] tracking-[-0.028em]",
+        )}
+      >
         {title}
       </Heading>
       {description ? (
-        <p className="mt-2 max-w-[58ch] text-fluid-sm leading-[1.7] text-pretty text-muted-foreground">
+        <p className="mt-4 max-w-[58ch] text-fluid-sm leading-[1.75] text-pretty text-muted-foreground">
           {description}
         </p>
       ) : null}
     </div>
-
   );
 }
+
 
 export function Tag({ className, ...props }: ComponentProps<"span">) {
   return (
