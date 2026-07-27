@@ -73,6 +73,23 @@
   --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/*
+ * Breakpoints por ponto de virada do CONTEÚDO, não por dispositivo.
+ * - xs (22.5rem / 360px): menor largura em que o par "imagem + texto" dos
+ *   cards cabe lado a lado; abaixo disso tudo empilha em coluna única.
+ * - sm..2xl: mantidos nos valores padrão do Tailwind, já validados contra
+ *   as faixas intermediárias (768–1023px e 1280–1535px).
+ * - 3xl (120rem / 1920px): teto para telas ultrawide, onde o container
+ *   para de crescer e passamos a distribuir espaço em vez de esticar linha.
+ * Em rem para respeitar o zoom de fonte do sistema operacional.
+ */
+@theme {
+  --breakpoint-xs: 22.5rem;
+  --breakpoint-3xl: 120rem;
+}
+
+
+
 
 :root {
   /* Informa ao navegador quais controles nativos (scrollbar, inputs) usar. */
