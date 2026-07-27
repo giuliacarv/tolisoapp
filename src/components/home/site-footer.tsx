@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Mail, Sparkles, Youtube } from "lucide-react";
 
+import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import { handleAnchorClick } from "@/lib/smooth-scroll";
@@ -8,6 +9,7 @@ import { Container } from "./primitives";
 
 /**
  * Links do rodapé.
+ * - `to` → rota interna existente (navegação do router).
  * - `href` → âncora interna existente, com scroll suave.
  * - `message` → página institucional ainda inexistente: renderiza um botão
  *   com aparência de link e avisa o usuário por toast (sem navegar, sem
@@ -15,6 +17,7 @@ import { Container } from "./primitives";
  */
 interface FooterLink {
   label: string;
+  to?: string;
   href?: string;
   message?: string;
 }
@@ -32,29 +35,21 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: "Suporte",
     links: [
-      { label: "Central de ajuda", message: "Central de ajuda será disponibilizada em breve." },
-      { label: "Contato", message: "Página de contato será disponibilizada em breve." },
+      { label: "Central de ajuda", to: "/ajuda" },
+      { label: "Contato", to: "/contato" },
     ],
   },
   {
     title: "Legal",
     links: [
-      { label: "Termos de uso", message: "Termos de uso serão adicionados antes do lançamento." },
-      {
-        label: "Política de privacidade",
-        message: "Política de privacidade será adicionada antes do lançamento.",
-      },
-      {
-        label: "Política de cookies",
-        message: "Política de cookies será adicionada antes do lançamento.",
-      },
-      {
-        label: "Divulgação de afiliados",
-        message: "Divulgação de afiliados será adicionada antes do lançamento.",
-      },
+      { label: "Termos de uso", to: "/termos" },
+      { label: "Política de privacidade", to: "/privacidade" },
+      { label: "Política de cookies", to: "/cookies" },
+      { label: "Divulgação de afiliados", to: "/afiliados" },
     ],
   },
 ];
+
 
 
 const SOCIALS = [
