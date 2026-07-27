@@ -185,14 +185,21 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
        * Bento assimétrico: o primeiro bloco ocupa 2 colunas x 2 linhas a partir
        * de `lg`, criando um ponto focal e evitando a monotonia de 6 caixas iguais.
        */}
-      <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 lg:gap-5">
+      <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
         {CATEGORIES.map((category, index) => (
           <Reveal
             as="li"
             key={category.id}
             delay={index * 60}
-            className={cn("min-w-0", index === 0 && "sm:col-span-2 lg:row-span-2")}
+            className={cn(
+              "min-w-0",
+              // 6 itens em 8 células: o primeiro e o último ocupam duas colunas,
+              // fechando duas linhas cheias sem buracos na grade.
+              index === 0 && "sm:col-span-2",
+              index === CATEGORIES.length - 1 && "sm:col-span-2",
+            )}
           >
+
             <CategoryCard
               category={category}
               index={index}
