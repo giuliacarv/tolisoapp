@@ -93,7 +93,7 @@ export interface Product {
   updatedAt?: string;
 }
 
-export type CouponDiscountType = "percentage" | "fixed" | "shipping";
+export type CouponDiscountType = "percentage" | "fixed" | "shipping" | "special";
 
 /** Estados possíveis exibidos no card de cupom. */
 export type CouponStatus = "validated" | "pending" | "expired";
@@ -108,7 +108,7 @@ export interface Coupon {
   /** Código FICTÍCIO — nunca exibido por inteiro antes do resgate autenticado. */
   code: string;
   discountType: CouponDiscountType;
-  /** Percentual (0-100), valor em BRL, ou 0 para frete grátis. */
+  /** Percentual (0-100), valor em BRL, ou 0 para frete grátis/benefício especial. */
   discountValue: number;
   /** Compra mínima em BRL; null quando não há exigência. */
   minimumPurchase: number | null;

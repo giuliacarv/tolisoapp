@@ -38,6 +38,8 @@ export function formatDiscountLabel(
       return `${formatBRL(coupon.discountValue)} OFF`;
     case "shipping":
       return "Frete grátis";
+    case "special":
+      return "Benefício especial";
     default:
       return "Desconto";
   }
