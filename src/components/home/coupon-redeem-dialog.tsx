@@ -4,14 +4,12 @@ import { toast } from "sonner";
 
 import {
   COUPON_REDEMPTION_COST,
-  formatBRL,
-  formatDateBR,
   formatDiscountLabel,
   getCouponStatus,
-  type Coupon,
-  type CouponStatus,
-} from "@/data/coupons";
-import { DEMO_CREDIT_BALANCE, formatCreditsLabel, getRemainingBalance } from "@/data/credits";
+} from "@/domain/coupons/coupon-rules";
+import { DEMO_CREDIT_BALANCE, getRemainingBalance } from "@/domain/credits/credit-rules";
+import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
+import type { Coupon, CouponStatus } from "@/types";
 
 import { ConfirmDialog } from "./confirm-dialog";
 

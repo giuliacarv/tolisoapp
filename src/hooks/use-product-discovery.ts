@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 
-import type { Product } from "@/data/products";
+import type { Product } from "@/types";
 import { filterProducts } from "@/domain/products/filters";
 import { DEFAULT_PAGE_SIZE, paginate } from "@/domain/products/pagination";
 import { sortProducts, type SortId } from "@/domain/products/sorting";

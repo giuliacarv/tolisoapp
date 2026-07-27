@@ -1,7 +1,7 @@
 import { ArrowRight, Coins, Minus, Ticket, Wallet } from "lucide-react";
 import { toast } from "sonner";
 
-import { COUPON_REDEMPTION_COST } from "@/data/coupons";
+import { COUPON_REDEMPTION_COST } from "@/domain/coupons/coupon-rules";
 
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 

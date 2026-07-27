@@ -1,7 +1,9 @@
 import { Coins, ExternalLink, Store as StoreIcon } from "lucide-react";
 import { toast } from "sonner";
 
-import { formatBRL, formatCreditsLabel, type Product } from "@/data/products";
+import { calculateSavings } from "@/domain/products/product-rules";
+import { formatBRL, formatCreditsLabel } from "@/lib/format";
+import type { Product } from "@/types";
 
 import { ConfirmDialog } from "./confirm-dialog";
 

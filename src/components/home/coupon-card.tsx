@@ -2,15 +2,13 @@ import { BadgeCheck, CalendarClock, CalendarX2, Clock3, Coins, ShieldAlert, Tick
 
 import {
   COUPON_REDEMPTION_COST,
-  formatBRL,
-  formatDateBR,
   formatDiscountLabel,
   getCouponStatus,
   maskCouponCode,
-  type Coupon,
-  type CouponStatus,
-} from "@/data/coupons";
+} from "@/domain/coupons/coupon-rules";
+import { formatBRL, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import type { Coupon, CouponStatus } from "@/types";
 
 import { buttonOutline } from "./primitives";
 
