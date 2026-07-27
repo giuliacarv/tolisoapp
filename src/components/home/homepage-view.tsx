@@ -67,7 +67,7 @@ export function HomepageView() {
           <TrustSection />
         </Reveal>
       </main>
-      <Footer />
+      <InstitutionalFooter />
       <ThemeToggle
         theme={isDark ? "dark" : "light"}
         toggleTheme={() => setIsDark((prev) => !prev)}
