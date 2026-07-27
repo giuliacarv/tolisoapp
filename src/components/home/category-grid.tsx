@@ -179,12 +179,12 @@ export interface CategoryGridProps {
 }
 
 /**
- * Classes da malha. Linhas de 176px (22 × 8) e gaps de 16px/24px mantêm todo o
+ * Classes da malha. Linhas de 224px (28 × 8) e gaps de 16px/24px mantêm todo o
  * bento sobre a grade de 8px. Compartilhado entre conteúdo e skeleton para que
  * o placeholder tenha exatamente a mesma geometria (CLS zero).
  */
 const BENTO_GRID =
-  "mt-12 grid auto-rows-[11rem] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6";
+  "mt-12 grid auto-rows-[14rem] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6";
 
 /** Placeholder com a mesma malha bento, evitando salto de layout (CLS). */
 function CategoryGridSkeleton() {
