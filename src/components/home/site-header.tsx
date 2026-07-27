@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Heart, Menu, Search, Sparkles } from "lucide-react";
+import { Heart, Menu, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 import { SearchHeader } from "@/components/search/search-header";
