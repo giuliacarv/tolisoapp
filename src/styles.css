@@ -827,3 +827,151 @@
     display: none;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * DESIGN SYSTEM "VIVID" (referências enviadas pelo cliente)
+ *
+ * Estética: laranja saturado + tinta azul-marinho sobre creme, cartões brancos
+ * com raio muito grande, pílulas, sombras difusas e nenhum serif.
+ *
+ * É um tema ESCOPADO: aplique a classe `.theme-vivid` no wrapper da página.
+ * Assim a identidade Noir & Gold da home em produção permanece intacta.
+ * ------------------------------------------------------------------------ */
+.theme-vivid {
+  color-scheme: light;
+  --radius: 1.5rem;
+
+  /* Núcleo da paleta */
+  --vivid: oklch(0.66 0.215 34); /* laranja de ação (#FF4A17 aprox.) */
+  --vivid-strong: oklch(0.6 0.22 32);
+  --vivid-soft: oklch(0.95 0.03 45);
+  --navy: oklch(0.24 0.06 268); /* tinta dos títulos */
+  --cream: oklch(0.975 0.014 60);
+
+  --background: var(--cream);
+  --foreground: var(--navy);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--navy);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--navy);
+  --primary: var(--vivid);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.965 0.012 60);
+  --secondary-foreground: var(--navy);
+  --muted: oklch(0.965 0.012 60);
+  --muted-foreground: oklch(0.55 0.02 268);
+  --accent: var(--vivid);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.6 0.19 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.92 0.012 60);
+  --input: oklch(0.92 0.012 60);
+  --ring: var(--vivid);
+
+  /* Acentos de dado herdados do produto, recalibrados para o fundo creme. */
+  --gold: var(--vivid);
+  --gold-soft: var(--vivid-soft);
+  --saving: oklch(0.55 0.13 158);
+  --amber: oklch(0.7 0.15 70);
+  --discount: var(--vivid);
+  --petrol: oklch(0.5 0.1 250);
+  --petrol-bright: oklch(0.62 0.14 255);
+  --ink: var(--navy);
+  --graphite: oklch(0.3 0.05 268);
+  --offwhite: var(--cream);
+
+  /* Sombras mais aéreas e frias que as do tema noir. */
+  --shadow-soft: 0 1px 2px oklch(0.24 0.06 268 / 0.05), 0 10px 30px -14px oklch(0.24 0.06 268 / 0.18);
+  --shadow-lift: 0 2px 6px oklch(0.24 0.06 268 / 0.06), 0 20px 46px -18px oklch(0.24 0.06 268 / 0.2);
+  --shadow-float: 0 6px 14px oklch(0.24 0.06 268 / 0.07), 0 32px 70px -24px oklch(0.24 0.06 268 / 0.24);
+
+  font-family: "Poppins", var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Títulos do tema vivid são geométricos e pesados — nunca serifados. */
+.theme-vivid :is(h1, h2, h3, h4),
+.theme-vivid .font-serif {
+  font-family: "Poppins", var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+}
+
+.theme-vivid :focus-visible {
+  outline-color: var(--vivid);
+}
+
+/** Faixa de destaque laranja (substitui o `noir-band` neste tema). */
+.theme-vivid .noir-band {
+  background: linear-gradient(160deg, var(--vivid) 0%, var(--vivid-strong) 100%);
+  color: oklch(0.99 0 0);
+}
+
+/** Superfícies brancas com raio generoso, como nos cartões da referência. */
+@utility surface-vivid {
+  border-radius: 1.75rem;
+  background-color: var(--card);
+  box-shadow: var(--shadow-soft);
+}
+
+/** Pílula de ação sólida (CTA principal). */
+@utility pill-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding-inline: 1.5rem;
+  min-height: 2.75rem;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+  transition: all 0.3s var(--ease-premium);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/** Pílula neutra escura (Sign In da referência). */
+@utility pill-ink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding-inline: 1.5rem;
+  min-height: 2.75rem;
+  font-weight: 600;
+  background-color: var(--ink);
+  color: oklch(0.99 0 0);
+  transition: all 0.3s var(--ease-premium);
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+/** Chip de filtro; o estado ativo recebe o laranja. */
+@utility chip-vivid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  padding: 0.5rem 1rem;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--muted-foreground);
+  transition: all 0.3s var(--ease-premium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-vivid * {
+    transition-duration: 0.01ms !important;
+  }
+}

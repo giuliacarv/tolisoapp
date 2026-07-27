@@ -16,6 +16,7 @@ import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as Homepage2RouteImport } from './routes/homepage2'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
 import { Route as CookiesRouteImport } from './routes/cookies'
@@ -62,6 +63,11 @@ const FavoritosRoute = FavoritosRouteImport.update({
 const EntrarRoute = EntrarRouteImport.update({
   id: '/entrar',
   path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CriarContaRoute = CriarContaRouteImport.update({
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
+  '/design-system': typeof DesignSystemRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
   '/homepage2': typeof Homepage2Route
@@ -155,6 +162,7 @@ export interface FileRoutesByTo {
   '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
+  '/design-system': typeof DesignSystemRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
   '/homepage2': typeof Homepage2Route
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/cookies': typeof CookiesRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
+  '/design-system': typeof DesignSystemRoute
   '/entrar': typeof EntrarRoute
   '/favoritos': typeof FavoritosRoute
   '/homepage2': typeof Homepage2Route
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/creditos'
     | '/criar-conta'
+    | '/design-system'
     | '/entrar'
     | '/favoritos'
     | '/homepage2'
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/creditos'
     | '/criar-conta'
+    | '/design-system'
     | '/entrar'
     | '/favoritos'
     | '/homepage2'
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/cookies'
     | '/creditos'
     | '/criar-conta'
+    | '/design-system'
     | '/entrar'
     | '/favoritos'
     | '/homepage2'
@@ -264,6 +276,7 @@ export interface RootRouteChildren {
   CookiesRoute: typeof CookiesRoute
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
+  DesignSystemRoute: typeof DesignSystemRoute
   EntrarRoute: typeof EntrarRoute
   FavoritosRoute: typeof FavoritosRoute
   Homepage2Route: typeof Homepage2Route
@@ -326,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/entrar'
       fullPath: '/entrar'
       preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/criar-conta': {
@@ -424,6 +444,7 @@ const rootRouteChildren: RootRouteChildren = {
   CookiesRoute: CookiesRoute,
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
+  DesignSystemRoute: DesignSystemRoute,
   EntrarRoute: EntrarRoute,
   FavoritosRoute: FavoritosRoute,
   Homepage2Route: Homepage2Route,
