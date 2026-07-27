@@ -88,7 +88,7 @@ function RecoverPasswordPage() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">E-mail</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">E-mail</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -100,7 +100,7 @@ function RecoverPasswordPage() {
                     className={authInput}
                   />
                 </FormControl>
-                <FormDescription className="text-offwhite/50">
+                <FormDescription className="text-muted-foreground">
                   Use o mesmo e-mail utilizado no cadastro.
                 </FormDescription>
                 <FormMessage />
