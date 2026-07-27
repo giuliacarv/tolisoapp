@@ -12,6 +12,8 @@ interface SectionHeadingProps {
   title: ReactNode;
   description?: string;
   align?: "left" | "center";
+  /** Nível semântico do título. Use "h1" quando for o título principal da página. */
+  as?: "h1" | "h2" | "h3";
   className?: string;
 }
 
@@ -20,6 +22,7 @@ export function SectionHeading({
   title,
   description,
   align = "left",
+  as: Heading = "h2",
   className,
 }: SectionHeadingProps) {
   return (
@@ -37,9 +40,9 @@ export function SectionHeading({
           {eyebrow}
         </span>
       ) : null}
-      <h2 className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance text-foreground">
+      <Heading className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance text-foreground">
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p className="mt-2 max-w-[58ch] text-fluid-sm leading-[1.7] text-pretty text-muted-foreground">
           {description}
