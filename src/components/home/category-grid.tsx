@@ -21,18 +21,56 @@ const CATEGORY_ICONS: Record<CategoryIconName, LucideIcon> = {
   watch: Watch,
 };
 
+/** Tamanhos do bento. Cada variante define proporção e densidade tipográfica. */
+type BentoSize = "hero" | "wide" | "compact";
+
+interface BentoSlot {
+  size: BentoSize;
+  /** Classes de posicionamento na grade (mobile → sm → lg). */
+  span: string;
+}
+
+/**
+ * Malha assimétrica de 4 colunas × linhas de 176px (22 × 8px).
+ *
+ *   ┌───────────────┬───────────────┐
+ *   │               │     wide      │
+ *   │     hero      ├───────┬───────┤
+ *   │   (2 × 2)     │ comp. │ comp. │
+ *   ├───────────────┼───────┴───────┤
+ *   │     wide      │     wide      │
+ *   └───────────────┴───────────────┘
+ *
+ * O padrão cobre 6 blocos e se repete em ciclo caso o catálogo cresça, sempre
+ * fechando linhas cheias — nunca sobra buraco na grade.
+ */
+const BENTO_PATTERN: readonly BentoSlot[] = [
+  { size: "hero", span: "sm:col-span-2 sm:row-span-2" },
+  { size: "wide", span: "sm:col-span-2" },
+  { size: "compact", span: "sm:col-span-1" },
+  { size: "compact", span: "sm:col-span-1" },
+  { size: "wide", span: "sm:col-span-2" },
+  { size: "wide", span: "sm:col-span-2" },
+];
+
+function slotAt(index: number): BentoSlot {
+  return BENTO_PATTERN[index % BENTO_PATTERN.length];
+}
+
 interface CategoryCardProps {
   category: Category;
   index: number;
   isActive: boolean;
-  /** O primeiro bloco da grade bento ocupa 2x2 e recebe tratamento noir. */
-  featured?: boolean;
+  size: BentoSize;
   onSelect: (id: string) => void;
 }
 
-function CategoryCard({ category, index, isActive, featured = false, onSelect }: CategoryCardProps) {
+function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCardProps) {
   const Icon = CATEGORY_ICONS[category.iconName] ?? Smartphone;
-  const dark = featured || isActive;
+  const isHero = size === "hero";
+  // Bloco focal e bloco selecionado recebem o mesmo tratamento de superfície
+  // escura, deixando claro qual filtro está ativo.
+  const dark = isHero || isActive;
 
   return (
     <button
@@ -41,13 +79,17 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
       aria-pressed={isActive}
       className={cn(
         cardInteractive,
-        "motion-safe-transform group relative isolate flex h-full w-full flex-col items-start overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        featured ? "p-7 sm:p-9" : "p-6",
+        "motion-safe-transform group relative isolate flex h-full w-full flex-col items-start overflow-hidden text-left",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        // Espaçamento interno em múltiplos de 8px: 24px / 32px / 40px.
+        size === "compact" && "p-6",
+        size === "wide" && "p-6 sm:p-8",
+        isHero && "p-8 sm:p-10",
         dark &&
           "border-ink bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift hover:border-gold/45",
       )}
     >
-      {/* Halo dourado assimétrico + contraluz frio no bloco em destaque. */}
+      {/* Halo dourado assimétrico + contraluz frio nas superfícies escuras. */}
       {dark ? (
         <>
           <span
@@ -61,13 +103,12 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
         </>
       ) : null}
 
-
       {/* Índice editorial: numeração discreta que dá ritmo à grade. */}
       <span
         aria-hidden
         className={cn(
-          "absolute right-5 top-5 font-serif tabular-nums transition-colors duration-200",
-          featured ? "text-2xl" : "text-lg",
+          "absolute right-6 top-6 font-serif tabular-nums transition-colors duration-200",
+          isHero ? "text-2xl" : "text-lg",
           dark ? "text-offwhite/20" : "text-border",
         )}
       >
@@ -77,22 +118,23 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
       <span
         className={cn(
           "grid shrink-0 place-items-center rounded-xl border transition-colors duration-200",
-          featured ? "h-14 w-14" : "h-11 w-11",
+          isHero ? "h-14 w-14" : "h-11 w-11",
           dark ? "border-gold/30 bg-offwhite/8" : "border-gold/25 bg-gold/8",
         )}
       >
         <Icon
-          className={cn(featured ? "h-6 w-6" : "h-5 w-5", "text-gold")}
+          className={cn(isHero ? "h-6 w-6" : "h-5 w-5", "text-gold")}
           strokeWidth={1.6}
           aria-hidden
         />
       </span>
 
-      <span className={cn("flex min-w-0 flex-col gap-1.5", featured ? "mt-7" : "mt-4")}>
+      {/* Ritmo vertical 8pt: 32px (hero) ou 24px depois do ícone. */}
+      <span className={cn("flex min-w-0 flex-col gap-2", isHero ? "mt-8" : "mt-6")}>
         <span
           className={cn(
             "font-serif tracking-tight",
-            featured ? "text-2xl leading-[1.15] sm:text-3xl" : "text-lg font-medium",
+            isHero ? "text-2xl leading-[1.15] sm:text-3xl" : "text-lg font-medium",
           )}
         >
           {category.label}
@@ -100,8 +142,11 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
         <span
           className={cn(
             "max-w-[38ch] leading-relaxed",
-            featured ? "text-fluid-sm" : "text-fluid-xs",
+            isHero ? "text-fluid-sm" : "text-fluid-xs",
             dark ? "text-offwhite/70" : "text-muted-foreground",
+            // Nos blocos baixos a descrição fica em duas linhas para não
+            // empurrar o rodapé do card.
+            size === "compact" && "line-clamp-2",
           )}
         >
           {category.description}
@@ -110,7 +155,7 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
 
       <span
         className={cn(
-          "mt-auto inline-flex items-center gap-1.5 pt-6 text-xs font-semibold uppercase tracking-[0.14em]",
+          "mt-auto inline-flex items-center gap-2 pt-6 text-xs font-semibold uppercase tracking-[0.14em]",
           dark ? "text-gold" : "text-muted-foreground",
         )}
       >
@@ -133,17 +178,24 @@ export interface CategoryGridProps {
   isLoading?: boolean;
 }
 
+/**
+ * Classes da malha. Linhas de 176px (22 × 8) e gaps de 16px/24px mantêm todo o
+ * bento sobre a grade de 8px. Compartilhado entre conteúdo e skeleton para que
+ * o placeholder tenha exatamente a mesma geometria (CLS zero).
+ */
+const BENTO_GRID =
+  "mt-12 grid auto-rows-[11rem] grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6";
+
 /** Placeholder com a mesma malha bento, evitando salto de layout (CLS). */
 function CategoryGridSkeleton() {
   return (
-    <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5" aria-hidden>
-      {Array.from({ length: 6 }).map((_, index) => (
+    <ul className={BENTO_GRID} aria-hidden>
+      {Array.from({ length: BENTO_PATTERN.length }).map((_, index) => (
         <li
           key={`category-skeleton-${index}`}
           className={cn(
-            "min-w-0 animate-pulse rounded-2xl border border-border bg-muted/50",
-            index === 0 ? "h-64 sm:col-span-2" : "h-44",
-            index === 5 && "sm:col-span-2",
+            "min-w-0 animate-pulse rounded-[18px] border border-border bg-muted/50",
+            slotAt(index).span,
           )}
         />
       ))}
@@ -167,38 +219,32 @@ export function CategoryGrid({
         className="mx-auto items-center text-center"
       />
 
-      {/*
-       * Bento assimétrico: o primeiro bloco ocupa 2 colunas x 2 linhas a partir
-       * de `lg`, criando um ponto focal e evitando a monotonia de 6 caixas iguais.
-       */}
-      {isLoading ? <CategoryGridSkeleton /> : (
-      <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-        {categories.map((category, index) => (
-          <Reveal
-            as="li"
-            key={category.id}
-            delay={index * 60}
-            className={cn(
-              "min-w-0",
-              // 6 itens em 8 células: o primeiro e o último ocupam duas colunas,
-              // fechando duas linhas cheias sem buracos na grade.
-              index === 0 && "sm:col-span-2",
-              index === categories.length - 1 && "sm:col-span-2",
-            )}
-          >
+      {isLoading ? (
+        <CategoryGridSkeleton />
+      ) : (
+        <ul className={BENTO_GRID}>
+          {categories.map((category, index) => {
+            const slot = slotAt(index);
 
-            <CategoryCard
-              category={category}
-              index={index}
-              featured={index === 0}
-              isActive={activeCategory === category.id}
-              onSelect={onSelect}
-            />
-          </Reveal>
-        ))}
-      </ul>
+            return (
+              <Reveal
+                as="li"
+                key={category.id}
+                delay={index * 60}
+                className={cn("min-w-0", slot.span)}
+              >
+                <CategoryCard
+                  category={category}
+                  index={index}
+                  size={slot.size}
+                  isActive={activeCategory === category.id}
+                  onSelect={onSelect}
+                />
+              </Reveal>
+            );
+          })}
+        </ul>
       )}
     </div>
   );
 }
-
