@@ -72,6 +72,7 @@ function CatalogPage() {
           <Container>
             <SectionHeading
               eyebrow="Ofertas selecionadas"
+              as="h1"
               title="Encontre sua próxima oportunidade de economia"
               description="Explore produtos selecionados em diferentes lojas, categorias e faixas de preço."
             />

@@ -78,6 +78,7 @@ function CouponsPage() {
           <Container>
             <SectionHeading
               eyebrow="Benefícios selecionados"
+              as="h1"
               title="Cupons para economizar nas suas lojas favoritas"
               description="Consulte condições, validade e status de verificação antes de realizar o resgate."
             />

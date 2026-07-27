@@ -6,11 +6,12 @@
  * resgate autenticado.
  */
 
+import { COUPON_CREDIT_COST } from "@/config/business-rules";
 import { formatBRL } from "@/lib/format";
 import type { Coupon, CouponStatus } from "@/types";
 
 /** Custo fixo, em créditos, para resgatar qualquer cupom. */
-export const COUPON_REDEMPTION_COST = 3;
+export const COUPON_REDEMPTION_COST = COUPON_CREDIT_COST;
 
 /**
  * Estado do cupom. A expiração tem prioridade sobre a validação:
