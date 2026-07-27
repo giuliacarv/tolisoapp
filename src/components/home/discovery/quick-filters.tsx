@@ -14,7 +14,7 @@ export interface QuickFiltersProps {
 /** Chips de filtro rápido da vitrine. */
 export function QuickFilters({ options, activeId, onSelect }: QuickFiltersProps) {
   return (
-    <div className="mt-5 flex flex-wrap justify-center gap-2">
+    <div className="flex flex-wrap justify-center gap-2">
       {options.map(({ id, label }) => {
         const isActive = activeId === id;
         return (
