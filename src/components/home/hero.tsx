@@ -14,10 +14,10 @@ import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
 
 /** Sinais de confiança exibidos abaixo dos CTAs. */
 const TRUST_SIGNALS = [
-  { label: "Ofertas selecionadas", icon: BadgeCheck },
-  { label: "Cupons verificados", icon: TicketCheck },
-  { label: "Lojas reconhecidas", icon: Store },
-  { label: "Links seguros", icon: ShieldCheck },
+  { label: "Curadoria feita por IA", icon: BadgeCheck },
+  { label: "Cupom só entra depois de testado", icon: TicketCheck },
+  { label: "Só lojas que você já conhece", icon: Store },
+  { label: "Você compra direto na loja", icon: ShieldCheck },
 ];
 
 interface HeroOffer {
