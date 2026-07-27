@@ -5,13 +5,13 @@ import { filterProducts } from "@/domain/products/filters";
 import { DEFAULT_PAGE_SIZE, paginate } from "@/domain/products/pagination";
 import { sortProducts, type SortId } from "@/domain/products/sorting";
 
-import { useSimulatedLoading } from "./use-simulated-loading";
-
 /** Id reservado para "sem filtro de categoria". */
 export const ALL_FILTER_ID = "all";
 
 export interface UseProductDiscoveryOptions {
   products: readonly Product[];
+  /** Carregamento vindo da camada de serviços (`useAsyncResource`). */
+  isLoading?: boolean;
   /** Traduz o id do filtro para o rótulo de categoria dos dados. */
   resolveCategoryLabel: (filterId: string) => string | undefined;
   pageSize?: number;
@@ -23,6 +23,7 @@ export interface UseProductDiscoveryOptions {
  */
 export function useProductDiscovery({
   products,
+  isLoading = false,
   resolveCategoryLabel,
   pageSize = DEFAULT_PAGE_SIZE,
 }: UseProductDiscoveryOptions) {
@@ -30,8 +31,6 @@ export function useProductDiscovery({
   const [activeFilter, setActiveFilter] = useState(ALL_FILTER_ID);
   const [sort, setSort] = useState<SortId>("recommended");
   const [page, setPage] = useState(1);
-
-  const isLoading = useSimulatedLoading([query, activeFilter, sort]);
 
   const categoryLabel =
     activeFilter === ALL_FILTER_ID ? undefined : resolveCategoryLabel(activeFilter);
