@@ -257,7 +257,9 @@ export function SearchAndCategories() {
         </Container>
 
         <ProductModals modals={modals} />
-      </section>
+        </section>
+      </div>
     </>
+
   );
 }
