@@ -28,13 +28,23 @@ const iconButton =
  */
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      setScrolled(window.scrollY > 8);
+      // Evita divisão por zero em páginas curtas (progresso permanece 0).
+      setProgress(scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const handleLogin = () => {
@@ -60,6 +70,20 @@ export function Header() {
           scrolled ? "opacity-100" : "opacity-0",
         )}
       />
+
+      {/*
+       * Indicador de progresso de leitura: 2px de ouro que acompanham a rolagem.
+       * Puramente decorativo — a informação já existe no scrollbar nativo.
+       */}
+      <span
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-x-0 bottom-0 h-0.5 origin-left bg-[image:var(--gradient-gold)] transition-opacity duration-300",
+          scrolled ? "opacity-100" : "opacity-0",
+        )}
+        style={{ transform: `scaleX(${progress})` }}
+      />
+
 
       <Container className="flex h-[var(--header-h)] items-center justify-between gap-2 sm:gap-4">
         <a
