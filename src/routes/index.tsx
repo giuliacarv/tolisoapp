@@ -1,23 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { Reveal } from "@/components/home/reveal";
-import { CreditsSection } from "@/components/home/credits-system";
-import { HeroSection } from "@/components/home/hero";
-import { LogoCarousel } from "@/components/home/logo-carousel";
-import { HowItWorks } from "@/components/home/how-it-works";
-import { SearchAndCategories } from "@/components/home/discovery-section";
-import { Footer } from "@/components/home/site-footer";
-import { Header } from "@/components/home/site-header";
-import { TrustSection } from "@/components/home/trust-section";
-import { CouponSection } from "@/components/home/validated-coupons";
-import { ThemeToggle } from "@/components/home/theme-toggle";
-
+import { HomepageView } from "@/components/home/homepage-view";
 
 const SITE_URL = "https://descontai1.lovable.app";
 const TITLE = "EconomizAI | Ofertas e cupons selecionados";
 const DESCRIPTION =
   "Inteligência Artificial pra Economizar de Verdade! Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
+
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -65,33 +56,5 @@ export const Route = createFileRoute("/")({
 
 
 function Index() {
-  return (
-    <div className="min-h-dvh bg-background">
-      <Header />
-      <main>
-        <HeroSection />
-        <LogoCarousel />
-
-        {/* Cada seção entra com um leve deslocamento ao alcançar a viewport. */}
-        <Reveal>
-          <SearchAndCategories />
-        </Reveal>
-        <Reveal>
-          <CouponSection />
-        </Reveal>
-        <Reveal>
-          <HowItWorks />
-        </Reveal>
-        <Reveal>
-          <CreditsSection />
-        </Reveal>
-        <Reveal>
-          <TrustSection />
-        </Reveal>
-      </main>
-      <Footer />
-      <ThemeToggle />
-
-    </div>
-  );
+  return <HomepageView />;
 }

@@ -1,18 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 
-import { Reveal } from "@/components/home/reveal";
-import { CreditsSection } from "@/components/home/credits-system";
-import { HeroSection } from "@/components/home/hero";
-import { LogoCarousel } from "@/components/home/logo-carousel";
-import { HowItWorks } from "@/components/home/how-it-works";
-import { SearchAndCategories } from "@/components/home/discovery-section";
-import { Footer } from "@/components/home/site-footer";
-import { Header } from "@/components/home/site-header";
-import { TrustSection } from "@/components/home/trust-section";
-import { CouponSection } from "@/components/home/validated-coupons";
-import { ThemeToggle } from "@/components/home/theme-toggle";
-import { cn } from "@/lib/utils";
+import { HomepageView } from "@/components/home/homepage-view";
 
 const SITE_URL = "https://descontai1.lovable.app";
 const TITLE = "EconomizAI | Novo design (rascunho)";
@@ -39,54 +27,9 @@ export const Route = createFileRoute("/homepage2")({
 });
 
 /**
- * Cópia isolada da home. Recebe o tema escopado "Obsidian" (obsidiana +
- * violeta elétrico no escuro; roxo + laranja + branco no claro). O estado
- * de tema é controlado localmente, sem alterar o tema global do documento.
+ * Alias histórico da home. Renderiza exatamente a mesma view de "/",
+ * mantida apenas para links antigos e para os testes de regressão visual.
  */
 function Homepage2() {
-  const [isDark, setIsDark] = useState(false);
-
-  return (
-    <div
-      className={cn(
-        "theme-obsidian relative min-h-dvh bg-background text-foreground",
-        isDark && "dark",
-      )}
-    >
-      {/* Ambiência: focos de luz roxo e laranja, fixos, atrás de todo o conteúdo. */}
-      <div
-        aria-hidden
-        className="ambient-light pointer-events-none fixed inset-0 -z-10 opacity-70"
-      />
-
-      <Header />
-      <main>
-        <HeroSection />
-        <LogoCarousel />
-
-        <Reveal>
-          <SearchAndCategories />
-        </Reveal>
-        <Reveal>
-          <CouponSection />
-        </Reveal>
-        <Reveal>
-          <HowItWorks />
-        </Reveal>
-        <Reveal>
-          <CreditsSection />
-        </Reveal>
-        <Reveal>
-          <TrustSection />
-        </Reveal>
-      </main>
-      <Footer />
-      <ThemeToggle
-        theme={isDark ? "dark" : "light"}
-        toggleTheme={() => setIsDark((prev) => !prev)}
-        mounted={true}
-      />
-    </div>
-  );
+  return <HomepageView />;
 }
-
