@@ -229,7 +229,7 @@ export function SearchAndCategories() {
                 items={discovery.results}
                 getKey={(product) => product.id}
                 ariaLabel="Carrossel de ofertas em destaque"
-                speed={45}
+                intervalMs={3600}
                 renderItem={(product) => (
                   <div className="w-full">
                     <ProductCard
