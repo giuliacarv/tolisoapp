@@ -1,4 +1,5 @@
-import { BadgeCheck, Coins, ExternalLink, Store as StoreIcon } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ArrowUpRight, BadgeCheck, Coins, ExternalLink, Store as StoreIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import {
@@ -104,6 +105,17 @@ export function ProductDetailsModal({
             {formatCreditsLabel(product.creditsRequired)}
           </span>
         </div>
+
+        {/* Acesso à página dedicada: mantém o modal como resumo. */}
+        <Link
+          to="/ofertas/$slug"
+          params={{ slug: product.slug }}
+          onClick={() => onOpenChange(false)}
+          className="inline-flex min-h-11 items-center gap-1.5 self-start rounded-lg text-fluid-xs font-semibold text-foreground underline-offset-4 transition-colors duration-200 hover:text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+        >
+          Ver página da oferta
+          <ArrowUpRight className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
+        </Link>
 
         <p className="text-xs leading-relaxed text-muted-foreground">
           Preço, disponibilidade e condições são definidos pela loja parceira e podem mudar sem

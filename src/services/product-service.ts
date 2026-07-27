@@ -32,6 +32,8 @@ export interface ProductService {
   listFeatured(): Promise<Product[]>;
   getById(id: string): Promise<Product>;
   findBySlug(slug: string): Promise<Product | null>;
+  /** Ofertas da mesma categoria, excluindo o próprio produto. */
+  listRelated(productId: string, limit?: number): Promise<Product[]>;
   /** Prévia informativa de resgate — não debita créditos. */
   previewRedemption(productId: string): Promise<RedemptionPreview>;
 }
@@ -69,6 +71,18 @@ export const productService: ProductService = {
   async findBySlug(slug) {
     const product = MOCK_PRODUCTS.find((candidate) => candidate.slug === slug);
     return resolveMock(product ?? null);
+  },
+
+  async listRelated(productId, limit = 4) {
+    const current = MOCK_PRODUCTS.find((candidate) => candidate.id === productId);
+    if (!current) return resolveMock([]);
+
+    const related = MOCK_PRODUCTS.filter(
+      (candidate) =>
+        candidate.id !== current.id && candidate.categoryId === current.categoryId,
+    ).slice(0, limit);
+
+    return resolveMock(related);
   },
 
   async previewRedemption(productId) {

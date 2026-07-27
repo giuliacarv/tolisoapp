@@ -23,7 +23,7 @@ const DESCRIPTION =
   "Explore produtos selecionados em diferentes lojas, categorias e faixas de preço no catálogo do DESCONTAI.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
 
-export const Route = createFileRoute("/ofertas")({
+export const Route = createFileRoute("/ofertas/")({
   head: () => ({
     meta: [
       { title: TITLE },

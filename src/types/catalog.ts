@@ -80,6 +80,17 @@ export interface Product {
   publishedAt: string;
   /** Disponibilidade na loja parceira. Ausente = disponível. */
   available?: boolean;
+  /**
+   * Imagens adicionais da oferta. Ausente ou com um único item = sem
+   * miniaturas na página de detalhe.
+   */
+  gallery?: string[];
+  /** Características objetivas do produto (bullets curtos). */
+  highlights?: string[];
+  /** Condições da oferta informadas pela loja parceira. */
+  terms?: string;
+  /** ISO 8601 — última atualização de preço/condições. */
+  updatedAt?: string;
 }
 
 export type CouponDiscountType = "percentage" | "fixed" | "shipping";

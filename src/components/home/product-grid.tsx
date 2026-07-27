@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { cn } from "@/lib/utils";
+
 import { ProductCard, ProductCardSkeleton } from "./product-card";
 import { Reveal } from "./reveal";
 import type { Product } from "@/types";
@@ -14,6 +16,8 @@ export interface ProductGridProps {
   skeletonCount?: number;
   /** Conteúdo customizado para o estado vazio. */
   emptyState?: ReactNode;
+  /** Classes extras da grade (ex.: limitar colunas em blocos estreitos). */
+  className?: string;
 }
 
 /** Grade responsiva de produtos: 1 / 2 / 3 / 4 colunas. */
@@ -24,6 +28,7 @@ export function ProductGrid({
   isLoading = false,
   skeletonCount = 8,
   emptyState,
+  className,
 }: ProductGridProps) {
   if (isLoading) {
     return (
@@ -31,7 +36,7 @@ export function ProductGrid({
         role="status"
         aria-busy="true"
         aria-label="Carregando ofertas"
-        className="grid-fluid [--col-min:15rem]"
+        className={cn("grid-fluid [--col-min:15rem]", className)}
       >
         {Array.from({ length: skeletonCount }).map((_, index) => (
           <ProductCardSkeleton key={`skeleton-${index}`} />
@@ -55,7 +60,7 @@ export function ProductGrid({
 
 
   return (
-    <ul className="grid-fluid [--col-min:15rem]">
+    <ul className={cn("grid-fluid [--col-min:15rem]", className)}>
       {products.map((product, index) => (
         // Cascata limitada aos 8 primeiros itens: acima disso a espera
         // acumulada passaria a parecer lentidão, não elegância.

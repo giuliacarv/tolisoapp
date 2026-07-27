@@ -10,17 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as OfertasRouteImport } from './routes/ofertas'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
+import { Route as OfertasSlugRouteImport } from './routes/ofertas.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const OfertasRoute = OfertasRouteImport.update({
-  id: '/ofertas',
-  path: '/ofertas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -28,35 +24,49 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OfertasIndexRoute = OfertasIndexRouteImport.update({
+  id: '/ofertas/',
+  path: '/ofertas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertasSlugRoute = OfertasSlugRouteImport.update({
+  id: '/ofertas/$slug',
+  path: '/ofertas/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/ofertas': typeof OfertasRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ofertas/$slug': typeof OfertasSlugRoute
+  '/ofertas/': typeof OfertasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/ofertas': typeof OfertasRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ofertas/$slug': typeof OfertasSlugRoute
+  '/ofertas': typeof OfertasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/ofertas': typeof OfertasRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/ofertas/$slug': typeof OfertasSlugRoute
+  '/ofertas/': typeof OfertasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ofertas' | '/sitemap.xml'
+  fullPaths: '/' | '/sitemap.xml' | '/ofertas/$slug' | '/ofertas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ofertas' | '/sitemap.xml'
-  id: '__root__' | '/' | '/ofertas' | '/sitemap.xml'
+  to: '/' | '/sitemap.xml' | '/ofertas/$slug' | '/ofertas'
+  id: '__root__' | '/' | '/sitemap.xml' | '/ofertas/$slug' | '/ofertas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  OfertasRoute: typeof OfertasRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  OfertasSlugRoute: typeof OfertasSlugRoute
+  OfertasIndexRoute: typeof OfertasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,13 +78,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ofertas': {
-      id: '/ofertas'
-      path: '/ofertas'
-      fullPath: '/ofertas'
-      preLoaderRoute: typeof OfertasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -82,13 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ofertas/': {
+      id: '/ofertas/'
+      path: '/ofertas'
+      fullPath: '/ofertas/'
+      preLoaderRoute: typeof OfertasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofertas/$slug': {
+      id: '/ofertas/$slug'
+      path: '/ofertas/$slug'
+      fullPath: '/ofertas/$slug'
+      preLoaderRoute: typeof OfertasSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  OfertasRoute: OfertasRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  OfertasSlugRoute: OfertasSlugRoute,
+  OfertasIndexRoute: OfertasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
