@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useRouterState } from "@tanstack/react-router";
-import { Menu, Search, Sparkles } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
+import { Heart, Menu, Search, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -155,6 +155,17 @@ export function Header() {
             <Search className="h-4 w-4" strokeWidth={1.75} aria-hidden />
           </a>
 
+          <Link
+            to="/favoritos"
+            aria-label="Ver meus favoritos salvos neste dispositivo"
+            className={cn(
+              iconButton,
+              !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
+            )}
+          >
+            <Heart className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+          </Link>
+
           <CreditsBadge
             className={cn(
               "hidden sm:inline-flex",
@@ -199,7 +210,18 @@ export function Header() {
               </SheetHeader>
 
               <div className="mt-5">
-                <CreditsBadge />
+                <Link
+            to="/favoritos"
+            aria-label="Ver meus favoritos salvos neste dispositivo"
+            className={cn(
+              iconButton,
+              !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
+            )}
+          >
+            <Heart className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+          </Link>
+
+          <CreditsBadge />
               </div>
 
               <nav aria-label="Navegação mobile" className="mt-6 flex flex-col">
