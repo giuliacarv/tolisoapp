@@ -304,12 +304,23 @@
   );
   --gradient-ink: linear-gradient(to bottom right, oklch(0.2 0.004 285), oklch(0.13 0.004 285));
   --gradient-gold: linear-gradient(to bottom right, oklch(0.82 0.07 85), oklch(0.71 0.08 78));
+
+  /*
+   * Superfície das ações primárias.
+   * No tema claro o CTA é uma peça de tinta profunda sobre fundo off-white; no
+   * escuro essa mesma peça desapareceria no fundo, então a ação passa a ser
+   * dourada sobre tinta — mantendo o mesmo peso hierárquico nos dois temas.
+   */
+  --gradient-cta: var(--gradient-ink);
+  --cta-foreground: var(--offwhite);
+
   /* Halo dourado difuso usado atrás de seções de destaque. */
   --gradient-halo: radial-gradient(
     60% 60% at 50% 0%,
     color-mix(in oklab, var(--gold) 22%, transparent),
     transparent 70%
   );
+
 
   /* Vidro (Glassmorphism) — mesmos valores em todo o produto. */
   --glass-bg: color-mix(in oklab, var(--card) 62%, transparent);
