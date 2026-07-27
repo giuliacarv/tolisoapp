@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-import { Check } from "lucide-react";
-
 import {
   CREDIT_OPTIONS,
   MIN_DISCOUNT_OPTIONS,
@@ -8,70 +5,9 @@ import {
   type CatalogFilters,
 } from "@/domain/products/catalog-filters";
 import type { FacetOption } from "@/hooks/use-catalog";
+import { CheckRow, FacetGroup } from "@/components/ui/facet-group";
 import { linkQuiet } from "@/components/home/primitives";
 import { cn } from "@/lib/utils";
-
-/** Bloco de faceta com título discreto e ritmo vertical de 8pt. */
-function FacetGroup({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <fieldset className="border-0 p-0">
-      <legend className="text-fluid-micro font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-        {title}
-      </legend>
-      <div className="mt-3 flex flex-col gap-1">{children}</div>
-    </fieldset>
-  );
-}
-
-interface CheckRowProps {
-  checked: boolean;
-  label: string;
-  count?: number;
-  onToggle: () => void;
-}
-
-/**
- * Linha de seleção acessível.
- * O input nativo permanece no DOM (leitores de tela e teclado funcionam); o
- * quadrado dourado é apenas a representação visual.
- */
-function CheckRow({ checked, label, count, onToggle }: CheckRowProps) {
-  return (
-    <label
-      className={cn(
-        "group flex min-h-11 cursor-pointer items-center gap-3 rounded-lg px-2 text-sm transition-colors duration-200",
-        "hover:bg-secondary focus-within:ring-2 focus-within:ring-gold/50",
-      )}
-    >
-      <input
-        type="checkbox"
-        checked={checked}
-        onChange={onToggle}
-        className="peer sr-only"
-      />
-      <span
-        aria-hidden
-        className={cn(
-          "grid size-[18px] shrink-0 place-items-center rounded-[5px] border transition-colors duration-200",
-          checked ? "border-gold bg-gold text-ink" : "border-border bg-background",
-        )}
-      >
-        {checked ? <Check className="size-3" strokeWidth={3} /> : null}
-      </span>
-      <span
-        className={cn(
-          "min-w-0 flex-1 truncate transition-colors duration-200",
-          checked ? "font-medium text-foreground" : "text-muted-foreground",
-        )}
-      >
-        {label}
-      </span>
-      {count !== undefined ? (
-        <span className="shrink-0 text-xs tabular-nums text-muted-foreground/70">{count}</span>
-      ) : null}
-    </label>
-  );
-}
 
 export interface CatalogFiltersPanelProps {
   filters: CatalogFilters;
