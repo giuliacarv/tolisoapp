@@ -816,11 +816,113 @@
   }
 }
 
+/**
+ * Cartão "vitrine" do hero.
+ *
+ * Por que existe: os cards do hero são a primeira prova de valor da página e
+ * precisavam de um acabamento acima do `noir-card` genérico — moldura dourada
+ * permanente (não só no hover), profundidade real e um brilho que atravessa a
+ * superfície ao passar o mouse, como luz correndo sobre vidro polido.
+ *
+ * Composição em três camadas:
+ *  1. base    — vidro escuro com blur e sombra projetada;
+ *  2. ::before — filete dourado de 1px desenhado por máscara (não engorda o box);
+ *  3. ::after  — faixa de luz diagonal que só se move no hover.
+ */
+@utility luxe-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--offwhite) 10%, transparent);
+  background-image: linear-gradient(
+    150deg,
+    color-mix(in oklab, var(--offwhite) 9%, transparent),
+    color-mix(in oklab, var(--offwhite) 3%, transparent) 55%
+  );
+  backdrop-filter: blur(16px) saturate(130%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklab, var(--offwhite) 14%, transparent),
+    0 24px 60px -32px oklch(0 0 0 / 0.85);
+  transition:
+    border-color 0.45s var(--ease-premium),
+    box-shadow 0.45s var(--ease-premium),
+    transform 0.45s var(--ease-premium);
+
+  /* Filete dourado permanente — a "moldura de joalheria" do cartão. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    padding: 1px;
+    background-image: linear-gradient(
+      145deg,
+      color-mix(in oklab, var(--gold) 55%, transparent),
+      transparent 40%,
+      transparent 60%,
+      color-mix(in oklab, var(--gold) 30%, transparent)
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.45s var(--ease-premium);
+    pointer-events: none;
+  }
+
+  /* Varredura de luz: parada fora do cartão até o hover. */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background-image: linear-gradient(
+      105deg,
+      transparent 35%,
+      color-mix(in oklab, var(--offwhite) 16%, transparent) 50%,
+      transparent 65%
+    );
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: color-mix(in oklab, var(--gold) 40%, transparent);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, var(--offwhite) 18%, transparent),
+      0 32px 70px -30px oklch(0 0 0 / 0.9),
+      0 0 0 1px color-mix(in oklab, var(--gold) 18%, transparent);
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+/*
+ * A varredura e o realce de elevação só existem em ponteiros finos: em telas
+ * de toque o "hover grudado" deixaria o brilho congelado sobre o cartão.
+ */
+@media (hover: hover) and (pointer: fine) {
+  .luxe-card:hover::after {
+    transform: translateX(120%);
+    transition: transform 1.1s var(--ease-premium);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .noir-card:hover {
     transform: none !important;
   }
+
+  .luxe-card::after {
+    display: none;
+  }
 }
+
 
 /* ---------------------------------------------------------------------------
  * Camada de luz: orbes desfocados que simulam iluminação de vitrine.
