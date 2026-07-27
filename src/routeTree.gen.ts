@@ -14,6 +14,7 @@ import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as IndexRouteImport } from './routes/index'
@@ -45,6 +46,11 @@ const CriarContaRoute = CriarContaRouteImport.update({
 const CreditosRoute = CreditosRouteImport.update({
   id: '/creditos',
   path: '/creditos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/contato': typeof ContatoRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/contato': typeof ContatoRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/contato': typeof ContatoRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ajuda'
     | '/como-funciona'
+    | '/contato'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ajuda'
     | '/como-funciona'
+    | '/contato'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/'
     | '/ajuda'
     | '/como-funciona'
+    | '/contato'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -175,6 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AjudaRoute: typeof AjudaRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
+  ContatoRoute: typeof ContatoRoute
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
@@ -221,6 +234,13 @@ declare module '@tanstack/react-router' {
       path: '/creditos'
       fullPath: '/creditos'
       preLoaderRoute: typeof CreditosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/como-funciona': {
@@ -279,6 +299,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AjudaRoute: AjudaRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
+  ContatoRoute: ContatoRoute,
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
@@ -292,3 +313,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
