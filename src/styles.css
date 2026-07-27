@@ -648,6 +648,10 @@
   background-image: var(--gradient-ink);
   color: var(--offwhite);
 
+  /* Dentro de uma faixa escura a ação primária é sempre dourada, em qualquer tema. */
+  --gradient-cta: var(--gradient-gold);
+  --cta-foreground: var(--ink);
+
   &::before {
     content: "";
     position: absolute;

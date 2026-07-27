@@ -30,7 +30,7 @@ export function AuthShell({
   className,
 }: AuthShellProps) {
   return (
-    <div className="relative isolate min-h-dvh overflow-hidden bg-ink bg-[image:var(--gradient-ink)] text-offwhite">
+    <div className="noir-band min-h-dvh">
       <span
         aria-hidden
         className="halo-gradient pointer-events-none absolute inset-x-0 -top-1/2 -z-10 h-[160%] opacity-40"

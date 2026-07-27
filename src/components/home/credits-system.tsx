@@ -28,7 +28,7 @@ export function CreditsSystem() {
   return (
     <section id="creditos" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
       <Container>
-        <div className="relative isolate overflow-hidden rounded-3xl bg-ink bg-[image:var(--gradient-ink)] px-6 py-12 text-offwhite shadow-float sm:px-12 sm:py-16">
+        <div className="noir-band rounded-3xl px-6 py-12 text-offwhite shadow-float sm:px-12 sm:py-16">
           {/* Halo dourado difuso: dá volume ao bloco escuro sem poluir o conteúdo. */}
           <div
             aria-hidden
