@@ -1027,10 +1027,11 @@
   --amber: oklch(0.7 0.15 70);
   --discount: var(--orange-accent);
   --petrol: var(--violet-action);
-  --petrol-bright: var(--violet-lume);
+  /* Usado como texto SOBRE faixas escuras: precisa ser claro. */
+  --petrol-bright: oklch(0.86 0.09 300);
   --ink: var(--ink-purple);
-  --graphite: oklch(0.35 0.03 300);
-  --offwhite: oklch(1 0 0);
+  --graphite: oklch(0.27 0.045 300);
+  --offwhite: oklch(0.985 0.004 300);
 
   /* Sombras aéreas, frias e discretas sobre fundo branco. */
   --shadow-hairline: 0 0 0 1px oklch(0.22 0.02 300 / 6%);
@@ -1040,17 +1041,24 @@
   --shadow-gold: 0 0 0 1px color-mix(in oklab, var(--orange-accent) 35%, transparent),
     0 18px 44px -20px color-mix(in oklab, var(--orange-accent) 45%, transparent);
 
-  /* Gradientes: roxo primário com laranja como destaque dourado. */
+  /*
+   * Faixas (`noir-band`, cabeçalho dos cupons, medalhões) sempre carregam
+   * texto claro (`text-offwhite`). Portanto o gradiente de "tinta" precisa
+   * permanecer escuro TAMBÉM no tema claro — antes ele virava violeta médio
+   * e o conteúdo ficava ilegível. O roxo vibrante fica reservado para CTAs.
+   */
   --gradient-surface: linear-gradient(135deg, oklch(1 0 0), oklch(0.98 0.005 300));
-  --gradient-ink: linear-gradient(135deg, var(--violet-action) 0%, var(--violet-action-strong) 100%);
-  --gradient-gold: linear-gradient(135deg, var(--orange-accent) 0%, var(--violet-action) 100%);
-  --gradient-cta: var(--gradient-ink);
+  --gradient-ink: linear-gradient(135deg, oklch(0.26 0.075 300) 0%, oklch(0.155 0.05 300) 100%);
+  /* Texto/CTA dourado sobre faixa escura: laranja → âmbar claro (alto contraste). */
+  --gradient-gold: linear-gradient(135deg, var(--orange-accent) 0%, oklch(0.86 0.13 72) 100%);
+  --gradient-cta: linear-gradient(135deg, var(--violet-action) 0%, var(--violet-action-strong) 100%);
   --cta-foreground: oklch(0.99 0 0);
   --gradient-halo: radial-gradient(
     60% 60% at 50% 0%,
-    color-mix(in oklab, var(--violet-action) 18%, transparent),
+    color-mix(in oklab, var(--orange-accent) 20%, transparent),
     transparent 70%
   );
+
 
   /* Glassmorphism suave sobre fundos claros. */
   --glass-bg: color-mix(in oklab, var(--card) 72%, transparent);
