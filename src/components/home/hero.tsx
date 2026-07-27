@@ -139,17 +139,11 @@ export function HeroSection() {
       />
 
       {/*
-       * Iluminação de vitrine: um feixe quente no alto à direita e um
-       * contraluz frio à esquerda. Assimétricos de propósito.
+       * Iluminação de vitrine com parallax suave: feixe quente no alto à
+       * direita, contraluz frio à esquerda e um brilho distante embaixo.
        */}
-      <div
-        aria-hidden
-        className="glow-orb absolute -right-24 -top-32 -z-10 h-72 w-72 sm:h-96 sm:w-96"
-      />
-      <div
-        aria-hidden
-        className="glow-orb-cool absolute -left-32 top-1/3 -z-10 h-64 w-64 sm:h-80 sm:w-80"
-      />
+      <ParallaxOrbs />
+
 
       <Container className="relative section-y">
         <div className="grid min-w-0 gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-16">
