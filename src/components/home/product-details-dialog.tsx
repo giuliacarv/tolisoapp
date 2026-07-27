@@ -14,7 +14,14 @@ import { formatBRL, formatCreditsLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
-import { buttonOutline, buttonSolid } from "./primitives";
+import {
+  buttonOutline,
+  buttonSolid,
+  chipMeta,
+  linkGold,
+  panelInset,
+  sheetDialogContentWide,
+} from "./primitives";
 
 export interface ProductDetailsModalProps {
   product: Product | null;
