@@ -108,7 +108,7 @@ export function AutoCarousel<T>({
               key={`clone-${getKey(item, index)}`}
               aria-hidden
               // `inert` evita foco por teclado nos controles duplicados.
-              {...{ inert: "" }}
+              inert
               className={cn("flex shrink-0 motion-reduce:hidden", itemClassName)}
             >
               {renderItem(item)}
