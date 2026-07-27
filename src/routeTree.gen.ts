@@ -14,7 +14,9 @@ import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
+import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
+import { Route as AjudaRouteImport } from './routes/ajuda'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
 import { Route as CuponsIndexRouteImport } from './routes/cupons.index'
@@ -46,9 +48,19 @@ const CreditosRoute = CreditosRouteImport.update({
   path: '/creditos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
   id: '/como-funciona',
   path: '/como-funciona',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AjudaRoute = AjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -79,7 +91,9 @@ const CuponsSlugRoute = CuponsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/contato': typeof ContatoRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -92,7 +106,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/contato': typeof ContatoRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -106,7 +122,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ajuda': typeof AjudaRoute
   '/como-funciona': typeof ComoFuncionaRoute
+  '/contato': typeof ContatoRoute
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
@@ -121,7 +139,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ajuda'
     | '/como-funciona'
+    | '/contato'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -134,7 +154,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ajuda'
     | '/como-funciona'
+    | '/contato'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -147,7 +169,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/ajuda'
     | '/como-funciona'
+    | '/contato'
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
@@ -161,7 +185,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AjudaRoute: typeof AjudaRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
+  ContatoRoute: typeof ContatoRoute
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
@@ -210,11 +236,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CreditosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/como-funciona': {
       id: '/como-funciona'
       path: '/como-funciona'
       fullPath: '/como-funciona'
       preLoaderRoute: typeof ComoFuncionaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ajuda': {
+      id: '/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AjudaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -257,7 +297,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AjudaRoute: AjudaRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
+  ContatoRoute: ContatoRoute,
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
