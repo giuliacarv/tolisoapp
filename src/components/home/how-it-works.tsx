@@ -65,7 +65,7 @@ export function HowItWorks() {
                   className="group relative flex flex-col items-start gap-5 lg:items-center lg:text-center"
                 >
                   {/* Medalhão sobre o trilho: âncora visual de cada etapa. */}
-                  <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold/30 bg-background shadow-soft transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-safe:group-hover:-translate-y-1 group-hover:border-gold/60 group-hover:shadow-lift">
+                  <span className="relative grid h-14 w-14 shrink-0 place-items-center rounded-full border border-gold/30 bg-background transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-safe:group-hover:-translate-y-1 group-hover:border-gold/60">
                     <Icon className="h-5 w-5 text-gold" strokeWidth={1.5} aria-hidden />
                   </span>
 
