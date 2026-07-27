@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import { useCallback } from "react";
 
 import { toUserMessage } from "@/services";
 
@@ -24,61 +25,39 @@ function isEmptyResult(value: unknown): boolean {
 }
 
 /**
- * Executa uma chamada de serviço e expõe loading / sucesso / erro / vazio.
+ * Adaptador entre o TanStack Query e o contrato `AsyncResource` usado pela UI.
  *
- * Intencionalmente genérico: quando os serviços passarem a consultar o
- * Supabase, este hook (ou um `useQuery` equivalente) continua o mesmo.
+ * Decisão arquitetural: a UI continua consumindo um objeto pequeno e estável
+ * (loading / vazio / erro traduzido). O cache, a deduplicação por chave, o
+ * stale-while-revalidate e o descarte de respostas fora de ordem passam a ser
+ * responsabilidade do Query — não mais de `useEffect` + refs manuais.
  *
- * `deps` controla a reexecução — trate-o como a `queryKey` do TanStack Query.
+ * Efeito prático: `productService.list()` montado em três seções da home
+ * dispara UMA leitura em vez de três, e navegar entre rotas volta instantâneo
+ * porque o dado em cache é servido antes da revalidação.
  */
-export function useAsyncResource<T>(
-  fetcher: () => Promise<T>,
-  deps: readonly unknown[] = [],
+export function useResource<T>(
+  options: UseQueryOptions<T, Error, T, readonly unknown[]>,
 ): AsyncResource<T> {
-  const [data, setData] = useState<T | null>(null);
-  const [status, setStatus] = useState<ResourceStatus>("loading");
-  const [error, setError] = useState<string | null>(null);
-  const [reloadToken, setReloadToken] = useState(0);
+  const query = useQuery(options);
 
-  // Evita `setState` após desmontagem e descarta respostas fora de ordem.
-  const requestIdRef = useRef(0);
+  const refetch = useCallback(() => {
+    void query.refetch();
+  }, [query]);
 
-  useEffect(() => {
-    const requestId = ++requestIdRef.current;
-    let active = true;
+  if (query.error) {
+    // Detalhe técnico fica no console; o usuário recebe mensagem genérica.
+    console.error("[useResource]", options.queryKey, query.error);
+  }
 
-    setStatus("loading");
-    setError(null);
-
-    fetcher()
-      .then((result) => {
-        if (!active || requestId !== requestIdRef.current) return;
-        setData(result);
-        setStatus("success");
-      })
-      .catch((caught: unknown) => {
-        if (!active || requestId !== requestIdRef.current) return;
-        // Detalhe técnico fica no console; o usuário recebe mensagem genérica.
-        console.error("[useAsyncResource]", caught);
-        setData(null);
-        setError(toUserMessage(caught));
-        setStatus("error");
-      });
-
-    return () => {
-      active = false;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [...deps, reloadToken]);
-
-  const refetch = useCallback(() => setReloadToken((token) => token + 1), []);
+  const data = (query.data ?? null) as T | null;
 
   return {
     data,
-    status,
-    isLoading: status === "loading",
-    isEmpty: status === "success" && isEmptyResult(data),
-    error,
+    status: query.isError ? "error" : query.isPending ? "loading" : "success",
+    isLoading: query.isPending,
+    isEmpty: query.isSuccess && isEmptyResult(query.data),
+    error: query.isError ? toUserMessage(query.error) : null,
     refetch,
   };
 }
