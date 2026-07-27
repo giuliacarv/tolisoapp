@@ -4,6 +4,7 @@ import {
   formatUnavailableLabel,
   getProductUnavailableReason,
 } from "@/domain/products/product-rules";
+import { FavoriteButton } from "@/components/product/favorite-button";
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
@@ -73,12 +74,18 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
           ) : null}
         </div>
 
-        {/* Loja: faixa inferior isolada, sem colidir com a faixa superior. */}
-        <div className="pointer-events-none absolute inset-x-3 bottom-3 flex">
+        {/* Loja + favorito: faixa inferior isolada, sem colidir com a superior. */}
+        <div className="pointer-events-none absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
           <span className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-border bg-card/90 px-2.5 py-1 text-fluid-micro font-semibold text-foreground backdrop-blur">
             <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
             <span className="truncate">{product.store}</span>
           </span>
+
+          <FavoriteButton
+            productId={product.id}
+            productName={product.name}
+            className="pointer-events-auto"
+          />
         </div>
       </div>
 
