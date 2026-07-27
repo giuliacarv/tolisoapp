@@ -37,9 +37,13 @@ function isEmptyResult(value: unknown): boolean {
  * porque o dado em cache é servido antes da revalidação.
  */
 export function useResource<T>(
-  options: UseQueryOptions<T, Error, T, readonly unknown[]>,
+  options: Omit<UseQueryOptions<T, Error, T, readonly unknown[]>, "queryFn"> & {
+    /** Ponto de inferência de `T` — mantém o contrato tipado sem `any`. */
+    queryFn: () => Promise<T>;
+  },
 ): AsyncResource<T> {
   const query = useQuery(options);
+
 
   const refetch = useCallback(() => {
     void query.refetch();
