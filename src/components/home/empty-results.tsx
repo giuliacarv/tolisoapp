@@ -1,5 +1,9 @@
 import { SearchX } from "lucide-react";
 
+import { cn } from "@/lib/utils";
+
+import { buttonSolid, chipIdle } from "./primitives";
+
 export interface EmptyResultsProps {
   /** Título do estado vazio. */
   title?: string;
@@ -59,7 +63,7 @@ export function EmptyResults({
                 key={suggestion}
                 type="button"
                 onClick={() => onSuggestionSelect?.(suggestion)}
-                className="inline-flex min-h-11 items-center rounded-full border border-border bg-background px-4 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground"
+                className={chipIdle}
               >
                 {suggestion}
               </button>
@@ -68,11 +72,7 @@ export function EmptyResults({
         </div>
       )}
 
-      <button
-        type="button"
-        onClick={onReset}
-        className="mt-7 inline-flex min-h-11 items-center justify-center rounded-xl bg-ink px-6 text-sm font-medium text-offwhite transition-opacity duration-200 hover:opacity-90"
-      >
+      <button type="button" onClick={onReset} className={cn(buttonSolid, "mt-7")}>
         Limpar filtros
       </button>
     </div>

@@ -94,7 +94,6 @@ export const cardInteractive = cn(
 );
 
 
-
 /** Superfície de vidro para painéis sobrepostos (modais, barras flutuantes). */
 export const glassPanel = "glass-surface rounded-[18px] shadow-lift";
 
@@ -109,6 +108,33 @@ export const chipIdle = cn(
   "border border-border bg-background text-muted-foreground hover:border-gold/40 hover:text-foreground",
 );
 
+/**
+ * Chip informativo estático (loja, categoria, créditos) usado dentro de modais
+ * e cabeçalhos. Não é interativo: sem altura mínima de toque nem estado ativo.
+ */
+export const chipMeta =
+  "inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground";
+
+/**
+ * Link/ação terciária discreta ("Limpar filtros", "Ver todas").
+ * Mesma altura de toque dos botões, sem peso visual de superfície.
+ */
+export const linkQuiet =
+  "inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-fluid-xs font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50";
+
+/** Link de ênfase — dourado nos dois temas, legível também sobre faixas noir. */
+export const linkGold =
+  "inline-flex min-h-11 items-center gap-1.5 rounded-lg text-fluid-xs font-semibold text-gold underline-offset-4 transition-colors duration-200 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+/** Bloco interno de modal/painel (resumos, listas de definição). */
+export const panelInset = "rounded-xl border border-border bg-background px-4 py-3";
+
+/** Variante de destaque do bloco interno (custo, saldo, avisos). */
+export const panelInsetMuted = "rounded-xl border border-border bg-secondary px-4 py-3";
+
 /** Diálogo em bottom-sheet no mobile e centrado a partir de `sm`. */
 export const sheetDialogContent =
   "fixed inset-x-0 bottom-0 top-auto max-h-[90dvh] w-full max-w-none translate-x-0 translate-y-0 gap-4 overflow-y-auto overscroll-contain rounded-t-[20px] border-border bg-card/95 backdrop-blur-xl p-[var(--gutter)] sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[20px] sm:p-6 sm:shadow-float";
+
+/** Mesma casca do diálogo, com largura maior (modais com mídia). */
+export const sheetDialogContentWide = cn(sheetDialogContent, "sm:max-w-lg");

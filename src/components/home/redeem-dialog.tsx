@@ -3,9 +3,11 @@ import { toast } from "sonner";
 
 import { calculateSavings } from "@/domain/products/product-rules";
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
 import { ConfirmDialog } from "./confirm-dialog";
+import { panelInset, panelInsetMuted } from "./primitives";
 
 export interface RedeemProductModalProps {
   product: Product | null;
@@ -55,7 +57,7 @@ export function RedeemProductModal({
         product ? (
           <div className="space-y-4">
             {/* Identificação da oferta: imagem em proporção fixa + nome e loja. */}
-            <div className="flex gap-4 rounded-xl border border-border bg-background p-3">
+            <div className={cn(panelInset, "flex gap-4 p-3")}>
               <img
                 src={product.image}
                 alt={`Foto ilustrativa: ${product.name}`}
@@ -77,7 +79,7 @@ export function RedeemProductModal({
             </div>
 
             {/* Resumo financeiro: lista de definição para leitores de tela. */}
-            <dl className="space-y-2 rounded-xl border border-border bg-background px-4 py-3 text-fluid-xs">
+            <dl className={cn(panelInset, "space-y-2 text-fluid-xs")}>
               <div className="flex items-center justify-between gap-4">
                 <dt className="text-muted-foreground">Preço anterior</dt>
                 <dd className="text-muted-foreground line-through">
@@ -108,7 +110,7 @@ export function RedeemProductModal({
             </dl>
 
             {/* Aviso de redirecionamento externo. */}
-            <p className="flex items-start gap-2 rounded-xl border border-border bg-secondary px-4 py-3 text-fluid-xs leading-relaxed text-muted-foreground">
+            <p className={cn(panelInsetMuted, "flex items-start gap-2 text-fluid-xs leading-relaxed text-muted-foreground")}>
               <ExternalLink className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               <span>Ao continuar, você será redirecionado para um site externo.</span>
             </p>

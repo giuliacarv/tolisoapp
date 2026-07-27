@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LifeBuoy, Mail, Search, X } from "lucide-react";
 
-import { Container, SectionHeading, buttonOutline, buttonSolid, chipActive, chipIdle } from "@/components/home/primitives";
+import { Container, SectionHeading, buttonOutline, buttonSolid, chipActive, chipIdle, linkGold } from "@/components/home/primitives";
 import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";
 import { ThemeToggle } from "@/components/home/theme-toggle";
@@ -164,7 +164,7 @@ function HelpCenterPage() {
                 <button
                   type="button"
                   onClick={clearFilters}
-                  className="inline-flex min-h-11 items-center gap-1.5 text-fluid-xs font-semibold text-gold underline-offset-4 transition-colors duration-200 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className={linkGold}
                 >
                   <X className="size-3.5" strokeWidth={2} aria-hidden />
                   Limpar filtros

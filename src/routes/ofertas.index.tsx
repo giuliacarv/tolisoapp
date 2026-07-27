@@ -5,7 +5,7 @@ import { SlidersHorizontal } from "lucide-react";
 import { CatalogFiltersPanel } from "@/components/catalog/catalog-filters-panel";
 import { CatalogSearch } from "@/components/catalog/catalog-search";
 import { EmptyResults } from "@/components/home/empty-results";
-import { Container, SectionHeading, chipIdle } from "@/components/home/primitives";
+import { Container, SectionHeading, chipIdle, linkQuiet } from "@/components/home/primitives";
 import { ProductGrid } from "@/components/home/product-grid";
 import { ProductModals } from "@/components/home/product-modals";
 import { Footer } from "@/components/home/site-footer";
@@ -196,7 +196,7 @@ function CatalogPage() {
                     <button
                       type="button"
                       onClick={catalog.reset}
-                      className="min-h-11 rounded-lg px-2 text-xs font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+                      className={linkQuiet}
                     >
                       Limpar filtros
                     </button>
