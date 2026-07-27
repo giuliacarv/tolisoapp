@@ -73,7 +73,7 @@ export function Header() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow] duration-200",
         scrolled
-          ? "bg-background/75 shadow-hairline backdrop-blur-xl backdrop-saturate-150"
+          ? "bg-background/92 shadow-hairline backdrop-blur-xl backdrop-saturate-150"
           : "bg-transparent",
       )}
       data-over-hero={scrolled ? undefined : "true"}
