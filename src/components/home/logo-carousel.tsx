@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useResource } from "@/hooks/use-async-resource";
 import { cn } from "@/lib/utils";
-import { storeService } from "@/services";
+import { storeQueries } from "@/services";
 import type { Store } from "@/types";
 
 import { Container } from "./primitives";
