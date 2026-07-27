@@ -1,5 +1,4 @@
 import { ArrowRight, Coins, Minus, Ticket, Wallet } from "lucide-react";
-import { toast } from "sonner";
 
 import {
   INITIAL_CREDIT_BALANCE,
@@ -35,6 +34,10 @@ const LEDGER = [
 ];
 
 export function CreditsSystem() {
+  const notifyComingSoon = useComingSoon(
+    "Os planos e o checkout serão adicionados em uma próxima etapa.",
+  );
+
   function handlePlansClick() {
     notifyComingSoon();
   }

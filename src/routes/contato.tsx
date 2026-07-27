@@ -111,6 +111,10 @@ function ContactPage() {
 
   const messageLength = form.watch("message")?.length ?? 0;
 
+  const notifyComingSoon = useComingSoon(
+    "O envio de mensagens será ativado após a integração com o serviço de atendimento.",
+  );
+
   /**
    * Ponto único de integração futura. Nada é enviado, armazenado ou processado:
    * apenas confirmamos que o formulário está válido.
