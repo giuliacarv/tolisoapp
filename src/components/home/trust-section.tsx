@@ -65,7 +65,7 @@ export function TrustSection() {
       <Container className="relative">
         <SectionHeading
           eyebrow="Confiança"
-          title="Transparência em cada oferta"
+          title="Nenhuma surpresa entre o clique e o carrinho"
           align="center"
           className="mx-auto items-center text-center [&_h2]:text-offwhite [&_p]:text-offwhite/65 [&_span]:text-offwhite/60"
         />
