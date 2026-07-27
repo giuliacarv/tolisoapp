@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
@@ -23,6 +24,11 @@ import { Route as CuponsSlugRouteImport } from './routes/cupons.$slug'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
+  id: '/recuperar-senha',
+  path: '/recuperar-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EntrarRoute = EntrarRouteImport.update({
@@ -77,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
+    | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
     | '/ofertas/$slug'
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
+    | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
     | '/ofertas/$slug'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
+    | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
     | '/ofertas/$slug'
@@ -153,6 +165,7 @@ export interface RootRouteChildren {
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
+  RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CuponsSlugRoute: typeof CuponsSlugRoute
   OfertasSlugRoute: typeof OfertasSlugRoute
@@ -167,6 +180,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar-senha': {
+      id: '/recuperar-senha'
+      path: '/recuperar-senha'
+      fullPath: '/recuperar-senha'
+      preLoaderRoute: typeof RecuperarSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entrar': {
@@ -241,6 +261,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
+  RecuperarSenhaRoute: RecuperarSenhaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CuponsSlugRoute: CuponsSlugRoute,
   OfertasSlugRoute: OfertasSlugRoute,
@@ -250,3 +271,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
