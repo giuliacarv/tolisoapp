@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { LifeBuoy, Mail, Search, X } from "lucide-react";
 
-import { Container, SectionHeading, buttonOutline, buttonSolid, chipActive, chipIdle } from "@/components/home/primitives";
+import { Container, SectionHeading, buttonOutline, buttonSolid, chipActive, chipIdle, linkGold } from "@/components/home/primitives";
 import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";
 import { ThemeToggle } from "@/components/home/theme-toggle";

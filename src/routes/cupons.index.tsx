@@ -7,7 +7,7 @@ import { RedeemCouponModal } from "@/components/home/coupon-redeem-dialog";
 import { CouponFiltersPanel } from "@/components/coupons/coupon-filters-panel";
 import { CouponSearch } from "@/components/coupons/coupon-search";
 import { EmptyResults } from "@/components/home/empty-results";
-import { Container, SectionHeading, chipIdle } from "@/components/home/primitives";
+import { Container, SectionHeading, chipIdle, linkQuiet } from "@/components/home/primitives";
 import { Reveal } from "@/components/home/reveal";
 import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";

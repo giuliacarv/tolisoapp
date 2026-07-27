@@ -5,7 +5,7 @@ import { SlidersHorizontal } from "lucide-react";
 import { CatalogFiltersPanel } from "@/components/catalog/catalog-filters-panel";
 import { CatalogSearch } from "@/components/catalog/catalog-search";
 import { EmptyResults } from "@/components/home/empty-results";
-import { Container, SectionHeading, chipIdle } from "@/components/home/primitives";
+import { Container, SectionHeading, chipIdle, linkQuiet } from "@/components/home/primitives";
 import { ProductGrid } from "@/components/home/product-grid";
 import { ProductModals } from "@/components/home/product-modals";
 import { Footer } from "@/components/home/site-footer";
