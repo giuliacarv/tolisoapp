@@ -148,7 +148,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
           className={cn(
             "max-w-[38ch] leading-relaxed",
             isHero ? "text-fluid-sm" : "text-fluid-xs",
-            dark ? "text-offwhite/70" : "text-muted-foreground",
+            dark ? "text-offwhite/80" : "text-muted-foreground",
             // Nos blocos baixos a descrição fica em duas linhas para não
             // empurrar o rodapé do card.
             size === "compact" && "line-clamp-2",
