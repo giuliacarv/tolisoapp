@@ -143,17 +143,14 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <a
-            href={hrefFor("#buscar")}
-            onClick={(event) => handleAnchorClick(event, "#buscar")}
-            aria-label="Ir para a busca de ofertas"
-            className={cn(
+          <SearchHeader
+            triggerClassName={cn(
               iconButton,
+              "h-auto w-auto rounded-xl",
               !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
             )}
-          >
-            <Search className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-          </a>
+          />
+
 
           <Link
             to="/favoritos"
