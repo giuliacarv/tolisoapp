@@ -3,7 +3,9 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Heart, Menu, Search, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
+import { SearchHeader } from "@/components/search/search-header";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
