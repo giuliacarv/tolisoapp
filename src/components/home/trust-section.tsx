@@ -94,14 +94,14 @@ export function TrustSection() {
         </div>
 
         {/* Indicadores de confiança. */}
-        <Reveal as="ul" delay={80} className="mt-14 grid gap-4 sm:grid-cols-3 lg:gap-6">
+        <Reveal as="ul" delay={80} className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-3 lg:gap-6">
           {ASSURANCES.map((item, index) => {
             const isGold = index % 2 === 0;
             return (
               <li
                 key={item.label}
                 className={cn(
-                  "group relative flex flex-col items-center rounded-2xl border border-offwhite/12 bg-graphite/40 px-6 py-8 text-center transition-all duration-300 ease-[var(--ease-premium)] hover:border-violet/40",
+                  "group relative flex flex-col items-center rounded-2xl border border-offwhite/12 bg-graphite/40 px-5 py-7 text-center sm:px-6 sm:py-8 transition-all duration-300 ease-[var(--ease-premium)] hover:border-violet/40",
                   isGold && "hover:border-gold/40",
                 )}
               >
@@ -129,7 +129,7 @@ export function TrustSection() {
         </Reveal>
 
         {/* Timeline horizontal de confiança. */}
-        <div className="relative mt-16 px-4 lg:mt-20">
+        <div className="relative mt-12 sm:mt-16 sm:px-4 lg:mt-20">
           {/* Linha conectora — desktop. */}
           <div
             aria-hidden
@@ -141,7 +141,7 @@ export function TrustSection() {
             className="pointer-events-none absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent md:hidden"
           />
 
-          <ol className="relative grid gap-10 md:grid-cols-4 md:gap-8">
+          <ol className="relative grid gap-7 sm:gap-10 md:grid-cols-4 md:gap-8">
             {PILLARS.map((pillar, index) => {
               const Icon = pillar.icon;
               return (
@@ -188,7 +188,7 @@ export function TrustSection() {
         </div>
 
         {/* Disclaimer e privacidade. */}
-        <div className="mx-auto mt-16 max-w-3xl">
+        <div className="mx-auto mt-12 max-w-3xl sm:mt-16">
           <div aria-hidden className="rule-gold mx-auto mb-8 h-px w-full" />
           <p className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-2xl border border-offwhite/12 bg-offwhite/5 px-6 py-4 text-fluid-xs text-offwhite/60 backdrop-blur-sm">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.7} aria-hidden />

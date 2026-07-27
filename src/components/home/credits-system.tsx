@@ -167,12 +167,14 @@ export function CreditsSystem() {
             {/* Carteira demonstrativa — valores ilustrativos, sem saldo real. */}
             <Reveal delay={140} className="min-w-0">
               <div className="luxe-card min-w-0 rounded-[1.5rem] p-[clamp(1.25rem,3vw,2rem)]">
-                <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
+                {/* O título quebra em duas linhas em vez de ser truncado em
+                    "Carteira demo…", mantendo o selo na mesma linha. */}
+                <div className="flex items-center justify-between gap-3">
                   <div className="flex min-w-0 items-center gap-3">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-offwhite/8">
                       <Wallet className="h-4 w-4 text-gold" strokeWidth={1.7} aria-hidden />
                     </span>
-                    <p className="truncate text-sm font-medium text-offwhite">
+                    <p className="min-w-0 text-sm font-medium leading-snug text-offwhite">
                       Carteira demonstrativa
                     </p>
                   </div>
@@ -180,6 +182,7 @@ export function CreditsSystem() {
                     Ilustrativo
                   </span>
                 </div>
+
 
                 {/* Bloco de saldo: número em destaque + moedas + consumo. */}
                 <div className="mt-6 rounded-2xl border border-offwhite/10 bg-ink/40 p-5">
