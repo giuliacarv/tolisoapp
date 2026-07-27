@@ -21,7 +21,7 @@ export function HowItWorksStepCard({ step, index }: StepCardProps) {
 
   return (
     <div
-      className="group relative flex h-full flex-col items-start gap-4 rounded-2xl border border-border/60 bg-card/60 p-5 text-left backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-safe:hover:-translate-y-1 motion-safe:focus-within:-translate-y-1 hover:border-gold/35 lg:items-center lg:gap-5 lg:border-transparent lg:bg-transparent lg:p-2 lg:text-center lg:backdrop-blur-none"
+      className="group relative flex h-full w-full flex-col items-start gap-4 rounded-2xl border border-border/60 bg-card/60 p-5 text-left backdrop-blur-sm transition-[transform,border-color,background-color] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] motion-safe:hover:-translate-y-1 motion-safe:focus-within:-translate-y-1 hover:border-gold/35 lg:items-center lg:gap-5 lg:border-transparent lg:bg-transparent lg:p-2 lg:text-center lg:backdrop-blur-none"
       tabIndex={0}
       aria-describedby={highlightId}
     >
