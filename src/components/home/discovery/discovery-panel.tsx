@@ -30,11 +30,11 @@ export function DiscoveryPanel({
           Descoberta
         </span>
         <h2 className="mt-4 text-balance text-fluid-h2 font-semibold tracking-tight text-foreground">
-          O que você quer <span className="gold-text">economizar</span> hoje?
+          Diga o que você quer. Nós achamos o <span className="gold-text">melhor preço</span>.
         </h2>
         <p className="mx-auto mt-3 max-w-xl text-pretty text-fluid-sm text-muted-foreground">
-          Busque por produto, marca ou loja e refine com os filtros rápidos. A curadoria acontece
-          em tempo real, sem recarregar a página.
+          Digite um produto, marca ou loja e refine com um toque. Os resultados mudam na hora —
+          sem recarregar, sem enrolação.
         </p>
       </div>
 
