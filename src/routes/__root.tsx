@@ -102,7 +102,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         // Aplica o tema antes da primeira pintura para evitar flash de tela clara.
-        children: `(function(){try{var s=localStorage.getItem("descontai-theme");var d=s?s==="dark":matchMedia("(prefers-color-scheme: dark)").matches;var r=document.documentElement;r.classList.toggle("dark",d);r.style.colorScheme=d?"dark":"light";}catch(e){}})();`,
+        children: `(function(){try{var s=localStorage.getItem("descontai-theme");var d=s?s==="dark":matchMedia("(prefers-color-scheme: dark)").matches;var r=document.documentElement;r.classList.toggle("dark",d);}catch(e){}})();`,
       },
     ],
   }),
