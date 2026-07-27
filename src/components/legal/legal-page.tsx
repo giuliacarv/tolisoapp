@@ -88,7 +88,7 @@ export function LegalPage({
                   <li key={section.id}>
                     <a
                       href={`#${section.id}`}
-                      className="inline-flex min-h-9 items-center gap-2 text-fluid-xs leading-[1.6] text-muted-foreground transition-colors duration-200 hover:text-gold"
+                      className="inline-flex min-h-11 items-center gap-2 text-fluid-xs leading-[1.6] text-muted-foreground transition-colors duration-200 hover:text-gold"
                     >
                       <span className="tabular-nums text-gold/70">
                         {String(index + 1).padStart(2, "0")}

@@ -247,9 +247,11 @@ export function InstitutionalFooter() {
                       status === "error" && "border-destructive focus-visible:ring-destructive",
                     )}
                   />
+                  {/* Botão embutido no campo: 44px de alvo dentro de um input
+                      de 48px, mantendo folga de 2px nas bordas. */}
                   <Button
                     type="submit"
-                    className="absolute right-1 top-1 h-10 rounded-lg bg-gradient-to-r from-violet to-violet-soft px-4 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:brightness-110"
+                    className="absolute right-0.5 top-0.5 h-11 min-w-11 rounded-lg bg-gradient-to-r from-violet to-violet-soft px-4 text-xs font-bold uppercase tracking-wider text-primary-foreground transition-all hover:brightness-110"
                   >
                     OK
                   </Button>

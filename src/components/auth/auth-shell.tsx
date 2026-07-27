@@ -109,9 +109,16 @@ export function AuthShell({
   );
 }
 
-/** Link textual de ênfase, idêntico ao usado na home. */
+/**
+ * Link textual de ênfase, idêntico ao usado na home.
+ *
+ * Ergonomia touch: `inline-flex` + `min-h-11` garantem 44px de altura de alvo
+ * mesmo quando o texto tem apenas ~18px de caixa (WCAG 2.5.8), sem alterar o
+ * ritmo tipográfico da linha em desktop.
+ */
 export const authLink =
-  "font-semibold text-gold underline-offset-4 transition-colors duration-200 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
+  "inline-flex min-h-11 items-center font-semibold text-gold underline-offset-4 transition-colors duration-200 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-sm";
+
 
 /** Campo alinhado às superfícies do tema Obsidian (claro e escuro). */
 export const authInput =
