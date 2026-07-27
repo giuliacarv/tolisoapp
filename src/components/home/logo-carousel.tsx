@@ -1,24 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { PARTNER_LOGOS, type PartnerLogo } from "@/data/logos";
+import { useAsyncResource } from "@/hooks/use-async-resource";
 import { cn } from "@/lib/utils";
+import { storeService } from "@/services";
+import type { Store } from "@/types";
 
 import { Container } from "./primitives";
 
 export interface LogoCarouselProps {
-  /** Lista de marcas. Padrão: dados demonstrativos de `src/data/logos.ts`. */
-  logos?: PartnerLogo[];
+  /** Lista de marcas. Padrão: lojas ativas resolvidas pelo `storeService`. */
+  logos?: readonly Store[];
   /** Velocidade da rolagem em pixels por segundo. */
   speed?: number;
   className?: string;
 }
 
 /** Slide individual: imagem uniforme, centralizada e dessaturada por padrão. */
-function LogoSlide({ logo, ariaHidden }: { logo: PartnerLogo; ariaHidden?: boolean }) {
+function LogoSlide({ logo, ariaHidden }: { logo: Store; ariaHidden?: boolean }) {
   const image = (
     <img
-      src={logo.src}
-      alt={ariaHidden ? "" : logo.alt}
+      src={logo.logoSrc}
+      alt={ariaHidden ? "" : logo.logoAlt}
       loading="lazy"
       decoding="async"
       width={240}
