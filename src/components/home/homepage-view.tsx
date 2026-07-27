@@ -36,8 +36,17 @@ export function HomepageView() {
         className="ambient-light pointer-events-none fixed inset-0 -z-10 opacity-70"
       />
 
+      {/* WCAG 2.4.1 — primeiro item da ordem de tabulação, visível ao focar. */}
+      <a
+        href="#conteudo-principal"
+        className="sr-only rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground focus-visible:not-sr-only focus-visible:absolute focus-visible:left-4 focus-visible:top-4 focus-visible:z-[100]"
+      >
+        Pular para o conteúdo principal
+      </a>
+
       <Header />
-      <main>
+      <main id="conteudo-principal" tabIndex={-1}>
+
         <HeroSection />
         <LogoCarousel />
 
