@@ -89,7 +89,7 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
       className={cn(
         cardInteractive,
         "motion-safe-transform group relative isolate flex h-full w-full flex-col items-start overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        featured ? "p-8 sm:p-10" : "p-6",
+        featured ? "p-7 sm:p-9" : "p-6",
         dark &&
           "border-ink bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift hover:border-gold/45",
       )}
