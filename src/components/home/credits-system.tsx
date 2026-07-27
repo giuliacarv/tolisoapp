@@ -108,14 +108,14 @@ export function CreditsSystem() {
               </Reveal>
 
               <Reveal delay={60} as="h2" className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance">
-                Seus créditos desbloqueiam{" "}
-                <span className="gold-text">novas economias</span>
+                Um crédito hoje,{" "}
+                <span className="gold-text">uma economia amanhã</span>
               </Reveal>
 
               <Reveal delay={110} as="p" className="max-w-xl text-fluid-sm leading-[1.7] text-pretty text-offwhite/70">
-                Toda nova conta começa com {formatCreditCount(INITIAL_CREDIT_BALANCE)} gratuitos.
-                Use-os para revelar ofertas verificadas e cupons exclusivos — sem assinatura, sem
-                surpresa no preço final.
+                Toda nova conta começa com {formatCreditCount(INITIAL_CREDIT_BALANCE)} gratuitos —
+                o suficiente para testar sem gastar nada. Cada crédito revela uma oferta conferida
+                ou um cupom validado. Sem assinatura, sem pegadinha no preço final.
               </Reveal>
 
               <ul className="space-y-3">
