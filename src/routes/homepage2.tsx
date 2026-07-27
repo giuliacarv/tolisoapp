@@ -37,12 +37,18 @@ export const Route = createFileRoute("/homepage2")({
 });
 
 /**
- * Cópia isolada da home atual. Serve como área de trabalho para aplicar o
- * novo design de referência sem alterar a página inicial em produção.
+ * Cópia isolada da home. Recebe o tema escopado "Obsidian" (obsidiana +
+ * violeta elétrico): a classe `dark` é aplicada localmente para que as
+ * variantes `dark:` dos componentes respondam sem depender do tema global.
  */
 function Homepage2() {
   return (
-    <div className="theme-vivid min-h-dvh bg-background">
+    <div className="theme-obsidian dark relative min-h-dvh bg-background text-foreground">
+      {/* Ambiência: dois focos de luz violeta, fixos, atrás de todo o conteúdo. */}
+      <div
+        aria-hidden
+        className="ambient-light pointer-events-none fixed inset-0 -z-10 opacity-70"
+      />
 
       <Header />
       <main>
@@ -70,3 +76,4 @@ function Homepage2() {
     </div>
   );
 }
+
