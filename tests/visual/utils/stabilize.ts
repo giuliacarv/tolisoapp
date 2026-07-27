@@ -41,6 +41,23 @@ export function volatileRegions(page: Page): Locator[] {
  */
 export async function gotoStable(page: Page, path: string): Promise<void> {
   await page.emulateMedia({ reducedMotion: "reduce" });
+
+  // Pré-decide o consentimento de cookies: o banner é fixo no rodapé, cobre
+  // conteúdo e intercepta cliques, tornando as capturas não determinísticas.
+  await page.addInitScript(() => {
+    window.localStorage.setItem(
+      "economizai_cookie_consent",
+      JSON.stringify({
+        essential: true,
+        preferences: true,
+        analytics: false,
+        marketing: false,
+        version: 1,
+        decidedAt: "2026-01-01T00:00:00.000Z",
+      }),
+    );
+  });
+
   await page.goto(path, { waitUntil: "domcontentloaded" });
   await page.addStyleTag({ content: DETERMINISTIC_CSS });
 
