@@ -161,7 +161,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
       <span
         className={cn(
           "mt-auto inline-flex items-center gap-2 pt-6 text-xs font-semibold uppercase tracking-[0.14em]",
-          dark ? "text-gold" : "text-muted-foreground",
+          dark ? "text-gold" : "text-foreground/80",
         )}
       >
         {category.offerCount} ofertas
