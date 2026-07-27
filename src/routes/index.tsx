@@ -10,6 +10,8 @@ import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";
 import { TrustSection } from "@/components/home/trust-section";
 import { CouponSection } from "@/components/home/validated-coupons";
+import { ThemeToggle } from "@/components/home/theme-toggle";
+
 
 const SITE_URL = "https://descontai1.lovable.app";
 const TITLE = "DESCONTAI | Ofertas e cupons selecionados";
@@ -88,6 +90,8 @@ function Index() {
         </Reveal>
       </main>
       <Footer />
+      <ThemeToggle />
+
     </div>
   );
 }

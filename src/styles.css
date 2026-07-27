@@ -73,7 +73,10 @@
 
 
 :root {
+  /* Informa ao navegador quais controles nativos (scrollbar, inputs) usar. */
+  color-scheme: light;
   --radius: 1rem;
+
   --ink: oklch(0.16 0.004 285);
   --graphite: oklch(0.22 0.004 285);
   --offwhite: oklch(0.968 0.008 85);
@@ -106,7 +109,9 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: oklch(0.16 0.004 285);
+
   --foreground: oklch(0.968 0.008 85);
   --card: oklch(0.22 0.004 285);
   --card-foreground: oklch(0.968 0.008 85);
@@ -537,7 +542,14 @@
   background-repeat: repeat;
   opacity: 0.035;
   mix-blend-mode: multiply;
+
+  /* No escuro, `multiply` some no fundo: o grão precisa clarear, não escurecer. */
+  .dark & {
+    opacity: 0.05;
+    mix-blend-mode: screen;
+  }
 }
+
 
 /** Filete horizontal que nasce e morre em transparente. */
 @utility rule-fade {
