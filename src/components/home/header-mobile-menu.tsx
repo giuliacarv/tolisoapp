@@ -48,7 +48,7 @@ export function HeaderMobileMenu({
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="flex w-[min(21.25rem,88vw)] flex-col gap-0 overflow-y-auto overscroll-contain border-l border-border bg-background p-[var(--gutter)]"
+        className="flex w-[min(21.25rem,88vw)] flex-col gap-0 overflow-y-auto overscroll-contain border-l border-border/60 bg-background/75 p-[var(--gutter)] backdrop-blur-xl"
       >
         <SheetHeader className="p-0 text-left">
           <SheetTitle className="font-serif text-xl tracking-tight">Menu</SheetTitle>
