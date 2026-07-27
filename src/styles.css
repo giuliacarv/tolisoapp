@@ -223,6 +223,22 @@
     max-width: 100%;
   }
 
+  /* Palavras longas (URLs, códigos de cupom, e-mails) quebram dentro do
+     container em vez de empurrar a largura da página em telas de ~280px. */
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  dd,
+  dt,
+  a {
+    overflow-wrap: anywhere;
+  }
+
+
+
   /* Foco visível consistente em toda navegação por teclado. */
   :focus-visible {
     outline: 2px solid var(--gold);
