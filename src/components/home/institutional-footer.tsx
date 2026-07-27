@@ -191,7 +191,7 @@ export function InstitutionalFooter() {
 
             {NAV_GROUPS.map((group) => (
               <div key={group.title}>
-                <h3 className="text-fluid-xs font-semibold uppercase tracking-wider text-foreground">
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground md:text-fluid-xs">
                   {group.title}
                 </h3>
                 <ul className="mt-4 space-y-2.5">
