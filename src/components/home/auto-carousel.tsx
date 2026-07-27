@@ -1,4 +1,4 @@
-import { Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
