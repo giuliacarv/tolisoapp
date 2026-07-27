@@ -27,9 +27,13 @@ export function HomepageView() {
     <div
       className={cn(
         "theme-obsidian relative min-h-dvh bg-background text-foreground",
-        isDark && "dark",
+        // `theme-day`/`theme-night` expõem o tema LOCAL da home para o CSS.
+        // Necessário porque o `<html>` pode ter `.dark` por preferência do
+        // sistema, o que faria variantes `dark:` dispararem no modo claro.
+        isDark ? "dark theme-night" : "theme-day",
       )}
     >
+
       {/* Ambiência: focos de luz roxo e laranja, fixos, atrás de todo o conteúdo. */}
       <div
         aria-hidden
