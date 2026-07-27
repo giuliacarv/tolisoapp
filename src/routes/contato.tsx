@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LifeBuoy, Send, ShieldAlert } from "lucide-react";
-import { toast } from "sonner";
 import { z } from "zod";
 
 import { Container, SectionHeading, buttonOutline, buttonSolid } from "@/components/home/primitives";
@@ -27,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useComingSoon } from "@/hooks/use-coming-soon";
 import { cn } from "@/lib/utils";
 
 const SITE_URL = "https://descontai1.lovable.app";
@@ -110,12 +110,16 @@ function ContactPage() {
 
   const messageLength = form.watch("message")?.length ?? 0;
 
+  const notifyComingSoon = useComingSoon(
+    "O envio de mensagens será ativado após a integração com o serviço de atendimento.",
+  );
+
   /**
    * Ponto único de integração futura. Nada é enviado, armazenado ou processado:
    * apenas confirmamos que o formulário está válido.
    */
   function onSubmit(_values: ContactValues) {
-    toast("O envio de mensagens será ativado após a integração com o serviço de atendimento.");
+    notifyComingSoon();
   }
 
   return (

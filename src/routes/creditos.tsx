@@ -22,6 +22,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import {
+  describeCouponCreditRule,
+  describeProductCreditRule,
+  formatCreditCount,
+} from "@/config/business-rules";
 import { COUPON_REDEMPTION_COST } from "@/domain/coupons/coupon-rules";
 import { DEMO_CREDIT_BALANCE } from "@/domain/credits/credit-rules";
 import { formatCreditsLabel } from "@/lib/format";
@@ -60,10 +65,10 @@ const SIMULATION_OPTIONS = [
 type SimulationId = (typeof SIMULATION_OPTIONS)[number]["id"];
 
 const RULES = [
-  { icon: Coins, title: "Produto de até R$ 50,00", value: "1 crédito" },
-  { icon: Coins, title: "Produto acima de R$ 50,00", value: "2 créditos" },
-  { icon: Ticket, title: "Cupom", value: `${COUPON_REDEMPTION_COST} créditos` },
-  { icon: Gift, title: "Nova conta", value: `${NEW_ACCOUNT_CREDITS} créditos gratuitos` },
+  { icon: Coins, title: `Produto ${describeProductCreditRule("low").range}`, value: describeProductCreditRule("low").cost },
+  { icon: Coins, title: `Produto ${describeProductCreditRule("high").range}`, value: describeProductCreditRule("high").cost },
+  { icon: Ticket, title: "Cupom", value: describeCouponCreditRule().cost },
+  { icon: Gift, title: "Nova conta", value: `${formatCreditCount(NEW_ACCOUNT_CREDITS)} gratuitos` },
 ];
 
 const FAQ = [

@@ -3,6 +3,8 @@
  * Mantido em arquivo separado para que a futura migração para banco de dados
  * ou CMS troque apenas a origem dos dados, sem tocar na interface.
  */
+import { describeCouponCreditRule, describeProductCreditRule } from "@/config/business-rules";
+
 
 export type FaqCategory =
   | "Conta"
@@ -48,7 +50,7 @@ export const FAQ_ENTRIES: readonly FaqEntry[] = [
     category: "Créditos",
     question: "Como funcionam os créditos?",
     answer:
-      "Créditos são usados para liberar o acesso a uma oportunidade. Produtos até R$ 50,00 custam 1 crédito, produtos acima de R$ 50,00 custam 2 créditos e cada cupom custa 3 créditos.",
+      `Créditos são usados para liberar o acesso a uma oportunidade. ${describeProductCreditRule("low").sentence} ${describeProductCreditRule("high").sentence} ${describeCouponCreditRule().sentence}`,
   },
   {
     id: "creditos-comprar",
