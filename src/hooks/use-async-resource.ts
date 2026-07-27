@@ -1,4 +1,4 @@
-import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import { useQuery, type DataTag, type UseQueryOptions } from "@tanstack/react-query";
 import { useCallback } from "react";
 
 import { toUserMessage } from "@/services";
@@ -37,9 +37,13 @@ function isEmptyResult(value: unknown): boolean {
  * porque o dado em cache é servido antes da revalidação.
  */
 export function useResource<T>(
-  options: Omit<UseQueryOptions<T, Error, T, readonly unknown[]>, "queryFn"> & {
-    /** Ponto de inferência de `T` — mantém o contrato tipado sem `any`. */
-    queryFn: () => Promise<T>;
+  /**
+   * Aceita exatamente o objeto produzido por `queryOptions(...)`.
+   * O `DataTag` na chave é o ponto de inferência de `T` — por isso o contrato
+   * permanece rigorosamente tipado, sem `any` e sem asserções.
+   */
+  options: UseQueryOptions<T, Error, T, readonly unknown[]> & {
+    queryKey: DataTag<readonly unknown[], T, Error>;
   },
 ): AsyncResource<T> {
   const query = useQuery(options);
