@@ -10,7 +10,7 @@ const SECTIONS: LegalSection[] = [
     id: "dados-coletados",
     title: "Quais dados poderão ser coletados",
     body: [
-      "Nesta versão, o DESCONTAI não possui cadastro ativo, banco de dados de usuários nem envio de formulários. As informações digitadas em telas de login, cadastro ou contato permanecem no seu navegador e não são transmitidas.",
+      "Nesta versão, o EconomizAI não possui cadastro ativo, banco de dados de usuários nem envio de formulários. As informações digitadas em telas de login, cadastro ou contato permanecem no seu navegador e não são transmitidas.",
       "Quando as funcionalidades de conta e atendimento forem ativadas, os dados abaixo poderão ser coletados. Esta lista descreve o tratamento planejado, e não um sistema já em operação.",
     ],
     bullets: [
@@ -138,9 +138,9 @@ const SECTIONS: LegalSection[] = [
 
 export const Route = createFileRoute("/privacidade")({
   head: () => {
-    const title = "Política de privacidade | DESCONTAI";
+    const title = "Política de privacidade | EconomizAI";
     const description =
-      "Política de privacidade provisória do DESCONTAI: dados que poderão ser coletados, finalidades, bases legais, segurança, retenção e direitos do titular.";
+      "Política de privacidade provisória do EconomizAI: dados que poderão ser coletados, finalidades, bases legais, segurança, retenção e direitos do titular.";
 
     return {
       meta: [

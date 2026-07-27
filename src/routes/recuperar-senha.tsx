@@ -34,8 +34,8 @@ type RecoverValues = z.infer<typeof recoverSchema>;
 
 export const Route = createFileRoute("/recuperar-senha")({
   head: () => {
-    const title = "Recuperar senha | DESCONTAI";
-    const description = "Receba instruções para redefinir o acesso à sua conta DESCONTAI.";
+    const title = "Recuperar senha | EconomizAI";
+    const description = "Receba instruções para redefinir o acesso à sua conta EconomizAI.";
 
     return {
       meta: [

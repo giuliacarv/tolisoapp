@@ -38,9 +38,9 @@ function filterFaq(
 
 export const Route = createFileRoute("/ajuda")({
   head: () => {
-    const title = "Central de ajuda | DESCONTAI";
+    const title = "Central de ajuda | EconomizAI";
     const description =
-      "Respostas objetivas sobre conta, créditos, ofertas, cupons, compras nas lojas parceiras e privacidade no DESCONTAI.";
+      "Respostas objetivas sobre conta, créditos, ofertas, cupons, compras nas lojas parceiras e privacidade no EconomizAI.";
 
     return {
       meta: [

@@ -58,9 +58,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "author", content: "DESCONTAI" },
+      { name: "author", content: "EconomizAI" },
       { name: "robots", content: "index, follow" },
-      { property: "og:site_name", content: "DESCONTAI" },
+      { property: "og:site_name", content: "EconomizAI" },
       { property: "og:locale", content: "pt_BR" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -82,7 +82,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     scripts: [
       {
         // Aplica o tema antes da primeira pintura para evitar flash de tela clara.
-        children: `(function(){try{var s=localStorage.getItem("descontai-theme");var d=s?s==="dark":matchMedia("(prefers-color-scheme: dark)").matches;var r=document.documentElement;r.classList.toggle("dark",d);}catch(e){}})();`,
+        children: `(function(){try{var s=localStorage.getItem("economizai-theme");var d=s?s==="dark":matchMedia("(prefers-color-scheme: dark)").matches;var r=document.documentElement;r.classList.toggle("dark",d);}catch(e){}})();`,
       },
     ],
   }),

@@ -12,7 +12,7 @@ const SECTIONS: LegalSection[] = [
     title: "O que são cookies",
     body: [
       "Cookies e tecnologias equivalentes (como o armazenamento local do navegador) são pequenos registros gravados no seu dispositivo quando você usa um site. Eles servem para manter a interface funcionando, lembrar escolhas e, dependendo da categoria, medir uso ou apoiar publicidade.",
-      "Nesta versão do DESCONTAI, apenas recursos essenciais e preferências locais estão em uso. Nenhum script de análise, pixel publicitário ou rastreador de rede de afiliados é carregado.",
+      "Nesta versão do EconomizAI, apenas recursos essenciais e preferências locais estão em uso. Nenhum script de análise, pixel publicitário ou rastreador de rede de afiliados é carregado.",
     ],
   },
   {
@@ -48,7 +48,7 @@ const SECTIONS: LegalSection[] = [
     title: "Publicidade e afiliados",
     body: [
       "Esta categoria abrange cookies de redes de afiliados e de publicidade, usados para atribuir cliques a comissões e para exibir comunicações mais relevantes.",
-      "Cookies de marketing não são ativados sem o seu consentimento. Enquanto você não autorizar esta categoria, nenhum rastreador de publicidade ou de atribuição é carregado pelo DESCONTAI.",
+      "Cookies de marketing não são ativados sem o seu consentimento. Enquanto você não autorizar esta categoria, nenhum rastreador de publicidade ou de atribuição é carregado pelo EconomizAI.",
       "Importante: ao clicar em um link de saída e chegar à loja de destino, o site do parceiro pode gravar os próprios cookies, sob a política dele. Essa decisão está fora do nosso controle.",
     ],
     extra: (
@@ -84,9 +84,9 @@ const SECTIONS: LegalSection[] = [
 
 export const Route = createFileRoute("/cookies")({
   head: () => {
-    const title = "Política de cookies | DESCONTAI";
+    const title = "Política de cookies | EconomizAI";
     const description =
-      "Política de cookies provisória do DESCONTAI: categorias essenciais, de preferências, de análise e de publicidade/afiliados, com controle das suas escolhas.";
+      "Política de cookies provisória do EconomizAI: categorias essenciais, de preferências, de análise e de publicidade/afiliados, com controle das suas escolhas.";
 
     return {
       meta: [

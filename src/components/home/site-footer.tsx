@@ -77,7 +77,7 @@ export function Footer() {
                 <Sparkles className="h-4 w-4 text-gold" strokeWidth={1.75} aria-hidden />
               </span>
               <span className="truncate text-fluid-base font-extrabold tracking-[-0.02em] text-foreground">
-                DESCONTAI<span className="text-gold">.</span>
+                EconomizAI<span className="text-gold">.</span>
               </span>
             </div>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -150,7 +150,7 @@ export function Footer() {
             uma compra é realizada, sem custo adicional para você.
           </p>
           <p className="text-xs text-muted-foreground">
-            © {year} DESCONTAI. Todos os direitos reservados.
+            © {year} EconomizAI. Todos os direitos reservados.
           </p>
         </div>
       </Container>

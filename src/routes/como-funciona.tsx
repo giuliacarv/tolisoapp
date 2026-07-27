@@ -62,9 +62,9 @@ const DOES_NOT = [
 
 export const Route = createFileRoute("/como-funciona")({
   head: () => {
-    const title = "Como funciona | DESCONTAI";
+    const title = "Como funciona | EconomizAI";
     const description =
-      "Entenda a jornada no DESCONTAI: encontrar uma oferta, usar créditos e comprar diretamente na loja parceira.";
+      "Entenda a jornada no EconomizAI: encontrar uma oferta, usar créditos e comprar diretamente na loja parceira.";
 
     return {
       meta: [
@@ -140,7 +140,7 @@ function StepsSection() {
         <SectionHeading
           eyebrow="Jornada"
           title={<span id="etapas">Cinco etapas, sem letras miúdas</span>}
-          description="Cada etapa mostra exatamente o que acontece de um lado e do outro: o que o DESCONTAI organiza e o que fica sob responsabilidade da loja."
+          description="Cada etapa mostra exatamente o que acontece de um lado e do outro: o que o EconomizAI organiza e o que fica sob responsabilidade da loja."
         />
 
         <ol className="relative mt-12 space-y-6 sm:space-y-0">
@@ -185,7 +185,7 @@ function AffiliateSection() {
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-14">
           <SectionHeading
             eyebrow="Transparência"
-            title={<span id="afiliados">Como o DESCONTAI se mantém</span>}
+            title={<span id="afiliados">Como o EconomizAI se mantém</span>}
           />
 
           <div className="gilded-frame rounded-[18px] border border-border bg-card p-6 shadow-soft sm:p-8">
@@ -197,7 +197,7 @@ function AffiliateSection() {
             </span>
             <p className="mt-4 text-fluid-sm leading-[1.7] text-pretty text-muted-foreground">
               Alguns links são links de afiliado. Quando uma compra elegível é realizada, o
-              DESCONTAI pode receber uma comissão sem custo adicional para o usuário.
+              EconomizAI pode receber uma comissão sem custo adicional para o usuário.
             </p>
           </div>
         </div>
@@ -219,7 +219,7 @@ function ScopeSection() {
         <div className="mt-10 grid gap-6 lg:grid-cols-2">
           <div className="gilded-frame rounded-[18px] border border-border bg-card p-6 shadow-soft sm:p-8">
             <h3 className="text-fluid-micro font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-              O que o DESCONTAI faz
+              O que o EconomizAI faz
             </h3>
             <ul className="mt-5 space-y-3">
               {DOES.map((item) => (
@@ -238,7 +238,7 @@ function ScopeSection() {
 
           <div className="rounded-[18px] border border-dashed border-border bg-secondary/60 p-6 shadow-soft sm:p-8">
             <h3 className="text-fluid-micro font-semibold uppercase tracking-[0.24em] text-muted-foreground">
-              O que o DESCONTAI não faz
+              O que o EconomizAI não faz
             </h3>
             <ul className="mt-5 space-y-3">
               {DOES_NOT.map((item) => (

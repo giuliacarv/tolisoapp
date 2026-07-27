@@ -77,9 +77,9 @@ type ContactValues = z.infer<typeof contactSchema>;
 
 export const Route = createFileRoute("/contato")({
   head: () => {
-    const title = "Contato | DESCONTAI";
+    const title = "Contato | EconomizAI";
     const description =
-      "Fale com o DESCONTAI sobre ofertas, cupons, créditos, privacidade ou parcerias.";
+      "Fale com o EconomizAI sobre ofertas, cupons, créditos, privacidade ou parcerias.";
 
     return {
       meta: [
@@ -135,7 +135,7 @@ function ContactPage() {
                 Contato
               </span>
               <h1 className="mt-4 font-serif text-fluid-h1 leading-[1.05] tracking-[-0.025em] text-balance">
-                Fale com o DESCONTAI
+                Fale com o EconomizAI
               </h1>
               <p className="mt-5 max-w-[58ch] text-fluid-base leading-[1.7] text-pretty text-offwhite/70">
                 Dúvidas sobre créditos, uma oferta desatualizada, um cupom que não funcionou ou uma
@@ -160,7 +160,7 @@ function ContactPage() {
                     <ShieldAlert className="mt-0.5 size-5 shrink-0 text-discount" strokeWidth={1.75} aria-hidden />
                     <p className="text-fluid-xs leading-[1.7] text-foreground">
                       Nunca informe senhas, códigos de verificação ou dados de cartão nesta ou em
-                      qualquer outra mensagem. O DESCONTAI jamais solicita esse tipo de informação.
+                      qualquer outra mensagem. O EconomizAI jamais solicita esse tipo de informação.
                     </p>
                   </div>
 

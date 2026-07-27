@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import type { Coupon } from "@/types";
 
 const SITE_URL = "https://descontai1.lovable.app";
-const TITLE = "Cupons selecionados | DESCONTAI";
+const TITLE = "Cupons selecionados | EconomizAI";
 const DESCRIPTION =
   "Consulte condições, validade e status de verificação dos cupons demonstrativos das principais lojas online do Brasil.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;

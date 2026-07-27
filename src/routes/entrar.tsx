@@ -44,9 +44,9 @@ type SignInValues = z.infer<typeof signInSchema>;
 
 export const Route = createFileRoute("/entrar")({
   head: () => {
-    const title = "Entrar | DESCONTAI";
+    const title = "Entrar | EconomizAI";
     const description =
-      "Acesse sua conta DESCONTAI para acompanhar ofertas, cupons e créditos.";
+      "Acesse sua conta EconomizAI para acompanhar ofertas, cupons e créditos.";
 
     return {
       meta: [

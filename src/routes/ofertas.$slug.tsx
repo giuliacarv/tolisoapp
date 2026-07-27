@@ -48,9 +48,9 @@ const EXTERNAL_NOTICE =
 
 export const Route = createFileRoute("/ofertas/$slug")({
   head: ({ params }) => {
-    const title = "Detalhes da oferta | DESCONTAI";
+    const title = "Detalhes da oferta | EconomizAI";
     const description =
-      "Veja preço, desconto, condições e créditos necessários desta oferta demonstrativa no DESCONTAI.";
+      "Veja preço, desconto, condições e créditos necessários desta oferta demonstrativa no EconomizAI.";
 
     return {
       meta: [

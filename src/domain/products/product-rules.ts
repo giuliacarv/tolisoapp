@@ -17,7 +17,7 @@ import type { Product } from "@/types";
 export type ProductUnavailableReason = "expired" | "unavailable";
 
 /**
- * Regra de créditos do DESCONTAI.
+ * Regra de créditos do EconomizAI.
  * - Preço atual até R$ 50,00 (inclusive) → 1 crédito
  * - Preço atual acima de R$ 50,00 → 2 créditos
  *
