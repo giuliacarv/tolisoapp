@@ -351,6 +351,8 @@ function ProductDetailContent({
               onSelect={modals.openDetails}
               isLoading={relatedLoading}
               skeletonCount={4}
+              // Grade fixa: com 1 ou 2 relacionados o auto-fit esticaria os cards.
+              className="!grid-cols-1 sm:!grid-cols-2 lg:!grid-cols-4"
             />
           </div>
         </section>
