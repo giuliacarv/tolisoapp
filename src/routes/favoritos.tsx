@@ -9,7 +9,7 @@ import { Footer } from "@/components/home/site-footer";
 import { Header } from "@/components/home/site-header";
 import { ThemeToggle } from "@/components/home/theme-toggle";
 import { RecentlyViewedSection } from "@/components/product/recently-viewed-section";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { cn } from "@/lib/utils";

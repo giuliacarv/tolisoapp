@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { cn } from "@/lib/utils";
 import { storeService } from "@/services";
 import type { Store } from "@/types";

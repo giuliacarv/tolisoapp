@@ -10,7 +10,7 @@ import {
   type CatalogFilters,
   type CatalogSortId,
 } from "@/domain/products/catalog-filters";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { categoryService, productService, storeService } from "@/services";
 import type { Product } from "@/types";
 
@@ -41,9 +41,9 @@ const EMPTY_PRODUCTS: readonly Product[] = [];
  * cuidamos apenas do estado de interface.
  */
 export function useCatalog() {
-  const productsResource = useAsyncResource(() => productService.list(), []);
-  const categoriesResource = useAsyncResource(() => categoryService.list(), []);
-  const storesResource = useAsyncResource(() => storeService.list({ activeOnly: true }), []);
+  const productsResource = useResource(productQueries.list());
+  const categoriesResource = useResource(categoryQueries.list());
+  const storesResource = useResource(storeQueries.list({ activeOnly: true }));
 
   const products = productsResource.data ?? EMPTY_PRODUCTS;
 

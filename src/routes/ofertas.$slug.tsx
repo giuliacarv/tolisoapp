@@ -29,7 +29,7 @@ import {
   formatUnavailableLabel,
   getProductUnavailableReason,
 } from "@/domain/products/product-rules";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { useRegisterRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";

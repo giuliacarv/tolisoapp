@@ -26,7 +26,7 @@ import {
   getCouponStatus,
   maskCouponCode,
 } from "@/domain/coupons/coupon-rules";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { couponService } from "@/services";

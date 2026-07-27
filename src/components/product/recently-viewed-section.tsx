@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { History, Trash2 } from "lucide-react";
 
 import { ProductGrid } from "@/components/home/product-grid";
-import { useAsyncResource } from "@/hooks/use-async-resource";
+import { useResource } from "@/hooks/use-async-resource";
 import { useRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { cn } from "@/lib/utils";
 import { productService } from "@/services";
