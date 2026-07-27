@@ -784,3 +784,42 @@
     transform: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Camada de luz: orbes desfocados que simulam iluminação de vitrine.
+ * São puramente decorativos — sempre em elementos `aria-hidden` posicionados
+ * de forma absoluta, atrás do conteúdo, e nunca interceptam o ponteiro.
+ * ------------------------------------------------------------------------ */
+
+/** Orbe quente (ouro velho) — foco principal de luz da composição. */
+@utility glow-orb {
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(60px);
+  background-color: color-mix(in oklab, var(--gold) 22%, transparent);
+}
+
+/** Orbe frio (azul-petróleo) — contraluz que dá profundidade à cena. */
+@utility glow-orb-cool {
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(70px);
+  background-color: color-mix(in oklab, var(--petrol) 20%, transparent);
+}
+
+/**
+ * Selo de desconto no acento frio. Sobre superfícies escuras (`noir-band`) o
+ * petróleo já é claro o bastante; no tema claro usamos o par escuro sobre véu.
+ */
+@utility petrol-badge {
+  border: 1px solid color-mix(in oklab, var(--petrol) 30%, transparent);
+  background-color: color-mix(in oklab, var(--petrol) 12%, transparent);
+  color: var(--petrol);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-orb,
+  .glow-orb-cool {
+    display: none;
+  }
+}
