@@ -73,6 +73,23 @@
   --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+/*
+ * Breakpoints por ponto de virada do CONTEÚDO, não por dispositivo.
+ * - xs (22.5rem / 360px): menor largura em que o par "imagem + texto" dos
+ *   cards cabe lado a lado; abaixo disso tudo empilha em coluna única.
+ * - sm..2xl: mantidos nos valores padrão do Tailwind, já validados contra
+ *   as faixas intermediárias (768–1023px e 1280–1535px).
+ * - 3xl (120rem / 1920px): teto para telas ultrawide, onde o container
+ *   para de crescer e passamos a distribuir espaço em vez de esticar linha.
+ * Em rem para respeitar o zoom de fonte do sistema operacional.
+ */
+@theme {
+  --breakpoint-xs: 22.5rem;
+  --breakpoint-3xl: 120rem;
+}
+
+
+
 
 :root {
   /* Informa ao navegador quais controles nativos (scrollbar, inputs) usar. */
@@ -205,6 +222,22 @@
   video {
     max-width: 100%;
   }
+
+  /* Palavras longas (URLs, códigos de cupom, e-mails) quebram dentro do
+     container em vez de empurrar a largura da página em telas de ~280px. */
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  dd,
+  dt,
+  a {
+    overflow-wrap: anywhere;
+  }
+
+
 
   /* Foco visível consistente em toda navegação por teclado. */
   :focus-visible {
@@ -1307,5 +1340,47 @@ summary:focus-visible,
   button:not([disabled]),
   [role="button"] {
     min-height: 44px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Ergonomia touch: neutralização de hover em ponteiro grosso.
+ *
+ * O Tailwind v4 já encapsula a variante `hover:` em `@media (hover: hover)`,
+ * mas os utilitários customizados acima usam `&:hover` cru dentro de
+ * `@utility` — esses NÃO são encapsulados. Em telas de toque o navegador
+ * mantém o último elemento tocado em estado :hover ("sticky hover"), o que
+ * deixava cards elevados e brilhos acesos depois do toque.
+ *
+ * Aqui o estado de hover é revertido ao repouso apenas quando o dispositivo
+ * não tem ponteiro fino. O feedback de toque continua existindo via `:active`
+ * e `:focus-visible`, que permanecem intactos.
+ * ------------------------------------------------------------------------ */
+@media (hover: none) and (pointer: coarse) {
+  .interactive-lift:hover,
+  .noir-card:hover,
+  .pill-primary:hover,
+  .pill-ink:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .hover-sheen:hover::after,
+  .gilded-frame:hover::before {
+    opacity: 0;
+  }
+
+  .nav-underline:hover::after {
+    transform: scaleX(0);
+  }
+
+  /* O sublinhado/brilho de foco por teclado ou leitor de tela é preservado. */
+  .hover-sheen:focus-visible::after,
+  .gilded-frame:focus-visible::before {
+    opacity: 1;
+  }
+
+  .nav-underline:focus-visible::after {
+    transform: scaleX(1);
   }
 }

@@ -30,14 +30,22 @@ export function ProductGallery({ image, gallery, name, discountPercentage }: Pro
   return (
     <div className="flex flex-col gap-3">
       <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[18px] border border-border bg-secondary">
+        {/* LCP da página de detalhe: carrega com prioridade alta e dimensões
+            intrínsecas declaradas, para o container reservar altura antes do
+            byte da imagem chegar (CLS = 0). O `sizes` informa ao navegador que
+            a arte ocupa a viewport inteira no mobile e ~55% dela no desktop. */}
         <img
           src={active}
           alt={`Foto ilustrativa: ${name}`}
           width={1200}
           height={900}
+          sizes="(min-width: 1024px) 55vw, 100vw"
+          loading="eager"
+          fetchPriority="high"
           decoding="async"
           className="h-full w-full object-cover object-center"
         />
+
         {discountPercentage > 0 ? (
           <span className="absolute left-4 top-4 rounded-lg bg-discount px-2.5 py-1 text-xs font-bold text-offwhite">
             -{discountPercentage}%
