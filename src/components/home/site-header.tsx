@@ -1,33 +1,27 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Heart, Menu, Sparkles } from "lucide-react";
-import { toast } from "sonner";
+import { Heart, Sparkles } from "lucide-react";
 
 import { SearchHeader } from "@/components/search/search-header";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-
+import { useComingSoon } from "@/hooks/use-coming-soon";
+import { useScrollProgress } from "@/hooks/use-scroll-progress";
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { cn } from "@/lib/utils";
 
-import { Container, buttonSolid } from "./primitives";
+import { Container } from "./primitives";
 import { CreditsBadge } from "./credits-badge";
-
-const NAV_LINKS = [
-  { label: "Ofertas", href: "#ofertas" },
-  { label: "Cupons", href: "#cupons" },
-  { label: "Categorias", href: "#categorias" },
-  { label: "Como funciona", href: "#como-funciona" },
-];
-
-const LOGIN_MESSAGE = "Login e cadastro serão implementados na próxima etapa.";
+import { HeaderMobileMenu } from "./header-mobile-menu";
+import { LOGIN_COMING_SOON_MESSAGE, NAV_LINKS } from "./header-nav-links";
 
 const iconButton =
   "touch-target grid shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground transition-colors duration-200 hover:bg-secondary";
 
 /**
  * Header sticky do EconomizAI.
- * O menu mobile usa o Sheet (Radix): fecha com Escape, trava a rolagem
- * e mantém o foco preso enquanto está aberto.
+ *
+ * Responsabilidade única: compor a barra fixa e reagir ao estado de rolagem.
+ * O cálculo de rolagem vive em `useScrollProgress`, o menu mobile em
+ * `HeaderMobileMenu` e os itens de navegação em `header-nav-links`.
  */
 export function Header() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
@@ -35,25 +29,9 @@ export function Header() {
   // sólido, caso contrário o texto claro ficaria ilegível sobre fundo claro.
   const isHome = pathname === "/";
 
-  const [rawScrolled, setRawScrolled] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const { scrolled: rawScrolled, progress } = useScrollProgress();
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      setRawScrolled(window.scrollY > 8);
-      // Evita divisão por zero em páginas curtas (progresso permanece 0).
-      setProgress(scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
+  const notifyLoginComingSoon = useComingSoon(LOGIN_COMING_SOON_MESSAGE);
 
   const scrolled = rawScrolled || !isHome;
 
@@ -65,7 +43,7 @@ export function Header() {
 
   const handleLogin = () => {
     setOpen(false);
-    toast(LOGIN_MESSAGE);
+    notifyLoginComingSoon();
   };
 
   return (
@@ -99,7 +77,6 @@ export function Header() {
         )}
         style={{ transform: `scaleX(${progress})` }}
       />
-
 
       <Container className="flex h-[var(--header-h)] items-center justify-between gap-2 sm:gap-4">
         <a
@@ -153,7 +130,6 @@ export function Header() {
             )}
           />
 
-
           <Link
             to="/favoritos"
             aria-label="Ver meus favoritos salvos neste dispositivo"
@@ -185,66 +161,16 @@ export function Header() {
             Entrar
           </button>
 
-
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <button
-                type="button"
-                aria-label="Abrir menu de navegação"
-                className={cn(
-                  iconButton,
-                  "lg:hidden",
-                  !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
-                )}
-              >
-                <Menu className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-              </button>
-            </SheetTrigger>
-            <SheetContent
-              side="right"
-              className="flex w-[min(21.25rem,88vw)] flex-col gap-0 overflow-y-auto overscroll-contain border-l border-border bg-background p-[var(--gutter)]"
-            >
-              <SheetHeader className="p-0 text-left">
-                <SheetTitle className="font-serif text-xl tracking-tight">Menu</SheetTitle>
-              </SheetHeader>
-
-              <div className="mt-5 flex items-center gap-2">
-                <CreditsBadge />
-              </div>
-
-              <nav aria-label="Atalhos" className="mt-4">
-                <Link
-                  to="/favoritos"
-                  onClick={() => setOpen(false)}
-                  className="touch-target flex items-center gap-2 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground transition-colors duration-200 hover:bg-secondary"
-                >
-                  <Heart className="size-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
-                  Meus favoritos
-                </Link>
-              </nav>
-
-
-              <nav aria-label="Navegação mobile" className="mt-6 flex flex-col">
-                {NAV_LINKS.map((link) => (
-                  <a
-                    key={link.href}
-                    href={hrefFor(link.href)}
-                    onClick={(event) => {
-                      handleAnchorClick(event, link.href, () => setOpen(false));
-                      setOpen(false);
-                    }}
-                    className="touch-target flex items-center border-b border-border/70 py-4 font-serif text-lg text-foreground transition-colors duration-200 hover:text-gold"
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </nav>
-
-              <button type="button" onClick={handleLogin} className={cn(buttonSolid, "mt-auto w-full py-3.5")}>
-                Entrar
-              </button>
-            </SheetContent>
-          </Sheet>
+          <HeaderMobileMenu
+            open={open}
+            onOpenChange={setOpen}
+            hrefFor={hrefFor}
+            onLogin={handleLogin}
+            triggerClassName={cn(
+              iconButton,
+              !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
+            )}
+          />
         </div>
       </Container>
     </header>
