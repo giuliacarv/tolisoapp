@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
 import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
@@ -31,6 +32,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
   id: '/recuperar-senha',
   path: '/recuperar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EntrarRoute = EntrarRouteImport.update({
@@ -97,6 +103,7 @@ export interface FileRoutesByFullPath {
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
+  '/favoritos': typeof FavoritosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
@@ -112,6 +119,7 @@ export interface FileRoutesByTo {
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
+  '/favoritos': typeof FavoritosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
@@ -128,6 +136,7 @@ export interface FileRoutesById {
   '/creditos': typeof CreditosRoute
   '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
+  '/favoritos': typeof FavoritosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
@@ -145,6 +154,7 @@ export interface FileRouteTypes {
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
+    | '/favoritos'
     | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
+    | '/favoritos'
     | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/creditos'
     | '/criar-conta'
     | '/entrar'
+    | '/favoritos'
     | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
@@ -191,6 +203,7 @@ export interface RootRouteChildren {
   CreditosRoute: typeof CreditosRoute
   CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
+  FavoritosRoute: typeof FavoritosRoute
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CuponsSlugRoute: typeof CuponsSlugRoute
@@ -213,6 +226,13 @@ declare module '@tanstack/react-router' {
       path: '/recuperar-senha'
       fullPath: '/recuperar-senha'
       preLoaderRoute: typeof RecuperarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/entrar': {
@@ -303,6 +323,7 @@ const rootRouteChildren: RootRouteChildren = {
   CreditosRoute: CreditosRoute,
   CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
+  FavoritosRoute: FavoritosRoute,
   RecuperarSenhaRoute: RecuperarSenhaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CuponsSlugRoute: CuponsSlugRoute,
