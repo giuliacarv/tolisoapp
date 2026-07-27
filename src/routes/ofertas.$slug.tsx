@@ -22,6 +22,7 @@ import {
   ProductNotFound,
 } from "@/components/product/product-detail-states";
 import { ProductGallery } from "@/components/product/product-gallery";
+import { FavoriteButton } from "@/components/product/favorite-button";
 import { ProductShare } from "@/components/product/product-share";
 import {
   calculateSavings,
@@ -30,6 +31,7 @@ import {
 } from "@/domain/products/product-rules";
 import { useAsyncResource } from "@/hooks/use-async-resource";
 import { useProductModals } from "@/hooks/use-product-modals";
+import { useRegisterRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { productService } from "@/services";
@@ -102,6 +104,10 @@ function ProductDetailPage() {
   const product = useAsyncResource<Product | null>(fetchProduct, [slug]);
 
   const currentId = product.data?.id ?? null;
+
+  // Histórico local "Vistos recentemente" (apenas o id público do produto).
+  useRegisterRecentlyViewed(currentId ?? undefined);
+
   const fetchRelated = useCallback(
     () => (currentId ? productService.listRelated(currentId, 4) : Promise.resolve([])),
     [currentId],
@@ -246,6 +252,7 @@ function ProductDetailContent({
 
           {/* Ação principal */}
           <div className="mt-6 flex flex-col gap-4">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <button
               type="button"
               onClick={() => modals.openRedeem(product)}
@@ -256,6 +263,14 @@ function ProductDetailContent({
                 ? formatUnavailableLabel(unavailableReason)
                 : "Resgatar Desconto"}
             </button>
+
+              <FavoriteButton
+                productId={product.id}
+                productName={product.name}
+                variant="label"
+                className="w-full justify-center rounded-xl sm:w-auto"
+              />
+            </div>
 
             <ProductShare title={product.name} text={`${product.name} — ${product.store}`} />
           </div>
