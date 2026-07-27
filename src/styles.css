@@ -970,6 +970,35 @@
 }
 
 /**
+ * Moeda de crédito do medidor de saldo.
+ *
+ * Duas variantes controladas por `data-state`, para que o markup expresse
+ * semântica (disponível/consumido) em vez de repetir classes utilitárias:
+ *  - `available` — disco dourado com brilho especular no topo;
+ *  - `spent`     — apenas o contorno, indicando crédito já utilizado.
+ */
+@utility credit-pip {
+  position: relative;
+  display: inline-block;
+  block-size: 1.25rem;
+  inline-size: 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--offwhite) 18%, transparent);
+  background-color: color-mix(in oklab, var(--offwhite) 6%, transparent);
+  transition: transform 0.4s var(--ease-premium);
+
+  &[data-state="available"] {
+    border-color: color-mix(in oklab, var(--gold) 55%, transparent);
+    background-image: var(--gradient-gold);
+    box-shadow:
+      inset 0 1px 0 color-mix(in oklab, white 45%, transparent),
+      0 0 14px color-mix(in oklab, var(--gold) 35%, transparent);
+  }
+}
+
+
+
+/**
  * Selo de desconto no acento frio. Sobre superfícies escuras (`noir-band`) o
  * petróleo já é claro o bastante; no tema claro usamos o par escuro sobre véu.
  */
