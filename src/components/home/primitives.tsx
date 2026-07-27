@@ -14,6 +14,11 @@ interface SectionHeadingProps {
   align?: "left" | "center";
   /** Nível semântico do título. Use "h1" quando for o título principal da página. */
   as?: "h1" | "h2" | "h3";
+  /**
+   * `serif` (padrão) mantém a voz editorial Fraunces.
+   * `display` usa a condensada Bebas Neue para títulos de impacto institucional.
+   */
+  variant?: "serif" | "display";
   className?: string;
 }
 
@@ -23,8 +28,11 @@ export function SectionHeading({
   description,
   align = "left",
   as: Heading = "h2",
+  variant = "serif",
   className,
 }: SectionHeadingProps) {
+  const isDisplay = variant === "display";
+
   return (
     <div
       className={cn(
@@ -35,23 +43,30 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.24em] text-muted-foreground">
+        <span className="inline-flex items-center gap-2 text-fluid-micro font-semibold uppercase tracking-[0.28em] text-muted-foreground">
           <span className="h-px w-6 bg-[image:var(--gradient-gold)]" aria-hidden />
           {eyebrow}
         </span>
       ) : null}
-      <Heading className="font-serif text-fluid-h2 leading-[1.08] tracking-[-0.025em] text-balance text-foreground">
+      <Heading
+        className={cn(
+          "text-balance text-foreground",
+          isDisplay
+            ? "font-display text-fluid-h1 uppercase leading-[0.92] tracking-[0.01em]"
+            : "font-serif text-fluid-h2 leading-[1.06] tracking-[-0.028em]",
+        )}
+      >
         {title}
       </Heading>
       {description ? (
-        <p className="mt-2 max-w-[58ch] text-fluid-sm leading-[1.7] text-pretty text-muted-foreground">
+        <p className="mt-4 max-w-[58ch] text-fluid-sm leading-[1.75] text-pretty text-muted-foreground">
           {description}
         </p>
       ) : null}
     </div>
-
   );
 }
+
 
 export function Tag({ className, ...props }: ComponentProps<"span">) {
   return (
@@ -67,10 +82,13 @@ export function Tag({ className, ...props }: ComponentProps<"span">) {
 
 /**
  * Estilos de botão reutilizáveis — mantêm consistência de raio, altura mínima
- * (área de toque >= 44px), foco visível e duração de transição (~200ms).
+ * (área de toque >= 44px), foco visível e duração de transição.
+ *
+ * A curva `--ease-spring` (leve overshoot) só é aplicada ao repouso->hover;
+ * o estado `:active` volta com a curva rápida para não parecer "mole".
  */
 export const buttonBase =
-  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0";
+  "inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-5 text-sm font-semibold transition-[transform,background-color,border-color,color,box-shadow] duration-300 ease-[var(--ease-spring)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0 motion-safe:active:scale-[0.985] active:duration-100 active:ease-[var(--ease-premium)]";
 
 /** Ação primária: gradiente grafite→carvão e sombra que ganha difusão no hover. */
 export const buttonSolid = cn(
@@ -85,13 +103,14 @@ export const buttonOutline = cn(
 
 /** Card base: borda fina, sombra difusa e elevação contida no hover. */
 export const cardBase =
-  "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow,background-color] duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)]";
+  "rounded-[18px] border border-border bg-card shadow-soft transition-[transform,border-color,box-shadow,background-color] duration-300 ease-[var(--ease-spring)]";
 
 /** Card clicável/navegável: base + elevação e brilho diagonal no hover. */
 export const cardInteractive = cn(
   cardBase,
   "hover-sheen gilded-frame motion-safe-transform hover:border-gold/40 hover:shadow-lift motion-safe:hover:-translate-y-1",
 );
+
 
 
 /** Superfície de vidro para painéis sobrepostos (modais, barras flutuantes). */

@@ -75,6 +75,11 @@
 
   /* Curva de easing única do produto: saída rápida, chegada suave. */
   --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Curva com leve "overshoot" — reservada a hover de cards e selos. */
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.44, 1);
+  /* Curva editorial lenta — entradas de conteúdo longas (reveal). */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
 }
 
 /*
@@ -621,11 +626,12 @@
 @keyframes reveal-rise {
   from {
     opacity: 0;
-    transform: translate3d(0, 20px, 0);
+    /* Deslocamento + micro-escala: a peça "chega" em vez de piscar. */
+    transform: translate3d(0, 24px, 0) scale(0.988);
   }
   to {
     opacity: 1;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0) scale(1);
   }
 }
 
@@ -634,12 +640,42 @@
   will-change: opacity, transform;
 
   &[data-revealed="true"] {
-    animation: reveal-rise 0.7s var(--ease-premium) both;
+    animation: reveal-rise 0.8s var(--ease-editorial) both;
     animation-delay: var(--reveal-delay, 0ms);
     /* Libera a camada de composição depois da entrada. */
     will-change: auto;
   }
 }
+
+/**
+ * Cascata automática: aplique no CONTAINER e cada filho direto herda um
+ * atraso de 70ms extra. Evita espalhar `style={{ animationDelay }}` pelos
+ * componentes e mantém o ritmo idêntico em todas as grades.
+ */
+@utility reveal-stagger {
+  & > * {
+    --reveal-delay: 0ms;
+  }
+  & > *:nth-child(2) {
+    --reveal-delay: 70ms;
+  }
+  & > *:nth-child(3) {
+    --reveal-delay: 140ms;
+  }
+  & > *:nth-child(4) {
+    --reveal-delay: 210ms;
+  }
+  & > *:nth-child(5) {
+    --reveal-delay: 280ms;
+  }
+  & > *:nth-child(6) {
+    --reveal-delay: 350ms;
+  }
+  & > *:nth-child(n + 7) {
+    --reveal-delay: 420ms;
+  }
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   /* Sem deslocamento: o conteúdo simplesmente já está visível. */
