@@ -13,14 +13,8 @@ export interface RedeemProductModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-/**
- * Economia absoluta da oferta em reais.
- * Protegido contra dados inconsistentes (preço atual maior que o anterior).
- */
-function calculateSavings(originalPrice: number, currentPrice: number): number {
-  const savings = originalPrice - currentPrice;
-  return savings > 0 ? savings : 0;
-}
+
+
 
 /**
  * Confirmação de resgate de produto.
