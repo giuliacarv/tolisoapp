@@ -15,6 +15,13 @@ export {
 } from "./product-service";
 export { storeService, type StoreQuery, type StoreService } from "./store-service";
 export {
+  categoryQueries,
+  couponQueries,
+  productQueries,
+  queryKeys,
+  storeQueries,
+} from "./queries";
+export {
   NotFoundError,
   ServiceError,
   ValidationError,
