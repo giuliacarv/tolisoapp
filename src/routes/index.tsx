@@ -2,6 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { HomepageView } from "@/components/home/homepage-view";
 
+const SITE_URL = "https://descontai1.lovable.app";
+const TITLE = "EconomizAI | Ofertas e cupons selecionados";
+const DESCRIPTION =
+  "Inteligência Artificial pra Economizar de Verdade! Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
+const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
+
+
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
