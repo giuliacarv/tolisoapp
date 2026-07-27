@@ -58,7 +58,7 @@ export function ProductDetailsModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="fixed inset-x-0 bottom-0 top-auto max-h-[90dvh] w-full max-w-none translate-x-0 translate-y-0 gap-4 overflow-y-auto overscroll-contain rounded-t-[20px] border-border bg-card p-[var(--gutter)] sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:max-w-lg sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[20px] sm:p-6">
+      <DialogContent className={sheetDialogContentWide}>
         {/* Imagem com aspect-ratio fixo: sem salto de layout ao abrir. */}
         <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-secondary">
           <img
@@ -77,12 +77,14 @@ export function ProductDetailsModal({
 
         <DialogHeader>
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground">
+            <span className={chipMeta}>
               <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               {product.store}
             </span>
             {product.verified ? (
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-saving/40 bg-saving/10 px-2.5 py-1 text-fluid-micro font-semibold text-saving">
+              <span
+                className={cn(chipMeta, "border-saving/40 bg-saving/10 text-saving")}
+              >
                 <BadgeCheck className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden />
                 Oferta verificada
               </span>
