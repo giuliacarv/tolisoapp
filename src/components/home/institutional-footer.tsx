@@ -125,31 +125,41 @@ export function InstitutionalFooter() {
             </div>
 
             <address className="mt-6 not-italic">
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-3">
+              {/*
+               * Ergonomia touch: cada linha acionável tem no mínimo 44px de
+               * altura (min-h-11). O endereço, que não é clicável, mantém o
+               * ritmo vertical de 8pt sem inflar a área de toque.
+               */}
+              <ul className="space-y-1 text-sm text-muted-foreground">
+                <li className="flex items-start gap-3 py-1">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
-                  <span className="leading-relaxed">{COMPANY.address}</span>
+                  <span className="min-w-0 leading-relaxed">{COMPANY.address}</span>
                 </li>
                 <li>
                   <a
                     href={`mailto:${COMPANY.email}`}
-                    className="group flex items-center gap-3 transition-colors hover:text-foreground"
+                    className="group flex min-h-11 items-center gap-3 transition-colors hover:text-foreground"
                   >
                     <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                    <span className="underline-offset-4 group-hover:underline">{COMPANY.email}</span>
+                    <span className="min-w-0 break-words underline-offset-4 group-hover:underline">
+                      {COMPANY.email}
+                    </span>
                   </a>
                 </li>
                 <li>
                   <a
                     href={`tel:${COMPANY.phone.replace(/[^\d+]/g, "")}`}
-                    className="group flex items-center gap-3 transition-colors hover:text-foreground"
+                    className="group flex min-h-11 items-center gap-3 transition-colors hover:text-foreground"
                   >
                     <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                    <span className="underline-offset-4 group-hover:underline">{COMPANY.phone}</span>
+                    <span className="min-w-0 underline-offset-4 group-hover:underline">
+                      {COMPANY.phone}
+                    </span>
                   </a>
                 </li>
               </ul>
             </address>
+
 
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Redes sociais">
               {SOCIALS.map(({ icon: Icon, label, href }) => (
