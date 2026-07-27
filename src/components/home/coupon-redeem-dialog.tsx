@@ -87,7 +87,7 @@ export function RedeemCouponModal({
         coupon ? (
           <div className="space-y-4">
             {/* Identificação: loja e benefício em destaque. */}
-            <div className="rounded-xl border border-border bg-background px-4 py-3">
+            <div className={panelInset}>
               <p className="inline-flex items-center gap-1.5 text-fluid-xs text-muted-foreground">
                 <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
                 <span className="truncate">{coupon.store}</span>
@@ -101,7 +101,7 @@ export function RedeemCouponModal({
             </div>
 
             {/* Condições do cupom em lista de definição (acessível a leitores de tela). */}
-            <dl className="space-y-2 rounded-xl border border-border bg-background px-4 py-3 text-fluid-xs">
+            <dl className={cn(panelInset, "space-y-2 text-fluid-xs")}>
               <DetailRow label="Benefício" icon={Tag}>
                 {formatDiscountLabel(coupon)}
               </DetailRow>
@@ -120,7 +120,7 @@ export function RedeemCouponModal({
             </dl>
 
             {/* Custo e saldo — ambos demonstrativos, nada é debitado. */}
-            <dl className="space-y-2 rounded-xl border border-border bg-secondary px-4 py-3 text-fluid-xs">
+            <dl className={cn(panelInsetMuted, "space-y-2 text-fluid-xs")}>
               <DetailRow label="Custo do resgate" icon={Coins}>
                 {formatCreditsLabel(COUPON_REDEMPTION_COST)}
               </DetailRow>

@@ -8,6 +8,7 @@ import {
   type CouponFilters,
 } from "@/domain/coupons/coupon-filters";
 import type { CouponFacetOption } from "@/hooks/use-coupon-catalog";
+import { linkQuiet } from "@/components/home/primitives";
 import { cn } from "@/lib/utils";
 
 /** Bloco de faceta com título discreto e ritmo vertical de 8pt. */

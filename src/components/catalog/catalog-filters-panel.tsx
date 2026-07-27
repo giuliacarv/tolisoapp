@@ -8,6 +8,7 @@ import {
   type CatalogFilters,
 } from "@/domain/products/catalog-filters";
 import type { FacetOption } from "@/hooks/use-catalog";
+import { linkQuiet } from "@/components/home/primitives";
 import { cn } from "@/lib/utils";
 
 /** Bloco de faceta com título discreto e ritmo vertical de 8pt. */
