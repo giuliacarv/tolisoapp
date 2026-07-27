@@ -537,7 +537,14 @@
   background-repeat: repeat;
   opacity: 0.035;
   mix-blend-mode: multiply;
+
+  /* No escuro, `multiply` some no fundo: o grão precisa clarear, não escurecer. */
+  .dark & {
+    opacity: 0.05;
+    mix-blend-mode: screen;
+  }
 }
+
 
 /** Filete horizontal que nasce e morre em transparente. */
 @utility rule-fade {
