@@ -75,7 +75,7 @@ export const buttonBase =
 /** Ação primária: gradiente grafite→carvão e sombra que ganha difusão no hover. */
 export const buttonSolid = cn(
   buttonBase,
-  "bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-soft hover:shadow-lift",
+  "cta-surface shadow-soft hover:shadow-lift",
 );
 
 export const buttonOutline = cn(
@@ -102,7 +102,7 @@ export const glassPanel = "glass-surface rounded-[18px] shadow-lift";
 export const chipBase =
   "inline-flex min-h-11 items-center rounded-full px-4 py-2 text-fluid-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50";
 
-export const chipActive = cn(chipBase, "bg-ink text-offwhite");
+export const chipActive = cn(chipBase, "cta-surface border-transparent");
 
 export const chipIdle = cn(
   chipBase,
