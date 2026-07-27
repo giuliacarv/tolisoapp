@@ -171,7 +171,7 @@ export function InstitutionalFooter() {
           {/* Coluna 2: Links rápidos e navegação */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-5 lg:gap-6">
             <div>
-              <h3 className="text-fluid-xs font-semibold uppercase tracking-wider text-foreground">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground md:text-fluid-xs">
                 Institucional
               </h3>
               <ul className="mt-4 space-y-2.5">
