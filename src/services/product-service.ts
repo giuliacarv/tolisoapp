@@ -32,6 +32,8 @@ export interface ProductService {
   listFeatured(): Promise<Product[]>;
   getById(id: string): Promise<Product>;
   findBySlug(slug: string): Promise<Product | null>;
+  /** Produtos correspondentes a uma lista de ids, preservando a ordem recebida. */
+  listByIds(ids: string[]): Promise<Product[]>;
   /** Ofertas da mesma categoria, excluindo o próprio produto. */
   listRelated(productId: string, limit?: number): Promise<Product[]>;
   /** Prévia informativa de resgate — não debita créditos. */
@@ -71,6 +73,15 @@ export const productService: ProductService = {
   async findBySlug(slug) {
     const product = MOCK_PRODUCTS.find((candidate) => candidate.slug === slug);
     return resolveMock(product ?? null);
+  },
+
+  async listByIds(ids) {
+    // Ids inexistentes (produto removido do catálogo) são simplesmente ignorados.
+    const found = ids
+      .map((id) => MOCK_PRODUCTS.find((candidate) => candidate.id === id))
+      .filter((product): product is Product => Boolean(product));
+
+    return resolveMock(found);
   },
 
   async listRelated(productId, limit = 4) {
