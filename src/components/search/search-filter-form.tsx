@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/select";
 import { PRICE_RANGES } from "@/domain/products/catalog-filters";
 import { useResource } from "@/hooks/use-async-resource";
-import { categoryService } from "@/services";
+import { categoryQueries } from "@/services";
 import type { Category } from "@/types";
 import { cn } from "@/lib/utils";
 

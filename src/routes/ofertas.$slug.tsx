@@ -34,7 +34,7 @@ import { useProductModals } from "@/hooks/use-product-modals";
 import { useRegisterRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { productService } from "@/services";
+import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
 const SITE_URL = "https://descontai1.lovable.app";

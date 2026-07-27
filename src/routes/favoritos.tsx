@@ -13,7 +13,7 @@ import { useResource } from "@/hooks/use-async-resource";
 import { useFavorites } from "@/hooks/use-favorites";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { cn } from "@/lib/utils";
-import { productService } from "@/services";
+import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
 const SITE_URL = "https://descontai1.lovable.app";

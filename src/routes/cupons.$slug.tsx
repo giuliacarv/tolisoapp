@@ -29,7 +29,7 @@ import {
 import { useResource } from "@/hooks/use-async-resource";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
-import { couponService } from "@/services";
+import { couponQueries } from "@/services";
 import type { Coupon, CouponStatus } from "@/types";
 
 const SITE_URL = "https://descontai1.lovable.app";

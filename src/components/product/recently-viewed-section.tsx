@@ -5,7 +5,7 @@ import { ProductGrid } from "@/components/home/product-grid";
 import { useResource } from "@/hooks/use-async-resource";
 import { useRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { cn } from "@/lib/utils";
-import { productService } from "@/services";
+import { productQueries } from "@/services";
 import type { Product } from "@/types";
 
 export interface RecentlyViewedSectionProps {

@@ -11,7 +11,7 @@ import {
   type CatalogSortId,
 } from "@/domain/products/catalog-filters";
 import { useResource } from "@/hooks/use-async-resource";
-import { categoryService, productService, storeService } from "@/services";
+import { categoryQueries, productQueries, storeQueries } from "@/services";
 import type { Product } from "@/types";
 
 /** Quantos itens são revelados a cada clique em "Carregar mais". */

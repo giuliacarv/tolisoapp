@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 import { useResource } from "@/hooks/use-async-resource";
-import { couponService } from "@/services";
+import { couponQueries } from "@/services";
 import type { Coupon } from "@/types";
 
 import { AutoCarousel } from "./auto-carousel";

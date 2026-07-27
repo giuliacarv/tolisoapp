@@ -12,7 +12,7 @@ import {
   type CouponSortId,
 } from "@/domain/coupons/coupon-filters";
 import { useResource } from "@/hooks/use-async-resource";
-import { couponService } from "@/services";
+import { couponQueries } from "@/services";
 import type { Coupon } from "@/types";
 
 /** Opção de faceta já com a contagem de cupons correspondentes. */
