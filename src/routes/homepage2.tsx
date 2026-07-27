@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
 import { Reveal } from "@/components/home/reveal";
 import { CreditsSection } from "@/components/home/credits-system";
@@ -11,6 +12,7 @@ import { Header } from "@/components/home/site-header";
 import { TrustSection } from "@/components/home/trust-section";
 import { CouponSection } from "@/components/home/validated-coupons";
 import { ThemeToggle } from "@/components/home/theme-toggle";
+import { cn } from "@/lib/utils";
 
 const SITE_URL = "https://descontai1.lovable.app";
 const TITLE = "EconomizAI | Novo design (rascunho)";
@@ -38,13 +40,20 @@ export const Route = createFileRoute("/homepage2")({
 
 /**
  * Cópia isolada da home. Recebe o tema escopado "Obsidian" (obsidiana +
- * violeta elétrico): a classe `dark` é aplicada localmente para que as
- * variantes `dark:` dos componentes respondam sem depender do tema global.
+ * violeta elétrico no escuro; roxo + laranja + branco no claro). O estado
+ * de tema é controlado localmente, sem alterar o tema global do documento.
  */
 function Homepage2() {
+  const [isDark, setIsDark] = useState(false);
+
   return (
-    <div className="theme-obsidian dark relative min-h-dvh bg-background text-foreground">
-      {/* Ambiência: dois focos de luz violeta, fixos, atrás de todo o conteúdo. */}
+    <div
+      className={cn(
+        "theme-obsidian relative min-h-dvh bg-background text-foreground",
+        isDark && "dark",
+      )}
+    >
+      {/* Ambiência: focos de luz roxo e laranja, fixos, atrás de todo o conteúdo. */}
       <div
         aria-hidden
         className="ambient-light pointer-events-none fixed inset-0 -z-10 opacity-70"
@@ -72,7 +81,11 @@ function Homepage2() {
         </Reveal>
       </main>
       <Footer />
-      <ThemeToggle />
+      <ThemeToggle
+        theme={isDark ? "dark" : "light"}
+        toggleTheme={() => setIsDark((prev) => !prev)}
+        mounted={true}
+      />
     </div>
   );
 }

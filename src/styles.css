@@ -977,18 +977,110 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Tema ESCOPADO "Obsidian" — obsidiana + violeta elétrico.
+ * Tema ESCOPADO "Obsidian" — alterna entre claro (roxo + laranja + branco)
+ * e escuro (obsidiana + violeta elétrico).
  *
- * Aplique a classe `theme-obsidian dark` no wrapper da página (ver
- * `src/routes/homepage2.tsx`). Todo o produto já consome tokens semânticos,
- * portanto redefinir os tokens aqui reveste a página inteira sem tocar em
- * nenhum componente — e a home em produção (Noir & Gold) fica intacta.
+ * Aplique a classe `theme-obsidian` no wrapper da página e adicione/remova
+ * `dark` para alternar (ver `src/routes/homepage2.tsx`). Todo o produto já
+ * consome tokens semânticos, portanto redefinir os tokens aqui reveste a
+ * página inteira sem tocar em nenhum componente — e a home em produção
+ * (Noir & Gold) fica intacta.
  * ------------------------------------------------------------------------ */
 .theme-obsidian {
-  color-scheme: dark;
+  color-scheme: light;
   --radius: 1.25rem;
 
-  /* Núcleo da paleta: três degraus de obsidiana + dois violetas de ação. */
+  /* Núcleo da paleta clara: roxo de ação, laranja de acento e branco puro. */
+  --violet-action: oklch(0.55 0.22 300); /* #7C3AED aprox. */
+  --violet-action-strong: oklch(0.48 0.24 300);
+  --violet-soft: oklch(0.95 0.03 300);
+  --violet-lume: oklch(0.62 0.18 300); /* legível sobre fundos claros */
+  --orange-accent: oklch(0.66 0.18 45); /* #F97316 aprox. */
+  --orange-strong: oklch(0.58 0.2 45);
+  --orange-soft: oklch(0.97 0.03 50);
+  --ink-purple: oklch(0.22 0.06 300); /* fundo escuro da faixa hero */
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.22 0.02 300);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.02 300);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.02 300);
+  --primary: var(--violet-action);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.97 0.01 300);
+  --secondary-foreground: oklch(0.22 0.02 300);
+  --muted: oklch(0.97 0.01 300);
+  --muted-foreground: oklch(0.55 0.015 300); /* >= 4.5:1 sobre branco */
+  --accent: var(--orange-accent);
+  --accent-foreground: oklch(0.99 0 0);
+  --destructive: oklch(0.6 0.19 22);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.01 300);
+  --input: oklch(0.9 0.01 300);
+  --ring: var(--violet-action);
+
+  /* Acentos de dado, recalibrados para fundos claros. */
+  --gold: var(--orange-accent);
+  --gold-soft: var(--orange-soft);
+  --saving: oklch(0.55 0.13 158);
+  --amber: oklch(0.7 0.15 70);
+  --discount: var(--orange-accent);
+  --petrol: var(--violet-action);
+  --petrol-bright: var(--violet-lume);
+  --ink: var(--ink-purple);
+  --graphite: oklch(0.35 0.03 300);
+  --offwhite: oklch(1 0 0);
+
+  /* Sombras aéreas, frias e discretas sobre fundo branco. */
+  --shadow-hairline: 0 0 0 1px oklch(0.22 0.02 300 / 6%);
+  --shadow-soft: 0 1px 2px oklch(0.22 0.02 300 / 0.05), 0 10px 30px -14px oklch(0.22 0.02 300 / 0.12);
+  --shadow-lift: 0 2px 6px oklch(0.22 0.02 300 / 0.06), 0 20px 46px -18px oklch(0.22 0.02 300 / 0.16);
+  --shadow-float: 0 6px 14px oklch(0.22 0.02 300 / 0.07), 0 32px 70px -24px oklch(0.22 0.02 300 / 0.2);
+  --shadow-gold: 0 0 0 1px color-mix(in oklab, var(--orange-accent) 35%, transparent),
+    0 18px 44px -20px color-mix(in oklab, var(--orange-accent) 45%, transparent);
+
+  /* Gradientes: roxo primário com laranja como destaque dourado. */
+  --gradient-surface: linear-gradient(135deg, oklch(1 0 0), oklch(0.98 0.005 300));
+  --gradient-ink: linear-gradient(135deg, var(--violet-action) 0%, var(--violet-action-strong) 100%);
+  --gradient-gold: linear-gradient(135deg, var(--orange-accent) 0%, var(--violet-action) 100%);
+  --gradient-cta: var(--gradient-ink);
+  --cta-foreground: oklch(0.99 0 0);
+  --gradient-halo: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in oklab, var(--violet-action) 18%, transparent),
+    transparent 70%
+  );
+
+  /* Glassmorphism suave sobre fundos claros. */
+  --glass-bg: color-mix(in oklab, var(--card) 72%, transparent);
+  --glass-border: color-mix(in oklab, var(--violet-action) 18%, transparent);
+  --glass-blur: 8px;
+
+  --panel-inset-bg: oklch(0.98 0.005 300);
+  --panel-inset-muted-bg: oklch(0.97 0.01 300);
+  --panel-inset-border: oklch(0.9 0.01 300);
+
+  --ambient-warm: radial-gradient(
+    42rem 26rem at 78% -8%,
+    color-mix(in oklab, var(--orange-accent) 18%, transparent),
+    transparent 68%
+  );
+  --ambient-cool: radial-gradient(
+    36rem 24rem at 6% 18%,
+    color-mix(in oklab, var(--violet-action) 14%, transparent),
+    transparent 70%
+  );
+
+  font-family: "Poppins", var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.theme-obsidian.dark {
+  color-scheme: dark;
+
+  /* Núcleo da paleta escura: três degraus de obsidiana + dois violetas de ação. */
   --obsidian-900: oklch(0.145 0 0); /* #0A0A0A */
   --obsidian-800: oklch(0.215 0 0); /* #1A1A1A */
   --obsidian-700: oklch(0.28 0 0); /* #2A2A2A */
@@ -1069,10 +1161,6 @@
     color-mix(in oklab, var(--violet-deep) 20%, transparent),
     transparent 70%
   );
-
-  font-family: "Poppins", var(--font-sans);
-  background-color: var(--background);
-  color: var(--foreground);
 }
 
 /* Tipografia: sans geométrica em todos os níveis — sem serifa neste tema. */
@@ -1091,30 +1179,31 @@
   line-height: 1.7;
 }
 
-/* Faixa hero: obsidiana com halo violeta assimétrico e filete de luz no topo. */
+/* Faixa hero: halo assimétrico no tom de acento (laranja no claro, violeta no escuro). */
 .theme-obsidian .noir-band::before {
   background-image: radial-gradient(
     48rem 28rem at 82% -8%,
-    color-mix(in oklab, var(--violet-electric) 26%, transparent),
+    color-mix(in oklab, var(--gold) 26%, transparent),
     transparent 66%
   );
 }
 
-/* Cards sobre a faixa escura: vidro real (blur + saturação) e aro violeta. */
+/* Cards sobre a faixa escura: vidro real (blur + saturação) e aro de acento. */
 .theme-obsidian .noir-card {
-  background-color: color-mix(in oklab, var(--obsidian-800) 58%, transparent);
+  background-color: color-mix(in oklab, var(--card) 58%, transparent);
   backdrop-filter: blur(8px) saturate(180%);
-  border-color: color-mix(in oklab, oklch(1 0 0) 10%, transparent);
-  box-shadow: 0 4px 15px oklch(0 0 0 / 0.35);
+  border-color: color-mix(in oklab, var(--offwhite) 10%, transparent);
+  box-shadow: var(--shadow-soft);
 }
 
 .theme-obsidian .noir-card:hover {
-  border-color: color-mix(in oklab, var(--violet-electric) 55%, transparent);
+  border-color: color-mix(in oklab, var(--gold) 55%, transparent);
   box-shadow: var(--shadow-lift);
 }
 
-/* Superfícies de conteúdo ganham o mesmo vidro dos cards do hero. */
-.theme-obsidian [class*="rounded-"][class*="bg-card"] {
+/* Superfícies de conteúdo ganham o mesmo vidro dos cards do hero apenas no escuro;
+   no claro o blur sobre branco puro barateia a leitura. */
+.theme-obsidian.dark [class*="rounded-"][class*="bg-card"] {
   backdrop-filter: blur(8px) saturate(180%);
 }
 

@@ -1,10 +1,13 @@
 import { Moon, Sun } from "lucide-react";
 
-import { useTheme } from "@/hooks/use-theme";
+import { useTheme, type Theme } from "@/hooks/use-theme";
 import { cn } from "@/lib/utils";
 
 export interface ThemeToggleProps {
   className?: string;
+  theme?: Theme;
+  toggleTheme?: () => void;
+  mounted?: boolean;
 }
 
 /**
@@ -12,9 +15,20 @@ export interface ThemeToggleProps {
  *
  * Fica ancorado no canto inferior direito, acima de qualquer conteúdo, e
  * respeita a área segura de aparelhos com notch/gesture bar.
+ *
+ * Aceita props opcionais para controle escopado (ex.: página /homepage2); quando
+ * omitidas, usa o tema global do documento via `useTheme`.
  */
-export function ThemeToggle({ className }: ThemeToggleProps) {
-  const { theme, toggleTheme, mounted } = useTheme();
+export function ThemeToggle({
+  className,
+  theme: externalTheme,
+  toggleTheme: externalToggle,
+  mounted: externalMounted,
+}: ThemeToggleProps) {
+  const globalTheme = useTheme();
+  const theme = externalTheme ?? globalTheme.theme;
+  const toggleTheme = externalToggle ?? globalTheme.toggleTheme;
+  const mounted = externalMounted ?? globalTheme.mounted;
   const isDark = theme === "dark";
   const label = isDark ? "Ativar modo claro" : "Ativar modo escuro";
 
