@@ -89,6 +89,9 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         isHero && "p-8 sm:p-10",
         dark &&
           "bg-ink bg-[image:var(--gradient-ink)] text-offwhite",
+        // Contraste de borda no tema claro: o fundo branco do card precisa se
+        // separar da faixa tonal lavanda, senão vira uma massa indefinida.
+        !dark && "border border-foreground/10",
       )}
     >
       {/* Halo dourado assimétrico + contraluz frio nas superfícies escuras. */}
