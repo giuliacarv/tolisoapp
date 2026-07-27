@@ -83,6 +83,11 @@
   --offwhite: oklch(0.968 0.008 85);
   --gold: oklch(0.75 0.075 82);
   --gold-soft: oklch(0.88 0.045 85);
+  /*
+   * Azul-petróleo: acento secundário frio que contrabalança o ouro.
+   * Reservado a selos de desconto e realces de dado — nunca a ações primárias.
+   */
+  --petrol: oklch(0.52 0.062 210);
   /* Âmbar legível sobre fundos claros — usado no estado "Validação pendente". */
   --amber: oklch(0.58 0.105 74);
   --saving: oklch(0.51 0.11 160);
