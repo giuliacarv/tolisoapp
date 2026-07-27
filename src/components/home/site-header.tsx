@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { Menu, Search, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
@@ -27,14 +28,19 @@ const iconButton =
  * e mantém o foco preso enquanto está aberto.
  */
 export function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  // Só a home tem hero escuro no topo; nas demais rotas o header já nasce
+  // sólido, caso contrário o texto claro ficaria ilegível sobre fundo claro.
+  const isHome = pathname === "/";
+
+  const [rawScrolled, setRawScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      setScrolled(window.scrollY > 8);
+      setRawScrolled(window.scrollY > 8);
       // Evita divisão por zero em páginas curtas (progresso permanece 0).
       setProgress(scrollable > 0 ? Math.min(1, window.scrollY / scrollable) : 0);
     };
@@ -46,6 +52,14 @@ export function Header() {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  const scrolled = rawScrolled || !isHome;
+
+  /**
+   * Fora da home as âncoras da homepage não existem: o link vira uma
+   * navegação real para "/#secao" em vez de uma rolagem interna.
+   */
+  const hrefFor = (hash: string) => (isHome ? hash : `/${hash}`);
 
   const handleLogin = () => {
     setOpen(false);
@@ -87,7 +101,7 @@ export function Header() {
 
       <Container className="flex h-[var(--header-h)] items-center justify-between gap-2 sm:gap-4">
         <a
-          href="#topo"
+          href={isHome ? "#topo" : "/"}
           onClick={(event) => handleAnchorClick(event, "#topo", () => setOpen(false))}
           className="flex min-h-11 min-w-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           aria-label="DESCONTAI — início"
@@ -114,7 +128,7 @@ export function Header() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
-              href={link.href}
+              href={hrefFor(link.href)}
               onClick={(event) => handleAnchorClick(event, link.href)}
               className={cn(
                 "nav-underline inline-flex min-h-11 items-center rounded-md text-sm font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2",
@@ -130,7 +144,7 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-2">
           <a
-            href="#buscar"
+            href={hrefFor("#buscar")}
             onClick={(event) => handleAnchorClick(event, "#buscar")}
             aria-label="Ir para a busca de ofertas"
             className={cn(
@@ -192,7 +206,7 @@ export function Header() {
                 {NAV_LINKS.map((link) => (
                   <a
                     key={link.href}
-                    href={link.href}
+                    href={hrefFor(link.href)}
                     onClick={(event) => {
                       handleAnchorClick(event, link.href, () => setOpen(false));
                       setOpen(false);

@@ -1,6 +1,10 @@
 import { SearchX } from "lucide-react";
 
 export interface EmptyResultsProps {
+  /** Título do estado vazio. */
+  title?: string;
+  /** Texto de apoio abaixo do título. */
+  description?: string;
   /** Termo buscado, exibido na mensagem quando existir. */
   query?: string;
   /** Rótulo do filtro ativo, exibido quando não for "todas". */
@@ -16,7 +20,13 @@ export interface EmptyResultsProps {
  * Estado vazio da vitrine: explica o que aconteceu e oferece caminhos de saída
  * (limpar filtros ou tentar uma sugestão de busca).
  */
-export function EmptyResults({ onReset, suggestions = [], onSuggestionSelect }: EmptyResultsProps) {
+export function EmptyResults({
+  title = "Nenhuma oferta encontrada",
+  description = "Tente buscar outro produto, loja ou categoria.",
+  onReset,
+  suggestions = [],
+  onSuggestionSelect,
+}: EmptyResultsProps) {
   return (
 
     <div
@@ -31,11 +41,11 @@ export function EmptyResults({ onReset, suggestions = [], onSuggestionSelect }: 
       </span>
 
       <h4 className="mt-5 font-serif text-xl tracking-tight text-foreground sm:text-2xl">
-        Nenhuma oferta encontrada
+        {title}
       </h4>
 
       <p className="mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-        Tente buscar outro produto, loja ou categoria.
+        {description}
       </p>
 
       {suggestions.length > 0 && (
