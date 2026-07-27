@@ -104,13 +104,18 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
       </div>
 
       <div className="flex flex-1 flex-col gap-4 px-6 pb-6 pt-6 sm:px-7">
+        {/*
+         * O título é o link principal do card: recebe altura mínima de 44px e
+         * padding vertical negativo compensado, preservando o ritmo visual.
+         */}
         <div className="min-h-[3.5rem] space-y-1">
           <h3 className="text-fluid-sm font-semibold leading-snug text-foreground">
             <Link
               to="/cupons/$slug"
               params={{ slug: coupon.slug }}
-              className="rounded-sm transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+              className="-my-1.5 inline-flex min-h-11 items-center rounded-sm py-1.5 transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
             >
+
               {coupon.title}
             </Link>
           </h3>

@@ -125,31 +125,41 @@ export function InstitutionalFooter() {
             </div>
 
             <address className="mt-6 not-italic">
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-3">
+              {/*
+               * Ergonomia touch: cada linha acionável tem no mínimo 44px de
+               * altura (min-h-11). O endereço, que não é clicável, mantém o
+               * ritmo vertical de 8pt sem inflar a área de toque.
+               */}
+              <ul className="space-y-1 text-sm text-muted-foreground">
+                <li className="flex items-start gap-3 py-1">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
-                  <span className="leading-relaxed">{COMPANY.address}</span>
+                  <span className="min-w-0 leading-relaxed">{COMPANY.address}</span>
                 </li>
                 <li>
                   <a
                     href={`mailto:${COMPANY.email}`}
-                    className="group flex items-center gap-3 transition-colors hover:text-foreground"
+                    className="group flex min-h-11 items-center gap-3 transition-colors hover:text-foreground"
                   >
                     <Mail className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                    <span className="underline-offset-4 group-hover:underline">{COMPANY.email}</span>
+                    <span className="min-w-0 break-words underline-offset-4 group-hover:underline">
+                      {COMPANY.email}
+                    </span>
                   </a>
                 </li>
                 <li>
                   <a
                     href={`tel:${COMPANY.phone.replace(/[^\d+]/g, "")}`}
-                    className="group flex items-center gap-3 transition-colors hover:text-foreground"
+                    className="group flex min-h-11 items-center gap-3 transition-colors hover:text-foreground"
                   >
                     <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
-                    <span className="underline-offset-4 group-hover:underline">{COMPANY.phone}</span>
+                    <span className="min-w-0 underline-offset-4 group-hover:underline">
+                      {COMPANY.phone}
+                    </span>
                   </a>
                 </li>
               </ul>
             </address>
+
 
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Redes sociais">
               {SOCIALS.map(({ icon: Icon, label, href }) => (
@@ -174,13 +184,13 @@ export function InstitutionalFooter() {
               <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground md:text-fluid-xs">
                 Institucional
               </h3>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="mt-2 space-y-0.5">
                 {INSTITUTIONAL_LINKS.map((link) => (
                   <li key={link.label}>
                     <button
                       type="button"
                       onClick={() => toast(link.message ?? SOON_MESSAGE)}
-                      className="inline-flex min-h-9 items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
+                      className="inline-flex min-h-11 w-full items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
                     >
                       {link.label}
                     </button>
@@ -194,13 +204,13 @@ export function InstitutionalFooter() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground md:text-fluid-xs">
                   {group.title}
                 </h3>
-                <ul className="mt-4 space-y-2.5">
+                <ul className="mt-2 space-y-0.5">
                   {group.links.map((link) => (
                     <li key={link.label}>
                       {"to" in link ? (
                         <Link
                           to={link.to}
-                          className="inline-flex min-h-9 items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
+                          className="inline-flex min-h-11 w-full items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
                         >
                           {link.label}
                         </Link>
@@ -208,7 +218,7 @@ export function InstitutionalFooter() {
                         <a
                           href={link.href}
                           onClick={(event) => handleAnchorClick(event, link.href)}
-                          className="inline-flex min-h-9 items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
+                          className="inline-flex min-h-11 w-full items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
                         >
                           {link.label}
                         </a>
