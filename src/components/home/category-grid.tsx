@@ -2,71 +2,24 @@ import { ArrowRight, Home, Laptop, Shirt, Smartphone, Sparkles, Watch } from "lu
 import type { LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import type { Category, CategoryIconName } from "@/types";
 
 import { SectionHeading, cardInteractive } from "./primitives";
 import { Reveal } from "./reveal";
 
-
 /**
- * ============================================================
- * DADOS DEMONSTRATIVOS — SERÃO SUBSTITUÍDOS PELO BANCO DE DADOS
- * ============================================================
- * As categorias e as contagens abaixo são ilustrativas e devem vir
- * da API/banco (`categories.offer_count`) na próxima fase.
+ * Mapa chave → componente de ícone.
+ * Os dados guardam apenas a string (`iconName`), serializável e pronta para o
+ * banco; a escolha do componente React acontece só na camada de apresentação.
  */
-export interface Category {
-  id: string;
-  label: string;
-  description: string;
-  icon: LucideIcon;
-  /** Contagem ilustrativa — substituir por dado real do backend. */
-  offerCount: number;
-}
-
-export const CATEGORIES: Category[] = [
-  {
-    id: "eletronicos",
-    label: "Eletrônicos",
-    description: "Fones, smartwatches e gadgets do dia a dia.",
-    icon: Smartphone,
-    offerCount: 24,
-  },
-  {
-    id: "casa",
-    label: "Casa e decoração",
-    description: "Eletrodomésticos, organização e conforto.",
-    icon: Home,
-    offerCount: 18,
-  },
-  {
-    id: "beleza",
-    label: "Beleza e cuidados",
-    description: "Skincare, perfumaria e itens de autocuidado.",
-    icon: Sparkles,
-    offerCount: 12,
-  },
-  {
-    id: "moda",
-    label: "Moda",
-    description: "Roupas, calçados e acessórios de vestuário.",
-    icon: Shirt,
-    offerCount: 16,
-  },
-  {
-    id: "informatica",
-    label: "Informática",
-    description: "Notebooks, periféricos e itens de escritório.",
-    icon: Laptop,
-    offerCount: 14,
-  },
-  {
-    id: "acessorios",
-    label: "Acessórios",
-    description: "Óculos, relógios, bolsas e complementos.",
-    icon: Watch,
-    offerCount: 11,
-  },
-];
+const CATEGORY_ICONS: Record<CategoryIconName, LucideIcon> = {
+  smartphone: Smartphone,
+  home: Home,
+  sparkles: Sparkles,
+  shirt: Shirt,
+  laptop: Laptop,
+  watch: Watch,
+};
 
 interface CategoryCardProps {
   category: Category;
@@ -78,7 +31,7 @@ interface CategoryCardProps {
 }
 
 function CategoryCard({ category, index, isActive, featured = false, onSelect }: CategoryCardProps) {
-  const Icon = category.icon;
+  const Icon = CATEGORY_ICONS[category.iconName] ?? Smartphone;
   const dark = featured || isActive;
 
   return (
@@ -166,11 +119,37 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
 }
 
 export interface CategoryGridProps {
+  /** Categorias resolvidas pelo `categoryService`. */
+  categories: readonly Category[];
   activeCategory: string;
   onSelect: (id: string) => void;
+  isLoading?: boolean;
 }
 
-export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
+/** Placeholder com a mesma malha bento, evitando salto de layout (CLS). */
+function CategoryGridSkeleton() {
+  return (
+    <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5" aria-hidden>
+      {Array.from({ length: 6 }).map((_, index) => (
+        <li
+          key={`category-skeleton-${index}`}
+          className={cn(
+            "min-w-0 animate-pulse rounded-2xl border border-border bg-muted/50",
+            index === 0 ? "h-64 sm:col-span-2" : "h-44",
+            index === 5 && "sm:col-span-2",
+          )}
+        />
+      ))}
+    </ul>
+  );
+}
+
+export function CategoryGrid({
+  categories,
+  activeCategory,
+  onSelect,
+  isLoading = false,
+}: CategoryGridProps) {
   return (
     <div>
       <SectionHeading
@@ -185,8 +164,9 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
        * Bento assimétrico: o primeiro bloco ocupa 2 colunas x 2 linhas a partir
        * de `lg`, criando um ponto focal e evitando a monotonia de 6 caixas iguais.
        */}
+      {isLoading ? <CategoryGridSkeleton /> : (
       <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
-        {CATEGORIES.map((category, index) => (
+        {categories.map((category, index) => (
           <Reveal
             as="li"
             key={category.id}
@@ -196,7 +176,7 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
               // 6 itens em 8 células: o primeiro e o último ocupam duas colunas,
               // fechando duas linhas cheias sem buracos na grade.
               index === 0 && "sm:col-span-2",
-              index === CATEGORIES.length - 1 && "sm:col-span-2",
+              index === categories.length - 1 && "sm:col-span-2",
             )}
           >
 
@@ -210,6 +190,7 @@ export function CategoryGrid({ activeCategory, onSelect }: CategoryGridProps) {
           </Reveal>
         ))}
       </ul>
+      )}
     </div>
   );
 }

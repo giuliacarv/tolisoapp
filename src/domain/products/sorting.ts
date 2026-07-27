@@ -1,4 +1,4 @@
-import type { Product } from "@/data/products";
+import type { Product } from "@/types";
 
 /** Opções de ordenação disponíveis para a vitrine de ofertas. */
 export const SORT_OPTIONS = [

@@ -1,13 +1,12 @@
 import { BadgeCheck, Coins, Store as StoreIcon } from "lucide-react";
 
 import {
-  formatBRL,
-  formatCreditsLabel,
   formatUnavailableLabel,
   getProductUnavailableReason,
-  type Product,
-} from "@/data/products";
+} from "@/domain/products/product-rules";
+import { formatBRL, formatCreditsLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import type { Product } from "@/types";
 
 import { cardBase } from "./primitives";
 

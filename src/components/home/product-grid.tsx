@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 import { ProductCard, ProductCardSkeleton } from "./product-card";
 import { Reveal } from "./reveal";
-import type { Product } from "@/data/products";
+import type { Product } from "@/types";
 
 export interface ProductGridProps {
   products: Product[];

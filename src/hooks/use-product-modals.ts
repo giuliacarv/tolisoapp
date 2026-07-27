@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import type { Product } from "@/data/products";
+import type { Product } from "@/types";
 
 export interface ProductModalsState {
   selected: Product | null;

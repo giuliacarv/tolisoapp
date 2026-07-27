@@ -1,7 +1,9 @@
 import { Coins, ExternalLink, Store as StoreIcon } from "lucide-react";
 import { toast } from "sonner";
 
-import { formatBRL, formatCreditsLabel, type Product } from "@/data/products";
+import { calculateSavings } from "@/domain/products/product-rules";
+import { formatBRL, formatCreditsLabel } from "@/lib/format";
+import type { Product } from "@/types";
 
 import { ConfirmDialog } from "./confirm-dialog";
 
@@ -11,14 +13,8 @@ export interface RedeemProductModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
-/**
- * Economia absoluta da oferta em reais.
- * Protegido contra dados inconsistentes (preço atual maior que o anterior).
- */
-function calculateSavings(originalPrice: number, currentPrice: number): number {
-  const savings = originalPrice - currentPrice;
-  return savings > 0 ? savings : 0;
-}
+
+
 
 /**
  * Confirmação de resgate de produto.

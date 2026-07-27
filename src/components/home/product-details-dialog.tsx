@@ -9,8 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { formatBRL, formatCreditsLabel, type Product } from "@/data/products";
+import { formatBRL, formatCreditsLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import type { Product } from "@/types";
 
 import { buttonOutline, buttonSolid } from "./primitives";
 

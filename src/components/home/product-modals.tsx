@@ -1,4 +1,4 @@
-import type { Product } from "@/data/products";
+import type { Product } from "@/types";
 import type { ProductModalsState } from "@/hooks/use-product-modals";
 
 import { ProductDetailsModal } from "./product-details-dialog";

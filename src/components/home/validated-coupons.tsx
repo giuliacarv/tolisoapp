@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
-import { COUPONS, type Coupon } from "@/data/coupons";
+import { useAsyncResource } from "@/hooks/use-async-resource";
+import { couponService } from "@/services";
+import type { Coupon } from "@/types";
 
 import { CouponCard, CouponCardSkeleton, CouponDisclaimer } from "./coupon-card";
 import { RedeemCouponModal } from "./coupon-redeem-dialog";
@@ -13,17 +15,13 @@ import { Reveal } from "./reveal";
 
 /**
  * Cupons validados.
- * TODO: substituir o timeout por fetch real quando o backend existir.
+ * Os dados chegam pelo `couponService` — a troca para o Supabase não exige
+ * nenhuma alteração neste componente.
  */
 export function CouponSection() {
-  const [isLoading, setIsLoading] = useState(true);
+  const coupons = useAsyncResource(() => couponService.list(), []);
   const [selected, setSelected] = useState<Coupon | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setIsLoading(false), 500);
-    return () => window.clearTimeout(timer);
-  }, []);
 
   function handleRedeem(coupon: Coupon) {
     setSelected(coupon);
@@ -52,15 +50,30 @@ export function CouponSection() {
           </a>
         </div>
 
-        {isLoading ? (
+        {coupons.isLoading ? (
           <div className="mt-10 grid-fluid [--col-min:18rem]">
             {Array.from({ length: 6 }).map((_, index) => (
               <CouponCardSkeleton key={`coupon-skeleton-${index}`} />
             ))}
           </div>
+        ) : coupons.error ? (
+          <div role="alert" className="mt-10 rounded-2xl border border-border bg-card p-8 text-center">
+            <p className="text-sm text-muted-foreground">{coupons.error}</p>
+            <button
+              type="button"
+              onClick={coupons.refetch}
+              className="mt-4 inline-flex min-h-11 items-center rounded-lg border border-border px-4 text-sm font-medium transition-colors duration-200 hover:bg-muted"
+            >
+              Tentar novamente
+            </button>
+          </div>
+        ) : coupons.isEmpty ? (
+          <p className="mt-10 text-sm text-muted-foreground">
+            Nenhum cupom disponível no momento.
+          </p>
         ) : (
           <ul className="mt-12 grid-fluid [--col-min:18rem]">
-            {COUPONS.map((coupon, index) => (
+            {(coupons.data ?? []).map((coupon, index) => (
               <Reveal as="li" key={coupon.id} delay={Math.min(index, 5) * 70} className="min-w-0">
                 <CouponCard coupon={coupon} onRedeem={handleRedeem} />
               </Reveal>

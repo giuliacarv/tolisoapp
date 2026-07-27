@@ -1,9 +1,14 @@
 /**
- * DADOS DEMONSTRATIVOS (MOCK)
+ * DADOS DEMONSTRATIVOS (MOCK) — PRODUTOS
  * ---------------------------------------------------------------------------
- * Este arquivo centraliza os produtos fictícios usados na vitrine inicial.
- * TODO: substituir por consulta ao banco de dados / API na próxima etapa.
- * A tipagem `Product` foi desenhada para espelhar a futura tabela `products`.
+ * ⚠️ Consumir SOMENTE através de `productService`. Nenhum componente deve
+ * importar este arquivo diretamente.
+ *
+ * TODO(backend): substituir por `select * from products`.
+ *
+ * `creditsRequired` e `discountPercentage` NUNCA são digitados à mão: são
+ * derivados das regras em `@/domain/products/product-rules`, garantindo que a
+ * política de créditos continue única quando o banco entrar.
  */
 
 import bagImg from "@/assets/product-bag.jpg";
@@ -17,98 +22,13 @@ import skincareImg from "@/assets/product-skincare.jpg";
 import smartwatchImg from "@/assets/hero-product-smartwatch.jpg";
 import walletImg from "@/assets/product-wallet.jpg";
 
-export interface Product {
-  id: string;
-  slug: string;
-  name: string;
-  description: string;
-  /** URL da imagem (import local nesta fase; virá do storage futuramente). */
-  image: string;
-  category: string;
-  store: string;
-  /** Valores em BRL (number), formatados na UI via `formatBRL`. */
-  originalPrice: number;
-  currentPrice: number;
-  discountPercentage: number;
-  /** Placeholder seguro — nenhum link real de afiliado nesta etapa. */
-  affiliateUrl: string;
-  creditsRequired: number;
-  featured: boolean;
-  verified: boolean;
-  /** ISO 8601. */
-  expiresAt: string;
-  /** ISO 8601 — data de publicação da oferta (mock). */
-  publishedAt: string;
-  /** Disponibilidade da oferta na loja parceira. Ausente = disponível. */
-  available?: boolean;
-}
+import {
+  calculateCreditsRequired,
+  calculateDiscountPercentage,
+} from "@/domain/products/product-rules";
+import type { Product } from "@/types";
 
-/** Motivo pelo qual uma oferta não pode ser resgatada (ou `null` se ativa). */
-export type ProductUnavailableReason = "expired" | "unavailable";
-
-/**
- * Avalia se a oferta ainda pode ser resgatada.
- * Datas inválidas são tratadas como "não expiradas" para não bloquear
- * indevidamente uma oferta por erro de dado.
- */
-export function getProductUnavailableReason(
-  product: Pick<Product, "expiresAt" | "available">,
-  now: Date = new Date(),
-): ProductUnavailableReason | null {
-  if (product.available === false) return "unavailable";
-
-  const expiresAt = new Date(product.expiresAt).getTime();
-  if (Number.isFinite(expiresAt) && expiresAt < now.getTime()) return "expired";
-
-  return null;
-}
-
-/** Rótulo curto exibido no card para ofertas não resgatáveis. */
-export function formatUnavailableLabel(reason: ProductUnavailableReason): string {
-  return reason === "expired" ? "Oferta expirada" : "Indisponível";
-}
-
-
-/**
- * Regra de créditos do DESCONTAI.
- * - Preço atual até R$ 50,00 (inclusive) → 1 crédito
- * - Preço atual acima de R$ 50,00 → 2 créditos
- *
- * Usamos centavos arredondados para evitar imprecisão de ponto flutuante
- * (ex.: 50.005 não deve virar 2 créditos indevidamente).
- */
-export function calculateCreditsRequired(currentPrice: number): number {
-  if (!Number.isFinite(currentPrice) || currentPrice < 0) {
-    // Entrada inválida: fallback conservador para o menor custo possível.
-    return 1;
-  }
-
-  const cents = Math.round(currentPrice * 100);
-  return cents <= 5000 ? 1 : 2;
-}
-
-/** Formata um número como moeda brasileira: 39.9 → "R$ 39,90". */
-export function formatBRL(value: number): string {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(value);
-}
-
-/** Rótulo de créditos com singular/plural corretos. */
-export function formatCreditsLabel(credits: number): string {
-  return credits === 1 ? "1 crédito" : `${credits} créditos`;
-}
-
-/** Percentual de desconto arredondado a partir dos preços. */
-export function calculateDiscountPercentage(
-  originalPrice: number,
-  currentPrice: number,
-): number {
-  if (originalPrice <= 0 || currentPrice >= originalPrice) return 0;
-  return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
-}
-
+/** Campos derivados ficam de fora da semente. */
 type ProductSeed = Omit<Product, "creditsRequired" | "discountPercentage">;
 
 const PRODUCT_SEEDS: ProductSeed[] = [
@@ -119,7 +39,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Até 30h de bateria, estojo compacto e modo transparência.",
     image: headphonesImg,
     category: "Eletrônicos",
+    categoryId: "eletronicos",
     store: "Amazon",
+    storeId: "str_amazon",
     originalPrice: 469.0,
     currentPrice: 289.9,
     affiliateUrl: "#placeholder-afiliado/prd_001",
@@ -135,7 +57,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Monitor de sono, GPS integrado e mais de 100 modos esportivos.",
     image: smartwatchImg,
     category: "Acessórios",
+    categoryId: "acessorios",
     store: "Shopee",
+    storeId: "str_shopee",
     originalPrice: 299.9,
     currentPrice: 189.9,
     affiliateUrl: "#placeholder-afiliado/prd_002",
@@ -151,7 +75,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Vaporizador de leite e reservatório removível de 1,2L.",
     image: espressoImg,
     category: "Casa e decoração",
+    categoryId: "casa",
     store: "Mercado Livre",
+    storeId: "str_mercado_livre",
     originalPrice: 749.0,
     currentPrice: 529.0,
     affiliateUrl: "#placeholder-afiliado/prd_003",
@@ -167,7 +93,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Switches lineares, estrutura de alumínio e conexão sem fio.",
     image: keyboardImg,
     category: "Informática",
+    categoryId: "informatica",
     store: "Amazon",
+    storeId: "str_amazon",
     originalPrice: 599.0,
     currentPrice: 379.9,
     affiliateUrl: "#placeholder-afiliado/prd_004",
@@ -183,7 +111,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Sérum, hidratante, tônico e protetor para rotina diária.",
     image: skincareImg,
     category: "Beleza e cuidados",
+    categoryId: "beleza",
     store: "Shopee",
+    storeId: "str_shopee",
     originalPrice: 139.9,
     currentPrice: 79.9,
     affiliateUrl: "#placeholder-afiliado/prd_005",
@@ -199,7 +129,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Alça ajustável, forro interno e acabamento artesanal.",
     image: bagImg,
     category: "Moda",
+    categoryId: "moda",
     store: "Magalu",
+    storeId: "str_magalu",
     originalPrice: 329.0,
     currentPrice: 199.0,
     affiliateUrl: "#placeholder-afiliado/prd_006",
@@ -215,7 +147,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Luz quente difusa, ideal para mesa de cabeceira.",
     image: lampImg,
     category: "Casa e decoração",
+    categoryId: "casa",
     store: "Amazon",
+    storeId: "str_amazon",
     originalPrice: 189.0,
     currentPrice: 118.9,
     affiliateUrl: "#placeholder-afiliado/prd_007",
@@ -226,12 +160,14 @@ const PRODUCT_SEEDS: ProductSeed[] = [
   },
   {
     id: "prd_008",
-    slug: "sérum-facial-acido-hialuronico",
+    slug: "serum-facial-acido-hialuronico",
     name: "Sérum facial com ácido hialurônico 30ml",
     description: "Hidratação profunda com textura leve e absorção rápida.",
     image: serumImg,
     category: "Beleza e cuidados",
+    categoryId: "beleza",
     store: "Mercado Livre",
+    storeId: "str_mercado_livre",
     originalPrice: 79.9,
     currentPrice: 44.9,
     affiliateUrl: "#placeholder-afiliado/prd_008",
@@ -248,7 +184,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Sensor de 4000 DPI e bateria recarregável via USB-C.",
     image: mouseImg,
     category: "Informática",
+    categoryId: "informatica",
     store: "Shopee",
+    storeId: "str_shopee",
     originalPrice: 89.9,
     currentPrice: 49.9,
     affiliateUrl: "#placeholder-afiliado/prd_009",
@@ -266,7 +204,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     description: "Couro sintético premium com compartimento para 8 cartões.",
     image: walletImg,
     category: "Acessórios",
+    categoryId: "acessorios",
     store: "Magalu",
+    storeId: "str_magalu",
     originalPrice: 89.0,
     currentPrice: 50.0,
     affiliateUrl: "#placeholder-afiliado/prd_010",
@@ -277,11 +217,9 @@ const PRODUCT_SEEDS: ProductSeed[] = [
   },
 ];
 
-/** Produtos com créditos e desconto derivados (nunca digitados à mão). */
-export const PRODUCTS: Product[] = PRODUCT_SEEDS.map((seed) => ({
+/** Produtos com créditos e desconto derivados das regras de domínio. */
+export const MOCK_PRODUCTS: Product[] = PRODUCT_SEEDS.map((seed) => ({
   ...seed,
   discountPercentage: calculateDiscountPercentage(seed.originalPrice, seed.currentPrice),
   creditsRequired: calculateCreditsRequired(seed.currentPrice),
 }));
-
-export const FEATURED_PRODUCTS: Product[] = PRODUCTS.filter((product) => product.featured);
