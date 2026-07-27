@@ -114,7 +114,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         className={cn(
           "absolute right-6 top-6 font-serif tabular-nums transition-colors duration-200",
           isHero ? "text-2xl" : "text-lg",
-          dark ? "text-offwhite/20" : "text-border",
+          dark ? "text-offwhite/25" : "text-foreground/35",
         )}
       >
         {String(index + 1).padStart(2, "0")}
