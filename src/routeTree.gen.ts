@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as IndexRouteImport } from './routes/index'
@@ -27,6 +28,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const EntrarRoute = EntrarRouteImport.update({
   id: '/entrar',
   path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriarContaRoute = CriarContaRouteImport.update({
+  id: '/criar-conta',
+  path: '/criar-conta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreditosRoute = CreditosRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/creditos': typeof CreditosRoute
+  '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/creditos': typeof CreditosRoute
+  '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/creditos': typeof CreditosRoute
+  '/criar-conta': typeof CriarContaRoute
   '/entrar': typeof EntrarRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/como-funciona'
     | '/creditos'
+    | '/criar-conta'
     | '/entrar'
     | '/sitemap.xml'
     | '/cupons/$slug'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/como-funciona'
     | '/creditos'
+    | '/criar-conta'
     | '/entrar'
     | '/sitemap.xml'
     | '/cupons/$slug'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/como-funciona'
     | '/creditos'
+    | '/criar-conta'
     | '/entrar'
     | '/sitemap.xml'
     | '/cupons/$slug'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
   CreditosRoute: typeof CreditosRoute
+  CriarContaRoute: typeof CriarContaRoute
   EntrarRoute: typeof EntrarRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CuponsSlugRoute: typeof CuponsSlugRoute
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       path: '/entrar'
       fullPath: '/entrar'
       preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criar-conta': {
+      id: '/criar-conta'
+      path: '/criar-conta'
+      fullPath: '/criar-conta'
+      preLoaderRoute: typeof CriarContaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/creditos': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
   CreditosRoute: CreditosRoute,
+  CriarContaRoute: CriarContaRoute,
   EntrarRoute: EntrarRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CuponsSlugRoute: CuponsSlugRoute,
