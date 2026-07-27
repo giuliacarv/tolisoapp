@@ -50,15 +50,7 @@ function FavoritesPage() {
   const { favoriteIds, count, clearFavorites } = useFavorites();
   const modals = useProductModals();
 
-  // A chave em string mantém a dependência estável entre renders.
-  const key = favoriteIds.join(",");
-  const fetchFavorites = useCallback(
-    () => (favoriteIds.length > 0 ? productService.listByIds(favoriteIds) : Promise.resolve([])),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [key],
-  );
-
-  const favorites = useAsyncResource<Product[]>(fetchFavorites, [key]);
+  const favorites = useResource(productQueries.byIds(favoriteIds));
   const products = favorites.data ?? [];
 
   return (

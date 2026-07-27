@@ -100,19 +100,14 @@ function ProductDetailPage() {
   const { slug } = Route.useParams();
   const modals = useProductModals();
 
-  const fetchProduct = useCallback(() => productService.findBySlug(slug), [slug]);
-  const product = useAsyncResource<Product | null>(fetchProduct, [slug]);
+  const product = useResource(productQueries.bySlug(slug));
 
   const currentId = product.data?.id ?? null;
 
   // Histórico local "Vistos recentemente" (apenas o id público do produto).
   useRegisterRecentlyViewed(currentId ?? undefined);
 
-  const fetchRelated = useCallback(
-    () => (currentId ? productService.listRelated(currentId, 4) : Promise.resolve([])),
-    [currentId],
-  );
-  const related = useAsyncResource<Product[]>(fetchRelated, [currentId]);
+  const related = useResource(productQueries.related(currentId, 4));
 
   if (product.isLoading) {
     return (

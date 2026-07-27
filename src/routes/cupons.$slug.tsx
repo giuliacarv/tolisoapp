@@ -177,15 +177,10 @@ function CouponDetailPage() {
   const [redeemTarget, setRedeemTarget] = useState<Coupon | null>(null);
   const [redeemOpen, setRedeemOpen] = useState(false);
 
-  const fetchCoupon = useCallback(() => couponService.findBySlug(slug), [slug]);
-  const coupon = useAsyncResource<Coupon | null>(fetchCoupon, [slug]);
+  const coupon = useResource(couponQueries.bySlug(slug));
 
   const currentId = coupon.data?.id ?? null;
-  const fetchSiblings = useCallback(
-    () => (currentId ? couponService.listByStore(currentId, 3) : Promise.resolve([])),
-    [currentId],
-  );
-  const siblings = useAsyncResource<Coupon[]>(fetchSiblings, [currentId]);
+  const siblings = useResource(couponQueries.byStore(currentId, 3));
 
   const openRedeem = useCallback((target: Coupon) => {
     setRedeemTarget(target);
