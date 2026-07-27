@@ -53,7 +53,8 @@ export const productQueries = {
   byIds: (ids: readonly string[]) =>
     queryOptions<Product[]>({
       queryKey: [...queryKeys.products, "ids", ids],
-      queryFn: () => (ids.length === 0 ? Promise.resolve(EMPTY_PRODUCTS) : productService.listByIds([...ids])),
+      queryFn: () =>
+        ids.length === 0 ? Promise.resolve(EMPTY_PRODUCTS) : productService.listByIds([...ids]),
     }),
 
   /** `productId` nulo resolve vazio — evita `enabled:false` e estados ambíguos. */

@@ -48,7 +48,6 @@ export function useResource<T>(
 ): AsyncResource<T> {
   const query = useQuery(options);
 
-
   const refetch = useCallback(() => {
     void query.refetch();
   }, [query]);
