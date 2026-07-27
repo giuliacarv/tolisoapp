@@ -101,7 +101,7 @@ export function SearchAndCategories() {
       {/* Ofertas em destaque */}
       <section id="ofertas" className="section-y scroll-mt-[calc(var(--header-h)+1rem)]">
         <Container>
-          <div className="flex flex-wrap items-end justify-between gap-6">
+          <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
             <SectionHeading
               eyebrow="Curadoria"
               title="Ofertas em destaque"
@@ -110,16 +110,21 @@ export function SearchAndCategories() {
             <button
               type="button"
               onClick={handleSeeAll}
-              className="inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-medium text-muted-foreground underline-offset-4 transition-colors duration-200 hover:text-foreground hover:underline"
+              className="group inline-flex min-h-11 items-center gap-1.5 rounded-lg text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
             >
               Ver todas as ofertas
-              <ArrowUpRight className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden />
+              <ArrowUpRight
+                className="h-4 w-4 shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                strokeWidth={2}
+                aria-hidden
+              />
             </button>
           </div>
 
-          <div className="mt-10">
+          {/* Régua de controle — não repete o título da seção. */}
+          <div className="mt-8">
             <ResultsHeader
-              title={discovery.hasActiveCriteria ? "Resultados da busca" : "Todas as ofertas"}
+              label={discovery.hasActiveCriteria ? "Resultados da busca" : "Todas as ofertas"}
               isLoading={discovery.isLoading}
               total={discovery.results.length}
               page={discovery.page}
@@ -130,6 +135,7 @@ export function SearchAndCategories() {
               onReset={discovery.reset}
             />
           </div>
+
 
           {activeChips.length > 0 ? (
             <ul className="mt-4 flex flex-wrap items-center gap-2" aria-label="Filtros ativos">
