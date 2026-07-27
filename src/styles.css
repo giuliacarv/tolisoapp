@@ -1209,6 +1209,21 @@
   box-shadow: none;
 }
 
+/*
+ * No tema claro o `--card` é branco: usar 58% dele sobre a faixa escura
+ * produzia cartões lavanda pálidos com texto branco por cima (ilegível).
+ * Sobre faixa escura o vidro precisa ser escuro em qualquer modo.
+ */
+.theme-obsidian:not(.dark) .noir-card {
+  background-color: color-mix(in oklab, oklch(0.16 0.05 300) 62%, transparent);
+  border-color: color-mix(in oklab, oklch(1 0 0) 16%, transparent);
+}
+
+.theme-obsidian:not(.dark) .noir-card:hover {
+  border-color: color-mix(in oklab, var(--gold) 60%, transparent);
+}
+
+
 /* Superfícies de conteúdo ganham o mesmo vidro dos cards do hero apenas no escuro;
    no claro o blur sobre branco puro barateia a leitura. */
 .theme-obsidian.dark [class*="rounded-"][class*="bg-card"] {
