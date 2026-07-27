@@ -1,5 +1,4 @@
-import { BadgeCheck, Coins, Info, Lock, ShieldCheck, Store } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { Info, Lock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -7,44 +6,52 @@ import { Container, SectionHeading } from "./primitives";
 import { Reveal } from "./reveal";
 
 interface Pillar {
-  icon: LucideIcon;
+  /** Título curto do pilar de confiança. */
   title: string;
+  /** Descrição do compromisso. */
   description: string;
-  /** Pilares em destaque ocupam duas colunas na grade bento (a partir de lg). */
-  wide?: boolean;
+  /** Cor do nó na linha do tempo: dourado ou violeta. */
+  accent: "gold" | "violet";
 }
 
 const PILLARS: Pillar[] = [
   {
-    icon: Store,
     title: "Só lojas que você já conhece",
     description: "Nada de site duvidoso: as ofertas vêm de marketplaces e varejistas reconhecidos.",
-    wide: true,
+    accent: "gold",
   },
   {
-    icon: BadgeCheck,
     title: "Cupom com data e prova",
     description: "Cada código mostra status de validação, quando foi conferido e as regras de uso.",
+    accent: "violet",
   },
   {
-    icon: ShieldCheck,
     title: "A compra é sua, na loja",
     description: "Você confere tudo e finaliza no ambiente da própria loja responsável.",
+    accent: "gold",
   },
   {
-    icon: Coins,
     title: "O preço em créditos aparece antes",
     description: "Você sempre sabe quanto custa antes de resgatar. Nenhum débito surpresa.",
-    wide: true,
+    accent: "violet",
   },
 ];
 
-/** Indicadores demonstrativos exibidos abaixo dos pilares de confiança. */
-const ASSURANCES: { value: string; label: string }[] = [
+const ASSURANCES = [
   { value: "100%", label: "Do custo em créditos exibido antes do resgate" },
   { value: "0", label: "Rastreadores carregados sem o seu consentimento" },
   { value: "24h", label: "Janela de revisão dos cupons demonstrativos" },
 ];
+
+const ACCENT_CLASSES = {
+  gold: "border-gold shadow-[0_0_15px_color-mix(in_oklab,var(--gold)_60%,transparent)]",
+  violet: "border-violet shadow-[0_0_15px_color-mix(in_oklab,var(--violet)_60%,transparent)]",
+};
+
+const DOT_CLASSES = {
+  gold: "bg-gold",
+  violet: "bg-violet",
+};
 
 export function TrustSection() {
   return (
@@ -63,76 +70,112 @@ export function TrustSection() {
       />
 
       <Container className="relative">
-        <SectionHeading
-          eyebrow="Confiança"
-          title="Nenhuma surpresa entre o clique e o carrinho"
-          align="center"
-          className="mx-auto items-center text-center [&_h2]:text-offwhite [&_p]:text-offwhite/65 [&_span]:text-offwhite/60"
-        />
+        {/* Cabeçalho: editorial e impactante. */}
+        <div className="mx-auto max-w-3xl text-center">
+          <SectionHeading
+            eyebrow="Confiança"
+            title={
+              <span className="font-display text-fluid-h1 uppercase tracking-wide text-offwhite">
+                Sua{" "}
+                <span className="gold-text">Segurança</span>{" "}
+                é Nossa Prioridade
+              </span>
+            }
+            description="Transparência total em cada etapa da sua jornada de economia."
+            align="center"
+            className="mx-auto items-center text-center [&_p]:text-offwhite/65 [&_span]:text-offwhite/60"
+          />
+        </div>
 
-        {/* Bento: alternância 2/1 e 1/2 cria assimetria equilibrada sem quebrar o ritmo. */}
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {PILLARS.map((pillar, index) => {
-            const Icon = pillar.icon;
+        {/* Indicadores de confiança. */}
+        <Reveal as="ul" delay={80} className="mt-14 grid gap-4 sm:grid-cols-3 lg:gap-6">
+          {ASSURANCES.map((item, index) => {
+            const isGold = index % 2 === 0;
             return (
-              <Reveal
-                as="li"
-                key={pillar.title}
-                delay={index * 80}
+              <li
+                key={item.label}
                 className={cn(
-                  "noir-card hover-sheen motion-safe-transform group relative flex flex-col overflow-hidden rounded-[18px] p-6 sm:p-8",
-                  pillar.wide && "lg:col-span-2",
+                  "group relative flex flex-col items-center rounded-2xl border border-offwhite/12 bg-graphite/40 px-6 py-8 text-center transition-all duration-300 ease-[var(--ease-premium)] hover:border-violet/40",
+                  isGold && "hover:border-gold/40",
                 )}
               >
                 <span
                   aria-hidden
-                  className="halo-gradient pointer-events-none absolute -right-16 -top-20 h-44 w-56 opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-hover:opacity-45"
+                  className={cn(
+                    "absolute left-1/2 top-0 h-0.5 w-12 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent",
+                    isGold ? "via-gold" : "via-violet",
+                  )}
                 />
+                <span
+                  className={cn(
+                    "font-display text-fluid-h2 leading-none tabular-nums",
+                    isGold ? "gold-text" : "text-violet",
+                  )}
+                >
+                  {item.value}
+                </span>
+                <span className="mt-2 max-w-[26ch] text-fluid-xs font-semibold uppercase tracking-wider text-offwhite">
+                  {item.label}
+                </span>
+              </li>
+            );
+          })}
+        </Reveal>
 
-                <div className="relative flex items-start justify-between gap-4">
-                  <span className="gold-medallion grid h-12 w-12 shrink-0 place-items-center rounded-2xl">
-                    <Icon className="h-5 w-5 text-gold" strokeWidth={1.75} aria-hidden />
-                  </span>
+        {/* Timeline horizontal de confiança. */}
+        <div className="relative mt-16 px-4 lg:mt-20">
+          {/* Linha conectora — desktop. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-0 top-6 hidden h-px w-full bg-gradient-to-r from-transparent via-gold/30 to-transparent md:block"
+          />
+          {/* Linha conectora — mobile. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-6 top-0 h-full w-px bg-gradient-to-b from-transparent via-gold/30 to-transparent md:hidden"
+          />
+
+          <ol className="relative grid gap-10 md:grid-cols-4 md:gap-8">
+            {PILLARS.map((pillar, index) => (
+              <Reveal
+                as="li"
+                key={pillar.title}
+                delay={120 + index * 100}
+                className="group relative flex items-start gap-5 md:flex-col md:items-center md:text-center"
+              >
+                {/* Nó da timeline. */}
+                <span
+                  aria-hidden
+                  className={cn(
+                    "relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 bg-ink transition-transform duration-300 ease-[var(--ease-premium)] group-hover:scale-110",
+                    ACCENT_CLASSES[pillar.accent],
+                  )}
+                >
+                  <span className={cn("h-3 w-3 rounded-full", DOT_CLASSES[pillar.accent])} />
+                </span>
+
+                {/* Conteúdo. */}
+                <div className="flex flex-col">
                   <span
                     aria-hidden
-                    className="font-serif text-fluid-sm tabular-nums text-offwhite/25 transition-colors duration-300 group-hover:text-gold/60"
+                    className="font-display text-fluid-sm text-offwhite/25 transition-colors duration-300 group-hover:text-violet/60 md:hidden"
                   >
                     {String(index + 1).padStart(2, "0")}
                   </span>
+                  <h3 className="font-display text-fluid-h3 uppercase tracking-wide text-offwhite">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-2 max-w-[40ch] text-fluid-sm leading-relaxed text-offwhite/60">
+                    {pillar.description}
+                  </p>
                 </div>
-
-                <h3 className="relative mt-6 font-serif text-fluid-h3 tracking-tight text-offwhite">
-                  {pillar.title}
-                </h3>
-                <p className="relative mt-2 max-w-[46ch] text-fluid-sm text-offwhite/65">
-                  {pillar.description}
-                </p>
               </Reveal>
-            );
-          })}
-        </ul>
+            ))}
+          </ol>
+        </div>
 
-        {/* Indicadores: reforçam as promessas com números legíveis. */}
-        <Reveal
-          as="dl"
-          delay={320}
-          className="mt-6 grid gap-px overflow-hidden rounded-[18px] border border-offwhite/12 bg-offwhite/10 sm:grid-cols-3 lg:gap-px"
-        >
-          {ASSURANCES.map((item) => (
-            <div
-              key={item.label}
-              className="flex flex-col items-center gap-2 bg-ink/85 px-6 py-8 text-center"
-            >
-              <dt className="sr-only">{item.label}</dt>
-              <dd className="gold-text font-serif text-fluid-h2 leading-none tabular-nums">
-                {item.value}
-              </dd>
-              <p className="max-w-[26ch] text-fluid-xs text-offwhite/60">{item.label}</p>
-            </div>
-          ))}
-        </Reveal>
-
-        <div className="mx-auto mt-12 max-w-3xl">
+        {/* Disclaimer e privacidade. */}
+        <div className="mx-auto mt-16 max-w-3xl">
           <div aria-hidden className="rule-gold mx-auto mb-8 h-px w-full" />
           <p className="grid grid-cols-[auto_minmax(0,1fr)] items-start gap-3 rounded-2xl border border-offwhite/12 bg-offwhite/5 px-6 py-4 text-fluid-xs text-offwhite/60 backdrop-blur-sm">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold" strokeWidth={1.7} aria-hidden />

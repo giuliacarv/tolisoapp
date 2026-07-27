@@ -21,6 +21,7 @@
 @theme inline {
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Fraunces", ui-serif, Georgia, serif;
+  --font-display: "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -58,6 +59,9 @@
   --color-offwhite: var(--offwhite);
   --color-saving: var(--saving);
   --color-discount: var(--discount);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+  --color-violet-bright: var(--violet-bright);
   /*
    * Escada de elevação (Soft Shadows).
    * Blur entre 8px e 24px+, spread 0–4px e opacidades de 0.04 a 0.14 —
@@ -112,6 +116,9 @@
   --amber: oklch(0.58 0.105 74);
   --saving: oklch(0.51 0.11 160);
   --discount: oklch(0.6 0.15 22);
+  --violet: oklch(0.585 0.233 277);
+  --violet-soft: oklch(0.75 0.15 277);
+  --violet-bright: oklch(0.82 0.12 277);
 
   --background: oklch(0.985 0.005 85);
   --foreground: oklch(0.16 0.004 285);
@@ -162,6 +169,9 @@
   --discount: oklch(0.72 0.15 25);
   --petrol: oklch(0.78 0.075 205);
   --petrol-bright: oklch(0.84 0.07 205);
+  --violet: oklch(0.78 0.18 277);
+  --violet-soft: oklch(0.65 0.2 277);
+  --violet-bright: oklch(0.85 0.12 277);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.75 0.075 82);
