@@ -152,8 +152,9 @@ export function SearchAndCategories() {
               label={discovery.hasActiveCriteria ? "Resultados da busca" : "Todas as ofertas"}
               isLoading={discovery.isLoading}
               total={discovery.results.length}
-              page={discovery.page}
-              totalPages={discovery.totalPages}
+              page={1}
+              totalPages={1}
+
               sort={discovery.sort}
               onSortChange={discovery.changeSort}
               canReset={discovery.hasActiveCriteria}
