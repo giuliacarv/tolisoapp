@@ -86,7 +86,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         size === "wide" && "p-6 sm:p-8",
         isHero && "p-8 sm:p-10",
         dark &&
-          "border-ink bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift hover:border-gold/45",
+          "border-0 bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift hover:border-0",
       )}
     >
       {/* Halo dourado assimétrico + contraluz frio nas superfícies escuras. */}
