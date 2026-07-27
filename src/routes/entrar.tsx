@@ -104,7 +104,7 @@ function SignInPage() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">E-mail</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">E-mail</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -126,7 +126,7 @@ function SignInPage() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-offwhite/80">Senha</FormLabel>
+                <FormLabel className="text-fluid-xs font-medium text-foreground">Senha</FormLabel>
                 <div className="relative">
                   <FormControl>
                     <Input
@@ -143,7 +143,7 @@ function SignInPage() {
                     onClick={() => setShowPassword((value) => !value)}
                     aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
                     aria-pressed={showPassword}
-                    className="absolute inset-y-0 right-0 grid w-11 place-items-center rounded-r-md text-offwhite/60 transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                    className="absolute inset-y-0 right-0 grid w-11 place-items-center rounded-r-xl text-muted-foreground transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                   >
                     {showPassword ? (
                       <EyeOff className="size-4" strokeWidth={1.75} aria-hidden />
@@ -167,10 +167,10 @@ function SignInPage() {
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={(checked) => field.onChange(checked === true)}
-                      className="border-offwhite/30 data-[state=checked]:border-gold data-[state=checked]:bg-gold data-[state=checked]:text-ink"
+                      className="border-border data-[state=checked]:border-gold data-[state=checked]:bg-gold data-[state=checked]:text-ink"
                     />
                   </FormControl>
-                  <FormLabel className="cursor-pointer text-fluid-xs font-normal text-offwhite/70">
+                  <FormLabel className="cursor-pointer text-fluid-xs font-normal text-muted-foreground">
                     Lembrar de mim
                   </FormLabel>
                 </FormItem>
@@ -182,7 +182,7 @@ function SignInPage() {
             </Link>
           </div>
 
-          <button type="submit" className={cn(buttonSolid, "w-full border border-gold/30")}>
+          <button type="submit" className={cn(buttonSolid, "w-full")}>
             <LogIn className="size-4 shrink-0" strokeWidth={2} aria-hidden />
             Entrar
           </button>
