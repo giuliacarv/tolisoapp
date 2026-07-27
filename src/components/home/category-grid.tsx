@@ -47,13 +47,20 @@ function CategoryCard({ category, index, isActive, featured = false, onSelect }:
           "border-ink bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift hover:border-gold/45",
       )}
     >
-      {/* Halo dourado assimétrico exclusivo do bloco em destaque. */}
+      {/* Halo dourado assimétrico + contraluz frio no bloco em destaque. */}
       {dark ? (
-        <span
-          aria-hidden
-          className="halo-gradient pointer-events-none absolute -right-24 -top-28 -z-10 h-64 w-80 opacity-60"
-        />
+        <>
+          <span
+            aria-hidden
+            className="halo-gradient pointer-events-none absolute -right-24 -top-28 -z-10 h-64 w-80 opacity-60"
+          />
+          <span
+            aria-hidden
+            className="glow-orb-cool absolute -bottom-16 -left-16 -z-10 h-40 w-40"
+          />
+        </>
       ) : null}
+
 
       {/* Índice editorial: numeração discreta que dá ritmo à grade. */}
       <span

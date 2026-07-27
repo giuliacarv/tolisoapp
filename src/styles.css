@@ -50,6 +50,8 @@
   --color-ring-offset-background: var(--background);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-petrol: var(--petrol);
+  --color-petrol-bright: var(--petrol-bright);
   --color-amber: var(--amber);
   --color-ink: var(--ink);
   --color-graphite: var(--graphite);
@@ -82,6 +84,13 @@
   --offwhite: oklch(0.968 0.008 85);
   --gold: oklch(0.75 0.075 82);
   --gold-soft: oklch(0.88 0.045 85);
+  /*
+   * Azul-petróleo: acento secundário frio que contrabalança o ouro.
+   * Reservado a selos de desconto e realces de dado — nunca a ações primárias.
+   */
+  --petrol: oklch(0.52 0.062 210);
+  /* Par claro do petróleo, legível sobre superfícies de tinta em qualquer tema. */
+  --petrol-bright: oklch(0.82 0.07 205);
   /* Âmbar legível sobre fundos claros — usado no estado "Validação pendente". */
   --amber: oklch(0.58 0.105 74);
   --saving: oklch(0.51 0.11 160);
@@ -134,6 +143,8 @@
   --saving: oklch(0.76 0.13 162);
   --amber: oklch(0.82 0.1 80);
   --discount: oklch(0.72 0.15 25);
+  --petrol: oklch(0.78 0.075 205);
+  --petrol-bright: oklch(0.84 0.07 205);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.75 0.075 82);
@@ -775,5 +786,44 @@
 @media (prefers-reduced-motion: reduce) {
   .noir-card:hover {
     transform: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Camada de luz: orbes desfocados que simulam iluminação de vitrine.
+ * São puramente decorativos — sempre em elementos `aria-hidden` posicionados
+ * de forma absoluta, atrás do conteúdo, e nunca interceptam o ponteiro.
+ * ------------------------------------------------------------------------ */
+
+/** Orbe quente (ouro velho) — foco principal de luz da composição. */
+@utility glow-orb {
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(60px);
+  background-color: color-mix(in oklab, var(--gold) 22%, transparent);
+}
+
+/** Orbe frio (azul-petróleo) — contraluz que dá profundidade à cena. */
+@utility glow-orb-cool {
+  pointer-events: none;
+  border-radius: 9999px;
+  filter: blur(70px);
+  background-color: color-mix(in oklab, var(--petrol) 20%, transparent);
+}
+
+/**
+ * Selo de desconto no acento frio. Sobre superfícies escuras (`noir-band`) o
+ * petróleo já é claro o bastante; no tema claro usamos o par escuro sobre véu.
+ */
+@utility petrol-badge {
+  border: 1px solid color-mix(in oklab, var(--petrol) 30%, transparent);
+  background-color: color-mix(in oklab, var(--petrol) 12%, transparent);
+  color: var(--petrol);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-orb,
+  .glow-orb-cool {
+    display: none;
   }
 }
