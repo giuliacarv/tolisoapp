@@ -89,6 +89,9 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         isHero && "p-8 sm:p-10",
         dark &&
           "bg-ink bg-[image:var(--gradient-ink)] text-offwhite",
+        // Contraste de borda no tema claro: o fundo branco do card precisa se
+        // separar da faixa tonal lavanda, senão vira uma massa indefinida.
+        !dark && "border border-foreground/10",
       )}
     >
       {/* Halo dourado assimétrico + contraluz frio nas superfícies escuras. */}
@@ -111,7 +114,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         className={cn(
           "absolute right-6 top-6 font-serif tabular-nums transition-colors duration-200",
           isHero ? "text-2xl" : "text-lg",
-          dark ? "text-offwhite/20" : "text-border",
+          dark ? "text-offwhite/25" : "text-foreground/35",
         )}
       >
         {String(index + 1).padStart(2, "0")}
@@ -121,7 +124,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         className={cn(
           "grid shrink-0 place-items-center rounded-xl border transition-colors duration-200",
           isHero ? "h-14 w-14" : "h-11 w-11",
-          dark ? "border-gold/30 bg-offwhite/8" : "border-gold/25 bg-gold/8",
+          dark ? "border-gold/30 bg-offwhite/10" : "border-gold/40 bg-gold/15",
         )}
       >
         <Icon
@@ -145,7 +148,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
           className={cn(
             "max-w-[38ch] leading-relaxed",
             isHero ? "text-fluid-sm" : "text-fluid-xs",
-            dark ? "text-offwhite/70" : "text-muted-foreground",
+            dark ? "text-offwhite/80" : "text-muted-foreground",
             // Nos blocos baixos a descrição fica em duas linhas para não
             // empurrar o rodapé do card.
             size === "compact" && "line-clamp-2",
@@ -158,7 +161,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
       <span
         className={cn(
           "mt-auto inline-flex items-center gap-2 pt-6 text-xs font-semibold uppercase tracking-[0.14em]",
-          dark ? "text-gold" : "text-muted-foreground",
+          dark ? "text-gold" : "text-foreground/80",
         )}
       >
         {category.offerCount} ofertas
