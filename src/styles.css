@@ -386,6 +386,17 @@
   border: 1px solid var(--glass-border);
 }
 
+/**
+ * Superfície da ação primária (botões "Resgatar", "Entrar", chips ativos).
+ * Um único token controla os dois temas, garantindo o mesmo peso visual no
+ * claro (tinta sobre off-white) e no escuro (ouro sobre tinta).
+ */
+@utility cta-surface {
+  background-color: var(--ink);
+  background-image: var(--gradient-cta);
+  color: var(--cta-foreground);
+}
+
 /** Fundo com gradiente neutro — profundidade sem ruído visual. */
 @utility surface-gradient {
   background-image: var(--gradient-surface);
