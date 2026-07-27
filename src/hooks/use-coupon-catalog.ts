@@ -12,7 +12,7 @@ import {
   type CouponSortId,
 } from "@/domain/coupons/coupon-filters";
 import { useAsyncResource } from "@/hooks/use-async-resource";
-import { couponService, storeService } from "@/services";
+import { couponService } from "@/services";
 import type { Coupon } from "@/types";
 
 /** Opção de faceta já com a contagem de cupons correspondentes. */
@@ -38,7 +38,6 @@ const EMPTY_COUPONS: readonly Coupon[] = [];
  */
 export function useCouponCatalog() {
   const couponsResource = useAsyncResource(() => couponService.list(), []);
-  const storesResource = useAsyncResource(() => storeService.list({ activeOnly: true }), []);
 
   const coupons = couponsResource.data ?? EMPTY_COUPONS;
 
@@ -72,17 +71,25 @@ export function useCouponCatalog() {
     [coupons, filters, sort],
   );
 
-  /** Só exibimos lojas que realmente possuem cupons demonstrativos. */
+  /**
+   * Facetas de loja derivadas dos próprios cupons (o nome já vem
+   * desnormalizado). Isso garante que toda loja com cupom apareça, inclusive
+   * as que ainda não estão marcadas como ativas no catálogo de lojas.
+   */
   const storeOptions = useMemo<CouponFacetOption[]>(() => {
-    const stores = storesResource.data ?? [];
-    return stores
-      .map((store) => ({
-        id: store.id,
-        label: store.name,
-        count: coupons.filter((coupon) => coupon.storeId === store.id).length,
-      }))
-      .filter((option) => option.count > 0);
-  }, [storesResource.data, coupons]);
+    const byId = new Map<string, CouponFacetOption>();
+
+    for (const coupon of coupons) {
+      const existing = byId.get(coupon.storeId);
+      if (existing) {
+        existing.count += 1;
+        continue;
+      }
+      byId.set(coupon.storeId, { id: coupon.storeId, label: coupon.store, count: 1 });
+    }
+
+    return [...byId.values()].sort((a, b) => a.label.localeCompare(b.label, "pt-BR"));
+  }, [coupons]);
 
   const activeChips = useMemo<CouponFilterChip[]>(() => {
     const chips: CouponFilterChip[] = [];
