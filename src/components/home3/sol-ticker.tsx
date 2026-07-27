@@ -22,16 +22,14 @@ export function SolTicker() {
           style={{ animationDuration: `${loop.length * 3}s` }}
         >
           {loop.map((store, index) => (
-            <li key={`${store.id}-${index}`} className="flex shrink-0 items-center gap-3">
-              <img
-                src={store.logoSrc}
-                alt={index < items.length ? store.logoAlt : ""}
-                aria-hidden={index >= items.length}
-                loading="lazy"
-                decoding="async"
-                className="h-6 w-auto brightness-0 invert"
-              />
-              <span className="text-sm font-bold uppercase tracking-[0.2em] text-white/70">
+            <li
+              key={`${store.id}-${index}`}
+              aria-hidden={index >= items.length}
+              className="flex shrink-0 items-center gap-3"
+            >
+              {/* Marca-texto: o SVG monocromático não sobrevive à inversão. */}
+              <span className="h-1.5 w-1.5 rounded-full bg-white/50" aria-hidden />
+              <span className="text-base font-extrabold uppercase tracking-[0.18em] text-white">
                 {store.name}
               </span>
             </li>
