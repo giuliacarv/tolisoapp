@@ -197,7 +197,7 @@ export function InstitutionalFooter() {
                 <ul className="mt-4 space-y-2.5">
                   {group.links.map((link) => (
                     <li key={link.label}>
-                      {link.to ? (
+                      {"to" in link ? (
                         <Link
                           to={link.to}
                           className="inline-flex min-h-9 items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
@@ -207,7 +207,7 @@ export function InstitutionalFooter() {
                       ) : (
                         <a
                           href={link.href}
-                          onClick={(event) => handleAnchorClick(event, link.href as string)}
+                          onClick={(event) => handleAnchorClick(event, link.href)}
                           className="inline-flex min-h-9 items-center text-left text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline underline-offset-4"
                         >
                           {link.label}
