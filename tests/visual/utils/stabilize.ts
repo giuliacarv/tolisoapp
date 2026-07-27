@@ -91,5 +91,15 @@ export async function gotoStable(page: Page, path: string): Promise<void> {
   await page.waitForLoadState("networkidle").catch(() => {
     // networkidle pode não ocorrer com HMR ativo; seguimos com o estado atual.
   });
-  await page.waitForTimeout(300);
+  // Congela qualquer animação ainda ativa via Web Animations API. O CSS acima
+  // cobre a maioria dos casos, mas marquees recriados após hidratação podem
+  // reiniciar e impedir a estabilização da captura.
+  await page.evaluate(() => {
+    document.getAnimations().forEach((animation) => {
+      animation.currentTime = 0;
+      animation.pause();
+    });
+  });
+
+  await page.waitForTimeout(500);
 }

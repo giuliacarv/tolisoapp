@@ -28,8 +28,11 @@ export default defineConfig({
   workers: 1,
   retries: process.env.CI ? 1 : 0,
   reporter: [["list"]],
+  timeout: 90_000,
   expect: {
+    timeout: 30_000,
     toHaveScreenshot: {
+      timeout: 30_000,
       // Tolerância mínima para variações de antialiasing entre execuções.
       maxDiffPixelRatio: 0.01,
       animations: "disabled",
