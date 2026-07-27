@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as CriarContaRouteImport } from './routes/criar-conta'
 import { Route as CreditosRouteImport } from './routes/creditos'
 import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
 import { Route as IndexRouteImport } from './routes/index'
@@ -21,6 +24,21 @@ import { Route as CuponsSlugRouteImport } from './routes/cupons.$slug'
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
+  id: '/recuperar-senha',
+  path: '/recuperar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntrarRoute = EntrarRouteImport.update({
+  id: '/entrar',
+  path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriarContaRoute = CriarContaRouteImport.update({
+  id: '/criar-conta',
+  path: '/criar-conta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CreditosRoute = CreditosRouteImport.update({
@@ -63,6 +81,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/creditos': typeof CreditosRoute
+  '/criar-conta': typeof CriarContaRoute
+  '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
@@ -73,6 +94,9 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/creditos': typeof CreditosRoute
+  '/criar-conta': typeof CriarContaRoute
+  '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
@@ -84,6 +108,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/como-funciona': typeof ComoFuncionaRoute
   '/creditos': typeof CreditosRoute
+  '/criar-conta': typeof CriarContaRoute
+  '/entrar': typeof EntrarRoute
+  '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
@@ -96,6 +123,9 @@ export interface FileRouteTypes {
     | '/'
     | '/como-funciona'
     | '/creditos'
+    | '/criar-conta'
+    | '/entrar'
+    | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
     | '/ofertas/$slug'
@@ -106,6 +136,9 @@ export interface FileRouteTypes {
     | '/'
     | '/como-funciona'
     | '/creditos'
+    | '/criar-conta'
+    | '/entrar'
+    | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
     | '/ofertas/$slug'
@@ -116,6 +149,9 @@ export interface FileRouteTypes {
     | '/'
     | '/como-funciona'
     | '/creditos'
+    | '/criar-conta'
+    | '/entrar'
+    | '/recuperar-senha'
     | '/sitemap.xml'
     | '/cupons/$slug'
     | '/ofertas/$slug'
@@ -127,6 +163,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComoFuncionaRoute: typeof ComoFuncionaRoute
   CreditosRoute: typeof CreditosRoute
+  CriarContaRoute: typeof CriarContaRoute
+  EntrarRoute: typeof EntrarRoute
+  RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CuponsSlugRoute: typeof CuponsSlugRoute
   OfertasSlugRoute: typeof OfertasSlugRoute
@@ -141,6 +180,27 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar-senha': {
+      id: '/recuperar-senha'
+      path: '/recuperar-senha'
+      fullPath: '/recuperar-senha'
+      preLoaderRoute: typeof RecuperarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entrar': {
+      id: '/entrar'
+      path: '/entrar'
+      fullPath: '/entrar'
+      preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criar-conta': {
+      id: '/criar-conta'
+      path: '/criar-conta'
+      fullPath: '/criar-conta'
+      preLoaderRoute: typeof CriarContaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/creditos': {
@@ -199,6 +259,9 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComoFuncionaRoute: ComoFuncionaRoute,
   CreditosRoute: CreditosRoute,
+  CriarContaRoute: CriarContaRoute,
+  EntrarRoute: EntrarRoute,
+  RecuperarSenhaRoute: RecuperarSenhaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   CuponsSlugRoute: CuponsSlugRoute,
   OfertasSlugRoute: OfertasSlugRoute,
