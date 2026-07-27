@@ -1,10 +1,9 @@
 import { Coins, Search, Store } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-
-import { Container, SectionHeading, cardBase } from "./primitives";
+import { Container, SectionHeading } from "./primitives";
 import { Reveal } from "./reveal";
+
 
 interface Step {
   icon: LucideIcon;
