@@ -59,7 +59,16 @@ function LogoSlide({ logo, ariaHidden }: { logo: Store; ariaHidden?: boolean }) 
  * medida (`largura / speed`), mantendo a velocidade constante em qualquer tela.
  * A animação usa apenas `transform` + `will-change`, evitando reflow/repaint.
  */
-export function LogoCarousel({ logos = PARTNER_LOGOS, speed = 50, className }: LogoCarouselProps) {
+const EMPTY_STORES: readonly Store[] = [];
+
+export function LogoCarousel({ logos, speed = 50, className }: LogoCarouselProps) {
+  // Quando nenhuma lista é injetada, o componente resolve as lojas ativas.
+  const storesResource = useAsyncResource(
+    () => storeService.list({ activeOnly: true }),
+    [],
+  );
+  const items = logos ?? storesResource.data ?? EMPTY_STORES;
+
   const trackRef = useRef<HTMLUListElement>(null);
   const [durationSeconds, setDurationSeconds] = useState(30);
 
@@ -79,7 +88,7 @@ export function LogoCarousel({ logos = PARTNER_LOGOS, speed = 50, className }: L
     const observer = new ResizeObserver(measure);
     observer.observe(track);
     return () => observer.disconnect();
-  }, [measure, logos.length]);
+  }, [measure, items.length]);
 
   return (
     <section
@@ -100,16 +109,19 @@ export function LogoCarousel({ logos = PARTNER_LOGOS, speed = 50, className }: L
             role="group"
             aria-label="Carrossel de logotipos de lojas parceiras"
           >
+            {items.length === 0 ? (
+              <div className="h-11 w-full animate-pulse rounded-lg bg-muted/60" aria-hidden />
+            ) : null}
             <ul
               ref={trackRef}
               className="marquee-track flex w-max flex-nowrap items-center group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]"
               style={{ animationDuration: `${durationSeconds}s` }}
             >
-              {logos.map((logo) => (
+              {items.map((logo) => (
                 <LogoSlide key={logo.id} logo={logo} />
               ))}
               {/* Cópia clonada apenas para o efeito visual de loop infinito. */}
-              {logos.map((logo) => (
+              {items.map((logo) => (
                 <LogoSlide key={`clone-${logo.id}`} logo={logo} ariaHidden />
               ))}
             </ul>
