@@ -16,7 +16,7 @@ import { ThemeToggle } from "@/components/home/theme-toggle";
 const SITE_URL = "https://descontai1.lovable.app";
 const TITLE = "EconomizAI | Ofertas e cupons selecionados";
 const DESCRIPTION =
-  "Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
+  "Inteligência Artificial pra Economizar de Verdade! Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
 
 export const Route = createFileRoute("/")({
