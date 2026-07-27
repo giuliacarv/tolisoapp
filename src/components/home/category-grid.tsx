@@ -195,7 +195,7 @@ function CategoryGridSkeleton() {
         <li
           key={`category-skeleton-${index}`}
           className={cn(
-            "min-w-0 animate-pulse rounded-[18px] border border-border bg-muted/50",
+            "min-w-0 animate-pulse rounded-[18px] bg-muted/50",
             slotAt(index).span,
           )}
         />
