@@ -75,6 +75,11 @@
 
   /* Curva de easing única do produto: saída rápida, chegada suave. */
   --ease-premium: cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Curva com leve "overshoot" — reservada a hover de cards e selos. */
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.44, 1);
+  /* Curva editorial lenta — entradas de conteúdo longas (reveal). */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+
 }
 
 /*
