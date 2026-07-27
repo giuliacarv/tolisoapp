@@ -50,8 +50,8 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
     <article
       aria-disabled={isExpired || undefined}
       className={cn(
-        "gilded-frame motion-safe-transform relative flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-none transition-[transform,box-shadow,border-color] duration-300",
-        !isExpired && "hover:-translate-y-1 hover:shadow-none",
+        "gilded-frame motion-safe-transform relative flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card !shadow-none transition-[transform,box-shadow,border-color] duration-300",
+        !isExpired && "hover:-translate-y-1 hover:!shadow-none",
         isExpired && "border-dashed opacity-55 saturate-50",
       )}
     >

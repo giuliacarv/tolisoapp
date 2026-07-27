@@ -34,7 +34,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
       aria-disabled={isDisabled || undefined}
       className={cn(
         cardBase,
-        "motion-safe-transform group relative flex h-full flex-col overflow-hidden shadow-none hover:shadow-none",
+        "motion-safe-transform group relative flex h-full flex-col overflow-hidden !shadow-none hover:!shadow-none",
         isDisabled
           ? "opacity-60 saturate-50"
           : "interactive-lift gilded-frame hover:border-gold/40",
