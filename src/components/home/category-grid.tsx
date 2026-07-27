@@ -124,7 +124,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         className={cn(
           "grid shrink-0 place-items-center rounded-xl border transition-colors duration-200",
           isHero ? "h-14 w-14" : "h-11 w-11",
-          dark ? "border-gold/30 bg-offwhite/8" : "border-gold/25 bg-gold/8",
+          dark ? "border-gold/30 bg-offwhite/10" : "border-gold/40 bg-gold/15",
         )}
       >
         <Icon
