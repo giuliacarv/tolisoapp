@@ -93,7 +93,16 @@ export function SearchAndCategories() {
   return (
     <>
       {/* Busca e filtros */}
-      <section id="buscar" className="scroll-mt-[calc(var(--header-h)+1rem)] py-4">
+      <section
+        id="buscar"
+        className="relative isolate scroll-mt-[calc(var(--header-h)+1rem)] overflow-hidden py-16 sm:py-20"
+      >
+        <span
+          aria-hidden
+          className="glow-orb pointer-events-none absolute -top-24 left-1/2 h-72 w-[38rem] -translate-x-1/2 opacity-40"
+        />
+        <span aria-hidden className="rule-fade absolute inset-x-0 top-0 h-px" />
+        <span aria-hidden className="rule-fade absolute inset-x-0 bottom-0 h-px" />
         <Container>
           <DiscoveryPanel
             query={discovery.query}
@@ -104,6 +113,7 @@ export function SearchAndCategories() {
           />
         </Container>
       </section>
+
 
       {/* Categorias */}
       <section id="categorias" className="scroll-mt-[calc(var(--header-h)+1rem)] pt-16 sm:pt-20">
