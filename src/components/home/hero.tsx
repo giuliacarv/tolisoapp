@@ -79,12 +79,12 @@ function HeroOfferCard({
     // e um `transform` de hover sobrescreveria a inclinação da composição.
     <article
       className={cn(
-        "motion-safe-transform w-full min-w-0 rounded-2xl p-4 noir-card",
+        "group/card motion-safe-transform w-full min-w-0 rounded-[1.25rem] p-4 sm:p-5 luxe-card",
         className,
       )}
     >
       <div className="flex min-w-0 items-center gap-3 sm:gap-4">
-        <div className="grid h-16 w-16 shrink-0 sm:h-20 sm:w-20 place-items-center overflow-hidden rounded-2xl bg-offwhite/10">
+        <div className="relative grid h-[4.5rem] w-[4.5rem] shrink-0 sm:h-[5.25rem] sm:w-[5.25rem] place-items-center overflow-hidden rounded-2xl bg-offwhite/10 ring-1 ring-inset ring-gold/25">
           <img
             src={offer.image}
             alt={`Foto ilustrativa: ${offer.name}`}
@@ -93,7 +93,12 @@ function HeroOfferCard({
             decoding="async"
             loading={priority ? "eager" : "lazy"}
             fetchPriority={priority ? "high" : "auto"}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-premium)] motion-safe:group-hover/card:scale-[1.06]"
+          />
+          {/* Véu de baixo para cima: assenta a foto no vidro escuro do cartão. */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 rounded-2xl bg-[linear-gradient(to_top,color-mix(in_oklab,var(--ink)_45%,transparent),transparent_55%)]"
           />
         </div>
 
@@ -102,30 +107,43 @@ function HeroOfferCard({
             <span className="truncate text-fluid-micro font-semibold uppercase tracking-[0.18em] text-offwhite/55">
               {offer.store}
             </span>
-            <span className="petrol-badge shrink-0 text-petrol-bright rounded-md px-1.5 py-0.5 text-fluid-micro font-semibold">
+            <span className="shrink-0 rounded-full border border-gold/40 bg-[color-mix(in_oklab,var(--gold)_16%,transparent)] px-2 py-0.5 text-fluid-micro font-bold tracking-[0.04em] text-gold-soft">
               {offer.discount}
             </span>
           </div>
 
+          <p className="mt-1.5 truncate text-sm font-semibold leading-snug text-offwhite">
+            {offer.name}
+          </p>
 
-          <p className="mt-1 truncate text-sm font-semibold text-offwhite">{offer.name}</p>
-
-          <div className="mt-1.5 flex flex-wrap items-baseline gap-2">
-            <span className="font-serif text-lg text-offwhite">{offer.price}</span>
-            <span className="text-xs text-offwhite/45 line-through">{offer.oldPrice}</span>
+          <div className="mt-2 flex flex-wrap items-baseline gap-2">
+            <span className="font-serif text-xl leading-none tracking-[-0.01em] text-offwhite">
+              {offer.price}
+            </span>
+            <span className="text-xs text-offwhite/40 line-through">{offer.oldPrice}</span>
           </div>
         </div>
       </div>
 
-      <div className="mt-3 border-t border-offwhite/10 pt-3">
-        <span className="inline-flex items-center gap-1.5 text-fluid-micro font-medium text-offwhite/60">
+      {/* Filete de separação em degradê: mais suave que uma borda sólida. */}
+      <div
+        aria-hidden
+        className="mt-4 h-px w-full bg-[linear-gradient(to_right,transparent,color-mix(in_oklab,var(--gold)_35%,transparent),transparent)]"
+      />
+
+      <div className="mt-3 flex items-center justify-between gap-2">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-offwhite/12 bg-offwhite/[0.06] px-2.5 py-1 text-fluid-micro font-medium text-offwhite/70">
           <Sparkles className="h-3 w-3 shrink-0 text-gold" strokeWidth={2} aria-hidden />
-          {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"} para desbloquear
+          {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"}
+        </span>
+        <span className="text-fluid-micro font-medium uppercase tracking-[0.16em] text-offwhite/40">
+          Desbloquear
         </span>
       </div>
     </article>
   );
 }
+
 
 
 export function HeroSection() {
