@@ -133,8 +133,8 @@ export function SearchAndCategories() {
           <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
             <SectionHeading
               eyebrow="Curadoria"
-              title="Ofertas em destaque"
-              description="Produtos selecionados com preços atrativos nas principais lojas online."
+              title="As ofertas que passaram no crivo"
+              description="Preço comparado, loja reconhecida e desconto conferido. O que não passou, não aparece aqui."
             />
             <button
               type="button"
