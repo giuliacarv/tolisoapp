@@ -174,7 +174,7 @@ function ContactPage() {
                       Muitas dúvidas já estão respondidas na{" "}
                       <Link
                         to="/ajuda"
-                        className="font-semibold text-foreground underline-offset-4 hover:underline"
+                        className="inline-flex min-h-11 items-center font-semibold text-foreground underline-offset-4 hover:underline"
                       >
                         Central de ajuda
                       </Link>
