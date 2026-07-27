@@ -1,13 +1,14 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { ArrowUpRight, ShieldCheck, X } from "lucide-react";
 
-import { PRODUCTS } from "@/data/products";
 import { DEFAULT_PAGE_SIZE } from "@/domain/products/pagination";
+import { useAsyncResource } from "@/hooks/use-async-resource";
 import { ALL_FILTER_ID, useProductDiscovery } from "@/hooks/use-product-discovery";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { scrollToId } from "@/lib/smooth-scroll";
+import { categoryService, productService } from "@/services";
 
-import { CATEGORIES, CategoryGrid } from "./category-grid";
+import { CategoryGrid } from "./category-grid";
 import { DiscoveryPanel } from "./discovery/discovery-panel";
 import { ResultsHeader } from "./discovery/results-header";
 import { EmptyResults } from "./empty-results";
@@ -16,16 +17,11 @@ import { ProductGrid } from "./product-grid";
 import { ProductModals } from "./product-modals";
 import { Pagination } from "./results-controls";
 
-/** Filtros rápidos — os ids espelham as categorias demonstrativas. */
-const QUICK_FILTERS = [
-  { id: ALL_FILTER_ID, label: "Todas as ofertas" },
-  ...CATEGORIES.map((category) => ({ id: category.id, label: category.label })),
-];
-
 /** Sugestões demonstrativas exibidas no estado vazio. */
 const SEARCH_SUGGESTIONS = ["Fone", "Smartwatch", "Skincare", "Teclado"];
 
-const CATEGORY_LABEL_BY_ID = new Map(CATEGORIES.map((category) => [category.id, category.label]));
+const EMPTY_PRODUCTS: readonly never[] = [];
+const EMPTY_CATEGORIES: readonly never[] = [];
 
 /**
  * Descoberta + vitrine.
@@ -33,12 +29,36 @@ const CATEGORY_LABEL_BY_ID = new Map(CATEGORIES.map((category) => [category.id, 
  * (cabeçalho antes do conteúdo, sempre com o grid abaixo do título).
  */
 export function SearchAndCategories() {
-  const resolveCategoryLabel = useMemo(
-    () => (filterId: string) => CATEGORY_LABEL_BY_ID.get(filterId),
-    [],
+  // Camada de serviços: hoje resolve mocks, amanhã o Supabase — sem mudar a UI.
+  const productsResource = useAsyncResource(() => productService.list(), []);
+  const categoriesResource = useAsyncResource(() => categoryService.list(), []);
+
+  const products = productsResource.data ?? EMPTY_PRODUCTS;
+  const categories = categoriesResource.data ?? EMPTY_CATEGORIES;
+
+  const categoryLabelById = useMemo(
+    () => new Map(categories.map((category) => [category.id, category.label])),
+    [categories],
   );
 
-  const discovery = useProductDiscovery({ products: PRODUCTS, resolveCategoryLabel });
+  const resolveCategoryLabel = useCallback(
+    (filterId: string) => categoryLabelById.get(filterId),
+    [categoryLabelById],
+  );
+
+  const quickFilters = useMemo(
+    () => [
+      { id: ALL_FILTER_ID, label: "Todas as ofertas" },
+      ...categories.map((category) => ({ id: category.id, label: category.label })),
+    ],
+    [categories],
+  );
+
+  const discovery = useProductDiscovery({
+    products,
+    isLoading: productsResource.isLoading,
+    resolveCategoryLabel,
+  });
   const modals = useProductModals();
 
   function scrollToOffers() {
@@ -81,7 +101,7 @@ export function SearchAndCategories() {
           <DiscoveryPanel
             query={discovery.query}
             onQueryChange={discovery.changeQuery}
-            filters={QUICK_FILTERS}
+            filters={quickFilters}
             activeFilter={discovery.activeFilter}
             onFilterChange={discovery.changeFilter}
           />
@@ -92,6 +112,8 @@ export function SearchAndCategories() {
       <section id="categorias" className="scroll-mt-[calc(var(--header-h)+1rem)] pt-16 sm:pt-20">
         <Container>
           <CategoryGrid
+            categories={categories}
+            isLoading={categoriesResource.isLoading}
             activeCategory={discovery.activeFilter}
             onSelect={discovery.toggleFilter}
           />
@@ -155,6 +177,21 @@ export function SearchAndCategories() {
             </ul>
           ) : null}
 
+          {productsResource.error ? (
+            <div
+              role="alert"
+              className="mt-6 rounded-2xl border border-border bg-card p-8 text-center"
+            >
+              <p className="text-sm text-muted-foreground">{productsResource.error}</p>
+              <button
+                type="button"
+                onClick={productsResource.refetch}
+                className={`${chipIdle} mt-4`}
+              >
+                Tentar novamente
+              </button>
+            </div>
+          ) : (
           <div className="mt-6">
             <ProductGrid
               products={discovery.pageProducts}
@@ -173,8 +210,9 @@ export function SearchAndCategories() {
               }
             />
           </div>
+          )}
 
-          {!discovery.isLoading && (
+          {!discovery.isLoading && !productsResource.error && (
             <Pagination
               page={discovery.page}
               totalPages={discovery.totalPages}
