@@ -1,4 +1,4 @@
-import { Info, Lock } from "lucide-react";
+import { Eye, Home, Info, Lock, ShoppingBag, Ticket, type LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -12,6 +12,8 @@ interface Pillar {
   description: string;
   /** Cor do nó na linha do tempo: dourado ou violeta. */
   accent: "gold" | "violet";
+  /** Ícone representativo do pilar dentro do círculo. */
+  icon: LucideIcon;
 }
 
 const PILLARS: Pillar[] = [
@@ -19,21 +21,25 @@ const PILLARS: Pillar[] = [
     title: "Só lojas que você já conhece",
     description: "Nada de site duvidoso: as ofertas vêm de marketplaces e varejistas reconhecidos.",
     accent: "gold",
+    icon: Home,
   },
   {
     title: "Cupom com data e prova",
     description: "Cada código mostra status de validação, quando foi conferido e as regras de uso.",
     accent: "violet",
+    icon: Ticket,
   },
   {
     title: "A compra é sua, na loja",
     description: "Você confere tudo e finaliza no ambiente da própria loja responsável.",
     accent: "gold",
+    icon: ShoppingBag,
   },
   {
     title: "O preço em créditos aparece antes",
     description: "Você sempre sabe quanto custa antes de resgatar. Nenhum débito surpresa.",
     accent: "violet",
+    icon: Eye,
   },
 ];
 
@@ -44,13 +50,13 @@ const ASSURANCES = [
 ];
 
 const ACCENT_CLASSES = {
-  gold: "border-gold shadow-[0_0_15px_color-mix(in_oklab,var(--gold)_60%,transparent)]",
-  violet: "border-violet shadow-[0_0_15px_color-mix(in_oklab,var(--violet)_60%,transparent)]",
+  gold: "border-gold text-gold shadow-[0_0_15px_color-mix(in_oklab,var(--gold)_60%,transparent)]",
+  violet: "border-violet text-violet shadow-[0_0_15px_color-mix(in_oklab,var(--violet)_60%,transparent)]",
 };
 
-const DOT_CLASSES = {
-  gold: "bg-gold",
-  violet: "bg-violet",
+const ICON_GLOW_CLASSES = {
+  gold: "drop-shadow-[0_0_5px_color-mix(in_oklab,var(--gold)_60%,transparent)]",
+  violet: "drop-shadow-[0_0_5px_color-mix(in_oklab,var(--violet)_60%,transparent)]",
 };
 
 export function TrustSection() {
@@ -136,41 +142,48 @@ export function TrustSection() {
           />
 
           <ol className="relative grid gap-10 md:grid-cols-4 md:gap-8">
-            {PILLARS.map((pillar, index) => (
-              <Reveal
-                as="li"
-                key={pillar.title}
-                delay={120 + index * 100}
-                className="group relative flex items-start gap-5 md:flex-col md:items-center md:text-center"
-              >
-                {/* Nó da timeline. */}
-                <span
-                  aria-hidden
-                  className={cn(
-                    "relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 bg-ink transition-transform duration-300 ease-[var(--ease-premium)] group-hover:scale-110",
-                    ACCENT_CLASSES[pillar.accent],
-                  )}
+            {PILLARS.map((pillar, index) => {
+              const Icon = pillar.icon;
+              return (
+                <Reveal
+                  as="li"
+                  key={pillar.title}
+                  delay={120 + index * 100}
+                  className="group relative flex items-start gap-5 md:flex-col md:items-center md:text-center"
                 >
-                  <span className={cn("h-3 w-3 rounded-full", DOT_CLASSES[pillar.accent])} />
-                </span>
-
-                {/* Conteúdo. */}
-                <div className="flex flex-col">
+                  {/* Nó da timeline — medalhão metálico com ícone. */}
                   <span
                     aria-hidden
-                    className="font-display text-fluid-sm text-offwhite/25 transition-colors duration-300 group-hover:text-violet/60 md:hidden"
+                    className={cn(
+                      "relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 bg-ink ring-4 ring-background transition-all duration-300 ease-[var(--ease-premium)] group-hover:scale-110",
+                      ACCENT_CLASSES[pillar.accent],
+                    )}
                   >
-                    {String(index + 1).padStart(2, "0")}
+                    <Icon
+                      className={cn("h-5 w-5", ICON_GLOW_CLASSES[pillar.accent])}
+                      strokeWidth={1.8}
+                      aria-hidden
+                    />
                   </span>
-                  <h3 className="font-display text-fluid-h3 uppercase tracking-wide text-offwhite">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-2 max-w-[40ch] text-fluid-sm leading-relaxed text-offwhite/60">
-                    {pillar.description}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
+
+                  {/* Conteúdo. */}
+                  <div className="flex flex-col">
+                    <span
+                      aria-hidden
+                      className="font-display text-fluid-sm text-offwhite/25 transition-colors duration-300 group-hover:text-violet/60 md:hidden"
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-display text-fluid-h3 uppercase tracking-wide text-offwhite">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-2 max-w-[40ch] text-fluid-sm leading-relaxed text-offwhite/60">
+                      {pillar.description}
+                    </p>
+                  </div>
+                </Reveal>
+              );
+            })}
           </ol>
         </div>
 
