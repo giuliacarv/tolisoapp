@@ -134,7 +134,7 @@ export const panelInsetMuted = "panel-inset-muted rounded-xl px-4 py-3";
 
 /** Diálogo em bottom-sheet no mobile e centrado a partir de `sm`. */
 export const sheetDialogContent =
-  "fixed inset-x-0 bottom-0 top-auto max-h-[90dvh] w-full max-w-none translate-x-0 translate-y-0 gap-4 overflow-y-auto overscroll-contain rounded-t-[20px] dialog-surface backdrop-blur-xl p-[var(--gutter)] sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[20px] sm:p-6 sm:shadow-float";
+  "fixed inset-x-0 bottom-0 top-auto max-h-[90dvh] w-full max-w-none translate-x-0 translate-y-0 gap-4 overflow-y-auto overscroll-contain rounded-t-[20px] border-border bg-card/95 backdrop-blur-xl dark:border-offwhite/20 dark:bg-card p-[var(--gutter)] sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:max-w-md sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-[20px] sm:p-6 sm:shadow-float";
 
 /** Mesma casca do diálogo, com largura maior (modais com mídia). */
 export const sheetDialogContentWide = cn(sheetDialogContent, "sm:max-w-lg");

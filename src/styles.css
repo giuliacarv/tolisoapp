@@ -342,10 +342,6 @@
   --panel-inset-muted-bg: var(--secondary);
   --panel-inset-border: var(--color-border);
 
-  /* Casca do diálogo: opacidade e borda ajustadas por tema. */
-  --dialog-bg: color-mix(in oklab, var(--card) 95%, transparent);
-  --dialog-border: var(--color-border);
-
   /* Escala 8pt: todo espaçamento deriva destes degraus. */
   --space-1: 0.5rem;
   --space-2: 1rem;
@@ -378,11 +374,6 @@
   --panel-inset-bg: color-mix(in oklab, var(--offwhite) 6%, var(--card));
   --panel-inset-muted-bg: color-mix(in oklab, var(--offwhite) 10%, var(--card));
   --panel-inset-border: color-mix(in oklab, var(--offwhite) 16%, transparent);
-
-  /* Sem transparência no escuro: o blur sobre o fundo de tinta reduzia o
-     contraste do texto dentro do modal. */
-  --dialog-bg: var(--card);
-  --dialog-border: color-mix(in oklab, var(--offwhite) 18%, transparent);
 }
 
 
@@ -417,12 +408,6 @@
 @utility panel-inset-muted {
   border: 1px solid var(--panel-inset-border);
   background-color: var(--panel-inset-muted-bg);
-}
-
-/** Casca de diálogo: superfície e borda calibradas por tema. */
-@utility dialog-surface {
-  background-color: var(--dialog-bg);
-  border-color: var(--dialog-border);
 }
 
 /** Superfície de vidro: transparência + blur + borda de 1px de baixa opacidade. */
