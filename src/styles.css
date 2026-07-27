@@ -127,6 +127,13 @@
   --accent-foreground: oklch(0.16 0.004 285);
   --destructive: oklch(0.65 0.15 22);
   --destructive-foreground: oklch(0.99 0 0);
+  /*
+   * Verde/âmbar/vermelho de estado precisam clarear no tema escuro: os valores
+   * claros (L ~0.5) ficariam abaixo de 3:1 sobre a superfície de tinta.
+   */
+  --saving: oklch(0.76 0.13 162);
+  --amber: oklch(0.82 0.1 80);
+  --discount: oklch(0.72 0.15 25);
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.75 0.075 82);
@@ -327,6 +334,14 @@
   --glass-border: color-mix(in oklab, var(--foreground) 10%, transparent);
   --glass-blur: 16px;
 
+  /*
+   * Blocos internos de modais/painéis. No claro, o inset é mais escuro que o
+   * cartão; no escuro precisa ser mais CLARO, senão vira um "buraco" ilegível.
+   */
+  --panel-inset-bg: var(--background);
+  --panel-inset-muted-bg: var(--secondary);
+  --panel-inset-border: var(--color-border);
+
   /* Escala 8pt: todo espaçamento deriva destes degraus. */
   --space-1: 0.5rem;
   --space-2: 1rem;
@@ -355,6 +370,10 @@
 
   --glass-bg: color-mix(in oklab, var(--card) 55%, transparent);
   --glass-border: color-mix(in oklab, oklch(1 0 0) 14%, transparent);
+
+  --panel-inset-bg: color-mix(in oklab, var(--offwhite) 6%, var(--card));
+  --panel-inset-muted-bg: color-mix(in oklab, var(--offwhite) 10%, var(--card));
+  --panel-inset-border: color-mix(in oklab, var(--offwhite) 16%, transparent);
 }
 
 
@@ -379,6 +398,18 @@
   }
 }
 
+/** Bloco interno de modal/painel (resumos financeiros, listas de definição). */
+@utility panel-inset {
+  border: 1px solid var(--panel-inset-border);
+  background-color: var(--panel-inset-bg);
+}
+
+/** Variante de destaque do bloco interno (custo, saldo, avisos). */
+@utility panel-inset-muted {
+  border: 1px solid var(--panel-inset-border);
+  background-color: var(--panel-inset-muted-bg);
+}
+
 /** Superfície de vidro: transparência + blur + borda de 1px de baixa opacidade. */
 @utility glass-surface {
   background-color: var(--glass-bg);
@@ -395,6 +426,12 @@
   background-color: var(--ink);
   background-image: var(--gradient-cta);
   color: var(--cta-foreground);
+
+  /* No escuro a ação primária é dourada: um halo curto reforça a hierarquia
+     sem "acender" a interface. */
+  .dark & {
+    box-shadow: 0 10px 30px -14px color-mix(in oklab, var(--gold) 60%, transparent);
+  }
 }
 
 /** Fundo com gradiente neutro — profundidade sem ruído visual. */
