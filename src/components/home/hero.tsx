@@ -175,6 +175,13 @@ export function HeroSection() {
               </h1>
             </Reveal>
 
+            <Reveal delay={120}>
+              <p className="inline-flex max-w-[52ch] items-center gap-2 text-pretty text-fluid-base font-medium leading-[1.6] text-offwhite/80">
+                <Sparkles className="h-4 w-4 shrink-0 text-gold" strokeWidth={2} aria-hidden />
+                Inteligência Artificial pra Economizar de Verdade!
+              </p>
+            </Reveal>
+
             <Reveal delay={160}>
               <p className="max-w-[52ch] text-pretty text-fluid-base leading-[1.75] text-offwhite/65">
                 Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
