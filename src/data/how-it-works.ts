@@ -25,23 +25,23 @@ export const HOW_IT_WORKS_STEPS: readonly HowItWorksStep[] = [
     icon: MessageSquareText,
     title: "Diga o que você quer comprar",
     description:
-      "Conte o produto, a faixa de preço e a loja de preferência. A busca inteligente entende sua intenção e filtra o que realmente importa.",
-    highlight: "Busca sem acento, com filtros rápidos por categoria e desconto.",
+      "Produto, faixa de preço, loja preferida. Escreva do seu jeito: a busca entende a intenção e joga fora o que não interessa.",
+    highlight: "Funciona com ou sem acento, com filtros rápidos por categoria e desconto.",
   },
   {
     id: "curadoria",
     icon: Sparkles,
-    title: "A IA faz a curadoria",
+    title: "A IA separa o desconto real do falso",
     description:
-      "Nossa inteligência cruza ofertas, cupons e histórico de preços das lojas parceiras para separar apenas o que representa economia real.",
-    highlight: "Ofertas e cupons revisados antes de aparecerem para você.",
+      "Enquanto você espera, a inteligência cruza ofertas, cupons e histórico de preços das lojas parceiras — e descarta a promoção que só existe na etiqueta.",
+    highlight: "Se o desconto não se sustenta, a oferta nem chega na sua tela.",
   },
   {
     id: "resgate",
     icon: Rocket,
-    title: "Resgate e economize",
+    title: "Resgate e leve o preço menor",
     description:
-      "Use seus créditos para liberar o desconto ou o cupom e finalize a compra direto na loja parceira, com o preço já reduzido.",
+      "Gaste créditos para liberar o desconto ou o cupom e finalize direto na loja, com o valor já reduzido no carrinho.",
     highlight: `${describeProductCreditRange()} por oferta e ${describeCouponCreditRule().cost} por cupom.`,
   },
 ] as const;
