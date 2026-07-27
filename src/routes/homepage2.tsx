@@ -42,7 +42,8 @@ export const Route = createFileRoute("/homepage2")({
  */
 function Homepage2() {
   return (
-    <div className="min-h-dvh bg-background">
+    <div className="theme-vivid min-h-dvh bg-background">
+
       <Header />
       <main>
         <HeroSection />
