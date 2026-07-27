@@ -79,6 +79,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
       aria-pressed={isActive}
       className={cn(
         cardInteractive,
+        "border-0 hover:border-0",
         "motion-safe-transform group relative isolate flex h-full w-full flex-col items-start overflow-hidden text-left",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         // Espaçamento interno em múltiplos de 8px: 24px / 32px / 40px.
@@ -86,7 +87,7 @@ function CategoryCard({ category, index, isActive, size, onSelect }: CategoryCar
         size === "wide" && "p-6 sm:p-8",
         isHero && "p-8 sm:p-10",
         dark &&
-          "border-0 bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift hover:border-0",
+          "bg-ink bg-[image:var(--gradient-ink)] text-offwhite shadow-lift",
       )}
     >
       {/* Halo dourado assimétrico + contraluz frio nas superfícies escuras. */}
