@@ -44,9 +44,16 @@ export function AutoCarousel<T>({
   itemClassName = "w-[clamp(15rem,78vw,19rem)]",
   className,
 }: AutoCarouselProps<T>) {
+  const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLUListElement>(null);
   const [durationSeconds, setDurationSeconds] = useState(40);
   const [paused, setPaused] = useState(false);
+  /**
+   * Controle manual: assim que o usuário usa uma seta, o marquee é desligado e
+   * a faixa vira uma lista rolável (scroll nativo com snap). Isso evita brigar
+   * com a animação de `transform`, que não é compatível com `scrollLeft`.
+   */
+  const [manual, setManual] = useState(false);
   const trackId = useId();
 
   const measure = useCallback(() => {
@@ -67,17 +74,43 @@ export function AutoCarousel<T>({
     return () => observer.disconnect();
   }, [measure, items.length]);
 
+  const step = useCallback((direction: -1 | 1) => {
+    setManual(true);
+    setPaused(true);
+    // Espera o próximo quadro: só depois de remover a animação o `scrollLeft`
+    // do contêiner passa a refletir a posição real da faixa.
+    requestAnimationFrame(() => {
+      const viewport = viewportRef.current;
+      if (!viewport) return;
+      const firstItem = trackRef.current?.firstElementChild as HTMLElement | null;
+      const gap = 20; // gap-5
+      const amount = firstItem ? firstItem.offsetWidth + gap : viewport.clientWidth * 0.8;
+      viewport.scrollBy({ left: amount * direction, behavior: "smooth" });
+    });
+  }, []);
+
+  const resumeAuto = useCallback(() => {
+    setManual(false);
+    setPaused(false);
+    viewportRef.current?.scrollTo({ left: 0 });
+  }, []);
+
   if (items.length === 0) return null;
+
+  const arrowClass =
+    "hidden size-11 shrink-0 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:inline-flex";
 
   return (
     <div className={cn("relative", className)}>
       <div
+        ref={viewportRef}
         role="group"
         aria-label={ariaLabel}
         className={cn(
           "group relative -mx-[var(--gutter)] overflow-x-hidden px-[var(--gutter)] py-2",
           // Sem movimento: vira uma lista rolável pelo próprio usuário.
           "motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto",
+          manual && "snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]",
           "sm:[mask-image:linear-gradient(to_right,transparent,black_3%,black_97%,transparent)]",
         )}
       >
@@ -85,7 +118,8 @@ export function AutoCarousel<T>({
           id={trackId}
           ref={trackRef}
           className={cn(
-            "marquee-track flex w-max flex-nowrap items-stretch gap-5",
+            "flex w-max flex-nowrap items-stretch gap-5",
+            !manual && "marquee-track",
             "group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]",
           )}
           style={{
@@ -109,7 +143,11 @@ export function AutoCarousel<T>({
               aria-hidden
               // `inert` evita foco por teclado nos controles duplicados.
               inert
-              className={cn("flex shrink-0 motion-reduce:hidden", itemClassName)}
+              className={cn(
+                "flex shrink-0 motion-reduce:hidden",
+                manual && "hidden",
+                itemClassName,
+              )}
             >
               {renderItem(item)}
             </li>
@@ -117,23 +155,49 @@ export function AutoCarousel<T>({
         </ul>
       </div>
 
-      <div className="mt-4 flex items-center gap-3">
+      <div className="mt-4 flex flex-wrap items-center gap-3">
         <button
           type="button"
-          onClick={() => setPaused((value) => !value)}
-          aria-pressed={paused}
+          onClick={() => (manual ? resumeAuto() : setPaused((value) => !value))}
+          aria-pressed={manual || paused}
           aria-controls={trackId}
           className="inline-flex min-h-11 items-center gap-2 rounded-full border border-border bg-card px-4 text-xs font-medium text-muted-foreground transition-colors duration-200 hover:border-gold/40 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:hidden"
         >
-          {paused ? (
+          {manual || paused ? (
             <Play className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden />
           ) : (
             <Pause className="h-3.5 w-3.5 shrink-0" strokeWidth={2} aria-hidden />
           )}
-          {paused ? "Retomar rolagem" : "Pausar rolagem"}
+          {manual || paused ? "Retomar rolagem" : "Pausar rolagem"}
         </button>
+
+        {/* Setas manuais: reforço de usabilidade no desktop (ocultas no mobile,
+            onde o gesto de arrastar já resolve). */}
+        <div className="hidden items-center gap-2 sm:flex">
+          <button
+            type="button"
+            onClick={() => step(-1)}
+            aria-controls={trackId}
+            aria-label={`${ariaLabel}: item anterior`}
+            className={arrowClass}
+          >
+            <ChevronLeft className="h-4 w-4" strokeWidth={2} aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => step(1)}
+            aria-controls={trackId}
+            aria-label={`${ariaLabel}: próximo item`}
+            className={arrowClass}
+          >
+            <ChevronRight className="h-4 w-4" strokeWidth={2} aria-hidden />
+          </button>
+        </div>
+
         <p className="text-xs text-muted-foreground">
-          Passe o mouse ou use o teclado para pausar e explorar.
+          {manual
+            ? "Navegação manual ativa — use as setas ou retome a rolagem automática."
+            : "Passe o mouse, use as setas ou o teclado para pausar e explorar."}
         </p>
       </div>
     </div>
