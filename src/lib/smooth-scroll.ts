@@ -42,7 +42,7 @@ export function scrollToId(target: string, extraOffset = 16): boolean {
 
   window.scrollTo({
     top: Math.max(top, 0),
-    behavior: prefersReducedMotion() ? "auto" : "smooth",
+    behavior: scrollBehavior(),
   });
 
   // Mantém a acessibilidade: o alvo recebe foco sem rolagem extra.
