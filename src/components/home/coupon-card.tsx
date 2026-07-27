@@ -50,8 +50,8 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
     <article
       aria-disabled={isExpired || undefined}
       className={cn(
-        "gilded-frame motion-safe-transform relative flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-soft transition-[transform,box-shadow,border-color] duration-300",
-        !isExpired && "hover:-translate-y-1 hover:shadow-float",
+        "gilded-frame motion-safe-transform relative flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-none transition-[transform,box-shadow,border-color] duration-300",
+        !isExpired && "hover:-translate-y-1 hover:shadow-none",
         isExpired && "border-dashed opacity-55 saturate-50",
       )}
     >
@@ -178,7 +178,7 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
             type="button"
             onClick={() => onRedeem(coupon)}
             aria-label={`Resgatar cupom ${coupon.title} da loja ${coupon.store} por ${COUPON_REDEMPTION_COST} créditos`}
-            className="touch-target inline-flex w-full items-center justify-center gap-2 rounded-xl cta-surface px-5 py-3 text-sm font-semibold shadow-soft transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="touch-target inline-flex w-full items-center justify-center gap-2 rounded-xl cta-surface px-5 py-3 text-sm font-semibold transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             <Ticket className="h-4 w-4 shrink-0 text-gold" strokeWidth={2} aria-hidden />
             Resgatar Cupom
@@ -193,7 +193,7 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
 /** Skeleton alinhado ao card real, para a futura carga assíncrona. */
 export function CouponCardSkeleton() {
   return (
-    <div className="flex h-full flex-col gap-4 rounded-[18px] border border-border bg-card p-6 shadow-soft">
+    <div className="flex h-full flex-col gap-4 rounded-[18px] border border-border bg-card p-6">
       <div className="h-5 w-40 animate-pulse rounded-full bg-secondary" />
       <div className="h-3 w-20 animate-pulse rounded bg-secondary" />
       <div className="h-6 w-28 animate-pulse rounded bg-secondary" />

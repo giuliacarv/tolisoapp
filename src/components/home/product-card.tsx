@@ -34,7 +34,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
       aria-disabled={isDisabled || undefined}
       className={cn(
         cardBase,
-        "motion-safe-transform group relative flex h-full flex-col overflow-hidden",
+        "motion-safe-transform group relative flex h-full flex-col overflow-hidden shadow-none hover:shadow-none",
         isDisabled
           ? "opacity-60 saturate-50"
           : "interactive-lift gilded-frame hover:border-gold/40",
@@ -144,7 +144,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
               "touch-target relative z-10 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold transition-[transform,box-shadow,background-color] duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               isDisabled
                 ? "cursor-not-allowed border border-border bg-secondary text-muted-foreground opacity-70"
-                : "cta-surface shadow-soft hover:-translate-y-0.5 hover:shadow-lift",
+                : "cta-surface hover:-translate-y-0.5",
             )}
 
           >
@@ -161,7 +161,7 @@ export function ProductCardSkeleton() {
   return (
     <div
       aria-hidden
-      className="flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card shadow-soft"
+      className="flex h-full flex-col overflow-hidden rounded-[18px] border border-border bg-card"
     >
       <div className="aspect-[4/3] w-full shrink-0 animate-pulse bg-secondary" />
       <div className="flex flex-1 flex-col gap-2 p-5">
