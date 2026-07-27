@@ -6,7 +6,7 @@ import { HeroSection } from "@/components/home/hero";
 import { LogoCarousel } from "@/components/home/logo-carousel";
 import { HowItWorks } from "@/components/home/how-it-works";
 import { SearchAndCategories } from "@/components/home/discovery-section";
-import { Footer } from "@/components/home/site-footer";
+import { InstitutionalFooter } from "@/components/home/institutional-footer";
 import { Header } from "@/components/home/site-header";
 import { TrustSection } from "@/components/home/trust-section";
 import { CouponSection } from "@/components/home/validated-coupons";
@@ -67,7 +67,7 @@ export function HomepageView() {
           <TrustSection />
         </Reveal>
       </main>
-      <Footer />
+      <InstitutionalFooter />
       <ThemeToggle
         theme={isDark ? "dark" : "light"}
         toggleTheme={() => setIsDark((prev) => !prev)}
