@@ -1,6 +1,8 @@
 import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 
+import { scrollBehavior } from "@/lib/motion";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 export interface AutoCarouselProps<T> {
@@ -55,6 +57,13 @@ export function AutoCarousel<T>({
    */
   const [manual, setManual] = useState(false);
   const trackId = useId();
+  /**
+   * O CSS já neutraliza o marquee, mas o componente também precisa saber:
+   * sem movimento, a faixa nasce em modo manual (lista rolável), a cópia
+   * clonada some e a rolagem por setas é instantânea.
+   */
+  const reduceMotion = useReducedMotion();
+  const manualScroll = manual || reduceMotion;
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -85,7 +94,7 @@ export function AutoCarousel<T>({
       const firstItem = trackRef.current?.firstElementChild as HTMLElement | null;
       const gap = 20; // gap-5
       const amount = firstItem ? firstItem.offsetWidth + gap : viewport.clientWidth * 0.8;
-      viewport.scrollBy({ left: amount * direction, behavior: "smooth" });
+      viewport.scrollBy({ left: amount * direction, behavior: scrollBehavior() });
     });
   }, []);
 
@@ -110,7 +119,7 @@ export function AutoCarousel<T>({
           "group relative -mx-[var(--gutter)] overflow-x-hidden px-[var(--gutter)] py-2",
           // Sem movimento: vira uma lista rolável pelo próprio usuário.
           "motion-reduce:snap-x motion-reduce:snap-mandatory motion-reduce:overflow-x-auto",
-          manual && "snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]",
+          manualScroll && "snap-x snap-mandatory overflow-x-auto [scrollbar-width:none]",
           "sm:[mask-image:linear-gradient(to_right,transparent,black_3%,black_97%,transparent)]",
         )}
       >
@@ -119,7 +128,7 @@ export function AutoCarousel<T>({
           ref={trackRef}
           className={cn(
             "flex w-max flex-nowrap items-stretch gap-5",
-            !manual && "marquee-track",
+            !manualScroll && "marquee-track",
             "group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]",
           )}
           style={{
@@ -145,7 +154,7 @@ export function AutoCarousel<T>({
               inert
               className={cn(
                 "flex shrink-0 motion-reduce:hidden",
-                manual && "hidden",
+                manualScroll && "hidden",
                 itemClassName,
               )}
             >

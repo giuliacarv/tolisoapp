@@ -296,7 +296,14 @@
 }
 
 
-/* Respeita usuários que preferem menos movimento. */
+/**
+ * Rede de segurança global para `prefers-reduced-motion`.
+ *
+ * Estratégia: em vez de remover as animações (o que quebraria componentes que
+ * dependem de `animationend`, como os overlays do Radix), reduzimos a duração
+ * a um valor imperceptível e zeramos atrasos. Efeitos puramente decorativos —
+ * deslocamentos, brilhos e pulsos infinitos — são desligados de fato.
+ */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -307,15 +314,31 @@
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
+    /* Sem animação não há camada a promover; evita custo de composição. */
+    will-change: auto !important;
   }
 
   /* Neutraliza deslocamentos/rotações decorativas. */
   .motion-safe-transform {
     transform: none !important;
   }
+
+  /* Esqueletos: mantêm a forma, mas param de pulsar. */
+  .animate-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Varredura de luz no hover: some por completo (é puro enfeite). */
+  .hover-sheen::after {
+    display: none !important;
+  }
 }
+
 
 /* Faixa do carrossel de logotipos: loop infinito baseado só em transform. */
 @keyframes marquee-scroll {

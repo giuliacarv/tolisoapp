@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -55,11 +56,6 @@ export const HERO_ORBS: OrbSpec[] = [
 /** Largura mínima (px) para habilitar o parallax; abaixo disso ele é estático. */
 const MIN_WIDTH_FOR_PARALLAX = 768;
 
-function prefersReducedMotion(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-
 /**
  * Orbes de luz com parallax suave em `transform: translate3d`.
  *
@@ -79,7 +75,9 @@ export function ParallaxOrbs({
   const frameRef = useRef<number | null>(null);
   const [visible, setVisible] = useState(false);
 
-  const reduceMotion = useMemo(prefersReducedMotion, []);
+  // Reativo: se o usuário ligar "reduzir movimento" com a aba aberta, o
+  // parallax é desmontado no mesmo instante (o efeito abaixo depende disso).
+  const reduceMotion = useReducedMotion();
 
   // Entrada em cascata assim que a seção entra na viewport.
   useEffect(() => {
@@ -108,7 +106,13 @@ export function ParallaxOrbs({
 
   // Parallax vertical durante o scroll.
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion) {
+      // Zera qualquer deslocamento remanescente antes de desistir do efeito.
+      orbRefs.current.forEach((el) => {
+        if (el) el.style.transform = "";
+      });
+      return;
+    }
 
     let active = window.innerWidth >= MIN_WIDTH_FOR_PARALLAX;
 
