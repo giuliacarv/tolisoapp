@@ -216,8 +216,8 @@ export function CategoryGrid({
       <SectionHeading
         align="center"
         eyebrow="Categorias"
-        title="Explore por categoria"
-        description="Encontre as melhores oportunidades de acordo com o que você procura."
+        title="Comece por onde dói no bolso"
+        description="Escolha uma categoria e veja na hora onde estão os maiores cortes de preço."
         className="mx-auto items-center text-center"
       />
 
