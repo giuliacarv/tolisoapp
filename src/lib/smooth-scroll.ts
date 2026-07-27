@@ -4,14 +4,13 @@
  * Motivo de existir: o header é sticky, então a rolagem precisa compensar a
  * altura dele (`--header-h`) para que os títulos não fiquem escondidos.
  * Também respeitamos `prefers-reduced-motion`, usando salto instantâneo
- * quando o usuário pede menos movimento.
+ * quando o usuário pede menos movimento (decisão vem de `@/lib/motion`).
  */
 
-/** Retorna true quando o usuário pediu redução de movimento no sistema. */
-export function prefersReducedMotion(): boolean {
-  if (typeof window === "undefined" || typeof window.matchMedia !== "function") return false;
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
+import { scrollBehavior } from "@/lib/motion";
+
+export { prefersReducedMotion } from "@/lib/motion";
+
 
 /** Altura atual do header sticky, lida do token CSS `--header-h`. */
 function headerOffset(): number {
