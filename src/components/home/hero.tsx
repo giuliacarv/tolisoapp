@@ -100,7 +100,7 @@ function HeroOfferCard({
             <span className="truncate text-fluid-micro font-semibold uppercase tracking-[0.18em] text-offwhite/55">
               {offer.store}
             </span>
-            <span className="petrol-badge shrink-0 rounded-md px-1.5 py-0.5 text-fluid-micro font-semibold">
+            <span className="petrol-badge shrink-0 text-petrol-bright rounded-md px-1.5 py-0.5 text-fluid-micro font-semibold">
               {offer.discount}
             </span>
           </div>

@@ -58,7 +58,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
 
         {/* Faixa superior: badges em linha para nunca se sobreporem. */}
         <div className="pointer-events-none absolute inset-x-3 top-3 flex items-start justify-between gap-2">
-          <span className="rounded-lg bg-ink/85 px-2.5 py-1 text-xs font-bold text-petrol backdrop-blur">
+          <span className="rounded-lg bg-ink/85 px-2.5 py-1 text-xs font-bold text-petrol-bright backdrop-blur">
             -{product.discountPercentage}%
           </span>
 
