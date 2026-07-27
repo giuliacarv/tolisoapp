@@ -1255,7 +1255,9 @@ summary:focus-visible,
 [role="switch"]:focus-visible,
 [role="menuitem"]:focus-visible,
 [role="option"]:focus-visible {
-  outline: 3px solid var(--focus-ring) !important;
+  outline-width: 3px !important;
+  outline-style: solid !important;
+  outline-color: var(--focus-ring, currentColor) !important;
   outline-offset: 2px !important;
   /* Halo interno: mantém 3:1 mesmo quando o elemento encosta em um fundo
      da mesma família de cor do anel. Só transform/opacity/box-shadow —
