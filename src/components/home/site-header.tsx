@@ -209,20 +209,21 @@ export function Header() {
                 <SheetTitle className="font-serif text-xl tracking-tight">Menu</SheetTitle>
               </SheetHeader>
 
-              <div className="mt-5">
-                <Link
-            to="/favoritos"
-            aria-label="Ver meus favoritos salvos neste dispositivo"
-            className={cn(
-              iconButton,
-              !scrolled && "border-offwhite/20 bg-offwhite/5 text-offwhite hover:bg-offwhite/10",
-            )}
-          >
-            <Heart className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-          </Link>
-
-          <CreditsBadge />
+              <div className="mt-5 flex items-center gap-2">
+                <CreditsBadge />
               </div>
+
+              <nav aria-label="Atalhos" className="mt-4">
+                <Link
+                  to="/favoritos"
+                  onClick={() => setOpen(false)}
+                  className="touch-target flex items-center gap-2 rounded-xl border border-border bg-card px-4 text-sm font-semibold text-foreground transition-colors duration-200 hover:bg-secondary"
+                >
+                  <Heart className="size-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
+                  Meus favoritos
+                </Link>
+              </nav>
+
 
               <nav aria-label="Navegação mobile" className="mt-6 flex flex-col">
                 {NAV_LINKS.map((link) => (
