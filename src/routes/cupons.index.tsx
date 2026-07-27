@@ -115,7 +115,7 @@ function CouponsPage() {
                           <SlidersHorizontal className="size-4" strokeWidth={1.75} aria-hidden />
                           Filtrar
                           {catalog.activeChips.length > 0 ? (
-                            <span className="grid size-5 place-items-center rounded-full bg-ink text-[11px] font-semibold text-offwhite">
+                            <span className="grid size-5 place-items-center rounded-full cta-surface text-[11px] font-semibold">
                               {catalog.activeChips.length}
                             </span>
                           ) : null}
@@ -134,7 +134,7 @@ function CouponsPage() {
                         <button
                           type="button"
                           onClick={() => setDrawerOpen(false)}
-                          className="mt-8 inline-flex min-h-11 items-center justify-center rounded-xl bg-ink px-6 text-sm font-semibold text-offwhite transition-opacity duration-200 hover:opacity-90"
+                          className="mt-8 inline-flex min-h-11 items-center justify-center rounded-xl cta-surface px-6 text-sm font-semibold transition-opacity duration-200 hover:opacity-90"
                         >
                           Ver {total} {total === 1 ? "resultado" : "resultados"}
                         </button>

@@ -79,7 +79,7 @@ function HelpCenterPage() {
       <Header />
 
       <main className="pt-[var(--header-h)]">
-        <section className="relative isolate overflow-hidden bg-ink bg-[image:var(--gradient-ink)] text-offwhite">
+        <section className="noir-band">
           <span
             aria-hidden
             className="halo-gradient pointer-events-none absolute inset-x-0 -top-1/2 -z-10 h-[160%] opacity-40"

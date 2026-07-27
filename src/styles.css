@@ -304,12 +304,23 @@
   );
   --gradient-ink: linear-gradient(to bottom right, oklch(0.2 0.004 285), oklch(0.13 0.004 285));
   --gradient-gold: linear-gradient(to bottom right, oklch(0.82 0.07 85), oklch(0.71 0.08 78));
+
+  /*
+   * Superfície das ações primárias.
+   * No tema claro o CTA é uma peça de tinta profunda sobre fundo off-white; no
+   * escuro essa mesma peça desapareceria no fundo, então a ação passa a ser
+   * dourada sobre tinta — mantendo o mesmo peso hierárquico nos dois temas.
+   */
+  --gradient-cta: var(--gradient-ink);
+  --cta-foreground: var(--offwhite);
+
   /* Halo dourado difuso usado atrás de seções de destaque. */
   --gradient-halo: radial-gradient(
     60% 60% at 50% 0%,
     color-mix(in oklab, var(--gold) 22%, transparent),
     transparent 70%
   );
+
 
   /* Vidro (Glassmorphism) — mesmos valores em todo o produto. */
   --glass-bg: color-mix(in oklab, var(--card) 62%, transparent);
@@ -331,9 +342,21 @@
     oklch(0.19 0.004 285),
     oklch(0.15 0.004 285)
   );
+
+  /*
+   * As faixas noir precisam continuar legíveis sobre um fundo já escuro:
+   * elevamos levemente a luminosidade para preservar a leitura de camadas.
+   */
+  --gradient-ink: linear-gradient(to bottom right, oklch(0.235 0.005 285), oklch(0.165 0.004 285));
+
+  /* Ação primária dourada — único elemento realmente luminoso da tela. */
+  --gradient-cta: var(--gradient-gold);
+  --cta-foreground: var(--ink);
+
   --glass-bg: color-mix(in oklab, var(--card) 55%, transparent);
   --glass-border: color-mix(in oklab, oklch(1 0 0) 14%, transparent);
 }
+
 
 @layer base {
   /* Hierarquia tipográfica: títulos densos e editoriais, corpo respirável. */
@@ -361,6 +384,17 @@
   background-color: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur)) saturate(150%);
   border: 1px solid var(--glass-border);
+}
+
+/**
+ * Superfície da ação primária (botões "Resgatar", "Entrar", chips ativos).
+ * Um único token controla os dois temas, garantindo o mesmo peso visual no
+ * claro (tinta sobre off-white) e no escuro (ouro sobre tinta).
+ */
+@utility cta-surface {
+  background-color: var(--ink);
+  background-image: var(--gradient-cta);
+  color: var(--cta-foreground);
 }
 
 /** Fundo com gradiente neutro — profundidade sem ruído visual. */
@@ -613,6 +647,10 @@
   background-color: var(--ink);
   background-image: var(--gradient-ink);
   color: var(--offwhite);
+
+  /* Dentro de uma faixa escura a ação primária é sempre dourada, em qualquer tema. */
+  --gradient-cta: var(--gradient-gold);
+  --cta-foreground: var(--ink);
 
   &::before {
     content: "";

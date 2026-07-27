@@ -154,7 +154,7 @@ function CreditsPage() {
 
 function CreditsHero() {
   return (
-    <section className="relative isolate overflow-hidden bg-ink bg-[image:var(--gradient-ink)] text-offwhite">
+    <section className="noir-band">
       <span
         aria-hidden
         className="halo-gradient pointer-events-none absolute inset-x-0 -top-1/2 -z-10 h-[160%] opacity-40"
@@ -365,7 +365,7 @@ function BuyCredits({ onOpen }: { onOpen: () => void }) {
   return (
     <section className="section-y" aria-labelledby="comprar-creditos">
       <Container>
-        <div className="relative isolate overflow-hidden rounded-3xl bg-ink bg-[image:var(--gradient-ink)] px-6 py-12 text-offwhite shadow-float sm:px-12 sm:py-16">
+        <div className="noir-band rounded-3xl px-6 py-12 text-offwhite shadow-float sm:px-12 sm:py-16">
           <span
             aria-hidden
             className="halo-gradient pointer-events-none absolute inset-x-0 -top-1/2 -z-10 h-[140%] opacity-40"
