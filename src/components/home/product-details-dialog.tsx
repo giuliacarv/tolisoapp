@@ -102,14 +102,14 @@ export function ProductDetailsModal({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 rounded-xl border border-border bg-background px-4 py-3">
+        <div className={cn(panelInset, "flex flex-wrap items-baseline gap-x-3 gap-y-1")}>
           <span className="text-sm text-muted-foreground line-through">
             {formatBRL(product.originalPrice)}
           </span>
           <span className="font-serif text-fluid-h3 text-foreground">
             {formatBRL(product.currentPrice)}
           </span>
-          <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground">
+          <span className={cn(chipMeta, "ml-auto")}>
             <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
             {formatCreditsLabel(product.creditsRequired)}
           </span>
@@ -120,7 +120,7 @@ export function ProductDetailsModal({
           to="/ofertas/$slug"
           params={{ slug: product.slug }}
           onClick={() => onOpenChange(false)}
-          className="inline-flex min-h-11 items-center gap-1.5 self-start rounded-lg text-fluid-xs font-semibold text-foreground underline-offset-4 transition-colors duration-200 hover:text-gold hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+          className={cn(linkGold, "self-start")}
         >
           Ver página da oferta
           <ArrowUpRight className="size-4 shrink-0" strokeWidth={1.75} aria-hidden />
