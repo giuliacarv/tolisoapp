@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
 import { Route as FavoritosRouteImport } from './routes/favoritos'
@@ -24,6 +25,11 @@ import { Route as CuponsIndexRouteImport } from './routes/cupons.index'
 import { Route as OfertasSlugRouteImport } from './routes/ofertas.$slug'
 import { Route as CuponsSlugRouteImport } from './routes/cupons.$slug'
 
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -106,6 +112,7 @@ export interface FileRoutesByFullPath {
   '/favoritos': typeof FavoritosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termos': typeof TermosRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons/': typeof CuponsIndexRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/favoritos': typeof FavoritosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termos': typeof TermosRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons': typeof CuponsIndexRoute
@@ -139,6 +147,7 @@ export interface FileRoutesById {
   '/favoritos': typeof FavoritosRoute
   '/recuperar-senha': typeof RecuperarSenhaRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/termos': typeof TermosRoute
   '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons/': typeof CuponsIndexRoute
@@ -157,6 +166,7 @@ export interface FileRouteTypes {
     | '/favoritos'
     | '/recuperar-senha'
     | '/sitemap.xml'
+    | '/termos'
     | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons/'
@@ -173,6 +183,7 @@ export interface FileRouteTypes {
     | '/favoritos'
     | '/recuperar-senha'
     | '/sitemap.xml'
+    | '/termos'
     | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons'
@@ -189,6 +200,7 @@ export interface FileRouteTypes {
     | '/favoritos'
     | '/recuperar-senha'
     | '/sitemap.xml'
+    | '/termos'
     | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons/'
@@ -206,6 +218,7 @@ export interface RootRouteChildren {
   FavoritosRoute: typeof FavoritosRoute
   RecuperarSenhaRoute: typeof RecuperarSenhaRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermosRoute: typeof TermosRoute
   CuponsSlugRoute: typeof CuponsSlugRoute
   OfertasSlugRoute: typeof OfertasSlugRoute
   CuponsIndexRoute: typeof CuponsIndexRoute
@@ -214,6 +227,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -326,6 +346,7 @@ const rootRouteChildren: RootRouteChildren = {
   FavoritosRoute: FavoritosRoute,
   RecuperarSenhaRoute: RecuperarSenhaRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermosRoute: TermosRoute,
   CuponsSlugRoute: CuponsSlugRoute,
   OfertasSlugRoute: OfertasSlugRoute,
   CuponsIndexRoute: CuponsIndexRoute,
