@@ -1,4 +1,4 @@
-import type { Product } from "@/data/products";
+import type { Product } from "@/types";
 
 export interface ProductFilterCriteria {
   /** Termo de busca livre (pode vir com acentos, maiúsculas e espaços extras). */
