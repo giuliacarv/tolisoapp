@@ -130,12 +130,25 @@ export function HeroSection() {
   return (
     <section
       id="topo"
-      className="noir-band relative overflow-x-clip scroll-mt-[var(--header-h)] pt-[var(--header-h)]"
+      className="noir-band relative flex min-h-[min(100svh,52rem)] items-center overflow-x-clip scroll-mt-[var(--header-h)] pt-[var(--header-h)]"
     >
       {/* Grão fino sobre a faixa escura. Puramente decorativo. */}
       <div
         aria-hidden
         className="texture-grain pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-screen"
+      />
+
+      {/*
+       * Iluminação de vitrine: um feixe quente no alto à direita e um
+       * contraluz frio à esquerda. Assimétricos de propósito.
+       */}
+      <div
+        aria-hidden
+        className="glow-orb absolute -right-24 -top-32 -z-10 h-72 w-72 sm:h-96 sm:w-96"
+      />
+      <div
+        aria-hidden
+        className="glow-orb-cool absolute -left-32 top-1/3 -z-10 h-64 w-64 sm:h-80 sm:w-80"
       />
 
       <Container className="relative section-y">
@@ -147,6 +160,13 @@ export function HeroSection() {
                 <span className="min-w-0">Você começa com 5 créditos grátis.</span>
               </span>
             </Reveal>
+
+            <Reveal delay={40}>
+              <span className="block text-fluid-micro font-semibold uppercase tracking-[0.28em] text-gold">
+                Curadoria premium
+              </span>
+            </Reveal>
+
 
             <Reveal delay={80}>
               <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.04] tracking-[-0.03em] text-offwhite">
