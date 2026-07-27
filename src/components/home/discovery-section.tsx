@@ -193,24 +193,43 @@ export function SearchAndCategories() {
             </div>
           ) : (
           <div className="mt-6">
-            <ProductGrid
-              products={discovery.pageProducts}
-              onRedeem={modals.openRedeem}
-              onSelect={modals.openDetails}
-              isLoading={discovery.isLoading}
-              skeletonCount={DEFAULT_PAGE_SIZE}
-              emptyState={
-                <EmptyResults
-                  query={discovery.query}
-                  filterLabel={discovery.categoryLabel}
-                  onReset={discovery.reset}
-                  suggestions={SEARCH_SUGGESTIONS}
-                  onSuggestionSelect={handleSuggestion}
-                />
-              }
-            />
+            {discovery.isLoading || discovery.results.length === 0 ? (
+              <ProductGrid
+                products={[]}
+                onRedeem={modals.openRedeem}
+                onSelect={modals.openDetails}
+                isLoading={discovery.isLoading}
+                skeletonCount={DEFAULT_PAGE_SIZE}
+                emptyState={
+                  <EmptyResults
+                    query={discovery.query}
+                    filterLabel={discovery.categoryLabel}
+                    onReset={discovery.reset}
+                    suggestions={SEARCH_SUGGESTIONS}
+                    onSuggestionSelect={handleSuggestion}
+                  />
+                }
+              />
+            ) : (
+              <AutoCarousel
+                items={discovery.results}
+                getKey={(product) => product.id}
+                ariaLabel="Carrossel de ofertas em destaque"
+                speed={45}
+                renderItem={(product) => (
+                  <div className="w-full">
+                    <ProductCard
+                      product={product}
+                      onRedeem={modals.openRedeem}
+                      onSelect={modals.openDetails}
+                    />
+                  </div>
+                )}
+              />
+            )}
           </div>
           )}
+
 
           {!discovery.isLoading && !productsResource.error && (
             <Pagination
