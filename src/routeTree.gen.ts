@@ -30,9 +30,9 @@ const OfertasIndexRoute = OfertasIndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const OfertasSlugRoute = OfertasSlugRouteImport.update({
-  id: '/ofertas/$slug',
-  path: '/ofertas/$slug',
-  getParentRoute: () => rootRouteImport,
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => OfertasRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -65,7 +65,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  OfertasSlugRoute: typeof OfertasSlugRoute
   OfertasIndexRoute: typeof OfertasIndexRoute
 }
 
@@ -94,10 +93,10 @@ declare module '@tanstack/react-router' {
     }
     '/ofertas/$slug': {
       id: '/ofertas/$slug'
-      path: '/ofertas/$slug'
+      path: '/$slug'
       fullPath: '/ofertas/$slug'
       preLoaderRoute: typeof OfertasSlugRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof OfertasRoute
     }
   }
 }
@@ -105,9 +104,18 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  OfertasSlugRoute: OfertasSlugRoute,
   OfertasIndexRoute: OfertasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
