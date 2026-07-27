@@ -5,12 +5,13 @@ import { useAsyncResource } from "@/hooks/use-async-resource";
 import { couponService } from "@/services";
 import type { Coupon } from "@/types";
 
+import { AutoCarousel } from "./auto-carousel";
 import { CouponCard, CouponCardSkeleton, CouponDisclaimer } from "./coupon-card";
 import { RedeemCouponModal } from "./coupon-redeem-dialog";
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 
 import { Container, SectionHeading } from "./primitives";
-import { Reveal } from "./reveal";
+
 
 
 /**
@@ -72,13 +73,20 @@ export function CouponSection() {
             Nenhum cupom disponível no momento.
           </p>
         ) : (
-          <ul className="mt-12 grid-fluid [--col-min:18rem]">
-            {(coupons.data ?? []).map((coupon, index) => (
-              <Reveal as="li" key={coupon.id} delay={Math.min(index, 5) * 70} className="min-w-0">
-                <CouponCard coupon={coupon} onRedeem={handleRedeem} />
-              </Reveal>
-            ))}
-          </ul>
+          <div className="mt-12">
+            <AutoCarousel
+              items={coupons.data ?? []}
+              getKey={(coupon) => coupon.id}
+              ariaLabel="Carrossel de cupons validados"
+              speed={40}
+              renderItem={(coupon) => (
+                <div className="w-full">
+                  <CouponCard coupon={coupon} onRedeem={handleRedeem} />
+                </div>
+              )}
+            />
+          </div>
+
 
         )}
 

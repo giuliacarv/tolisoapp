@@ -8,14 +8,16 @@ import { useProductModals } from "@/hooks/use-product-modals";
 import { scrollToId } from "@/lib/smooth-scroll";
 import { categoryService, productService } from "@/services";
 
+import { AutoCarousel } from "./auto-carousel";
 import { CategoryGrid } from "./category-grid";
 import { DiscoveryPanel } from "./discovery/discovery-panel";
 import { ResultsHeader } from "./discovery/results-header";
 import { EmptyResults } from "./empty-results";
 import { Container, SectionHeading, chipIdle } from "./primitives";
+import { ProductCard } from "./product-card";
 import { ProductGrid } from "./product-grid";
 import { ProductModals } from "./product-modals";
-import { Pagination } from "./results-controls";
+
 
 /** Sugestões demonstrativas exibidas no estado vazio. */
 const SEARCH_SUGGESTIONS = ["Fone", "Smartwatch", "Skincare", "Teclado"];
@@ -63,11 +65,6 @@ export function SearchAndCategories() {
 
   function scrollToOffers() {
     scrollToId("#ofertas");
-  }
-
-  function handlePageChange(next: number) {
-    discovery.goToPage(next);
-    scrollToOffers();
   }
 
   function handleSuggestion(suggestion: string) {
@@ -149,8 +146,9 @@ export function SearchAndCategories() {
               label={discovery.hasActiveCriteria ? "Resultados da busca" : "Todas as ofertas"}
               isLoading={discovery.isLoading}
               total={discovery.results.length}
-              page={discovery.page}
-              totalPages={discovery.totalPages}
+              page={1}
+              totalPages={1}
+
               sort={discovery.sort}
               onSortChange={discovery.changeSort}
               canReset={discovery.hasActiveCriteria}
@@ -193,32 +191,44 @@ export function SearchAndCategories() {
             </div>
           ) : (
           <div className="mt-6">
-            <ProductGrid
-              products={discovery.pageProducts}
-              onRedeem={modals.openRedeem}
-              onSelect={modals.openDetails}
-              isLoading={discovery.isLoading}
-              skeletonCount={DEFAULT_PAGE_SIZE}
-              emptyState={
-                <EmptyResults
-                  query={discovery.query}
-                  filterLabel={discovery.categoryLabel}
-                  onReset={discovery.reset}
-                  suggestions={SEARCH_SUGGESTIONS}
-                  onSuggestionSelect={handleSuggestion}
-                />
-              }
-            />
+            {discovery.isLoading || discovery.results.length === 0 ? (
+              <ProductGrid
+                products={[]}
+                onRedeem={modals.openRedeem}
+                onSelect={modals.openDetails}
+                isLoading={discovery.isLoading}
+                skeletonCount={DEFAULT_PAGE_SIZE}
+                emptyState={
+                  <EmptyResults
+                    query={discovery.query}
+                    filterLabel={discovery.categoryLabel}
+                    onReset={discovery.reset}
+                    suggestions={SEARCH_SUGGESTIONS}
+                    onSuggestionSelect={handleSuggestion}
+                  />
+                }
+              />
+            ) : (
+              <AutoCarousel
+                items={discovery.results}
+                getKey={(product) => product.id}
+                ariaLabel="Carrossel de ofertas em destaque"
+                speed={45}
+                renderItem={(product) => (
+                  <div className="w-full">
+                    <ProductCard
+                      product={product}
+                      onRedeem={modals.openRedeem}
+                      onSelect={modals.openDetails}
+                    />
+                  </div>
+                )}
+              />
+            )}
           </div>
           )}
 
-          {!discovery.isLoading && !productsResource.error && (
-            <Pagination
-              page={discovery.page}
-              totalPages={discovery.totalPages}
-              onPageChange={handlePageChange}
-            />
-          )}
+
 
           <p className="mt-8 inline-flex items-start gap-2 text-xs text-muted-foreground">
             <ShieldCheck
