@@ -17,31 +17,31 @@ interface Pillar {
 const PILLARS: Pillar[] = [
   {
     icon: Store,
-    title: "Lojas reconhecidas",
-    description: "Ofertas provenientes de marketplaces e varejistas conhecidos.",
+    title: "Só lojas que você já conhece",
+    description: "Nada de site duvidoso: as ofertas vêm de marketplaces e varejistas reconhecidos.",
     wide: true,
   },
   {
     icon: BadgeCheck,
-    title: "Cupons revisados",
-    description: "Cupons com status de validação, data de verificação e regras disponíveis.",
+    title: "Cupom com data e prova",
+    description: "Cada código mostra status de validação, quando foi conferido e as regras de uso.",
   },
   {
     icon: ShieldCheck,
-    title: "Redirecionamento seguro",
-    description: "Você confere e finaliza a compra diretamente na plataforma responsável.",
+    title: "A compra é sua, na loja",
+    description: "Você confere tudo e finaliza no ambiente da própria loja responsável.",
   },
   {
     icon: Coins,
-    title: "Economia transparente",
-    description: "Antes de resgatar, você sempre verá a quantidade de créditos necessária.",
+    title: "O preço em créditos aparece antes",
+    description: "Você sempre sabe quanto custa antes de resgatar. Nenhum débito surpresa.",
     wide: true,
   },
 ];
 
 /** Indicadores demonstrativos exibidos abaixo dos pilares de confiança. */
 const ASSURANCES: { value: string; label: string }[] = [
-  { value: "100%", label: "Custos em créditos exibidos antes do resgate" },
+  { value: "100%", label: "Do custo em créditos exibido antes do resgate" },
   { value: "0", label: "Rastreadores carregados sem o seu consentimento" },
   { value: "24h", label: "Janela de revisão dos cupons demonstrativos" },
 ];
@@ -65,7 +65,7 @@ export function TrustSection() {
       <Container className="relative">
         <SectionHeading
           eyebrow="Confiança"
-          title="Transparência em cada oferta"
+          title="Nenhuma surpresa entre o clique e o carrinho"
           align="center"
           className="mx-auto items-center text-center [&_h2]:text-offwhite [&_p]:text-offwhite/65 [&_span]:text-offwhite/60"
         />

@@ -14,10 +14,10 @@ import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
 
 /** Sinais de confiança exibidos abaixo dos CTAs. */
 const TRUST_SIGNALS = [
-  { label: "Ofertas selecionadas", icon: BadgeCheck },
-  { label: "Cupons verificados", icon: TicketCheck },
-  { label: "Lojas reconhecidas", icon: Store },
-  { label: "Links seguros", icon: ShieldCheck },
+  { label: "Curadoria feita por IA", icon: BadgeCheck },
+  { label: "Cupom só entra depois de testado", icon: TicketCheck },
+  { label: "Só lojas que você já conhece", icon: Store },
+  { label: "Você compra direto na loja", icon: ShieldCheck },
 ];
 
 interface HeroOffer {
@@ -137,7 +137,7 @@ function HeroOfferCard({
           {offer.credits} {offer.credits === 1 ? "crédito" : "créditos"}
         </span>
         <span className="text-fluid-micro font-medium uppercase tracking-[0.16em] text-offwhite/40">
-          Desbloquear
+          Liberar oferta
         </span>
       </div>
     </article>
@@ -171,21 +171,21 @@ export function HeroSection() {
             <Reveal>
               <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-gold/35 bg-offwhite/5 px-3.5 py-1.5 text-xs font-medium text-offwhite/85 backdrop-blur-sm">
                 <Sparkles className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={2} aria-hidden />
-                <span className="min-w-0">Você começa com 5 créditos grátis.</span>
+                <span className="min-w-0">5 créditos grátis. Sem cartão, sem assinatura.</span>
               </span>
             </Reveal>
 
             <Reveal delay={40}>
               <span className="block text-fluid-micro font-semibold uppercase tracking-[0.28em] text-gold">
-                Curadoria premium
+                Curadoria com inteligência artificial
               </span>
             </Reveal>
 
 
             <Reveal delay={80}>
               <h1 className="max-w-[18ch] text-balance font-serif text-fluid-h1 leading-[1.04] tracking-[-0.03em] text-offwhite">
-                Ofertas selecionadas para{" "}
-                <span className="gold-text">economizar de verdade</span>.
+                Chega de pagar caro por{" "}
+                <span className="gold-text">falta de informação</span>.
               </h1>
             </Reveal>
 
@@ -198,8 +198,8 @@ export function HeroSection() {
 
             <Reveal delay={160}>
               <p className="max-w-[52ch] text-pretty text-fluid-base leading-[1.75] text-offwhite/65">
-                Encontre produtos relevantes, resgate cupons validados e compre com segurança nas
-                maiores lojas do Brasil.
+                Nossa IA compara preços e cupons das maiores lojas do Brasil e descarta o desconto
+                falso. Você vê só o que sobrou: a oferta que realmente vale o clique.
               </p>
             </Reveal>
 
@@ -210,7 +210,7 @@ export function HeroSection() {
                   onClick={(event) => handleAnchorClick(event, "#ofertas")}
                   className="group touch-target inline-flex items-center justify-center gap-2 rounded-xl bg-[image:var(--gradient-gold)] px-6 py-3.5 text-sm font-semibold text-ink shadow-soft transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
-                  Explorar ofertas
+                  Ver as ofertas de hoje
                   <ArrowRight
                     className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
                     strokeWidth={2}
@@ -222,7 +222,7 @@ export function HeroSection() {
                   onClick={(event) => handleAnchorClick(event, "#cupons")}
                   className="touch-target inline-flex items-center justify-center gap-2 rounded-xl border border-offwhite/25 px-6 py-3.5 text-sm font-semibold text-offwhite transition-colors duration-200 hover:border-gold/50 hover:bg-offwhite/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
                 >
-                  Ver cupons
+                  Pegar um cupom
                 </a>
               </div>
             </Reveal>

@@ -38,8 +38,8 @@ export function CouponSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
             eyebrow="Cupons"
-            title="Cupons validados"
-            description="Exemplos demonstrativos de cupons das principais lojas, com status de verificação e custo fixo de 3 créditos por resgate."
+            title="Cupom testado antes de chegar até você"
+            description="Nada de código expirado no meio do carrinho: cada cupom mostra status de verificação e custa 3 créditos para liberar."
           />
           <a
             href="#cupons"

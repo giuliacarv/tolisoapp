@@ -85,8 +85,8 @@ export function HowItWorks() {
           <SectionHeading
             align="center"
             eyebrow="Como funciona"
-            title={<span id="como-funciona-title">Economizar em três passos simples</span>}
-            description="Descubra a oferta certa, deixe a inteligência artificial validar a economia e finalize a compra direto na loja parceira."
+            title={<span id="como-funciona-title">Três passos entre você e o preço justo</span>}
+            description="Você diz o que procura, a inteligência artificial confere se o desconto é real e você finaliza a compra direto na loja parceira."
             className="mx-auto items-center text-center"
           />
         </Reveal>
