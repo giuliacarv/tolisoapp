@@ -234,13 +234,6 @@ export function SearchAndCategories() {
           )}
 
 
-          {!discovery.isLoading && !productsResource.error && (
-            <Pagination
-              page={discovery.page}
-              totalPages={discovery.totalPages}
-              onPageChange={handlePageChange}
-            />
-          )}
 
           <p className="mt-8 inline-flex items-start gap-2 text-xs text-muted-foreground">
             <ShieldCheck
