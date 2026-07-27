@@ -24,7 +24,7 @@ function LogoSlide({ logo, ariaHidden }: { logo: PartnerLogo; ariaHidden?: boole
       width={240}
       height={64}
       draggable={false}
-      className="h-7 w-auto max-w-full object-contain opacity-70 grayscale transition-[filter,opacity] duration-200 group-hover/slide:opacity-100 group-hover/slide:grayscale-0 group-focus-visible/slide:opacity-100 group-focus-visible/slide:grayscale-0 sm:h-9"
+      className="h-7 w-auto max-w-full object-contain opacity-70 grayscale transition-[filter,opacity] duration-200 group-hover/slide:opacity-100 group-hover/slide:grayscale-0 group-focus-visible/slide:opacity-100 group-focus-visible/slide:grayscale-0 sm:h-9 dark:opacity-60 dark:invert dark:group-hover/slide:opacity-95"
     />
   );
 
