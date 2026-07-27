@@ -24,6 +24,10 @@ export interface CouponQuery {
 export interface CouponService {
   list(query?: CouponQuery): Promise<Coupon[]>;
   getById(id: string): Promise<Coupon>;
+  /** Busca pelo slug da rota /cupons/:slug. Retorna null quando não existe. */
+  findBySlug(slug: string): Promise<Coupon | null>;
+  /** Outros cupons da mesma loja, excluindo o cupom atual. */
+  listByStore(couponId: string, limit?: number): Promise<Coupon[]>;
   /** Prévia informativa de resgate — não debita créditos nem revela o código. */
   previewRedemption(couponId: string): Promise<RedemptionPreview>;
 }
@@ -48,6 +52,24 @@ export const couponService: CouponService = {
     if (!coupon) throw new NotFoundError("Cupom", id);
 
     return resolveMock(coupon);
+  },
+
+  async findBySlug(slug) {
+    if (!slug.trim()) throw new ValidationError("Slug de cupom obrigatório.");
+
+    const coupon = MOCK_COUPONS.find((candidate) => candidate.slug === slug) ?? null;
+    return resolveMock(coupon);
+  },
+
+  async listByStore(couponId, limit = 3) {
+    const current = MOCK_COUPONS.find((candidate) => candidate.id === couponId);
+    if (!current) return resolveMock<Coupon[]>([]);
+
+    const siblings = MOCK_COUPONS.filter(
+      (candidate) => candidate.id !== current.id && candidate.storeId === current.storeId,
+    ).slice(0, limit);
+
+    return resolveMock(siblings);
   },
 
   async previewRedemption(couponId) {

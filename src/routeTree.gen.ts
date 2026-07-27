@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
 import { Route as CuponsIndexRouteImport } from './routes/cupons.index'
 import { Route as OfertasSlugRouteImport } from './routes/ofertas.$slug'
+import { Route as CuponsSlugRouteImport } from './routes/cupons.$slug'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -40,10 +41,16 @@ const OfertasSlugRoute = OfertasSlugRouteImport.update({
   path: '/ofertas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CuponsSlugRoute = CuponsSlugRouteImport.update({
+  id: '/cupons/$slug',
+  path: '/cupons/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons/': typeof CuponsIndexRoute
   '/ofertas/': typeof OfertasIndexRoute
@@ -51,6 +58,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons': typeof CuponsIndexRoute
   '/ofertas': typeof OfertasIndexRoute
@@ -59,19 +67,33 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/cupons/$slug': typeof CuponsSlugRoute
   '/ofertas/$slug': typeof OfertasSlugRoute
   '/cupons/': typeof CuponsIndexRoute
   '/ofertas/': typeof OfertasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sitemap.xml' | '/ofertas/$slug' | '/cupons/' | '/ofertas/'
+  fullPaths:
+    | '/'
+    | '/sitemap.xml'
+    | '/cupons/$slug'
+    | '/ofertas/$slug'
+    | '/cupons/'
+    | '/ofertas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sitemap.xml' | '/ofertas/$slug' | '/cupons' | '/ofertas'
+  to:
+    | '/'
+    | '/sitemap.xml'
+    | '/cupons/$slug'
+    | '/ofertas/$slug'
+    | '/cupons'
+    | '/ofertas'
   id:
     | '__root__'
     | '/'
     | '/sitemap.xml'
+    | '/cupons/$slug'
     | '/ofertas/$slug'
     | '/cupons/'
     | '/ofertas/'
@@ -80,6 +102,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  CuponsSlugRoute: typeof CuponsSlugRoute
   OfertasSlugRoute: typeof OfertasSlugRoute
   CuponsIndexRoute: typeof CuponsIndexRoute
   OfertasIndexRoute: typeof OfertasIndexRoute
@@ -122,12 +145,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OfertasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cupons/$slug': {
+      id: '/cupons/$slug'
+      path: '/cupons/$slug'
+      fullPath: '/cupons/$slug'
+      preLoaderRoute: typeof CuponsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  CuponsSlugRoute: CuponsSlugRoute,
   OfertasSlugRoute: OfertasSlugRoute,
   CuponsIndexRoute: CuponsIndexRoute,
   OfertasIndexRoute: OfertasIndexRoute,

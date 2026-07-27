@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { BadgeCheck, CalendarClock, CalendarX2, Clock3, Coins, ShieldAlert, Ticket } from "lucide-react";
 
 import {
@@ -105,7 +106,13 @@ export function CouponCard({ coupon, onRedeem }: CouponCardProps) {
       <div className="flex flex-1 flex-col gap-4 px-6 pb-6 pt-6 sm:px-7">
         <div className="min-h-[3.5rem] space-y-1">
           <h3 className="text-fluid-sm font-semibold leading-snug text-foreground">
-            {coupon.title}
+            <Link
+              to="/cupons/$slug"
+              params={{ slug: coupon.slug }}
+              className="rounded-sm transition-colors duration-200 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+            >
+              {coupon.title}
+            </Link>
           </h3>
           <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
             {coupon.description}

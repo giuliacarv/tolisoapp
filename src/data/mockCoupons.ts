@@ -22,6 +22,7 @@ type CouponSeed = Omit<Coupon, "creditsRequired">;
 const COUPON_SEEDS: CouponSeed[] = [
   {
     id: "cpn_001",
+    slug: "amazon-10-off-itens-selecionados",
     store: "Amazon",
     storeId: "str_amazon",
     title: "10% de desconto em itens selecionados",
@@ -35,9 +36,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: "2026-07-25T09:12:00-03:00",
     terms: "Não cumulativo com outras promoções. Limite de um uso por conta.",
     affiliateUrl: "#placeholder-afiliado/cpn_001",
+    eligibleItems: ["Eletrônicos", "Casa e decoração", "Informática"],
   },
   {
     id: "cpn_002",
+    slug: "shopee-20-reais-acima-150",
     store: "Shopee",
     storeId: "str_shopee",
     title: "R$ 20 de desconto em compras acima de R$ 150",
@@ -51,9 +54,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: "2026-07-26T08:40:00-03:00",
     terms: "Quantidade limitada de resgates por dia definida pela loja.",
     affiliateUrl: "#placeholder-afiliado/cpn_002",
+    eligibleItems: ["Moda", "Acessórios", "Beleza e cuidados"],
   },
   {
     id: "cpn_003",
+    slug: "mercado-livre-frete-gratis",
     store: "Mercado Livre",
     storeId: "str_mercado_livre",
     title: "Frete grátis em produtos participantes",
@@ -67,9 +72,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: "2026-07-24T18:05:00-03:00",
     terms: "Disponível apenas para regiões atendidas pelo envio participante.",
     affiliateUrl: "#placeholder-afiliado/cpn_003",
+    eligibleItems: ["Produtos com selo de envio participante"],
   },
   {
     id: "cpn_004",
+    slug: "magalu-15-off-primeira-compra",
     store: "Magalu",
     storeId: "str_magalu",
     title: "15% OFF na primeira compra",
@@ -83,9 +90,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: null,
     terms: "Condições definidas pela loja podem mudar sem aviso prévio.",
     affiliateUrl: "#placeholder-afiliado/cpn_004",
+    eligibleItems: ["Casa e decoração", "Eletrodomésticos selecionados"],
   },
   {
     id: "cpn_005",
+    slug: "tiktok-shop-15-reais-beleza",
     store: "TikTok Shop",
     storeId: "str_tiktok_shop",
     title: "R$ 15 de desconto em beleza e cuidados",
@@ -99,9 +108,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: null,
     terms: "Sujeito à disponibilidade de estoque durante o período promocional.",
     affiliateUrl: "#placeholder-afiliado/cpn_005",
+    eligibleItems: ["Beleza e cuidados"],
   },
   {
     id: "cpn_006",
+    slug: "ponto-12-off-eletrodomesticos",
     store: "Ponto",
     storeId: "str_ponto",
     title: "12% de desconto em eletrodomésticos",
@@ -115,9 +126,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: "2026-07-11T10:00:00-03:00",
     terms: "Promoção encerrada. Mantida apenas para demonstração da interface.",
     affiliateUrl: "#placeholder-afiliado/cpn_006",
+    eligibleItems: ["Eletrodomésticos", "Casa e decoração"],
   },
   {
     id: "cpn_007",
+    slug: "amazon-brinde-exclusivo",
     store: "Amazon",
     storeId: "str_amazon",
     title: "Brinde exclusivo em marcas participantes",
@@ -131,9 +144,11 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: "2026-07-26T11:30:00-03:00",
     terms: "Brinde sujeito à disponibilidade informada pela loja parceira.",
     affiliateUrl: "#placeholder-afiliado/cpn_007",
+    eligibleItems: ["Marcas participantes da campanha"],
   },
   {
     id: "cpn_008",
+    slug: "shopee-frete-gratis-sem-minimo",
     store: "Shopee",
     storeId: "str_shopee",
     title: "Frete grátis sem valor mínimo em itens selecionados",
@@ -147,6 +162,7 @@ const COUPON_SEEDS: CouponSeed[] = [
     checkedAt: null,
     terms: "Regras de envio definidas pela loja e pela região de entrega.",
     affiliateUrl: "#placeholder-afiliado/cpn_008",
+    eligibleItems: ["Itens com selo de frete promocional"],
   },
 ];
 

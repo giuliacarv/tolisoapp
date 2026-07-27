@@ -101,6 +101,8 @@ export type CouponStatus = "validated" | "pending" | "expired";
 /** Cupom promocional. Futura tabela `coupons`. */
 export interface Coupon {
   id: string;
+  /** Identificador legível usado na rota /cupons/:slug. */
+  slug: string;
   store: string;
   storeId: string;
   title: string;
@@ -121,4 +123,6 @@ export interface Coupon {
   /** Placeholder seguro — nenhum link real de afiliado nesta etapa. */
   affiliateUrl: string;
   creditsRequired: number;
+  /** Produtos ou categorias elegíveis informados pela loja. */
+  eligibleItems?: string[];
 }
