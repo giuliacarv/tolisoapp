@@ -15,7 +15,16 @@ export interface LogoCarouselProps {
   className?: string;
 }
 
-/** Slide individual: imagem uniforme, centralizada e dessaturada por padrão. */
+/**
+ * Slide individual: imagem uniforme, centralizada e dessaturada por padrão.
+ *
+ * Sobre a inversão: os logotipos são PNGs escuros, então precisam de `invert`
+ * para ficarem legíveis sobre fundo escuro. Não usamos a variante `dark:` aqui
+ * porque a home controla o tema localmente (classe no wrapper) enquanto o
+ * `<html>` pode continuar com `.dark` — nesse caso os logos ficavam brancos
+ * (invisíveis) no tema claro. Por isso a inversão é ancorada em `.theme-night`
+ * e explicitamente desligada em `.theme-day`.
+ */
 function LogoSlide({ logo, ariaHidden }: { logo: Store; ariaHidden?: boolean }) {
   const image = (
     <img
@@ -26,9 +35,10 @@ function LogoSlide({ logo, ariaHidden }: { logo: Store; ariaHidden?: boolean }) 
       width={240}
       height={64}
       draggable={false}
-      className="h-7 w-auto max-w-full object-contain opacity-70 grayscale transition-[filter,opacity] duration-200 group-hover/slide:opacity-100 group-hover/slide:grayscale-0 group-focus-visible/slide:opacity-100 group-focus-visible/slide:grayscale-0 sm:h-9 dark:opacity-60 dark:invert dark:group-hover/slide:opacity-95"
+      className="h-7 w-auto max-w-full object-contain opacity-70 grayscale transition-[filter,opacity] duration-200 group-hover/slide:opacity-100 group-hover/slide:grayscale-0 group-focus-visible/slide:opacity-100 group-focus-visible/slide:grayscale-0 sm:h-9 [.theme-day_&]:!opacity-70 [.theme-day_&]:!invert-0 [.theme-day_&]:group-hover/slide:!opacity-100 [.theme-night_&]:opacity-60 [.theme-night_&]:invert [.theme-night_&]:group-hover/slide:opacity-95 dark:opacity-60 dark:invert dark:group-hover/slide:opacity-95"
     />
   );
+
 
   return (
     <li
