@@ -40,7 +40,7 @@ export function ThemeToggle({
       aria-pressed={mounted ? isDark : undefined}
       title={label}
       className={cn(
-        "group fixed z-50 inline-flex items-center gap-2.5 rounded-full",
+        "group fixed z-[60] inline-flex items-center gap-2.5 rounded-full",
         "right-[max(1rem,env(safe-area-inset-right))] bottom-[max(1rem,env(safe-area-inset-bottom))]",
         "sm:right-6 sm:bottom-6",
         "touch-target px-3.5 py-3 sm:px-4",
