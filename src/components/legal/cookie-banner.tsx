@@ -52,7 +52,7 @@ export function CookieBanner() {
               Nenhum rastreador é carregado nesta versão.{" "}
               <Link
                 to="/cookies"
-                className="font-semibold text-foreground underline-offset-4 hover:underline"
+                className="inline-flex min-h-11 items-center font-semibold text-foreground underline-offset-4 hover:underline"
               >
                 Política de cookies
               </Link>
