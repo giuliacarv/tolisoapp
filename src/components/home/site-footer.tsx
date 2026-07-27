@@ -62,7 +62,7 @@ const SOCIALS = [
 const SOON_MESSAGE = "Esta página será publicada em uma próxima etapa.";
 
 const linkClass =
-  "inline-flex min-h-9 items-center rounded-md text-left text-sm text-muted-foreground transition-colors duration-200 hover:text-gold";
+  "inline-flex min-h-11 items-center rounded-md text-left text-sm text-muted-foreground transition-colors duration-200 hover:text-gold";
 
 export function Footer() {
   const year = new Date().getFullYear();
