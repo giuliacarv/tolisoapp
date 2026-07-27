@@ -109,7 +109,11 @@ export function Footer() {
                 <ul className="mt-4 space-y-3">
                   {column.links.map((link) => (
                     <li key={link.label}>
-                      {link.href ? (
+                      {link.to ? (
+                        <Link to={link.to} className={linkClass}>
+                          {link.label}
+                        </Link>
+                      ) : link.href ? (
                         <a
                           href={link.href}
                           onClick={(event) => handleAnchorClick(event, link.href as string)}
@@ -126,6 +130,7 @@ export function Footer() {
                           {link.label}
                         </button>
                       )}
+
 
                     </li>
                   ))}
