@@ -12,9 +12,10 @@ import { SolTrust } from "./sol-trust";
 import { SolFooter } from "./sol-footer";
 
 /**
- * Home alternativa (/homepage3) — tema escopado "Solaris".
- * Mesmo conteúdo da /homepage2, com linguagem visual oposta: fundo lavanda
- * claro, laranja de ação, tinta marinho, cartões brancos de raio muito grande.
+ * Home principal do EconomizAI — tema escopado "Solaris".
+ * Linguagem visual: fundo lavanda claro, laranja de ação, tinta marinho,
+ * cartões brancos de raio muito grande. Exibe ofertas, cupons, categorias e
+ * o sistema de créditos da aplicação.
  */
 export function Homepage3View() {
   const [term, setTerm] = useState("");
