@@ -1,26 +1,24 @@
-# ToLiso
+# ToLiso — projeto geral
 
-Projeto 26/07/2026, 16:15:50
+Este repositório reúne o projeto como um todo: aplicação web, documentação, estratégia comercial, propostas, apresentações e ideias.
 
-This project was built with [Lovable](https://lovable.dev).
+## Estrutura
 
-**Live app**: https://tolisoapp.lovable.app
+- [`site/`](site/): código, configuração, recursos e testes da aplicação web.
+- [`docs/`](docs/): materiais e documentação do projeto.
+  - [`estrategia-comercial/`](docs/estrategia-comercial/)
+  - [`propostas/`](docs/propostas/)
+  - [`apresentacoes/`](docs/apresentacoes/)
+  - [`ideias/`](docs/ideias/)
 
-## Build with Lovable
+As instruções específicas para desenvolver o site estão em [`site/README.md`](site/README.md). As orientações de cada área de documentação ficam no respectivo `README.md` dentro de `docs/`.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/966fdf30-2333-417f-b6bd-7796d44c8822).
+## Executar a aplicação web
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Com o Bun instalado, a partir da raiz do repositório:
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+cd site
+bun install
+bun run dev
 ```
