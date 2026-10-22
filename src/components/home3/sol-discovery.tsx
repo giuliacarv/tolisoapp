@@ -1,12 +1,13 @@
 import { Home, Laptop, Search, Shirt, Smartphone, Sparkles, Watch } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 
 import { useResource } from "@/hooks/use-async-resource";
 import { categoryQueries } from "@/services";
 import type { CategoryIconName } from "@/types";
 import { cn } from "@/lib/utils";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 import { Shell, SolHeading, SolSection } from "./shell";
 
@@ -39,8 +40,24 @@ export function SolDiscovery({
   onCategoryChange,
 }: SolDiscoveryProps) {
   const categories = useResource(categoryQueries.list());
+  const live = hasLiveCatalog();
   const [draft, setDraft] = useState(term);
   const navigate = useNavigate();
+
+  // Limpar filtros na vitrine também limpa o texto visível no campo de busca.
+  useEffect(() => {
+    setDraft(term);
+  }, [term]);
+
+  function showResults() {
+    const target = document.getElementById("sol-ofertas");
+    if (!target) return;
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+  }
 
   return (
     <SolSection id="sol-busca">
@@ -54,6 +71,7 @@ export function SolDiscovery({
             onSubmit={(event) => {
               event.preventDefault();
               onTermChange(draft.trim());
+              showResults();
             }}
           >
             <label className="sr-only" htmlFor="sol-search">
@@ -85,6 +103,7 @@ export function SolDiscovery({
                 onClick={() => {
                   setDraft(item);
                   onTermChange(item);
+                  showResults();
                 }}
                 className="sol-chip text-xs"
               >
@@ -98,11 +117,14 @@ export function SolDiscovery({
           <SolHeading
             eyebrow="Categorias"
             title="Escolha por onde começar"
-            description="Cada categoria reúne ofertas e cupons já filtrados pela curadoria."
+            description={live ? "Explore as categorias das ofertas publicadas, sujeitas à disponibilidade da loja." : "Explore produtos ilustrativos por categoria. Os preços exibidos não são cotações atuais."}
             action={
               <button
                 type="button"
-                onClick={() => onCategoryChange(null)}
+                onClick={() => {
+                  onCategoryChange(null);
+                  showResults();
+                }}
                 className="sol-pill-ghost text-sm"
               >
                 Ver tudo
@@ -121,7 +143,10 @@ export function SolDiscovery({
                   key={category.id}
                   type="button"
                   aria-pressed={isActive}
-                  onClick={() => onCategoryChange(isActive ? null : category.label)}
+                  onClick={() => {
+                    onCategoryChange(isActive ? null : category.label);
+                    showResults();
+                  }}
                   className={cn(
                     "sol-card sol-card-hover flex flex-col items-start gap-3 p-6 text-left",
                     isFeature && "lg:col-span-2 lg:flex-row lg:items-center lg:justify-between",

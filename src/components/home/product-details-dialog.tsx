@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BadgeCheck, Coins, ExternalLink, Store as StoreIcon } from "lucide-react";
-import { toast } from "sonner";
 
 import {
   Dialog,
@@ -11,6 +10,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
+import { getProductUnavailableReason } from "@/domain/products/product-rules";
+import { getRetailerSearchLinks } from "@/lib/retailer-search";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -46,9 +48,9 @@ export function ProductDetailsModal({
 }: ProductDetailsModalProps) {
   if (!product) return null;
 
-  function handleViewOffer() {
-    toast("Redirecionamento para a loja parceira será ativado na próxima etapa.");
-  }
+  const unavailable = getProductUnavailableReason(product);
+  const live = hasLiveCatalog();
+  const searchLinks = getRetailerSearchLinks(product.name);
 
   function handleRedeem() {
     if (!product) return;
@@ -81,7 +83,7 @@ export function ProductDetailsModal({
               <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               {product.store}
             </span>
-            {product.verified ? (
+            {product.verified && !unavailable && live ? (
               <span
                 className={cn(chipMeta, "border-saving/40 bg-saving/10 text-saving")}
               >
@@ -109,10 +111,10 @@ export function ProductDetailsModal({
           <span className="font-serif text-fluid-h3 text-foreground">
             {formatBRL(product.currentPrice)}
           </span>
-          <span className={cn(chipMeta, "ml-auto")}>
+          {!live ? <span className={cn(chipMeta, "ml-auto")}>
             <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
             {formatCreditsLabel(product.creditsRequired)}
-          </span>
+          </span> : null}
         </div>
 
         {/* Acesso à página dedicada: mantém o modal como resumo. */}
@@ -127,26 +129,38 @@ export function ProductDetailsModal({
         </Link>
 
         <p className="text-xs leading-relaxed text-muted-foreground">
-          Preço, disponibilidade e condições são definidos pela loja parceira e podem mudar sem
-          aviso. Valores ilustrativos nesta versão inicial.
+          {live ? "Valor informado na verificação da oferta. Confira preço, frete e estoque na loja." : "Todos os preços e descontos deste exemplo são fictícios. Use a pesquisa nas lojas para consultar produtos reais."}
         </p>
 
         <DialogFooter className="gap-2 sm:gap-3">
-          <button
-            type="button"
-            onClick={handleRedeem}
-            className={cn(buttonOutline, "w-full sm:w-auto")}
-          >
-            Resgatar Desconto
-          </button>
-          <button
-            type="button"
-            onClick={handleViewOffer}
-            className={cn(buttonSolid, "w-full sm:w-auto")}
-          >
-            Ver oferta
-            <ExternalLink className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
-          </button>
+          {live && !unavailable ? (
+            <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored"
+              className={cn(buttonSolid, "w-full sm:w-auto")}>
+              Abrir oferta na loja
+              <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+            </a>
+          ) : null}
+          {!live && !unavailable && onRedeem ? (
+            <button
+              type="button"
+              onClick={handleRedeem}
+              className={cn(buttonOutline, "w-full sm:w-auto")}
+            >
+              Simular resgate
+            </button>
+          ) : null}
+          {searchLinks.map(({ name, url }, index) => (
+            <a
+              key={name}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(index === 0 ? buttonSolid : buttonOutline, "w-full sm:w-auto")}
+            >
+              Pesquisar {name === "Mercado Livre" ? "no" : "na"} {name}
+              <ExternalLink className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
+            </a>
+          ))}
         </DialogFooter>
       </DialogContent>
     </Dialog>

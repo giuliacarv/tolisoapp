@@ -16,11 +16,12 @@ import { CATALOG_SORT_OPTIONS, type CatalogSortId } from "@/domain/products/cata
 import { CATALOG_PAGE_SIZE, useCatalog } from "@/hooks/use-catalog";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { cn } from "@/lib/utils";
+import { getRetailerSearchLinks } from "@/lib/retailer-search";
 
 const SITE_URL = "https://economizai1.lovable.app";
-const TITLE = "Ofertas selecionadas | EconomizAI";
+const TITLE = "Produtos demonstrativos | EconomizAI";
 const DESCRIPTION =
-  "Explore produtos selecionados em diferentes lojas, categorias e faixas de preço no catálogo do EconomizAI.";
+  "Explore um catálogo demonstrativo de produtos e pesquise opções reais nas lojas.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
 
 export const Route = createFileRoute("/ofertas/")({
@@ -71,16 +72,27 @@ function CatalogPage() {
         <section className="border-b border-border bg-secondary/40 py-12 sm:py-16">
           <Container>
             <SectionHeading
-              eyebrow="Ofertas selecionadas"
+              eyebrow="Catálogo de demonstração"
               as="h1"
               title="Encontre sua próxima oportunidade de economia"
-              description="Explore produtos selecionados em diferentes lojas, categorias e faixas de preço."
+              description="Produtos e preços ilustrativos: pesquise o item nas lojas para conferir condições reais."
             />
             <CatalogSearch
               value={catalog.filters.term}
               onSearch={(term) => catalog.patch({ term })}
               className="mt-8 max-w-2xl"
             />
+            {catalog.filters.term.trim() ? (
+              <div className="mt-4 flex flex-wrap items-center gap-3" aria-label="Pesquisar nas lojas">
+                <span className="text-xs text-muted-foreground">Conferir produtos reais:</span>
+                {getRetailerSearchLinks(catalog.filters.term).map(({ name, url }) => (
+                  <a key={name} href={url} target="_blank" rel="noopener noreferrer"
+                    className={cn(chipIdle, "inline-flex")}>
+                    Pesquisar {name === "Mercado Livre" ? "no" : "na"} {name}
+                  </a>
+                ))}
+              </div>
+            ) : null}
           </Container>
         </section>
 

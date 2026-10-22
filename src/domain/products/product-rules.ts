@@ -52,8 +52,8 @@ export function calculateSavings(originalPrice: number, currentPrice: number): n
 
 /**
  * Avalia se a oferta ainda pode ser resgatada.
- * Datas inválidas são tratadas como "não expiradas" para não bloquear
- * indevidamente uma oferta por erro de dado.
+ * Datas inválidas impedem o resgate; ofertas sem validade confiável
+ * não podem ser anunciadas como disponíveis.
  */
 export function getProductUnavailableReason(
   product: Pick<Product, "expiresAt" | "available">,
@@ -62,7 +62,8 @@ export function getProductUnavailableReason(
   if (product.available === false) return "unavailable";
 
   const expiresAt = new Date(product.expiresAt).getTime();
-  if (Number.isFinite(expiresAt) && expiresAt < now.getTime()) return "expired";
+  if (!Number.isFinite(expiresAt)) return "unavailable";
+  if (expiresAt < now.getTime()) return "expired";
 
   return null;
 }

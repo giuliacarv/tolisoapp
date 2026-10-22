@@ -1,22 +1,23 @@
 import { BadgeCheck, Eye, Lock, Store } from "lucide-react";
 
 import { Shell, SolHeading, SolSection } from "./shell";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 const PILLARS = [
   {
     icon: BadgeCheck,
-    title: "Curadoria antes da vitrine",
-    text: "A oferta só aparece quando o desconto resiste ao histórico de preço da loja.",
+    title: "Vitrine em demonstração",
+    text: "Os preços e descontos exibidos nos exemplos não são acompanhados em tempo real.",
   },
   {
     icon: Store,
-    title: "Só lojas reconhecidas",
-    text: "Trabalhamos com marketplaces que você já conhece. A compra acontece direto lá.",
+    title: "Consulta diretamente nas lojas",
+    text: "Os atalhos de pesquisa abrem as páginas públicas da Amazon e do Mercado Livre.",
   },
   {
     icon: Eye,
-    title: "Afiliados declarados",
-    text: "Podemos receber comissão por alguns links, sem custo adicional para você.",
+    title: "Monetização futura",
+    text: "Os atalhos de pesquisa não são links de afiliados. Integrações comerciais ainda não foram ativadas.",
   },
   {
     icon: Lock,
@@ -27,17 +28,23 @@ const PILLARS = [
 
 /** Quatro pilares de transparência em cartões brancos. */
 export function SolTrust() {
+  const live = hasLiveCatalog();
   return (
     <SolSection className="bg-secondary/60">
       <Shell>
         <SolHeading
           eyebrow="Confiança"
           title="Transparência é parte do produto"
-          description="Nada de letra miúda: explicamos como a curadoria funciona e de onde vem a receita."
+          description={live ? "A vitrine pública mostra somente ofertas recentemente verificadas e aprovadas no catálogo." : "Esta versão mostra exemplos fictícios e direciona buscas para lojas externas."}
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {PILLARS.map(({ icon: Icon, title, text }) => (
+          {(live ? [
+            { icon: BadgeCheck, title: "Revisão recente", text: "Apenas ofertas verificadas nos últimos 7 dias aparecem no catálogo público." },
+            { icon: Store, title: "Compra na loja", text: "A compra, o pagamento e a entrega são responsabilidade do vendedor." },
+            { icon: Eye, title: "Fonte identificada", text: "Cada oferta cadastrada contém uma URL de origem e um destino." },
+            { icon: Lock, title: "Favoritos locais", text: "Seus favoritos e itens vistos recentemente são armazenados neste dispositivo." },
+          ] : PILLARS).map(({ icon: Icon, title, text }) => (
             <article key={title} className="sol-card sol-card-hover flex flex-col gap-3 p-6">
               <span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary/10 text-primary">
                 <Icon className="h-5 w-5" strokeWidth={2.2} aria-hidden />

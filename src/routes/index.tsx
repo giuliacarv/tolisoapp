@@ -3,9 +3,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Homepage3View } from "@/components/home3/homepage3-view";
 
 const SITE_URL = "https://economizai1.lovable.app";
-const TITLE = "EconomizAI | Ofertas e cupons selecionados";
+const TITLE = "EconomizAI | Pesquisa de produtos e catálogo demonstrativo";
 const DESCRIPTION =
-  "Inteligência Artificial pra Economizar de Verdade! Encontre ofertas, descontos e cupons selecionados nas principais lojas online do Brasil.";
+  "Explore produtos demonstrativos e pesquise diretamente na Amazon e no Mercado Livre para consultar preços e condições atuais.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
 
 export const Route = createFileRoute("/")({
