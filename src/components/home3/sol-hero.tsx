@@ -24,7 +24,7 @@ export function SolHero() {
       <Shell className="flex flex-col items-center text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-bold text-foreground shadow-soft">
           <Star className="h-3.5 w-3.5 fill-primary text-primary" aria-hidden />
-          Inteligência Artificial pra economizar de verdade
+          Encontre produtos e pesquise nas lojas
         </span>
 
         <h1 className="mt-6 max-w-5xl text-[clamp(2.5rem,9vw,6.5rem)] text-foreground">
@@ -34,8 +34,7 @@ export function SolHero() {
         </h1>
 
         <p className="mt-6 max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-relaxed text-muted-foreground">
-          A IA cruza ofertas, cupons e histórico de preço das lojas que você já conhece — e mostra
-          só o desconto que se sustenta.
+          Explore uma vitrine demonstrativa de produtos e use a busca para consultar preços e condições diretamente nas lojas.
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
