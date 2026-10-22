@@ -1,7 +1,6 @@
 import { MessageSquareText, Rocket, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-import { describeCouponCreditRule, describeProductCreditRange } from "@/config/business-rules";
 
 /**
  * Etapa do fluxo "Como funciona".
@@ -25,23 +24,23 @@ export const HOW_IT_WORKS_STEPS: readonly HowItWorksStep[] = [
     icon: MessageSquareText,
     title: "Diga o que você quer comprar",
     description:
-      "Produto, faixa de preço, loja preferida. Escreva do seu jeito: a busca entende a intenção e joga fora o que não interessa.",
-    highlight: "Funciona com ou sem acento, com filtros rápidos por categoria e desconto.",
+      "Informe o nome do produto e use as categorias para explorar exemplos do catálogo.",
+    highlight: "A pesquisa abre links externos para consultar lojas, sem integração de preços.",
   },
   {
     id: "curadoria",
     icon: Sparkles,
-    title: "A IA separa o desconto real do falso",
+    title: "Pesquise os preços nas lojas",
     description:
-      "Enquanto você espera, a inteligência cruza ofertas, cupons e histórico de preços das lojas parceiras — e descarta a promoção que só existe na etiqueta.",
-    highlight: "Se o desconto não se sustenta, a oferta nem chega na sua tela.",
+      "Use os atalhos para consultar resultados de pesquisa diretamente na Amazon e no Mercado Livre.",
+    highlight: "O EconomizAI ainda não compara nem verifica preços automaticamente.",
   },
   {
     id: "resgate",
     icon: Rocket,
-    title: "Resgate e leve o preço menor",
+    title: "Confira antes de comprar",
     description:
-      "Gaste créditos para liberar o desconto ou o cupom e finalize direto na loja, com o valor já reduzido no carrinho.",
-    highlight: `${describeProductCreditRange()} por oferta e ${describeCouponCreditRule().cost} por cupom.`,
+      "Verifique frete, preço, disponibilidade e condições na loja. A compra ocorre fora do EconomizAI.",
+    highlight: "Créditos e cupons ainda são demonstrativos, sem resgate real.",
   },
 ] as const;
