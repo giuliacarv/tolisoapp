@@ -1,6 +1,6 @@
 import { Home, Laptop, Search, Shirt, Smartphone, Sparkles, Watch } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 
 import { useResource } from "@/hooks/use-async-resource";
@@ -41,6 +41,11 @@ export function SolDiscovery({
   const categories = useResource(categoryQueries.list());
   const [draft, setDraft] = useState(term);
   const navigate = useNavigate();
+
+  // Limpar filtros na vitrine também limpa o texto visível no campo de busca.
+  useEffect(() => {
+    setDraft(term);
+  }, [term]);
 
   function showResults() {
     const target = document.getElementById("sol-ofertas");
