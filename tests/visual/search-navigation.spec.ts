@@ -18,5 +18,5 @@ test("detalhes de produto fictício permitem pesquisar preços reais", async ({ 
   await page.getByRole("button", { name: /Ver detalhes de/ }).first().click();
   const dialog = page.getByRole("dialog");
   await expect(dialog.getByRole("link", { name: "Pesquisar na Amazon" })).toBeVisible();
-  await expect(dialog.getByRole("link", { name: "Pesquisar na Mercado Livre" })).toBeVisible();
+  await expect(dialog.getByRole("link", { name: "Pesquisar no Mercado Livre" })).toBeVisible();
 });
