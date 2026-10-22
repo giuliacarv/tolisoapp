@@ -1,4 +1,5 @@
 import { Coins, Heart, ShieldCheck } from "lucide-react";
+import { getProductUnavailableReason } from "@/domain/products/product-rules";
 
 import { formatBRL } from "@/lib/format";
 import { formatCreditsLabel } from "@/lib/format";
@@ -15,6 +16,7 @@ export interface SolProductCardProps {
  * grande, preço em destaque e pílula de resgate laranja.
  */
 export function SolProductCard({ product, onDetails, onRedeem }: SolProductCardProps) {
+  const unavailable = getProductUnavailableReason(product);
   return (
     <article className="sol-card sol-card-hover flex h-full flex-col p-3">
       <button
@@ -69,10 +71,10 @@ export function SolProductCard({ product, onDetails, onRedeem }: SolProductCardP
 
         <button
           type="button"
-          onClick={() => onRedeem(product)}
+          onClick={() => unavailable ? onDetails(product) : onRedeem(product)}
           className="sol-pill mt-4 w-full text-sm"
         >
-          Resgatar desconto
+          {unavailable ? "Ver detalhes (exemplo)" : "Resgatar desconto"}
         </button>
       </div>
     </article>
