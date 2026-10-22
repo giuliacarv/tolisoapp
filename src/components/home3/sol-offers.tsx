@@ -31,11 +31,11 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
   const hasFilters = Boolean(term || categoryLabel);
 
   return (
-    <SolSection id="sol-ofertas">
+    <SolSection id="sol-ofertas" tabIndex={-1}>
       <Shell>
         <SolHeading
           eyebrow="Curadoria"
-          title="Ofertas em destaque"
+          title="Exemplos de produtos"
           description="Explore o catálogo de demonstração e pesquise produtos diretamente em lojas conhecidas."
           action={
             <Link to="/ofertas" className="sol-pill-ghost text-sm">
@@ -47,7 +47,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
 
         <div className="mt-6 flex flex-wrap items-center gap-2">
           <span className="text-sm font-semibold text-muted-foreground">
-            {products.isLoading ? "Carregando ofertas…" : `${items.length} ofertas encontradas`}
+            {products.isLoading ? "Carregando ofertas…" : `${items.length} produtos demonstrativos`}
           </span>
           {hasFilters ? (
             <>
@@ -77,7 +77,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
           </div>
         ) : items.length === 0 ? (
           <div className="sol-card mt-8 p-10 text-center">
-            <p className="text-lg font-extrabold text-foreground">Nenhuma oferta com esse filtro</p>
+            <p className="text-lg font-extrabold text-foreground">Nenhum exemplo com esse filtro</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Tente outro termo ou volte para a vitrine completa.
             </p>
@@ -101,7 +101,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
         <RetailerSearchLinks term={term} />
 
         <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-          Dados demonstrativos: preços, cupons e links são fictícios e servem apenas para ilustrar a
+          Dados demonstrativos: os preços, cupons e descontos são fictícios e servem apenas para ilustrar a
           interface nesta etapa do projeto.
         </p>
       </Shell>
