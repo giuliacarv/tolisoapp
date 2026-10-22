@@ -12,6 +12,7 @@ import {
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
 import { getProductUnavailableReason } from "@/domain/products/product-rules";
 import { getRetailerSearchLinks } from "@/lib/retailer-search";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -48,6 +49,7 @@ export function ProductDetailsModal({
   if (!product) return null;
 
   const unavailable = getProductUnavailableReason(product);
+  const live = hasLiveCatalog();
   const searchLinks = getRetailerSearchLinks(product.name);
 
   function handleRedeem() {
@@ -81,7 +83,7 @@ export function ProductDetailsModal({
               <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               {product.store}
             </span>
-            {product.verified && !unavailable ? (
+            {product.verified && !unavailable && live ? (
               <span
                 className={cn(chipMeta, "border-saving/40 bg-saving/10 text-saving")}
               >
@@ -127,12 +129,18 @@ export function ProductDetailsModal({
         </Link>
 
         <p className="text-xs leading-relaxed text-muted-foreground">
-          Todos os preços e descontos deste exemplo são fictícios. Use a pesquisa nas lojas para
-          consultar produtos reais, sem garantia de encontrar o mesmo modelo ou preço.
+          {live ? "Valor informado na verificação da oferta. Confira preço, frete e estoque na loja." : "Todos os preços e descontos deste exemplo são fictícios. Use a pesquisa nas lojas para consultar produtos reais."}
         </p>
 
         <DialogFooter className="gap-2 sm:gap-3">
-          {!unavailable && onRedeem ? (
+          {live && !unavailable ? (
+            <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored"
+              className={cn(buttonSolid, "w-full sm:w-auto")}>
+              Abrir oferta na loja
+              <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+            </a>
+          ) : null}
+          {!live && !unavailable && onRedeem ? (
             <button
               type="button"
               onClick={handleRedeem}
