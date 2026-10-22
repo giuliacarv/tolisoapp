@@ -4,6 +4,7 @@ import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { formatBRL } from "@/lib/format";
 
 import { Shell } from "./shell";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 import headphonesImage from "@/assets/hero-product-headphones.jpg";
 import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
@@ -13,6 +14,7 @@ import smartwatchImage from "@/assets/hero-product-smartwatch.jpg";
  * flutuantes de prova — leitura direta da referência enviada.
  */
 export function SolHero() {
+  const live = hasLiveCatalog();
   return (
     <section className="relative overflow-hidden pb-[clamp(3rem,7vw,6rem)] pt-[clamp(2.5rem,7vw,5rem)]">
       {/* Halo laranja difuso atrás do título. */}
@@ -24,17 +26,17 @@ export function SolHero() {
       <Shell className="flex flex-col items-center text-center">
         <span className="inline-flex items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-bold text-foreground shadow-soft">
           <Star className="h-3.5 w-3.5 fill-primary text-primary" aria-hidden />
-          Encontre produtos e pesquise nas lojas
+          {live ? "Ofertas publicadas com verificação recente" : "Encontre produtos e pesquise nas lojas"}
         </span>
 
         <h1 className="mt-6 max-w-5xl text-[clamp(2.5rem,9vw,6.5rem)] text-foreground">
-          Pesquise primeiro.
+          {live ? "Produtos selecionados." : "Pesquise primeiro."}
           <br />
-          <span className="text-primary">Compare na loja.</span>
+          <span className="text-primary">{live ? "Compre direto na loja." : "Compare na loja."}</span>
         </h1>
 
         <p className="mt-6 max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-relaxed text-muted-foreground">
-          Explore uma vitrine demonstrativa de produtos e use a busca para consultar preços e condições diretamente nas lojas.
+          {live ? "Encontre ofertas cadastradas, veja as informações da última verificação e finalize diretamente na loja responsável." : "Explore uma vitrine demonstrativa de produtos e use a busca para consultar preços e condições diretamente nas lojas."}
         </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -43,7 +45,7 @@ export function SolHero() {
             onClick={(event) => handleAnchorClick(event, "#sol-ofertas")}
             className="sol-pill text-sm"
           >
-            Ver produtos de exemplo
+            {live ? "Explorar ofertas" : "Ver produtos de exemplo"}
             <ArrowRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
           </a>
           <a
@@ -52,11 +54,12 @@ export function SolHero() {
             className="sol-pill-ghost text-sm"
           >
             <TicketPercent className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-            Cupons de exemplo
+            {live ? "Consultar cupons" : "Cupons de exemplo"}
           </a>
         </div>
 
-        {/* Prova visual: dois cartões brancos em ângulos opostos. */}
+        {/* Prova visual puramente fictícia: oculta quando o catálogo real está ativo. */}
+        {!live ? (
         <div className="mt-12 grid w-full gap-4 sm:mt-16 sm:grid-cols-2 lg:max-w-4xl">
           <HeroProof
             image={headphonesImage}
@@ -80,6 +83,7 @@ export function SolHero() {
             Imagens e preços apenas ilustrativos. Não são ofertas ativas.
           </p>
         </div>
+        ) : null}
       </Shell>
     </section>
   );
