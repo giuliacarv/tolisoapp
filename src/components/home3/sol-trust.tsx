@@ -1,6 +1,7 @@
 import { BadgeCheck, Eye, Lock, Store } from "lucide-react";
 
 import { Shell, SolHeading, SolSection } from "./shell";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 const PILLARS = [
   {
@@ -27,13 +28,14 @@ const PILLARS = [
 
 /** Quatro pilares de transparência em cartões brancos. */
 export function SolTrust() {
+  const live = hasLiveCatalog();
   return (
     <SolSection className="bg-secondary/60">
       <Shell>
         <SolHeading
           eyebrow="Confiança"
           title="Transparência é parte do produto"
-          description="Esta versão mostra exemplos fictícios e direciona buscas para lojas externas."
+          description={live ? "A vitrine pública mostra somente ofertas recentemente verificadas e aprovadas no catálogo." : "Esta versão mostra exemplos fictícios e direciona buscas para lojas externas."}
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
