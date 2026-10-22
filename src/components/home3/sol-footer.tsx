@@ -56,8 +56,7 @@ export function SolFooter() {
               </span>
             </span>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Inteligência Artificial pra economizar de verdade: ofertas conferidas, cupons testados
-              e redirecionamento seguro para a loja parceira.
+              Catálogo em demonstração. Pesquise produtos nas lojas antes de tomar sua decisão de compra.
             </p>
             <div className="flex flex-wrap gap-2">
               {SOCIALS.map((Icon, index) => (
@@ -99,7 +98,7 @@ export function SolFooter() {
 
         <div className="mt-8 flex flex-col gap-2 text-xs text-white/85 sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} EconomizAI. Dados demonstrativos — nenhum valor é cobrado nesta etapa.</p>
-          <p>Alguns links são de afiliado e podem gerar comissão, sem custo adicional para você.</p>
+          <p>A pesquisa nas lojas não usa links de afiliados nesta etapa.</p>
         </div>
       </Shell>
     </footer>
