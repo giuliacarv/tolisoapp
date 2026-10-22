@@ -35,6 +35,7 @@ import { useRegisterRecentlyViewed } from "@/hooks/use-recently-viewed";
 import { formatBRL, formatCreditsLabel, formatDateBR } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { productQueries } from "@/services";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 import type { Product } from "@/types";
 
 const SITE_URL = "https://economizai1.lovable.app";
@@ -168,6 +169,7 @@ function ProductDetailContent({
     [product.originalPrice, product.currentPrice],
   );
   const unavailableReason = getProductUnavailableReason(product);
+  const live = hasLiveCatalog();
   const highlights = product.highlights ?? [];
 
   return (
@@ -202,7 +204,7 @@ function ProductDetailContent({
               <StoreIcon className="size-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               {product.store}
             </span>
-            {product.verified && !unavailableReason ? (
+            {product.verified && !unavailableReason && live ? (
               <span className="inline-flex items-center gap-1.5 rounded-lg border border-saving/40 bg-saving/10 px-2.5 py-1 text-fluid-micro font-semibold text-saving">
                 <BadgeCheck className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
                 Oferta verificada
@@ -238,26 +240,32 @@ function ProductDetailContent({
               <span className="rounded-lg border border-saving/40 bg-saving/10 px-2.5 py-1 text-xs font-semibold text-saving">
                 Economia de {formatBRL(savings)}
               </span>
-              <span className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1 text-xs font-semibold text-foreground">
+              {!live ? <span className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-background px-2.5 py-1 text-xs font-semibold text-foreground">
                 <Coins className="size-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
                 {formatCreditsLabel(product.creditsRequired)}
-              </span>
+              </span> : null}
             </div>
           </dl>
 
           {/* Ação principal */}
           <div className="mt-6 flex flex-col gap-4">
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <button
-              type="button"
-              onClick={() => modals.openRedeem(product)}
-              disabled={unavailableReason !== null}
-              className={cn(buttonSolid, "w-full sm:w-auto sm:min-w-64")}
-            >
-              {unavailableReason
-                ? formatUnavailableLabel(unavailableReason)
-                : "Resgatar Desconto"}
-            </button>
+            {live && !unavailableReason ? (
+              <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored"
+                className={cn(buttonSolid, "w-full sm:w-auto sm:min-w-64")}>
+                Abrir oferta na loja
+                <ExternalLink className="size-4" aria-hidden />
+              </a>
+            ) : (
+              <button
+                type="button"
+                onClick={() => modals.openRedeem(product)}
+                disabled={unavailableReason !== null}
+                className={cn(buttonSolid, "w-full sm:w-auto sm:min-w-64")}
+              >
+                {unavailableReason ? formatUnavailableLabel(unavailableReason) : "Simular resgate"}
+              </button>
+            )}
 
               <FavoriteButton
                 productId={product.id}
