@@ -22,7 +22,8 @@ export function getCouponStatus(
   now: Date = new Date(),
 ): CouponStatus {
   const expiresAt = new Date(coupon.expiresAt);
-  if (!Number.isNaN(expiresAt.getTime()) && expiresAt.getTime() < now.getTime()) {
+  if (Number.isNaN(expiresAt.getTime())) return "pending";
+  if (expiresAt.getTime() < now.getTime()) {
     return "expired";
   }
   return coupon.validated && coupon.checkedAt ? "validated" : "pending";
