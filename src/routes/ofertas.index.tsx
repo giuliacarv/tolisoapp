@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import { getRetailerSearchLinks } from "@/lib/retailer-search";
 
 const SITE_URL = "https://economizai1.lovable.app";
-const TITLE = "Ofertas selecionadas | EconomizAI";
+const TITLE = "Produtos demonstrativos | EconomizAI";
 const DESCRIPTION =
   "Explore um catálogo demonstrativo de produtos e pesquise opções reais nas lojas.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
@@ -72,7 +72,7 @@ function CatalogPage() {
         <section className="border-b border-border bg-secondary/40 py-12 sm:py-16">
           <Container>
             <SectionHeading
-              eyebrow="Ofertas selecionadas"
+              eyebrow="Catálogo de demonstração"
               as="h1"
               title="Encontre sua próxima oportunidade de economia"
               description="Produtos e preços ilustrativos: pesquise o item nas lojas para conferir condições reais."
