@@ -4,6 +4,7 @@ import { Coins, Menu, Search, Sparkles, X } from "lucide-react";
 
 import { handleAnchorClick } from "@/lib/smooth-scroll";
 import { INITIAL_CREDIT_BALANCE } from "@/config/business-rules";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 import { cn } from "@/lib/utils";
 
 const LINKS = [
@@ -20,6 +21,7 @@ const LINKS = [
  */
 export function SolHeader() {
   const [open, setOpen] = useState(false);
+  const live = hasLiveCatalog();
 
   return (
     <header className="sticky top-0 z-50 pt-3 sm:pt-5">
@@ -60,13 +62,13 @@ export function SolHeader() {
             >
               <Search className="h-4 w-4" strokeWidth={2.2} aria-hidden />
             </a>
-            <span aria-label="Saldo demonstrativo" className="hidden min-h-11 items-center gap-1.5 rounded-full bg-secondary px-3 text-sm font-bold text-foreground sm:inline-flex">
+            {!live ? <span aria-label="Saldo demonstrativo" className="hidden min-h-11 items-center gap-1.5 rounded-full bg-secondary px-3 text-sm font-bold text-foreground sm:inline-flex">
               <Coins className="h-4 w-4 text-primary" strokeWidth={2.2} aria-hidden />
               {INITIAL_CREDIT_BALANCE}
-            </span>
-            <Link to="/entrar" className="sol-pill-ink hidden text-sm sm:inline-flex">
+            </span> : null}
+            {!live ? <Link to="/entrar" className="sol-pill-ink hidden text-sm sm:inline-flex">
               Entrar
-            </Link>
+            </Link> : null}
             <button
               type="button"
               onClick={() => setOpen((prev) => !prev)}
@@ -98,9 +100,9 @@ export function SolHeader() {
               {link.label}
             </a>
           ))}
-          <Link to="/entrar" className="sol-pill mt-2 w-full text-sm">
+          {!live ? <Link to="/entrar" className="sol-pill mt-2 w-full text-sm">
             Entrar
-          </Link>
+          </Link> : null}
         </div>
       </div>
     </header>
