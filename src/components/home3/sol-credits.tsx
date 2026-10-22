@@ -9,9 +9,12 @@ import {
 } from "@/config/business-rules";
 
 import { Shell, SolHeading, SolSection } from "./shell";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 /** Carteira demonstrativa em faixa laranja — bloco de maior contraste da página. */
 export function SolCredits() {
+  // Créditos ainda não são transacionais: não apresentá-los como benefício de ofertas reais.
+  if (hasLiveCatalog()) return null;
   const low = describeProductCreditRule("low");
   const high = describeProductCreditRule("high");
   const coupon = describeCouponCreditRule();
