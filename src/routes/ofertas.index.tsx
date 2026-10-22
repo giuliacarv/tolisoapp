@@ -88,7 +88,7 @@ function CatalogPage() {
                 {getRetailerSearchLinks(catalog.filters.term).map(({ name, url }) => (
                   <a key={name} href={url} target="_blank" rel="noopener noreferrer"
                     className={cn(chipIdle, "inline-flex")}>
-                    Pesquisar na {name}
+                    Pesquisar {name === "Mercado Livre" ? "no" : "na"} {name}
                   </a>
                 ))}
               </div>
