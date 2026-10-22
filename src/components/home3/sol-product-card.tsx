@@ -1,5 +1,5 @@
 import { Coins, Heart, ShieldCheck } from "lucide-react";
-import { getProductUnavailableReason } from "@/domain/products/product-rules";
+import { getProductUnavailableReason, formatUnavailableLabel } from "@/domain/products/product-rules";
 
 import { formatBRL } from "@/lib/format";
 import { formatCreditsLabel } from "@/lib/format";
@@ -45,15 +45,19 @@ export function SolProductCard({ product, onDetails, onRedeem }: SolProductCardP
       <div className="flex flex-1 flex-col px-2 pb-1 pt-4">
         <p className="flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
           {product.store}
-          {product.verified ? (
+          {product.verified && !unavailable ? (
             <ShieldCheck className="h-3.5 w-3.5 text-primary" strokeWidth={2.4} aria-hidden />
           ) : null}
         </p>
+        {unavailable ? (
+          <p className="mt-2 text-xs font-semibold text-muted-foreground">{formatUnavailableLabel(unavailable)}</p>
+        ) : null}
         <h3 className="mt-1.5 line-clamp-2 text-base font-extrabold leading-snug tracking-[-0.02em] text-foreground">
           {product.name}
         </h3>
         <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{product.description}</p>
 
+        <p className="mt-2 text-xs text-muted-foreground">Preço e desconto ilustrativos</p>
         <div className="mt-4 flex items-end justify-between gap-3">
           <span>
             <span className="block text-xs text-muted-foreground line-through">
