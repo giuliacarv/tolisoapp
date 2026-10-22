@@ -42,6 +42,16 @@ export function SolDiscovery({
   const [draft, setDraft] = useState(term);
   const navigate = useNavigate();
 
+  function showResults() {
+    const target = document.getElementById("sol-ofertas");
+    if (!target) return;
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+      block: "start",
+    });
+  }
+
   return (
     <SolSection id="sol-busca">
       <Shell>
@@ -54,6 +64,7 @@ export function SolDiscovery({
             onSubmit={(event) => {
               event.preventDefault();
               onTermChange(draft.trim());
+              showResults();
             }}
           >
             <label className="sr-only" htmlFor="sol-search">
@@ -85,6 +96,7 @@ export function SolDiscovery({
                 onClick={() => {
                   setDraft(item);
                   onTermChange(item);
+                  showResults();
                 }}
                 className="sol-chip text-xs"
               >
@@ -98,11 +110,14 @@ export function SolDiscovery({
           <SolHeading
             eyebrow="Categorias"
             title="Escolha por onde começar"
-            description="Cada categoria reúne ofertas e cupons já filtrados pela curadoria."
+            description="Explore produtos ilustrativos por categoria. Os preços exibidos não são cotações atuais."
             action={
               <button
                 type="button"
-                onClick={() => onCategoryChange(null)}
+                onClick={() => {
+                  onCategoryChange(null);
+                  showResults();
+                }}
                 className="sol-pill-ghost text-sm"
               >
                 Ver tudo
@@ -121,7 +136,10 @@ export function SolDiscovery({
                   key={category.id}
                   type="button"
                   aria-pressed={isActive}
-                  onClick={() => onCategoryChange(isActive ? null : category.label)}
+                  onClick={() => {
+                    onCategoryChange(isActive ? null : category.label);
+                    showResults();
+                  }}
                   className={cn(
                     "sol-card sol-card-hover flex flex-col items-start gap-3 p-6 text-left",
                     isFeature && "lg:col-span-2 lg:flex-row lg:items-center lg:justify-between",
