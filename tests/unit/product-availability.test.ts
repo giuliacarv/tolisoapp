@@ -21,6 +21,12 @@ describe("validade de produtos e cupons", () => {
       checkedAt: "2026-07-15T10:00:00-03:00",
     }, NOW)).toBe("expired");
   });
+  it("não considera uma data inválida como uma oferta disponível", () => {
+    expect(getProductUnavailableReason({ expiresAt: "data-incorreta" }, NOW)).toBe("unavailable");
+  });
+  it("não valida cupom com data inválida", () => {
+    expect(getCouponStatus({ expiresAt: "data-incorreta", validated: true, checkedAt: NOW.toISOString() }, NOW)).toBe("pending");
+  });
   it("trata cupom não conferido como pendente", () => {
     expect(getCouponStatus({
       expiresAt: "2027-01-01T00:00:00-03:00",
