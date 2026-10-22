@@ -17,7 +17,7 @@ export function RetailerSearchLinks({ term }: { term: string }) {
         {links.map(({ name, url }) => (
           <a key={name} href={url} target="_blank" rel="noopener noreferrer"
             className="sol-pill-ghost inline-flex items-center gap-2 text-sm">
-            Buscar na {name} <ArrowUpRight className="h-4 w-4" aria-hidden />
+            Buscar {name === "Mercado Livre" ? "no" : "na"} {name} <ArrowUpRight className="h-4 w-4" aria-hidden />
           </a>
         ))}
       </div>
