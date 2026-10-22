@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 
 import { Shell } from "./shell";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 const COLUMNS = [
   {
@@ -41,6 +42,7 @@ const SOCIALS = [Instagram, Youtube, Linkedin, Mail];
  */
 export function SolFooter() {
   const year = new Date().getFullYear();
+  const live = hasLiveCatalog();
 
   return (
     <footer className="sol-band pb-10 pt-16">
@@ -56,7 +58,7 @@ export function SolFooter() {
               </span>
             </span>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Catálogo em demonstração. Pesquise produtos nas lojas antes de tomar sua decisão de compra.
+              {live ? "Ofertas publicadas após verificação. Confira as condições diretamente na loja." : "Catálogo em demonstração. Pesquise produtos nas lojas antes de tomar sua decisão de compra."}
             </p>
             <div className="flex flex-wrap gap-2">
               {SOCIALS.map((Icon, index) => (
@@ -97,7 +99,7 @@ export function SolFooter() {
         </div>
 
         <div className="mt-8 flex flex-col gap-2 text-xs text-white/85 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} EconomizAI. Dados demonstrativos — nenhum valor é cobrado nesta etapa.</p>
+          <p>© {year} EconomizAI. {live ? "Preços sujeitos a alterações pelas lojas." : "Dados demonstrativos, sem cobrança de créditos."}</p>
           <p>A pesquisa nas lojas não usa links de afiliados nesta etapa.</p>
         </div>
       </Shell>
