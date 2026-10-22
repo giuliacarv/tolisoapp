@@ -1,16 +1,16 @@
 name: MVP quality gate
 
 on:
-  push:
-    branches:
-      - fix/mvp-navigation-live-search-20261021
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: read
+
+concurrency:
+  group: mvp-quality-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
   quality:
