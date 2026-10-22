@@ -37,7 +37,7 @@ export function SolHeader() {
           </Link>
 
           <span className="ml-1 hidden rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground lg:inline-flex">
-            Catálogo demonstrativo
+            {live ? "Ofertas verificadas" : "Catálogo demonstrativo"}
           </span>
 
           <nav className="mx-auto hidden items-center gap-1 md:flex" aria-label="Seções da página">
