@@ -33,7 +33,7 @@ export function SolCredits() {
               etapa do projeto.
             </p>
             <Link to="/creditos" className="sol-pill-ink mt-7 text-sm">
-              Conhecer os pacotes
+              Entender créditos demonstrativos
             </Link>
           </div>
 
