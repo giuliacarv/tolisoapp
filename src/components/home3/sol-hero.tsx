@@ -98,7 +98,7 @@ interface HeroProofProps {
 function HeroProof({ image, store, name, price, old, discount, tilt }: HeroProofProps) {
   return (
     <article
-      className={`sol-card sol-card-hover flex items-center gap-4 p-4 text-left motion-safe:${tilt}`}
+      className={`sol-card sol-card-hover flex items-center gap-4 p-4 text-left ${tilt === "-rotate-2" ? "motion-safe:-rotate-2" : "motion-safe:rotate-2"}`}
     >
       <img
         src={image}
