@@ -8,6 +8,7 @@ import { productQueries } from "@/services";
 
 import { Shell, SolHeading, SolSection } from "./shell";
 import { SolProductCard, SolProductSkeleton } from "./sol-product-card";
+import { RetailerSearchLinks } from "./retailer-search-links";
 
 export interface SolOffersProps {
   term: string;
@@ -35,7 +36,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
         <SolHeading
           eyebrow="Curadoria"
           title="Ofertas em destaque"
-          description="Preço conferido, loja reconhecida e desconto que resiste ao histórico. Nenhuma promoção de etiqueta."
+          description="Explore o catálogo de demonstração e pesquise produtos diretamente em lojas conhecidas."
           action={
             <Link to="/ofertas" className="sol-pill-ghost text-sm">
               Ver todas as ofertas
@@ -96,6 +97,8 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
             ))}
           </div>
         )}
+
+        <RetailerSearchLinks term={term} />
 
         <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
           Dados demonstrativos: preços, cupons e links são fictícios e servem apenas para ilustrar a
