@@ -39,7 +39,12 @@ export function SolTrust() {
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {PILLARS.map(({ icon: Icon, title, text }) => (
+          {(live ? [
+            { icon: BadgeCheck, title: "Revisão recente", text: "Apenas ofertas verificadas nos últimos 7 dias aparecem no catálogo público." },
+            { icon: Store, title: "Compra na loja", text: "A compra, o pagamento e a entrega são responsabilidade do vendedor." },
+            { icon: Eye, title: "Fonte identificada", text: "Cada oferta cadastrada contém uma URL de origem e um destino." },
+            { icon: Lock, title: "Favoritos locais", text: "Seus favoritos e itens vistos recentemente são armazenados neste dispositivo." },
+          ] : PILLARS).map(({ icon: Icon, title, text }) => (
             <article key={title} className="sol-card sol-card-hover flex flex-col gap-3 p-6">
               <span className="grid h-11 w-11 place-items-center rounded-2xl bg-primary/10 text-primary">
                 <Icon className="h-5 w-5" strokeWidth={2.2} aria-hidden />
