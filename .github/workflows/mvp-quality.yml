@@ -1,0 +1,35 @@
+name: MVP quality gate
+
+on:
+  push:
+    branches:
+      - fix/mvp-navigation-live-search-20261021
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install frozen dependencies
+        run: bun install --frozen-lockfile
+      - name: Type check
+        run: bunx tsc --noEmit
+      - name: Lint
+        run: bun run lint
+      - name: Unit tests
+        run: bunx vitest run
+      - name: Production build
+        run: bun run build
