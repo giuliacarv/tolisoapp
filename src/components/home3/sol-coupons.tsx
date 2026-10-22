@@ -31,6 +31,10 @@ export function SolCoupons() {
           }
         />
 
+        {live && !coupons.isLoading && !coupons.error && items.length === 0 ? (
+          <p className="mt-8 rounded-2xl border border-border p-6 text-sm text-muted-foreground">Ainda não existem cupons publicados e verificados.</p>
+        ) : null}
+
         {coupons.error ? (
           <p role="alert" className="mt-8 text-sm text-destructive">{coupons.error}</p>
         ) : (
