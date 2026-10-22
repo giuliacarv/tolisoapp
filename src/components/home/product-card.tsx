@@ -128,10 +128,10 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
             </span>
           </p>
 
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground">
+          {!live ? <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-foreground">
             <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
             {formatCreditsLabel(product.creditsRequired)}
-          </span>
+          </span> : null}
 
           {live && !isDisabled ? (
             <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored"
