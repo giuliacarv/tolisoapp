@@ -7,6 +7,7 @@ import { useResource } from "@/hooks/use-async-resource";
 import { categoryQueries } from "@/services";
 import type { CategoryIconName } from "@/types";
 import { cn } from "@/lib/utils";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 import { Shell, SolHeading, SolSection } from "./shell";
 
@@ -39,6 +40,7 @@ export function SolDiscovery({
   onCategoryChange,
 }: SolDiscoveryProps) {
   const categories = useResource(categoryQueries.list());
+  const live = hasLiveCatalog();
   const [draft, setDraft] = useState(term);
   const navigate = useNavigate();
 
@@ -115,7 +117,7 @@ export function SolDiscovery({
           <SolHeading
             eyebrow="Categorias"
             title="Escolha por onde começar"
-            description="Explore produtos ilustrativos por categoria. Os preços exibidos não são cotações atuais."
+            description={live ? "Explore as categorias das ofertas publicadas, sujeitas à disponibilidade da loja." : "Explore produtos ilustrativos por categoria. Os preços exibidos não são cotações atuais."}
             action={
               <button
                 type="button"
