@@ -2,6 +2,7 @@ import { ArrowUpRight, Clock3, TicketPercent } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { useResource } from "@/hooks/use-async-resource";
 import { couponQueries } from "@/services";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 import { formatDiscountLabel, getCouponStatus, maskCouponCode } from "@/domain/coupons/coupon-rules";
 import { formatDateBR } from "@/lib/format";
 import { Shell, SolHeading, SolSection } from "./shell";
@@ -12,6 +13,7 @@ import { Shell, SolHeading, SolSection } from "./shell";
  */
 export function SolCoupons() {
   const coupons = useResource(couponQueries.list());
+  const live = hasLiveCatalog();
   const items = (coupons.data ?? []).slice(0, 6);
 
   return (
@@ -19,8 +21,8 @@ export function SolCoupons() {
       <Shell>
         <SolHeading
           eyebrow="Cupons"
-          title="Exemplos de cupons"
-          description="Esta é uma demonstração visual. Os códigos são fictícios e não podem ser utilizados em lojas."
+          title={live ? "Cupons publicados" : "Exemplos de cupons"}
+          description={live ? "Consulte cupons recentemente conferidos. A liberação de códigos ainda não foi ativada." : "Esta é uma demonstração visual. Os códigos são fictícios e não podem ser utilizados em lojas."}
           action={
             <Link to="/cupons" className="sol-pill-ghost text-sm">
               Explorar o catálogo demonstrativo
