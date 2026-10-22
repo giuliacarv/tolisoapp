@@ -7,6 +7,7 @@ import {
 import { FavoriteButton } from "@/components/product/favorite-button";
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
 import { cn } from "@/lib/utils";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 import type { Product } from "@/types";
 
 import { cardBase } from "./primitives";
@@ -28,6 +29,7 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
   // Ofertas expiradas ou esgotadas não podem consumir créditos do usuário.
   const unavailableReason = getProductUnavailableReason(product);
   const isDisabled = unavailableReason !== null;
+  const live = hasLiveCatalog();
 
   return (
     <article
@@ -131,6 +133,13 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
             {formatCreditsLabel(product.creditsRequired)}
           </span>
 
+          {live && !isDisabled ? (
+            <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored"
+              aria-label={`Abrir oferta de ${product.name} na loja`}
+              className="touch-target relative z-10 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold cta-surface">
+              Abrir na loja
+            </a>
+          ) : (
           <button
             type="button"
             onClick={() => onRedeem(product)}
@@ -148,8 +157,9 @@ export function ProductCard({ product, onRedeem, onSelect, className }: ProductC
             )}
 
           >
-            {isDisabled ? formatUnavailableLabel(unavailableReason) : "Resgatar Desconto"}
+            {isDisabled ? formatUnavailableLabel(unavailableReason) : "Simular resgate"}
           </button>
+          )}
         </div>
       </div>
     </article>
