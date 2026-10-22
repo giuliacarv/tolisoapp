@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, BadgeCheck, Coins, ExternalLink, Store as StoreIcon } from "lucide-react";
-import { toast } from "sonner";
 
 import {
   Dialog,
@@ -11,6 +10,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { formatBRL, formatCreditsLabel } from "@/lib/format";
+import { getProductUnavailableReason } from "@/domain/products/product-rules";
+import { getRetailerSearchLinks } from "@/lib/retailer-search";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -46,9 +47,8 @@ export function ProductDetailsModal({
 }: ProductDetailsModalProps) {
   if (!product) return null;
 
-  function handleViewOffer() {
-    toast("Redirecionamento para a loja parceira será ativado na próxima etapa.");
-  }
+  const unavailable = getProductUnavailableReason(product);
+  const searchLinks = getRetailerSearchLinks(product.name);
 
   function handleRedeem() {
     if (!product) return;
@@ -81,7 +81,7 @@ export function ProductDetailsModal({
               <StoreIcon className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               {product.store}
             </span>
-            {product.verified ? (
+            {product.verified && !unavailable ? (
               <span
                 className={cn(chipMeta, "border-saving/40 bg-saving/10 text-saving")}
               >
@@ -127,26 +127,32 @@ export function ProductDetailsModal({
         </Link>
 
         <p className="text-xs leading-relaxed text-muted-foreground">
-          Preço, disponibilidade e condições são definidos pela loja parceira e podem mudar sem
-          aviso. Valores ilustrativos nesta versão inicial.
+          Todos os preços e descontos deste exemplo são fictícios. Use a pesquisa nas lojas para
+          consultar produtos reais, sem garantia de encontrar o mesmo modelo ou preço.
         </p>
 
         <DialogFooter className="gap-2 sm:gap-3">
-          <button
-            type="button"
-            onClick={handleRedeem}
-            className={cn(buttonOutline, "w-full sm:w-auto")}
-          >
-            Resgatar Desconto
-          </button>
-          <button
-            type="button"
-            onClick={handleViewOffer}
-            className={cn(buttonSolid, "w-full sm:w-auto")}
-          >
-            Ver oferta
-            <ExternalLink className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
-          </button>
+          {!unavailable && onRedeem ? (
+            <button
+              type="button"
+              onClick={handleRedeem}
+              className={cn(buttonOutline, "w-full sm:w-auto")}
+            >
+              Simular resgate
+            </button>
+          ) : null}
+          {searchLinks.map(({ name, url }, index) => (
+            <a
+              key={name}
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(index === 0 ? buttonSolid : buttonOutline, "w-full sm:w-auto")}
+            >
+              Pesquisar na {name}
+              <ExternalLink className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
+            </a>
+          ))}
         </DialogFooter>
       </DialogContent>
     </Dialog>
