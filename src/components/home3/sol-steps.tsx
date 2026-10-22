@@ -10,8 +10,8 @@ export function SolSteps() {
         <SolHeading
           align="center"
           eyebrow="Como funciona"
-          title="Três passos até o preço menor"
-          description="Você descreve, a IA filtra, você resgata. Sem cadastro obrigatório para explorar."
+          title="Como pesquisar produtos"
+          description="Pesquise, consulte as lojas e compare as condições reais antes de decidir."
           className="text-center"
         />
 
