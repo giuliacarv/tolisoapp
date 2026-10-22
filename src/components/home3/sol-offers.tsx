@@ -5,6 +5,7 @@ import { useResource } from "@/hooks/use-async-resource";
 import { useProductModals } from "@/hooks/use-product-modals";
 import { ProductModals } from "@/components/home/product-modals";
 import { productQueries } from "@/services";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 import { Shell, SolHeading, SolSection } from "./shell";
 import { SolProductCard, SolProductSkeleton } from "./sol-product-card";
@@ -19,6 +20,7 @@ export interface SolOffersProps {
 /** Grade de ofertas reagindo em tempo real à busca e à categoria escolhida. */
 export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProps) {
   const modals = useProductModals();
+  const live = hasLiveCatalog();
   const products = useResource(
     productQueries.list({
       term: term || undefined,
@@ -35,8 +37,8 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
       <Shell>
         <SolHeading
           eyebrow="Curadoria"
-          title="Exemplos de produtos"
-          description="Explore o catálogo de demonstração e pesquise produtos diretamente em lojas conhecidas."
+          title={live ? "Ofertas disponíveis" : "Exemplos de produtos"}
+          description={live ? "Ofertas publicadas após verificação recente. Consulte sempre as condições finais da loja." : "Explore o catálogo de demonstração e pesquise produtos diretamente em lojas conhecidas."}
           action={
             <Link to="/ofertas" className="sol-pill-ghost text-sm">
               Ver todas as ofertas
@@ -47,7 +49,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
 
         <div className="mt-6 flex flex-wrap items-center gap-2">
           <span className="text-sm font-semibold text-muted-foreground">
-            {products.isLoading ? "Carregando ofertas…" : `${items.length} produtos demonstrativos`}
+            {products.isLoading ? "Carregando ofertas…" : `${items.length} ${live ? "ofertas verificadas" : "produtos demonstrativos"}`}
           </span>
           {hasFilters ? (
             <>
@@ -77,7 +79,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
           </div>
         ) : items.length === 0 ? (
           <div className="sol-card mt-8 p-10 text-center">
-            <p className="text-lg font-extrabold text-foreground">Nenhum exemplo com esse filtro</p>
+            <p className="text-lg font-extrabold text-foreground">{live ? "Nenhuma oferta verificada encontrada" : "Nenhum exemplo com esse filtro"}</p>
             <p className="mt-2 text-sm text-muted-foreground">
               Tente outro termo ou volte para a vitrine completa.
             </p>
@@ -101,8 +103,7 @@ export function SolOffers({ term, categoryLabel, onClearFilters }: SolOffersProp
         <RetailerSearchLinks term={term} />
 
         <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
-          Dados demonstrativos: os preços, cupons e descontos são fictícios e servem apenas para ilustrar a
-          interface nesta etapa do projeto.
+          {live ? "Preços e disponibilidade dependem da loja e podem mudar após a última verificação." : "Preços, cupons e descontos desta vitrine são demonstrativos e fictícios."}
         </p>
       </Shell>
 
