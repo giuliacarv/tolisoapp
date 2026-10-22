@@ -40,8 +40,8 @@ export function SolCoupons() {
       <Shell>
         <SolHeading
           eyebrow="Cupons"
-          title="Cupom testado antes de chegar até você"
-          description={`Cada cupom mostra o status da verificação e custa ${formatCreditsLabel(COUPON_REDEMPTION_COST)} para liberar.`}
+          title="Como serão os cupons"
+          description="Os cupons exibidos são exemplos fictícios e expirados. O resgate real ainda não está disponível."
           action={
             <Link to="/cupons" className="sol-pill-ghost text-sm">
               Ver todos os cupons
