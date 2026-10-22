@@ -202,14 +202,14 @@ function ProductDetailContent({
               <StoreIcon className="size-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
               {product.store}
             </span>
-            {product.verified ? (
+            {product.verified && !unavailableReason ? (
               <span className="inline-flex items-center gap-1.5 rounded-lg border border-saving/40 bg-saving/10 px-2.5 py-1 text-fluid-micro font-semibold text-saving">
                 <BadgeCheck className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
                 Oferta verificada
               </span>
             ) : (
               <span className="rounded-lg border border-border bg-secondary px-2.5 py-1 text-fluid-micro font-semibold text-muted-foreground">
-                Verificação pendente
+                {unavailableReason === "expired" ? "Oferta expirada" : unavailableReason === "unavailable" ? "Indisponível" : "Verificação pendente"}
               </span>
             )}
           </div>
