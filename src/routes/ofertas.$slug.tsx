@@ -344,7 +344,7 @@ function ProductDetailContent({
             </dl>
 
             <p className="mt-4 text-fluid-micro text-muted-foreground">
-              Produto, preço e desconto demonstrativos nesta versão inicial.
+              {live ? "Preço da última verificação. Confirme a disponibilidade e o valor final na loja." : "Produto, preço e desconto demonstrativos nesta versão inicial."}
             </p>
           </section>
         </div>
