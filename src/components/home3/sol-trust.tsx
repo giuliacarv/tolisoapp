@@ -5,18 +5,18 @@ import { Shell, SolHeading, SolSection } from "./shell";
 const PILLARS = [
   {
     icon: BadgeCheck,
-    title: "Curadoria antes da vitrine",
-    text: "A oferta só aparece quando o desconto resiste ao histórico de preço da loja.",
+    title: "Vitrine em demonstração",
+    text: "Os preços e descontos exibidos nos exemplos não são acompanhados em tempo real.",
   },
   {
     icon: Store,
-    title: "Só lojas reconhecidas",
-    text: "Trabalhamos com marketplaces que você já conhece. A compra acontece direto lá.",
+    title: "Consulta diretamente nas lojas",
+    text: "Os atalhos de pesquisa abrem as páginas públicas da Amazon e do Mercado Livre.",
   },
   {
     icon: Eye,
-    title: "Afiliados declarados",
-    text: "Podemos receber comissão por alguns links, sem custo adicional para você.",
+    title: "Monetização futura",
+    text: "Os atalhos de pesquisa não são links de afiliados. Integrações comerciais ainda não foram ativadas.",
   },
   {
     icon: Lock,
@@ -33,7 +33,7 @@ export function SolTrust() {
         <SolHeading
           eyebrow="Confiança"
           title="Transparência é parte do produto"
-          description="Nada de letra miúda: explicamos como a curadoria funciona e de onde vem a receita."
+          description="Esta versão mostra exemplos fictícios e direciona buscas para lojas externas."
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
