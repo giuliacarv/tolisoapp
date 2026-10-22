@@ -28,9 +28,9 @@ export function SolHero() {
         </span>
 
         <h1 className="mt-6 max-w-5xl text-[clamp(2.5rem,9vw,6.5rem)] text-foreground">
-          Produtos ótimos.
+          Pesquise primeiro.
           <br />
-          <span className="text-primary">Preço ainda menor.</span>
+          <span className="text-primary">Compare na loja.</span>
         </h1>
 
         <p className="mt-6 max-w-[46ch] text-[clamp(1rem,1.6vw,1.15rem)] leading-relaxed text-muted-foreground">
@@ -43,7 +43,7 @@ export function SolHero() {
             onClick={(event) => handleAnchorClick(event, "#sol-ofertas")}
             className="sol-pill text-sm"
           >
-            Ver ofertas do dia
+            Ver produtos de exemplo
             <ArrowRight className="h-4 w-4" strokeWidth={2.4} aria-hidden />
           </a>
           <a
@@ -52,7 +52,7 @@ export function SolHero() {
             className="sol-pill-ghost text-sm"
           >
             <TicketPercent className="h-4 w-4" strokeWidth={2.2} aria-hidden />
-            Cupons validados
+            Cupons de exemplo
           </a>
         </div>
 
@@ -76,6 +76,9 @@ export function SolHero() {
             discount="-37%"
             tilt="rotate-2"
           />
+          <p className="col-span-full text-center text-xs text-muted-foreground">
+            Imagens e preços apenas ilustrativos. Não são ofertas ativas.
+          </p>
         </div>
       </Shell>
     </section>
