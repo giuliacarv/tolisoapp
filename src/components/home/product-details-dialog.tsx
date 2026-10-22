@@ -149,7 +149,7 @@ export function ProductDetailsModal({
               rel="noopener noreferrer"
               className={cn(index === 0 ? buttonSolid : buttonOutline, "w-full sm:w-auto")}
             >
-              Pesquisar na {name}
+              Pesquisar {name === "Mercado Livre" ? "no" : "na"} {name}
               <ExternalLink className="h-4 w-4 shrink-0" strokeWidth={1.75} aria-hidden />
             </a>
           ))}
