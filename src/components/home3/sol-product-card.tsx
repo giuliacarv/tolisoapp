@@ -1,5 +1,6 @@
 import { Coins, Heart, ShieldCheck } from "lucide-react";
 import { getProductUnavailableReason, formatUnavailableLabel } from "@/domain/products/product-rules";
+import { hasLiveCatalog } from "@/services/live-catalog-source";
 
 import { formatBRL } from "@/lib/format";
 import { formatCreditsLabel } from "@/lib/format";
@@ -17,6 +18,7 @@ export interface SolProductCardProps {
  */
 export function SolProductCard({ product, onDetails, onRedeem }: SolProductCardProps) {
   const unavailable = getProductUnavailableReason(product);
+  const live = hasLiveCatalog();
   return (
     <article className="sol-card sol-card-hover flex h-full flex-col p-3">
       <button
@@ -57,7 +59,7 @@ export function SolProductCard({ product, onDetails, onRedeem }: SolProductCardP
         </h3>
         <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{product.description}</p>
 
-        <p className="mt-2 text-xs text-muted-foreground">Preço e desconto ilustrativos</p>
+        <p className="mt-2 text-xs text-muted-foreground">{live ? "Preço informado na última verificação" : "Preço e desconto ilustrativos"}</p>
         <div className="mt-4 flex items-end justify-between gap-3">
           <span>
             <span className="block text-xs text-muted-foreground line-through">
@@ -67,19 +69,24 @@ export function SolProductCard({ product, onDetails, onRedeem }: SolProductCardP
               {formatBRL(product.currentPrice)}
             </span>
           </span>
-          <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-xs font-bold text-foreground">
+          {!live ? <span className="inline-flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1 text-xs font-bold text-foreground">
             <Coins className="h-3.5 w-3.5 text-primary" strokeWidth={2.2} aria-hidden />
             {formatCreditsLabel(product.creditsRequired)}
-          </span>
+          </span> : null}
         </div>
 
-        <button
-          type="button"
-          onClick={() => unavailable ? onDetails(product) : onRedeem(product)}
-          className="sol-pill mt-4 w-full text-sm"
-        >
-          {unavailable ? "Ver detalhes (exemplo)" : "Resgatar desconto"}
-        </button>
+        {live && !unavailable ? (
+          <a href={product.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored"
+            className="sol-pill mt-4 w-full text-sm">
+            Abrir na loja
+          </a>
+        ) : (
+          <button type="button"
+            onClick={() => unavailable ? onDetails(product) : onRedeem(product)}
+            className="sol-pill mt-4 w-full text-sm">
+            {unavailable ? "Ver detalhes (exemplo)" : "Simular resgate"}
+          </button>
+        )}
       </div>
     </article>
   );
