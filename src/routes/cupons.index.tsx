@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import type { Coupon } from "@/types";
 
 const SITE_URL = "https://economizai1.lovable.app";
-const TITLE = "Cupons selecionados | EconomizAI";
+const TITLE = "Cupons demonstrativos | EconomizAI";
 const DESCRIPTION =
   "Consulte condições, validade e status de verificação dos cupons demonstrativos das principais lojas online do Brasil.";
 const OG_IMAGE = `${SITE_URL}/og-descontai.jpg`;
