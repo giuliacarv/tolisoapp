@@ -111,10 +111,10 @@ export function ProductDetailsModal({
           <span className="font-serif text-fluid-h3 text-foreground">
             {formatBRL(product.currentPrice)}
           </span>
-          <span className={cn(chipMeta, "ml-auto")}>
+          {!live ? <span className={cn(chipMeta, "ml-auto")}>
             <Coins className="h-3.5 w-3.5 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
             {formatCreditsLabel(product.creditsRequired)}
-          </span>
+          </span> : null}
         </div>
 
         {/* Acesso à página dedicada: mantém o modal como resumo. */}
