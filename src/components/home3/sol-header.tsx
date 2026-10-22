@@ -25,7 +25,7 @@ export function SolHeader() {
     <header className="sticky top-0 z-50 pt-3 sm:pt-5">
       <div className="mx-auto w-full max-w-[84rem] px-[clamp(0.75rem,3vw,2.5rem)]">
         <div className="sol-card flex items-center gap-3 rounded-full px-3 py-2 backdrop-blur-xl sm:px-4">
-          <Link to="/homepage3" className="flex min-h-11 items-center gap-2 rounded-full px-2">
+          <Link to="/" className="flex min-h-11 items-center gap-2 rounded-full px-2">
             <span className="grid h-9 w-9 place-items-center rounded-2xl bg-primary">
               <Sparkles className="h-4 w-4 text-primary-foreground" strokeWidth={2.4} aria-hidden />
             </span>
@@ -35,7 +35,7 @@ export function SolHeader() {
           </Link>
 
           <span className="ml-1 hidden rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-primary-foreground lg:inline-flex">
-            Descontos reais
+            Catálogo demonstrativo
           </span>
 
           <nav className="mx-auto hidden items-center gap-1 md:flex" aria-label="Seções da página">
@@ -60,7 +60,7 @@ export function SolHeader() {
             >
               <Search className="h-4 w-4" strokeWidth={2.2} aria-hidden />
             </a>
-            <span className="hidden min-h-11 items-center gap-1.5 rounded-full bg-secondary px-3 text-sm font-bold text-foreground sm:inline-flex">
+            <span aria-label="Saldo demonstrativo" className="hidden min-h-11 items-center gap-1.5 rounded-full bg-secondary px-3 text-sm font-bold text-foreground sm:inline-flex">
               <Coins className="h-4 w-4 text-primary" strokeWidth={2.2} aria-hidden />
               {INITIAL_CREDIT_BALANCE}
             </span>
