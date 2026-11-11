@@ -9,101 +9,31 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as TermosRouteImport } from './routes/termos'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
-import { Route as PrivacidadeRouteImport } from './routes/privacidade'
-import { Route as Homepage3RouteImport } from './routes/homepage3'
-import { Route as Homepage2RouteImport } from './routes/homepage2'
-import { Route as FavoritosRouteImport } from './routes/favoritos'
-import { Route as EntrarRouteImport } from './routes/entrar'
-import { Route as DesignSystemRouteImport } from './routes/design-system'
-import { Route as CriarContaRouteImport } from './routes/criar-conta'
-import { Route as CreditosRouteImport } from './routes/creditos'
-import { Route as CookiesRouteImport } from './routes/cookies'
-import { Route as ContatoRouteImport } from './routes/contato'
-import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
-import { Route as AjudaRouteImport } from './routes/ajuda'
-import { Route as AfiliadosRouteImport } from './routes/afiliados'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
+import { Route as AfiliadosRouteImport } from './routes/afiliados'
+import { Route as AjudaRouteImport } from './routes/ajuda'
+import { Route as ComoFuncionaRouteImport } from './routes/como-funciona'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as CookiesRouteImport } from './routes/cookies'
+import { Route as CreditosRouteImport } from './routes/creditos'
+import { Route as CriarContaRouteImport } from './routes/criar-conta'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
+import { Route as EntrarRouteImport } from './routes/entrar'
+import { Route as FavoritosRouteImport } from './routes/favoritos'
+import { Route as Homepage2RouteImport } from './routes/homepage2'
+import { Route as Homepage3RouteImport } from './routes/homepage3'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as RecuperarSenhaRouteImport } from './routes/recuperar-senha'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as TermosRouteImport } from './routes/termos'
 import { Route as CuponsIndexRouteImport } from './routes/cupons.index'
-import { Route as OfertasSlugRouteImport } from './routes/ofertas.$slug'
 import { Route as CuponsSlugRouteImport } from './routes/cupons.$slug'
+import { Route as OfertasIndexRouteImport } from './routes/ofertas.index'
+import { Route as OfertasSlugRouteImport } from './routes/ofertas.$slug'
 
-const TermosRoute = TermosRouteImport.update({
-  id: '/termos',
-  path: '/termos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
-  id: '/recuperar-senha',
-  path: '/recuperar-senha',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacidadeRoute = PrivacidadeRouteImport.update({
-  id: '/privacidade',
-  path: '/privacidade',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Homepage3Route = Homepage3RouteImport.update({
-  id: '/homepage3',
-  path: '/homepage3',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Homepage2Route = Homepage2RouteImport.update({
-  id: '/homepage2',
-  path: '/homepage2',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FavoritosRoute = FavoritosRouteImport.update({
-  id: '/favoritos',
-  path: '/favoritos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EntrarRoute = EntrarRouteImport.update({
-  id: '/entrar',
-  path: '/entrar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DesignSystemRoute = DesignSystemRouteImport.update({
-  id: '/design-system',
-  path: '/design-system',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CriarContaRoute = CriarContaRouteImport.update({
-  id: '/criar-conta',
-  path: '/criar-conta',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CreditosRoute = CreditosRouteImport.update({
-  id: '/creditos',
-  path: '/creditos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CookiesRoute = CookiesRouteImport.update({
-  id: '/cookies',
-  path: '/cookies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContatoRoute = ContatoRouteImport.update({
-  id: '/contato',
-  path: '/contato',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
-  id: '/como-funciona',
-  path: '/como-funciona',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AjudaRoute = AjudaRouteImport.update({
-  id: '/ajuda',
-  path: '/ajuda',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AfiliadosRoute = AfiliadosRouteImport.update({
@@ -111,14 +41,79 @@ const AfiliadosRoute = AfiliadosRouteImport.update({
   path: '/afiliados',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AjudaRoute = AjudaRouteImport.update({
+  id: '/ajuda',
+  path: '/ajuda',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OfertasIndexRoute = OfertasIndexRouteImport.update({
-  id: '/ofertas/',
-  path: '/ofertas/',
+const ComoFuncionaRoute = ComoFuncionaRouteImport.update({
+  id: '/como-funciona',
+  path: '/como-funciona',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CreditosRoute = CreditosRouteImport.update({
+  id: '/creditos',
+  path: '/creditos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriarContaRoute = CriarContaRouteImport.update({
+  id: '/criar-conta',
+  path: '/criar-conta',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EntrarRoute = EntrarRouteImport.update({
+  id: '/entrar',
+  path: '/entrar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FavoritosRoute = FavoritosRouteImport.update({
+  id: '/favoritos',
+  path: '/favoritos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Homepage2Route = Homepage2RouteImport.update({
+  id: '/homepage2',
+  path: '/homepage2',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Homepage3Route = Homepage3RouteImport.update({
+  id: '/homepage3',
+  path: '/homepage3',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecuperarSenhaRoute = RecuperarSenhaRouteImport.update({
+  id: '/recuperar-senha',
+  path: '/recuperar-senha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CuponsIndexRoute = CuponsIndexRouteImport.update({
@@ -126,14 +121,19 @@ const CuponsIndexRoute = CuponsIndexRouteImport.update({
   path: '/cupons/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OfertasSlugRoute = OfertasSlugRouteImport.update({
-  id: '/ofertas/$slug',
-  path: '/ofertas/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CuponsSlugRoute = CuponsSlugRouteImport.update({
   id: '/cupons/$slug',
   path: '/cupons/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertasIndexRoute = OfertasIndexRouteImport.update({
+  id: '/ofertas/',
+  path: '/ofertas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertasSlugRoute = OfertasSlugRouteImport.update({
+  id: '/ofertas/$slug',
+  path: '/ofertas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -305,109 +305,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/termos': {
-      id: '/termos'
-      path: '/termos'
-      fullPath: '/termos'
-      preLoaderRoute: typeof TermosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/recuperar-senha': {
-      id: '/recuperar-senha'
-      path: '/recuperar-senha'
-      fullPath: '/recuperar-senha'
-      preLoaderRoute: typeof RecuperarSenhaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacidade': {
-      id: '/privacidade'
-      path: '/privacidade'
-      fullPath: '/privacidade'
-      preLoaderRoute: typeof PrivacidadeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/homepage3': {
-      id: '/homepage3'
-      path: '/homepage3'
-      fullPath: '/homepage3'
-      preLoaderRoute: typeof Homepage3RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/homepage2': {
-      id: '/homepage2'
-      path: '/homepage2'
-      fullPath: '/homepage2'
-      preLoaderRoute: typeof Homepage2RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/favoritos': {
-      id: '/favoritos'
-      path: '/favoritos'
-      fullPath: '/favoritos'
-      preLoaderRoute: typeof FavoritosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/entrar': {
-      id: '/entrar'
-      path: '/entrar'
-      fullPath: '/entrar'
-      preLoaderRoute: typeof EntrarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/design-system': {
-      id: '/design-system'
-      path: '/design-system'
-      fullPath: '/design-system'
-      preLoaderRoute: typeof DesignSystemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/criar-conta': {
-      id: '/criar-conta'
-      path: '/criar-conta'
-      fullPath: '/criar-conta'
-      preLoaderRoute: typeof CriarContaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/creditos': {
-      id: '/creditos'
-      path: '/creditos'
-      fullPath: '/creditos'
-      preLoaderRoute: typeof CreditosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cookies': {
-      id: '/cookies'
-      path: '/cookies'
-      fullPath: '/cookies'
-      preLoaderRoute: typeof CookiesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contato': {
-      id: '/contato'
-      path: '/contato'
-      fullPath: '/contato'
-      preLoaderRoute: typeof ContatoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/como-funciona': {
-      id: '/como-funciona'
-      path: '/como-funciona'
-      fullPath: '/como-funciona'
-      preLoaderRoute: typeof ComoFuncionaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ajuda': {
-      id: '/ajuda'
-      path: '/ajuda'
-      fullPath: '/ajuda'
-      preLoaderRoute: typeof AjudaRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/afiliados': {
@@ -417,18 +319,109 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AfiliadosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/ajuda': {
+      id: '/ajuda'
+      path: '/ajuda'
+      fullPath: '/ajuda'
+      preLoaderRoute: typeof AjudaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ofertas/': {
-      id: '/ofertas/'
-      path: '/ofertas'
-      fullPath: '/ofertas/'
-      preLoaderRoute: typeof OfertasIndexRouteImport
+    '/como-funciona': {
+      id: '/como-funciona'
+      path: '/como-funciona'
+      fullPath: '/como-funciona'
+      preLoaderRoute: typeof ComoFuncionaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/creditos': {
+      id: '/creditos'
+      path: '/creditos'
+      fullPath: '/creditos'
+      preLoaderRoute: typeof CreditosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criar-conta': {
+      id: '/criar-conta'
+      path: '/criar-conta'
+      fullPath: '/criar-conta'
+      preLoaderRoute: typeof CriarContaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/entrar': {
+      id: '/entrar'
+      path: '/entrar'
+      fullPath: '/entrar'
+      preLoaderRoute: typeof EntrarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/favoritos': {
+      id: '/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof FavoritosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/homepage2': {
+      id: '/homepage2'
+      path: '/homepage2'
+      fullPath: '/homepage2'
+      preLoaderRoute: typeof Homepage2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/homepage3': {
+      id: '/homepage3'
+      path: '/homepage3'
+      fullPath: '/homepage3'
+      preLoaderRoute: typeof Homepage3RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recuperar-senha': {
+      id: '/recuperar-senha'
+      path: '/recuperar-senha'
+      fullPath: '/recuperar-senha'
+      preLoaderRoute: typeof RecuperarSenhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cupons/': {
@@ -438,18 +431,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CuponsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ofertas/$slug': {
-      id: '/ofertas/$slug'
-      path: '/ofertas/$slug'
-      fullPath: '/ofertas/$slug'
-      preLoaderRoute: typeof OfertasSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/cupons/$slug': {
       id: '/cupons/$slug'
       path: '/cupons/$slug'
       fullPath: '/cupons/$slug'
       preLoaderRoute: typeof CuponsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofertas/': {
+      id: '/ofertas/'
+      path: '/ofertas'
+      fullPath: '/ofertas/'
+      preLoaderRoute: typeof OfertasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofertas/$slug': {
+      id: '/ofertas/$slug'
+      path: '/ofertas/$slug'
+      fullPath: '/ofertas/$slug'
+      preLoaderRoute: typeof OfertasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
